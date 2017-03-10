@@ -1,0 +1,45 @@
+{
+    "name": "symfony/skeleton",
+    "type": "project",
+    "license": "proprietary",
+    "description": "Project description",
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.0",
+        "symfony/flex": "1.0.x-dev",
+        "symfony/framework-bundle": "3.3.x-dev",
+        "symfony/yaml": "3.3.x-dev"
+    },
+    "require-dev": {
+        "symfony/dotenv": "3.3.x-dev"
+    },
+    "config": {
+        "flex-id": "",
+        "platform": {
+            "php": "7.0"
+        },
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/",
+            "App\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "auto-scripts": [
+        ],
+        "post-install-cmd": [
+            "@auto-scripts"
+        ],
+        "post-update-cmd": [
+            "@auto-scripts"
+        ]
+    },
+    "conflict": {
+        "symfony/symfony": "<3.3",
+        "symfony/framework-bundle": "<3.3",
+        "symfony/twig-bundle": "<3.3",
+        "symfony/debug": "<3.3"
+    }
+}
