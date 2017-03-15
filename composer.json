@@ -42,6 +42,9 @@
             "@auto-scripts"
         ]
     },
+    "repositories": [
+        { "type": "vcs", "url": "https://github.com/fabpot/flex" }
+    ],
     "conflict": {
         "symfony/symfony": "<3.3",
         "symfony/twig-bundle": "<3.3",
