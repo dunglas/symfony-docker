@@ -18,6 +18,9 @@
         "platform": {
             "php": "7.0"
         },
+        "preferred-install": {
+            "*": "dist"
+        },
         "sort-packages": true
     },
     "autoload": {
