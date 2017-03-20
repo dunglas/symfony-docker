@@ -14,7 +14,6 @@
         "symfony/dotenv": "3.3.x-dev"
     },
     "config": {
-        "flex-id": "",
         "platform": {
             "php": "7.0"
         },
@@ -48,5 +47,8 @@
         "symfony/framework-bundle": "<3.3",
         "symfony/twig-bundle": "<3.3",
         "symfony/debug": "<3.3"
+    },
+    "extra": {
+        "flex-id": ""
     }
 }
