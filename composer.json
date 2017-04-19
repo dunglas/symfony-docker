@@ -48,7 +48,7 @@
         "symfony/debug": "<3.3"
     },
     "extra": {
-        "flex": {
+        "symfony": {
             "id": "",
             "allow-contrib": false
         }
