@@ -44,7 +44,6 @@
     },
     "conflict": {
         "symfony/symfony": "<3.3",
-        "symfony/framework-bundle": "<3.3",
         "symfony/twig-bundle": "<3.3",
         "symfony/debug": "<3.3"
     },
