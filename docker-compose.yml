@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  #db:
+  #  image: mysql:5.7
+  #  environment:
+  #    MYSQL_DATABASE: symfony
+  #    MYSQL_USER: symfony
+  #    MYSQL_PASSWORD: symfony
+  #    MYSQL_RANDOM_ROOT_PASSWORD: 'true'
+  #  volumes:
+  #    - db-data:/var/lib/mysql
+  #  healthcheck:
+  #    test: mysql --user=api_platform --password=api_platform -e "SELECT 1" api_platform
+
+  php:
+    build: .
+    #depends_on:
+    #  - db
+    volumes:
+      - ./:/srv/api-platform
+    env_file:
+      - .env
+
+  nginx:
+    image: nginx:1.11-alpine
+    depends_on:
+      - php
+    ports:
+      - '80:80'
+    volumes:
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./:/srv/api-platform
+
+#volumes:
+#  db-data:
