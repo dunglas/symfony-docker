@@ -1,5 +1,5 @@
 {
-    "name": "symfony/skeleton",
+    "name": "dunglas/symfony-docker-skeleton",
     "type": "project",
     "license": "proprietary",
     "description": "Project description",
