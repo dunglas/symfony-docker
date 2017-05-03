@@ -5,7 +5,7 @@ set -xe
 export DOCKER_BRIDGE_IP=$(ip ro | grep default | cut -d' ' -f 3)
 
 if [ "APP_ENV" = 'prod' ]; then
-	composer install --prefer-dist --no-dev --no-progress --no-suggest --optimize-autoloader --classmap-authoritative
+	composer install --prefer-dist --no-dev --no-progress --no-suggest --optimize-autoloader --apcu-autoloader
 else
 	composer install --prefer-dist --no-progress --no-suggest
 fi
