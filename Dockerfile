@@ -61,7 +61,7 @@ COPY src src/
 COPY var var/
 COPY web web/
 
-RUN composer dump-autoload --optimize --classmap-authoritative --no-dev
+RUN composer dump-autoload --optimize --apcu-autoloader --no-dev
 
 COPY docker/php/start.sh /usr/local/bin/docker-app-start
 
