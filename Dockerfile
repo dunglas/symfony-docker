@@ -3,6 +3,7 @@ FROM php:7.1-fpm-alpine
 RUN apk add --no-cache --virtual .persistent-deps \
 		git \
 		icu-libs \
+                make \
 		zlib
 
 ENV APCU_VERSION 5.1.8
