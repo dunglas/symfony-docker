@@ -1,36 +1,54 @@
 version: '3'
 
 services:
-  #db:
-  #  image: mysql:5.7
-  #  environment:
-  #    MYSQL_DATABASE: symfony
-  #    MYSQL_USER: symfony
-  #    MYSQL_PASSWORD: symfony
-  #    MYSQL_RANDOM_ROOT_PASSWORD: 'true'
-  #  volumes:
-  #    - db-data:/var/lib/mysql
-  #  healthcheck:
-  #    test: mysql --user=api_platform --password=api_platform -e "SELECT 1" api_platform
-
-  php:
-    build: .
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
     #depends_on:
     #  - db
+    environment:
+      # Change to prod in production
+      - SYMFONY_ENV=dev
     volumes:
-      - ./:/srv/api-platform
-    env_file:
-      - .env
+      # Comment out the next line in production
+      - ./:/srv/app:rw
+      # This is for assets:install
+      - ./web:/srv/app/web:rw
+      # If you develop on Linux, comment out the following volumes to just use bind-mounted project directory from host
+      - /srv/app/var
+      - /srv/app/var/cache
+      - /srv/app/var/logs
+      - /srv/app/var/sessions
+      - /srv/app/vendor
 
   nginx:
-    image: nginx:1.11-alpine
-    depends_on:
-      - php
-    ports:
-      - '80:80'
+    build:
+      context: ./docker/nginx
+      dockerfile: ./Dockerfile
     volumes:
+      # Comment out the next line in production
       - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
-      - ./:/srv/api-platform
+      - ./web:/srv/app/web:ro
+    ports:
+      - "80:80"
 
-#volumes:
-#  db-data:
+  # Uncomment the following lines to add a MySQL container
+  #db:
+  #  build:
+  #    context: ./docker/db
+  #    dockerfile: ./Dockerfile
+  #  environment:
+  #    - MYSQL_DATABASE=app
+  #    # You should definitely change the password in production
+  #    - MYSQL_PASSWORD=symfony
+  #    - MYSQL_RANDOM_ROOT_PASSWORD=true
+  #    - MYSQL_USER=symfony
+  #  volumes:
+  #    - db-data:/var/lib/mysql:rw
+  #    # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
+  #    # - ./docker/db/data:/var/lib/mysql:rw
+
+volumes:
+  app-web: {}
+  #db-data: {}
