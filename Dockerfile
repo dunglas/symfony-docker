@@ -3,7 +3,7 @@ FROM php:7.1-fpm-alpine
 RUN apk add --no-cache --virtual .persistent-deps \
 		git \
 		icu-libs \
-                make \
+		make \
 		zlib
 
 ENV APCU_VERSION 5.1.8
@@ -29,8 +29,7 @@ COPY docker/app/install-composer.sh /usr/local/bin/docker-app-install-composer
 RUN chmod +x /usr/local/bin/docker-app-install-composer
 
 RUN set -xe \
-	&& apk add --no-cache --virtual .fetch-deps \
-		openssl \
+	&& apk add --no-cache --virtual .fetch-deps openssl \
 	&& docker-app-install-composer \
 	&& mv composer.phar /usr/local/bin/composer \
 	&& apk del .fetch-deps
@@ -43,8 +42,7 @@ RUN composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-progress
 
 WORKDIR /srv/app
 
-COPY composer.json ./
-COPY composer.lock ./
+COPY composer.* ./
 
 RUN mkdir -p \
 		var/cache \
