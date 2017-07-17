@@ -7,11 +7,12 @@ if [ "${1#-}" != "$1" ]; then
 fi
 
 if [ "$1" = 'php-fpm' ] || [ "$1" = 'bin/console' ]; then
-	if [ "$APP_ENV" = 'prod' ]; then
-		composer install --prefer-dist --no-dev --no-progress --no-suggest --optimize-autoloader --classmap-authoritative --no-interaction
-	else
-		composer install --prefer-dist --no-progress --no-suggest --no-interaction
-	fi
+    # The first time volumes are mounted, dependencies need to be reinstalled
+    if [ ! -f composer.json ]; then
+        rm -Rf vendor/*
+        php -r "copy('$SKELETON_COMPOSER_JSON', 'composer.json');"
+        composer install --prefer-dist --no-progress --no-suggest --no-interaction
+    fi
 
 	# Permissions hack because setfacl does not work on Mac and Windows
 	chown -R www-data var

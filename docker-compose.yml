@@ -4,16 +4,9 @@ services:
   app:
     build:
       context: .
-      dockerfile: ./Dockerfile
-    #depends_on:
-    #  - db
-    env_file:
-      - .env
     volumes:
       # Comment out the next line in production
-      - ./:/srv/app/:rw
-      # This is for assets:install
-      - ./web/:/srv/app/web/:rw
+      - ./:/srv/app:rw
       # If you develop on Linux, comment out the following volumes to just use bind-mounted project directory from host
       - /srv/app/var/
       - /srv/app/var/cache/
@@ -23,31 +16,11 @@ services:
 
   nginx:
     build:
-      context: ./docker/nginx
-      dockerfile: ./Dockerfile
+      context: .
+      dockerfile: ./Dockerfile.nginx
     volumes:
       # Comment out the next line in production
       - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
-      - ./web:/srv/app/web:ro
+      - ./public:/srv/app/public:ro
     ports:
-      - "80:80"
-
-  # Uncomment the following lines to add a MySQL container
-  #db:
-  #  build:
-  #    context: ./docker/db
-  #    dockerfile: ./Dockerfile
-  #  environment:
-  #    - MYSQL_DATABASE=app
-  #    # You should definitely change the password in production
-  #    - MYSQL_PASSWORD=symfony
-  #    - MYSQL_RANDOM_ROOT_PASSWORD=true
-  #    - MYSQL_USER=symfony
-  #  volumes:
-  #    - db-data:/var/lib/mysql:rw
-  #    # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
-  #    # - ./docker/db/data:/var/lib/mysql:rw
-
-volumes:
-  app-web: {}
-  #db-data: {}
+      - '80:80'
