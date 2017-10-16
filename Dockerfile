@@ -37,27 +37,25 @@ RUN set -xe \
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
-RUN composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-progress --no-suggest --optimize-autoloader --classmap-authoritative \
-	&& composer clear-cache
+# Use prestissimo to speed up builds
+RUN composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-progress --no-suggest --optimize-autoloader --classmap-authoritative
+
+COPY docker/app/docker-entrypoint.sh /usr/local/bin/docker-app-entrypoint
+RUN chmod +x /usr/local/bin/docker-app-entrypoint
+
+# Download the Symfony skeleton and leverage Docker cache layers
+ENV SKELETON_COMPOSER_JSON https://raw.githubusercontent.com/symfony/skeleton/v3.3.4/composer.json
 
 WORKDIR /srv/app
+RUN php -r "copy('$SKELETON_COMPOSER_JSON', 'composer.json');" \
+    && composer install --prefer-dist --no-dev --no-progress --no-suggest --no-autoloader --no-scripts --no-plugins --no-interaction
 
 COPY . .
-# Cleanup unneeded files
-RUN rm -Rf docker/
-
-# Download the Symfony skeleton
-ENV SKELETON_COMPOSER_JSON https://raw.githubusercontent.com/symfony/skeleton/v3.3.2/composer.json
-RUN [ -f composer.json ] || php -r "copy('$SKELETON_COMPOSER_JSON', 'composer.json');"
 
 RUN mkdir -p var/cache var/logs var/sessions \
     && composer install --prefer-dist --no-dev --no-progress --no-suggest --optimize-autoloader --classmap-authoritative --no-interaction \
 	&& composer clear-cache \
-# Permissions hack because setfacl does not work on Mac and Windows
-	&& chown -R www-data var
-
-COPY docker/app/docker-entrypoint.sh /usr/local/bin/docker-app-entrypoint
-RUN chmod +x /usr/local/bin/docker-app-entrypoint
+	&& chown -R www-data var # Permissions hack because setfacl does not work on Mac and Windows
 
 ENTRYPOINT ["docker-app-entrypoint"]
 CMD ["php-fpm"]
