@@ -12,7 +12,6 @@ services:
       - /srv/app/var/cache/
       - /srv/app/var/logs/
       - /srv/app/var/sessions/
-      - /srv/app/vendor/
 
   nginx:
     build:
@@ -24,3 +23,13 @@ services:
       - ./public:/srv/app/public:ro
     ports:
       - '80:80'
+
+  # This HTTP/2 proxy is not secure: it should only be used in dev
+  h2-proxy:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.h2-proxy
+    volumes:
+      - ./docker/httpd/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro
+    ports:
+      - '443:443'
