@@ -34,3 +34,11 @@ services:
       - ./docker/httpd/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro
     ports:
       - '443:443'
+
+  mongodb:
+    image: mongo:latest
+    volumes:
+        - ./docker/mongodb:/data/db
+    ports:
+        - "27018:27017"
+

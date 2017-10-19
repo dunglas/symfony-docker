@@ -13,13 +13,16 @@ RUN set -xe \
 		$PHPIZE_DEPS \
 		icu-dev \
 		zlib-dev \
+        openssl-dev \
 	&& docker-php-ext-install \
 		intl \
 		zip \
 	&& pecl install \
 		apcu-${APCU_VERSION} \
+        mongodb \
 	&& docker-php-ext-enable --ini-name 20-apcu.ini apcu \
 	&& docker-php-ext-enable --ini-name 05-opcache.ini opcache \
+    && docker-php-ext-enable mongodb \
 	&& apk del .build-deps
 
 ###> recipes ###
