@@ -1,0 +1,25 @@
+FROM httpd:2.4-alpine
+
+RUN apk add --no-cache --virtual .persistent-deps openssl
+
+# Use this self-generated certificate only in dev, IT IS NOT SECURE!
+RUN openssl genrsa -des3 -passout pass:NotSecure -out server.pass.key 2048 \
+    && openssl rsa \
+        -passin pass:NotSecure \
+        -in server.pass.key \
+        -out /usr/local/apache2/conf/server.key \
+    && rm server.pass.key \
+    && openssl req \
+        -new \
+        -passout pass:NotSecure \
+        -subj '/C=SS/ST=SS/L=Gotham City/O=Symfony/CN=localhost' \
+        -key /usr/local/apache2/conf/server.key \
+        -out /usr/local/apache2/conf/server.csr \
+    && openssl x509 \
+        -req -sha256 \
+        -days 365 \
+        -in /usr/local/apache2/conf/server.csr \
+        -signkey /usr/local/apache2/conf/server.key \
+        -out /usr/local/apache2/conf/server.crt
+
+COPY ./docker/httpd/httpd.conf /usr/local/apache2/conf/httpd.conf
