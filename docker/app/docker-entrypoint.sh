@@ -7,10 +7,13 @@ if [ "${1#-}" != "$1" ]; then
 fi
 
 if [ "$1" = 'php-fpm' ] || [ "$1" = 'bin/console' ]; then
-    # The first time volumes are mounted, dependencies need to be reinstalled
+    # The first time volumes are mounted, the project needs to be recreated
     if [ ! -f composer.json ]; then
-        rm -Rf vendor/*
-        php -r "copy('$SKELETON_COMPOSER_JSON', 'composer.json');"
+        composer create-project "symfony/skeleton" tmp --stability=$STABILITY --prefer-dist --no-progress --no-interaction
+        cp -Rp tmp/. .
+        rm -Rf tmp/
+    elif [ "$APP_ENV" != 'prod' ]; then
+        # Always try to reinstall deps when not in prod
         composer install --prefer-dist --no-progress --no-suggest --no-interaction
     fi
 
