@@ -4,6 +4,9 @@ services:
   app:
     build:
       context: .
+      args:
+          VERSION: '3.4.0-BETA1'
+          STABILITY: 'beta'
     volumes:
       # Comment out the next line in production
       - ./:/srv/app:rw
@@ -24,7 +27,7 @@ services:
       - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
       - ./public:/srv/app/public:ro
     ports:
-      - '80:80'
+      - '81:80'
 
   # This HTTP/2 proxy is not secure: it should only be used in dev
   h2-proxy:
