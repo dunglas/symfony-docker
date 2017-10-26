@@ -3,24 +3,24 @@ FROM php:7.1-fpm-alpine
 WORKDIR /srv/app
 
 RUN apk add --no-cache --virtual .persistent-deps \
-		git \
-		icu-libs \
-		zlib
+        git \
+        icu-libs \
+        zlib
 
 ENV APCU_VERSION 5.1.8
 RUN set -xe \
-	&& apk add --no-cache --virtual .build-deps \
-		$PHPIZE_DEPS \
-		icu-dev \
-		zlib-dev \
-	&& docker-php-ext-install \
-		intl \
-		zip \
-	&& pecl install \
-		apcu-${APCU_VERSION} \
-	&& docker-php-ext-enable --ini-name 20-apcu.ini apcu \
-	&& docker-php-ext-enable --ini-name 05-opcache.ini opcache \
-	&& apk del .build-deps
+    && apk add --no-cache --virtual .build-deps \
+        $PHPIZE_DEPS \
+        icu-dev \
+        zlib-dev \
+    && docker-php-ext-install \
+        intl \
+        zip \
+    && pecl install \
+        apcu-${APCU_VERSION} \
+    && docker-php-ext-enable --ini-name 20-apcu.ini apcu \
+    && docker-php-ext-enable --ini-name 05-opcache.ini opcache \
+    && apk del .build-deps
 
 ###> recipes ###
 ###< recipes ###
@@ -31,8 +31,8 @@ COPY docker/app/install-composer.sh /usr/local/bin/docker-app-install-composer
 RUN chmod +x /usr/local/bin/docker-app-install-composer
 
 RUN set -xe \
-	&& docker-app-install-composer \
-	&& mv composer.phar /usr/local/bin/composer
+    && docker-app-install-composer \
+    && mv composer.phar /usr/local/bin/composer
 
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER 1
@@ -47,15 +47,19 @@ RUN chmod +x /usr/local/bin/docker-app-entrypoint
 ARG STABILITY=stable
 ENV STABILITY ${STABILITY}
 
+# Allow to install some other Symfony versions
+ARG VERSION='3.3.5'
+ENV VERSION ${VERSION}
+
 # Download the Symfony skeleton and leverage Docker cache layers
-RUN composer create-project "symfony/skeleton" . --stability=$STABILITY --prefer-dist --no-dev --no-progress --no-scripts --no-plugins --no-interaction
+RUN composer create-project "symfony/skeleton:$VERSION" . --stability=$STABILITY --prefer-dist --no-dev --no-progress --no-scripts --no-plugins --no-interaction
 
 COPY . .
 
 RUN mkdir -p var/cache var/logs var/sessions \
     && composer install --prefer-dist --no-dev --no-progress --no-suggest --classmap-authoritative --no-interaction \
-	&& composer clear-cache \
-	&& chown -R www-data var # Permissions hack because setfacl does not work on Mac and Windows
+    && composer clear-cache \
+    && chown -R www-data var # Permissions hack because setfacl does not work on Mac and Windows
 
 ENTRYPOINT ["docker-app-entrypoint"]
 CMD ["php-fpm"]
