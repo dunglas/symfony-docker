@@ -1,5 +1,5 @@
 FROM composer:1.5
-FROM php:7.1-fpm-alpine
+FROM php:7.2-fpm-alpine
 
 RUN apk add --no-cache --virtual .persistent-deps \
 		git \
