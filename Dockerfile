@@ -1,4 +1,3 @@
-FROM composer:1.6
 FROM php:7.2-fpm-alpine
 
 RUN apk add --no-cache --virtual .persistent-deps \
@@ -22,7 +21,7 @@ RUN set -xe \
 	&& apk del .build-deps
 
 COPY docker/app/php.ini /usr/local/etc/php/php.ini
-COPY --from=0 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:1.6 /usr/bin/composer /usr/bin/composer
 COPY docker/app/docker-entrypoint.sh /usr/local/bin/docker-app-entrypoint
 RUN chmod +x /usr/local/bin/docker-app-entrypoint
 
