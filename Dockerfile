@@ -51,6 +51,5 @@ RUN composer create-project "symfony/skeleton ${VERSION}" . --stability=$STABILI
 COPY . .
 
 RUN mkdir -p var/cache var/logs var/sessions \
-    && composer install --prefer-dist --no-dev --no-progress --no-suggest --classmap-authoritative --no-interaction \
-	&& composer clear-cache \
+    && composer install --prefer-dist --no-dev --no-scripts --no-progress --no-suggest --classmap-authoritative --no-interaction \
 	&& chown -R www-data var
