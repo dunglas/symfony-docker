@@ -39,8 +39,11 @@ RUN composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-progress
 ARG STABILITY=stable
 ENV STABILITY ${STABILITY}
 
+# Allow to select skeleton version
+ARG VERSION=""
+
 # Download the Symfony skeleton and leverage Docker cache layers
-RUN composer create-project "symfony/skeleton" . --stability=$STABILITY --prefer-dist --no-dev --no-progress --no-scripts --no-plugins --no-interaction
+RUN composer create-project "symfony/skeleton ${VERSION}" . --stability=$STABILITY --prefer-dist --no-dev --no-progress --no-scripts --no-plugins --no-interaction
 
 ###> recipes ###
 ###< recipes ###
