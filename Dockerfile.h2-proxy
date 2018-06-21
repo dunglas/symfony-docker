@@ -10,8 +10,8 @@ RUN openssl req -new -passout pass:NotSecure -key server.key -out server.csr \
     -subj '/C=SS/ST=SS/L=Gotham City/O=Symfony/CN=localhost'
 RUN openssl x509 -req -sha256 -days 365 -in server.csr -signkey server.key -out server.crt
 
-FROM httpd:2.4-alpine
+FROM nginx:1.15-alpine
 
-COPY --from=0 server.key /usr/local/apache2/conf/server.key
-COPY --from=0 server.crt /usr/local/apache2/conf/server.crt
-COPY ./docker/httpd/httpd.conf /usr/local/apache2/conf/httpd.conf
+RUN mkdir -p /etc/nginx/ssl/
+COPY --from=0 server.key server.crt /etc/nginx/ssl/
+COPY ./docker/h2-proxy/default.conf /etc/nginx/conf.d/default.conf
