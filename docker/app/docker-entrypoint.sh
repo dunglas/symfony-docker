@@ -9,7 +9,7 @@ fi
 if [ "$1" = 'php-fpm' ] || [ "$1" = 'bin/console' ]; then
     # The first time volumes are mounted, the project needs to be recreated
     if [ ! -f composer.json ]; then
-        composer create-project "symfony/skeleton $VERSION" tmp --stability=$STABILITY --prefer-dist --no-progress --no-interaction
+        composer create-project "symfony/skeleton $SYMFONY_VERSION" tmp --stability=$STABILITY --prefer-dist --no-progress --no-interaction
         cp -Rp tmp/. .
         rm -Rf tmp/
     elif [ "$APP_ENV" != 'prod' ]; then

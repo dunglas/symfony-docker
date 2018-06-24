@@ -5,7 +5,7 @@ services:
     build:
       context: .
       args:
-        VERSION: ${SYMFONY_VERSION}
+        SYMFONY_VERSION: ${SYMFONY_VERSION}
         STABILITY: stable
     volumes:
       # Comment out the next line in production
@@ -15,6 +15,8 @@ services:
       - /srv/app/var/cache/
       - /srv/app/var/logs/
       - /srv/app/var/sessions/
+    environment:
+      - SYMFONY_VERSION
 
   nginx:
     build:
