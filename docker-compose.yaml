@@ -6,7 +6,7 @@ services:
       context: .
       args:
         SYMFONY_VERSION: ${SYMFONY_VERSION}
-        STABILITY: stable
+        STABILITY: ${STABILITY}
     volumes:
       # Comment out the next line in production
       - ./:/srv/app:rw
