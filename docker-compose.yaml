@@ -9,7 +9,7 @@ services:
         STABILITY: ${STABILITY}
     volumes:
       # Comment out the next line in production
-      - ./:/srv/app:rw
+      - ./:/srv/app:rw,cached
       # If you develop on Linux, comment out the following volumes to just use bind-mounted project directory from host
       - /srv/app/var/
       - /srv/app/var/cache/
