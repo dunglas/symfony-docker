@@ -17,7 +17,7 @@ For instance, use the following command to install Symfony 3.4:
 `SYMFONY_VERSION=3.4 docker-compose up --build`
 
 To install a non-stable version of Symfony, use the `STABILITY` environment variable during the build.
-The value must be a valid [a valid Composer stability option](https://getcomposer.org/doc/04-schema.md#minimum-stability)) .
+The value must be [a valid Composer stability option](https://getcomposer.org/doc/04-schema.md#minimum-stability)) .
 
 For instance, use the following command to use the `master` branch of Symfony:
 
