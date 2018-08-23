@@ -1,4 +1,36 @@
-FROM php:7.2-fpm-alpine
+# the different stages of this Dockerfile are meant to be built into separate images
+# https://docs.docker.com/compose/compose-file/#target
+
+ARG PHP_VERSION=7.2
+ARG NGINX_VERSION=1.15
+
+### NGINX
+FROM nginx:${NGINX_VERSION}-alpine AS symfony_docker_nginx
+
+COPY docker/nginx/conf.d /etc/nginx/conf.d/
+COPY public /srv/app/public/
+
+### H2 PROXY
+FROM alpine:latest AS symfony_docker_h2-proxy
+
+RUN apk add --no-cache openssl
+
+# Use this self-generated certificate only in dev, IT IS NOT SECURE!
+RUN openssl genrsa -des3 -passout pass:NotSecure -out server.pass.key 2048
+RUN openssl rsa -passin pass:NotSecure -in server.pass.key -out server.key
+RUN rm server.pass.key
+RUN openssl req -new -passout pass:NotSecure -key server.key -out server.csr \
+    -subj '/C=SS/ST=SS/L=Gotham City/O=Symfony/CN=localhost'
+RUN openssl x509 -req -sha256 -days 365 -in server.csr -signkey server.key -out server.crt
+
+FROM nginx:${NGINX_VERSION}-alpine
+
+RUN mkdir -p /etc/nginx/ssl/
+COPY --from=symfony_docker_h2-proxy server.key server.crt /etc/nginx/ssl/
+COPY ./docker/h2-proxy/default.conf /etc/nginx/conf.d/default.conf
+
+### PHP
+FROM php:${PHP_VERSION}-fpm-alpine AS symfony_docker_php
 
 RUN apk add --no-cache --virtual .persistent-deps \
 		git \
@@ -6,7 +38,7 @@ RUN apk add --no-cache --virtual .persistent-deps \
 		zlib
 
 ENV APCU_VERSION 5.1.11
-RUN set -xe \
+RUN set -eux \
 	&& apk add --no-cache --virtual .build-deps \
 		$PHPIZE_DEPS \
 		icu-dev \
