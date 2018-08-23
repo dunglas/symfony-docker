@@ -36,8 +36,7 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 RUN composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-progress --no-suggest --optimize-autoloader --classmap-authoritative  --no-interaction
 
 # Allow to use development versions of Symfony
-ARG STABILITY=stable
-ENV STABILITY ${STABILITY}
+ENV STABILITY ${STABILITY:-stable}
 
 # Allow to select skeleton version
 ARG SYMFONY_VERSION=""
