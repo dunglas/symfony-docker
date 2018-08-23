@@ -1,24 +1,28 @@
-Symfony docker
-======
+# Symfony Docker
 
-Usage
-------
+A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony](https://symfony.com) web framework.
 
-Run `docker-compose up -d`
+## Getting Started
 
-Choosing symfony version
-------
+1. Run `docker-compose up` (the logs will be displayed in the current shell)
+2. Open `https://localhost` in your favorite web browser and [accept the auto-generated TLS certificate](https://stackoverflow.com/a/15076602/1352334)
+3. **Enjoy!**
 
-To choose specific symfony version define `SYMFONY_VERSION` env variable for first run.
+## Selecting a Specific Symfony Version
 
-Like:
+Use the `SYMFONY_VERSION` environment variable to select a specific Symfony version.
 
-`SYMFONY_VERSION=3.4 docker-compose up -d`
+For instance, use the following command to install Symfony 3.4:
 
-To install symfony with different stability (more about stability [here](https://getcomposer.org/doc/04-schema.md#minimum-stability)) define `STABILITY` env variable for first run.
+`SYMFONY_VERSION=3.4 docker-compose up --build`
 
-Like:
+To install a non-stable version of Symfony, use the `STABILITY` environment variable during the build.
+The value must be a valid [a valid Composer stability option](https://getcomposer.org/doc/04-schema.md#minimum-stability)) .
 
-`STABILITY=dev docker-compose up -d`
+For instance, use the following command to use the `master` branch of Symfony:
 
-will install symfony from master branch.
+`STABILITY=dev docker-compose up --build`
+
+## Credits
+
+Created by [Kévin Dunglas](https://dunglas.fr) and sponsored by [Les-Tilleuls.coop](https://les-tilleuls.coop).
