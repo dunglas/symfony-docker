@@ -1,9 +1,10 @@
-version: '3'
+version: '3.4'
 
 services:
   app:
     build:
       context: .
+      target: symfony_docker_php
       args:
         SYMFONY_VERSION: ${SYMFONY_VERSION}
         STABILITY: ${STABILITY}
@@ -21,7 +22,7 @@ services:
   nginx:
     build:
       context: .
-      dockerfile: ./Dockerfile.nginx
+      target: symfony_docker_nginx
     depends_on:
       - app
     volumes:
@@ -35,7 +36,7 @@ services:
   h2-proxy:
     build:
       context: .
-      dockerfile: ./Dockerfile.h2-proxy
+      target: symfony_docker_h2-proxy
     volumes:
       - ./docker/h2-proxy/default.conf:/etc/nginx/conf.d/default.conf:ro
     ports:
