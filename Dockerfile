@@ -37,7 +37,7 @@ RUN apk add --no-cache --virtual .persistent-deps \
 		icu-libs \
 		zlib
 
-ENV APCU_VERSION 5.1.11
+ENV APCU_VERSION 5.1.12
 RUN set -eux \
 	&& apk add --no-cache --virtual .build-deps \
 		$PHPIZE_DEPS \
@@ -53,7 +53,7 @@ RUN set -eux \
 	&& apk del .build-deps
 
 COPY docker/app/php.ini /usr/local/etc/php/php.ini
-COPY --from=composer:1.6 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY docker/app/docker-entrypoint.sh /usr/local/bin/docker-app-entrypoint
 RUN chmod +x /usr/local/bin/docker-app-entrypoint
 
