@@ -8,10 +8,6 @@ A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony
 2. Open `https://localhost` in your favorite web browser and [accept the auto-generated TLS certificate](https://stackoverflow.com/a/15076602/1352334)
 3. **Enjoy!**
 
-### Note for linux users
-
-If you work on linux and cannot edit some of the project files right after the first installation, you can run `docker-compose run --rm app chown -R $(id -u):$(id -g) .` to set yourselft as owner of the project files that were created by the docker container.
-
 ## Selecting a Specific Symfony Version
 
 Use the `SYMFONY_VERSION` environment variable to select a specific Symfony version.
@@ -99,6 +95,10 @@ Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
     with Zend OPcache v7.2.8, Copyright (c) 1999-2018, by Zend Technologies
     with Xdebug v2.6.0, Copyright (c) 2002-2018, by Derick Rethans
 ```
+
+### Note for linux users
+
+If you work on linux and cannot edit some of the project files right after the first installation, you can run `docker-compose run --rm app chown -R $(id -u):$(id -g) .` to set yourself as owner of the project files that were created by the docker container.
 
 ## Credits
 
