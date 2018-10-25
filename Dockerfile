@@ -11,7 +11,7 @@ COPY docker/nginx/conf.d /etc/nginx/conf.d/
 COPY public /srv/app/public/
 
 ### H2 PROXY
-FROM alpine:latest AS symfony_docker_h2-proxy
+FROM alpine:latest AS symfony_docker_h2-proxy-cert
 
 RUN apk add --no-cache openssl
 
@@ -23,10 +23,10 @@ RUN openssl req -new -passout pass:NotSecure -key server.key -out server.csr \
     -subj '/C=SS/ST=SS/L=Gotham City/O=Symfony/CN=localhost'
 RUN openssl x509 -req -sha256 -days 365 -in server.csr -signkey server.key -out server.crt
 
-FROM nginx:${NGINX_VERSION}-alpine
+FROM nginx:${NGINX_VERSION}-alpine AS symfony_docker_h2-proxy
 
 RUN mkdir -p /etc/nginx/ssl/
-COPY --from=symfony_docker_h2-proxy server.key server.crt /etc/nginx/ssl/
+COPY --from=symfony_docker_h2-proxy-cert server.key server.crt /etc/nginx/ssl/
 COPY ./docker/h2-proxy/default.conf /etc/nginx/conf.d/default.conf
 
 ### PHP
@@ -68,6 +68,7 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 RUN composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-progress --no-suggest --optimize-autoloader --classmap-authoritative  --no-interaction
 
 # Allow to use development versions of Symfony
+ARG STABILITY="stable"
 ENV STABILITY ${STABILITY:-stable}
 
 # Allow to select skeleton version
