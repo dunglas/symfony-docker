@@ -37,6 +37,8 @@ services:
     build:
       context: .
       target: symfony_docker_h2-proxy
+    depends_on:
+      - nginx
     volumes:
       - ./docker/h2-proxy/default.conf:/etc/nginx/conf.d/default.conf:ro
     ports:
