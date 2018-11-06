@@ -1,6 +1,6 @@
 # Symfony Docker
 
-A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony](https://symfony.com) web framework.
+A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony](https://symfony.com) web framework, with full [HTTP/2](https://symfony.com/doc/current/weblink.html) and HTTPS support.
 
 ## Getting Started
 
@@ -21,13 +21,14 @@ The value must be [a valid Composer stability option](https://getcomposer.org/do
 
 For instance, use the following command to use the `master` branch of Symfony:
 
-`STABILITY=dev docker-compose up --build`
+```bash
+STABILITY=dev docker-compose up --build
+```
 
 ## Debugging
 
-The default Docker stack is shipped without a Xdebug stage. It's easy
-though to add [Xdebug](https://xdebug.org/) to your project, for development
-purposes such as debugging tests or API requests remotely.
+The default Docker stack is shipped without a Xdebug stage.
+It's easy though to add [Xdebug](https://xdebug.org/) to your project, for development purposes such as debugging tests or API requests remotely.
 
 ### Add a Development Stage to the Dockerfile
 
@@ -48,8 +49,7 @@ RUN set -eux; \
 
 ### Configure Xdebug with Docker Compose Override
 
-Using an [override](https://docs.docker.com/compose/reference/overview/#specifying-multiple-compose-files)  
- file named `docker-compose.override.yaml` ensures that the production
+Using an [override](https://docs.docker.com/compose/reference/overview/#specifying-multiple-compose-files) file named `docker-compose.override.yaml` ensures that the production
 configuration remains untouched.
 
 As example, an override could look like this:
@@ -76,15 +76,15 @@ services:
       PHP_IDE_CONFIG: serverName=symfony-docker
 ```
 
-And run :
+Then run:
+
 ````bash
 docker-compose -f docker-compose.yaml -f docker-compose.override.yaml up -d
 ````
 
 ### Troubleshooting
 
-Inspect the installation with the following command. The requested Xdebug
-version should be displayed in the output.
+Inspect the installation with the following command. The requested Xdebug version should be displayed in the output.
 
 ```bash
 $ docker-compose exec php php --version
