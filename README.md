@@ -58,7 +58,7 @@ As example, an override could look like this:
 version: '3.4'
 
 services:
-  php:
+  app:
     build:
       context: .
       target: symfony_docker_php_dev
