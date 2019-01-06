@@ -7,6 +7,12 @@ if [ "${1#-}" != "$1" ]; then
 fi
 
 if [ "$1" = 'php-fpm' ] || [ "$1" = 'bin/console' ]; then
+    PHP_INI_RECOMMENDED="$PHP_INI_DIR/php.ini-production"
+    if [ "$APP_ENV" != 'prod' ]; then
+        PHP_INI_RECOMMENDED="$PHP_INI_DIR/php.ini-development"
+    fi
+    ln -sf "$PHP_INI_RECOMMENDED" "$PHP_INI_DIR/php.ini"
+
     # The first time volumes are mounted, the project needs to be recreated
     if [ ! -f composer.json ]; then
         composer create-project "symfony/skeleton $SYMFONY_VERSION" tmp --stability=$STABILITY --prefer-dist --no-progress --no-interaction
