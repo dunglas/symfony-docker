@@ -1,0 +1,34 @@
+sudo: required
+
+services:
+  - docker
+
+## Use this method when travis updated docker-ce for the variable substitution
+#addons:
+#  apt:
+#    packages:
+#      - docker-ce
+
+env:
+  DOCKER_COMPOSE_VERSION: 1.18.0
+
+before_install:
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
+install:
+  - true
+
+script:
+  - docker-compose -v
+  - docker-compose pull --ignore-pull-failures
+  - docker-compose build --pull
+  - docker-compose up -d
+  - sleep 30
+  - docker-compose exec -T app composer req sensiolabs/security-checker
+  - docker-compose exec -T app bin/console security:check
+  - docker-compose run --no-deps -T app composer validate --no-check-publish
+  - curl http://localhost # Client
+  - curl -k https://localhost # Client (HTTP/2)
+  - docker-compose logs # Display logs if anything wrong
