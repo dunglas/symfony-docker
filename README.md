@@ -87,7 +87,7 @@ docker-compose -f docker-compose.yaml -f docker-compose.override.yaml up -d
 Inspect the installation with the following command. The requested Xdebug version should be displayed in the output.
 
 ```bash
-$ docker-compose exec php php --version
+$ docker-compose exec app php --version
 
 PHP 7.2.8 (cli) (built: Jul 21 2018 08:09:37) ( NTS )
 Copyright (c) 1997-2018 The PHP Group
