@@ -66,7 +66,7 @@ CMD ["php-fpm"]
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
 # Use prestissimo to speed up builds
-RUN composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-progress --no-suggest --optimize-autoloader --classmap-authoritative  --no-interaction
+RUN composer global require "symfony/flex" --prefer-dist --no-progress --no-suggest --classmap-authoritative  --no-interaction
 
 # Allow to use development versions of Symfony
 ARG STABILITY="stable"
@@ -85,4 +85,5 @@ COPY . .
 
 RUN mkdir -p var/cache var/logs var/sessions \
     && composer install --prefer-dist --no-dev --no-scripts --no-progress --no-suggest --classmap-authoritative --no-interaction \
-	&& chown -R www-data var
+    && composer clear-cache \
+    && chown -R www-data var
