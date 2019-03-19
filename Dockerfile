@@ -43,13 +43,20 @@ RUN set -eux \
 		$PHPIZE_DEPS \
 		icu-dev \
 		zlib-dev \
-	&& docker-php-ext-install \
+	&& docker-php-ext-install -j$(nproc) \
 		intl \
 		zip \
 	&& pecl install \
 		apcu-${APCU_VERSION} \
 	&& docker-php-ext-enable --ini-name 20-apcu.ini apcu \
 	&& docker-php-ext-enable --ini-name 05-opcache.ini opcache \
+	&& runDeps="$( \
+        scanelf --needed --nobanner --format '%n#p' --recursive /usr/local/lib/php/extensions \
+            | tr ',' '\n' \
+            | sort -u \
+            | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
+    )" \
+    && apk add --no-cache --virtual .api-phpexts-rundeps $runDeps \
 	&& apk del .build-deps
 
 RUN ln -s $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini
