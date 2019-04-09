@@ -38,6 +38,10 @@ RUN apk add --no-cache --virtual .persistent-deps \
 		zlib
 
 ENV APCU_VERSION 5.1.12
+
+### Uncomment to set your proxy for pear
+# RUN pear config-set http_proxy yourproxy
+
 RUN set -eux \
 	&& apk add --no-cache --virtual .build-deps \
 		$PHPIZE_DEPS \
