@@ -25,6 +25,22 @@ For instance, use the following command to use the `master` branch of Symfony:
 STABILITY=dev docker-compose up --build
 ```
 
+## Build and running behind a proxy
+
+1. Uncomment in the Dockerfile the following line
+```bash
+RUN pear config-set http_proxy yourproxy
+```
+2. Replace "yourproxy" by your proxy
+3. Build
+```bash
+docker-compose build --build-arg http_proxy="yourproxy" --build-arg https_proxy="yourproxy"
+```
+4. Up
+```bash
+docker-compose up
+```
+
 ## Debugging
 
 The default Docker stack is shipped without a Xdebug stage.
