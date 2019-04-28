@@ -32,10 +32,11 @@ COPY ./docker/h2-proxy/default.conf /etc/nginx/conf.d/default.conf
 ### PHP
 FROM php:${PHP_VERSION}-fpm-alpine AS symfony_docker_php
 
-RUN apk add --no-cache --virtual .persistent-deps \
+RUN apk add --no-cache \
 		git \
 		icu-libs \
-		zlib
+		zlib \
+		jq
 
 ENV APCU_VERSION 5.1.12
 RUN set -eux \
