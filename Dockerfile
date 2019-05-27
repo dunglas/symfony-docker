@@ -44,6 +44,8 @@ RUN set -eux \
 		$PHPIZE_DEPS \
 		icu-dev \
 		zlib-dev \
+        libzip-dev \
+    && docker-php-ext-configure zip --with-libzip \
 	&& docker-php-ext-install -j$(nproc) \
 		intl \
 		zip \
