@@ -1,7 +1,7 @@
-version: '3.4'
+version: "3.4"
 
 services:
-  app:
+  php:
     build:
       context: .
       target: symfony_docker_php
@@ -24,13 +24,13 @@ services:
       context: .
       target: symfony_docker_nginx
     depends_on:
-      - app
+      - php
     volumes:
       # Comment out the next line in production
       - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
       - ./public:/srv/app/public:ro
     ports:
-      - '80:80'
+      - "80:80"
 
   # This HTTP/2 proxy is not secure: it should only be used in dev
   h2-proxy:
@@ -42,4 +42,4 @@ services:
     volumes:
       - ./docker/h2-proxy/default.conf:/etc/nginx/conf.d/default.conf:ro
     ports:
-      - '443:443'
+      - "443:443"

@@ -55,7 +55,7 @@ configuration remains untouched.
 As example, an override could look like this:
 
 ```yaml
-version: '3.4'
+version: "3.4"
 
 services:
   app:
@@ -78,9 +78,9 @@ services:
 
 Then run:
 
-````bash
+```bash
 docker-compose up -d
-````
+```
 
 If `docker-compose.yaml` and a `docker-compose.override.yaml` are present on the same directory level, Docker Compose combines the two files into a single configuration, applying the configuration in the `docker-compose.override.yaml` file over and in addition to the values in the `docker-compose.yaml` file.
 
@@ -89,7 +89,7 @@ If `docker-compose.yaml` and a `docker-compose.override.yaml` are present on the
 Inspect the installation with the following command. The requested Xdebug version should be displayed in the output.
 
 ```bash
-$ docker-compose exec app php --version
+$ docker-compose exec php php --version
 
 PHP 7.2.8 (cli) (built: Jul 21 2018 08:09:37) ( NTS )
 Copyright (c) 1997-2018 The PHP Group
@@ -100,7 +100,7 @@ Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
 
 ### Editing Permissions on Linux
 
-If you work on linux and cannot edit some of the project files right after the first installation, you can run `docker-compose run --rm app chown -R $(id -u):$(id -g) .` to set yourself as owner of the project files that were created by the docker container.
+If you work on linux and cannot edit some of the project files right after the first installation, you can run `docker-compose run --rm php chown -R $(id -u):$(id -g) .` to set yourself as owner of the project files that were created by the docker container.
 
 ## Credits
 
