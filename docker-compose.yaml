@@ -9,6 +9,7 @@ services:
         SYMFONY_VERSION: ${SYMFONY_VERSION:-}
         STABILITY: ${STABILITY:-stable}
     volumes:
+      - ~/.composer/cache:/root/.composer/cache
       # Comment out the next line in production
       - ./:/srv/app:rw,cached
       # If you develop on Linux, comment out the following volumes to just use bind-mounted project directory from host
