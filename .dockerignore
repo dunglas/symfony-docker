@@ -12,7 +12,6 @@
 **/Thumbs.db
 .editorconfig
 .env*
-!.env.local.php
 .php_cs.cache
 bin/*
 !bin/console

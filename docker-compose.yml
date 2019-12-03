@@ -4,10 +4,15 @@ services:
   php:
     build:
       context: .
-      target: symfony_docker_php
+      target: symfony_php
       args:
         SYMFONY_VERSION: ${SYMFONY_VERSION:-}
         STABILITY: ${STABILITY:-stable}
+    healthcheck:
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 30s
     volumes:
       # Comment out the next line in production
       - ./:/srv/app:rw,cached
@@ -22,7 +27,7 @@ services:
   nginx:
     build:
       context: .
-      target: symfony_docker_nginx
+      target: symfony_nginx
     depends_on:
       - php
     volumes:
@@ -36,7 +41,7 @@ services:
   h2-proxy:
     build:
       context: .
-      target: symfony_docker_h2-proxy
+      target: symfony_h2-proxy
     depends_on:
       - nginx
     volumes:

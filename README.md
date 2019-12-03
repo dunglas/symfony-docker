@@ -37,9 +37,9 @@ it's recommended to add a custom stage to the end of the `Dockerfile`.
 
 ```Dockerfile
 # Dockerfile
-FROM symfony_docker_php as symfony_docker_php_dev
+FROM symfony_php as symfony_php_dev
 
-ARG XDEBUG_VERSION=2.6.0
+ARG XDEBUG_VERSION=2.8.0
 RUN set -eux; \
 	apk add --no-cache --virtual .build-deps $PHPIZE_DEPS; \
 	pecl install xdebug-$XDEBUG_VERSION; \
@@ -58,10 +58,10 @@ As example, an override could look like this:
 version: "3.4"
 
 services:
-  app:
+  php:
     build:
       context: .
-      target: symfony_docker_php_dev
+      target: symfony_php_dev
     environment:
       # See https://docs.docker.com/docker-for-mac/networking/#i-want-to-connect-from-a-container-to-a-service-on-the-host
       # See https://github.com/docker/for-linux/issues/264
@@ -73,7 +73,7 @@ services:
         idekey=PHPSTORM
       # This should correspond to the server declared in PHPStorm `Preferences | Languages & Frameworks | PHP | Servers`
       # Then PHPStorm will use the corresponding path mappings
-      PHP_IDE_CONFIG: serverName=symfony-docker
+      PHP_IDE_CONFIG: serverName=symfony
 ```
 
 Then run:
@@ -82,7 +82,7 @@ Then run:
 docker-compose up -d
 ```
 
-If `docker-compose.yaml` and a `docker-compose.override.yaml` are present on the same directory level, Docker Compose combines the two files into a single configuration, applying the configuration in the `docker-compose.override.yaml` file over and in addition to the values in the `docker-compose.yaml` file.
+If `docker-compose.yml` and a `docker-compose.override.yml` are present on the same directory level, Docker Compose combines the two files into a single configuration, applying the configuration in the `docker-compose.override.yml` file over and in addition to the values in the `docker-compose.yml` file.
 
 ### Troubleshooting
 
@@ -91,11 +91,8 @@ Inspect the installation with the following command. The requested Xdebug versio
 ```bash
 $ docker-compose exec php php --version
 
-PHP 7.2.8 (cli) (built: Jul 21 2018 08:09:37) ( NTS )
-Copyright (c) 1997-2018 The PHP Group
-Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
-    with Zend OPcache v7.2.8, Copyright (c) 1999-2018, by Zend Technologies
-    with Xdebug v2.6.0, Copyright (c) 2002-2018, by Derick Rethans
+PHP ...
+    with Xdebug v2.8.0 ...
 ```
 
 ### Editing Permissions on Linux
