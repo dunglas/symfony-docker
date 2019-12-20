@@ -29,7 +29,7 @@ RUN set -eux; \
 	    zlib-dev \
 	; \
 	\
-	docker-php-ext-configure zip --with-libzip; \
+	docker-php-ext-configure zip; \
 	docker-php-ext-install -j$(nproc) \
 	    intl \
 	    zip \
