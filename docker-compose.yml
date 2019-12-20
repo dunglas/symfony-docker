@@ -1,13 +1,18 @@
-version: '3.4'
+version: "3.4"
 
 services:
-  app:
+  php:
     build:
       context: .
-      target: symfony_docker_php
+      target: symfony_php
       args:
         SYMFONY_VERSION: ${SYMFONY_VERSION:-}
         STABILITY: ${STABILITY:-stable}
+    healthcheck:
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 30s
     volumes:
       # Comment out the next line in production
       - ./:/srv/app:rw,cached
@@ -22,24 +27,24 @@ services:
   nginx:
     build:
       context: .
-      target: symfony_docker_nginx
+      target: symfony_nginx
     depends_on:
-      - app
+      - php
     volumes:
       # Comment out the next line in production
       - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
       - ./public:/srv/app/public:ro
     ports:
-      - '80:80'
+      - "80:80"
 
   # This HTTP/2 proxy is not secure: it should only be used in dev
   h2-proxy:
     build:
       context: .
-      target: symfony_docker_h2-proxy
+      target: symfony_h2-proxy
     depends_on:
       - nginx
     volumes:
       - ./docker/h2-proxy/default.conf:/etc/nginx/conf.d/default.conf:ro
     ports:
-      - '443:443'
+      - "443:443"

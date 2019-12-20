@@ -26,9 +26,9 @@ script:
   - docker-compose build --pull
   - docker-compose up -d
   - sleep 30
-  - docker-compose exec -T app composer req sensiolabs/security-checker
-  - docker-compose exec -T app bin/console security:check
-  - docker-compose run --no-deps -T app composer validate --no-check-publish
+  - docker-compose exec -T php composer req sensiolabs/security-checker
+  - docker-compose exec -T php bin/console security:check
+  - docker-compose run --no-deps -T php composer validate --no-check-publish
   - curl http://localhost # Client
   - curl -k https://localhost # Client (HTTP/2)
   - docker-compose logs # Display logs if anything wrong
