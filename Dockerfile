@@ -126,13 +126,32 @@ FROM alpine:latest AS symfony_h2-proxy-cert
 
 RUN apk add --no-cache openssl
 
+# Allow to set server name
+ARG SERVER_NAME="localhost"
+ENV SERVER_NAME=${SERVER_NAME}
+
 # Use this self-generated certificate only in dev, IT IS NOT SECURE!
+# create the private key
 RUN openssl genrsa -des3 -passout pass:NotSecure -out server.pass.key 2048
-RUN openssl rsa -passin pass:NotSecure -in server.pass.key -out server.key
-RUN rm server.pass.key
+RUN openssl rsa -passin pass:NotSecure -in server.pass.key -out server.key \
+        && rm server.pass.key
+
+# create a request to sign certificate
 RUN openssl req -new -passout pass:NotSecure -key server.key -out server.csr \
-	-subj '/C=SS/ST=SS/L=Gotham City/O=Symfony/CN=localhost'
-RUN openssl x509 -req -sha256 -days 365 -in server.csr -signkey server.key -out server.crt
+        -subj "/C=SS/ST=SS/L=Gotham City/O=Symfony/CN=${SERVER_NAME}"
+
+# create an extensions configuration file
+RUN set -eux; \
+	{ \
+		echo "[ v3_ca  ]"; \
+		echo "subjectAltName = DNS:${SERVER_NAME}"; \
+		echo "extendedKeyUsage = serverAuth"; \
+	} > extfile.cnf
+
+# create the signed certificate
+RUN openssl x509 -req -sha256 -extensions v3_ca -extfile extfile.cnf -days 365 \
+        -in server.csr -signkey server.key -out server.crt \
+        && rm extfile.cnf
 
 ### "h2-proxy" stage
 FROM nginx:${NGINX_VERSION}-alpine AS symfony_h2-proxy
