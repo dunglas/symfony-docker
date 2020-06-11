@@ -8,6 +8,7 @@ services:
       args:
         SYMFONY_VERSION: ${SYMFONY_VERSION:-}
         STABILITY: ${STABILITY:-stable}
+        SERVER_NAME: ${SERVER_NAME:-localhost}
     healthcheck:
       interval: 10s
       timeout: 3s
