@@ -85,7 +85,7 @@ ENV STABILITY ${STABILITY:-stable}
 ARG SYMFONY_VERSION=""
 
 # Download the Symfony skeleton and leverage Docker cache layers
-RUN composer create-project "symfony/skeleton ${SYMFONY_VERSION}" . --stability=$STABILITY --prefer-dist --no-dev --no-progress --no-scripts --no-interaction; \
+RUN composer create-project "symfony/skeleton ${SYMFONY_VERSION}" . --stability=$STABILITY --prefer-dist --no-dev --no-progress --no-interaction; \
 	composer clear-cache
 
 ###> recipes ###
@@ -95,8 +95,9 @@ COPY . .
 
 RUN set -eux; \
 	mkdir -p var/cache var/log; \
-	composer install --no-progress --no-suggest --no-interaction --no-dev --no-scripts; \
+	composer install --prefer-dist --no-dev --no-progress --no-scripts --no-interaction; \
 	composer dump-autoload --classmap-authoritative --no-dev; \
+	composer symfony:dump-env prod; \
 	composer run-script --no-dev post-install-cmd; sync
 VOLUME /srv/app/var
 

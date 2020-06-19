@@ -8,10 +8,16 @@
 **/.gitattributes
 **/.gitignore
 **/.gitmodules
+**/docker-compose.*.yaml
+**/docker-compose.*.yml
+**/docker-compose.yaml
+**/docker-compose.yml
 **/Dockerfile
 **/Thumbs.db
 .editorconfig
-.env*
+.env.*.local
+.env.local
+.env.local.php
 .php_cs.cache
 bin/*
 !bin/console

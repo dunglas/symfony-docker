@@ -25,6 +25,7 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
       cp -Rp tmp/. .
       rm -Rf tmp/
   elif [ "$APP_ENV" != 'prod' ]; then
+      rm -f .env.local.php
       composer install --prefer-dist --no-progress --no-suggest --no-interaction
   fi
 
