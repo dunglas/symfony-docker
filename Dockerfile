@@ -95,6 +95,7 @@ COPY . .
 
 RUN set -eux; \
 	mkdir -p var/cache var/log; \
+	composer install --no-progress --no-suggest --no-interaction --no-dev --no-scripts; \
 	composer dump-autoload --classmap-authoritative --no-dev; \
 	composer run-script --no-dev post-install-cmd; sync
 VOLUME /srv/app/var
@@ -124,7 +125,10 @@ COPY --from=symfony_php /srv/app/public public/
 # "h2-proxy-cert" stage
 FROM alpine:latest AS symfony_h2-proxy-cert
 
-RUN apk add --no-cache openssl
+RUN apk add --no-cache \
+        ca-certificates \
+        openssl \
+    ;
 
 # Allow to set server name
 ARG SERVER_NAME="localhost"
@@ -151,7 +155,8 @@ RUN set -eux; \
 # create the signed certificate
 RUN openssl x509 -req -sha256 -extensions v3_ca -extfile extfile.cnf -days 365 \
         -in server.csr -signkey server.key -out server.crt \
-        && rm extfile.cnf
+        && rm extfile.cnf \
+        && update-ca-certificates
 
 ### "h2-proxy" stage
 FROM nginx:${NGINX_VERSION}-alpine AS symfony_h2-proxy
