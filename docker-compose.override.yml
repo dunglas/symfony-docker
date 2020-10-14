@@ -1,0 +1,29 @@
+version: "3.4"
+
+# Development environment override
+services:
+  php:
+    volumes:
+      - ./:/srv/app:rw,cached
+      - ./docker/php/conf.d/symfony.dev.ini:/usr/local/etc/php/conf.d/symfony.ini
+      # If you develop on Linux, comment out the following volumes to just use bind-mounted project directory from host
+      # - ./api/var:/srv/app/var:rw
+    environment:
+      APP_ENV: dev
+
+  nginx:
+    volumes:
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./public:/srv/app/public:ro
+
+    # This HTTP/2 proxy is not secure: it should only be used in dev
+  h2-proxy:
+    build:
+      context: .
+      target: symfony_h2-proxy
+    depends_on:
+      - nginx
+    volumes:
+      - ./docker/h2-proxy/default.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - "443:443"

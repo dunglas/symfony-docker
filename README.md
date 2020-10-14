@@ -14,24 +14,22 @@ A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony
 
 Use the `SYMFONY_VERSION` environment variable to select a specific Symfony version.
 
-For instance, use the following command to install Symfony 3.4:
+For instance, use the following command to install Symfony 4.4:
 
-`SYMFONY_VERSION=3.4.* docker-compose up --build`
+    $ SYMFONY_VERSION=4.4.* docker-compose up --build
 
 To install a non-stable version of Symfony, use the `STABILITY` environment variable during the build.
 The value must be [a valid Composer stability option](https://getcomposer.org/doc/04-schema.md#minimum-stability)) .
 
 For instance, use the following command to use the `master` branch of Symfony:
 
-```bash
-STABILITY=dev docker-compose up --build
-```
+    $ STABILITY=dev docker-compose up --build
 
 ## Customize Server Name
 
 Use the `SERVER_NAME` environment variable to define your custom server name.
 
-`SERVER_NAME=symfony.wip docker-compose up --build`
+    $ SERVER_NAME=symfony.wip docker-compose up --build
 
 ## Debugging
 
@@ -47,7 +45,7 @@ it's recommended to add a custom stage to the end of the `Dockerfile`.
 # Dockerfile
 FROM symfony_php as symfony_php_dev
 
-ARG XDEBUG_VERSION=2.8.0
+ARG XDEBUG_VERSION=2.9.8
 RUN set -eux; \
 	apk add --no-cache --virtual .build-deps $PHPIZE_DEPS; \
 	pecl install xdebug-$XDEBUG_VERSION; \
@@ -57,12 +55,13 @@ RUN set -eux; \
 
 ### Configure Xdebug with Docker Compose Override
 
-Using an [override](https://docs.docker.com/compose/reference/overview/#specifying-multiple-compose-files) file named `docker-compose.override.yaml` ensures that the production
+Using an [override](https://docs.docker.com/compose/reference/overview/#specifying-multiple-compose-files) file named `docker-compose.debug.yaml` ensures that the production
 configuration remains untouched.
 
 As example, an override could look like this:
 
 ```yaml
+# docker-compose.debug.yaml
 version: "3.4"
 
 services:
@@ -86,22 +85,16 @@ services:
 
 Then run:
 
-```bash
-docker-compose up -d
-```
-
-If `docker-compose.yml` and a `docker-compose.override.yml` are present on the same directory level, Docker Compose combines the two files into a single configuration, applying the configuration in the `docker-compose.override.yml` file over and in addition to the values in the `docker-compose.yml` file.
+    $ docker-compose -f docker-compose.yml -f docker-compose.debug.yml up -d
 
 ### Troubleshooting
 
 Inspect the installation with the following command. The requested Xdebug version should be displayed in the output.
 
-```bash
-$ docker-compose exec php php --version
-
-PHP ...
-    with Xdebug v2.8.0 ...
-```
+    $ docker-compose exec php php --version
+    
+    PHP ...
+        with Xdebug v2.8.0 ...
 
 ### Editing Permissions on Linux
 
@@ -111,9 +104,8 @@ If you work on linux and cannot edit some of the project files right after the f
 
 If you have a SSL trust issues, download the self-signed certificate and run :
 
-`sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain /path/to/you/certificate.cer`
+    $ sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain /path/to/you/certificate.cer
 
 ## Credits
 
 Created by [Kévin Dunglas](https://dunglas.fr), co-maintained by [Maxime Helias](https://twitter.com/maxhelias) and sponsored by [Les-Tilleuls.coop](https://les-tilleuls.coop).
-

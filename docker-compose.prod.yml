@@ -1,0 +1,7 @@
+version: "3.4"
+
+# Production environment override
+services:
+  php:
+    environment:
+      APP_ENV: prod
