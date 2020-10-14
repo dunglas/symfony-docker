@@ -11,8 +11,12 @@ jobs:
         steps:
             - name: Checkout
               uses: actions/checkout@v2
+            - name: Pull images
+              run: docker-compose pull
+            - uses: satackey/action-docker-layer-caching@v0.0.8
+              continue-on-error: true
             - name: Start services
-              run: docker-compose up -d
+              run: docker-compose up --build -d
             - name: Wait for services
               run: |
                   while status="$(docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" "$(docker-compose ps -q php)")"; do
