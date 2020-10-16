@@ -14,5 +14,3 @@ bin/console text eol=lf
 
 *.ico binary
 *.png binary
-
-README.md export-ignore
