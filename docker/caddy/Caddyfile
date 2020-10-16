@@ -1,0 +1,12 @@
+{
+    experimental_http3
+}
+
+{$SERVER_NAME}
+
+route {
+    root * /srv/app/public
+    vulcain
+    push
+    php_fastcgi php:9000
+}
