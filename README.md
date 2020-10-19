@@ -10,6 +10,15 @@ A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony
 2. Open `https://localhost` in your favorite web browser and [accept the auto-generated TLS certificate](https://stackoverflow.com/a/15076602/1352334)
 3. **Enjoy!**
 
+## Features
+
+* Production, development and CI ready
+* Automatic HTTPS (in dev and in prod!)
+* HTTP/2, HTTP/3 and [Server Push](https://symfony.com/doc/current/web_link.html) support
+* [Vulcain](https://vulcain.rocks)-enabled
+* Just 2 services (PHP FPM and Caddy server)
+* Super-readable configuration
+
 ## Selecting a Specific Symfony Version
 
 Use the `SYMFONY_VERSION` environment variable to select a specific Symfony version.

@@ -8,7 +8,7 @@ services:
       args:
         SYMFONY_VERSION: ${SYMFONY_VERSION:-}
         STABILITY: ${STABILITY:-stable}
-        SERVER_NAME: ${SERVER_NAME:-localhost}
+    restart: unless-stopped
     healthcheck:
       interval: 10s
       timeout: 3s
@@ -17,11 +17,20 @@ services:
     environment:
       SYMFONY_VERSION:
 
-  nginx:
+  caddy:
     build:
       context: .
-      target: symfony_nginx
-    depends_on:
-      - php
+      target: symfony_caddy
+    environment:
+      SERVER_NAME: ${SERVER_NAME:-localhost}
+    restart: unless-stopped
     ports:
       - "80:80"
+      - "443:443"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:

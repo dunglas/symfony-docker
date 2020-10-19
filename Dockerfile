@@ -5,7 +5,7 @@
 
 # https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact
 ARG PHP_VERSION=7.4
-ARG NGINX_VERSION=1.19
+ARG CADDY_VERSION=2.1.1
 
 # "php" stage
 FROM php:${PHP_VERSION}-fpm-alpine AS symfony_php
@@ -109,56 +109,15 @@ RUN chmod +x /usr/local/bin/docker-entrypoint
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
 
+FROM caddy:${CADDY_VERSION}-builder-alpine AS symfony_caddy_builder
 
-# "nginx" stage
-# depends on the "php" stage above
-FROM nginx:${NGINX_VERSION}-alpine AS symfony_nginx
+RUN xcaddy build \
+    --with github.com/dunglas/vulcain/caddy
 
-COPY docker/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
+FROM caddy:${CADDY_VERSION} AS symfony_caddy
 
 WORKDIR /srv/app
 
+COPY --from=symfony_caddy_builder /usr/bin/caddy /usr/bin/caddy
 COPY --from=symfony_php /srv/app/public public/
-
-# "h2-proxy-cert" stage
-FROM alpine:latest AS symfony_h2-proxy-cert
-
-RUN apk add --no-cache \
-        ca-certificates \
-        openssl \
-    ;
-
-# Allow to set server name
-ARG SERVER_NAME="localhost"
-ENV SERVER_NAME=${SERVER_NAME}
-
-# Use this self-generated certificate only in dev, IT IS NOT SECURE!
-# create the private key
-RUN openssl genrsa -des3 -passout pass:NotSecure -out server.pass.key 2048
-RUN openssl rsa -passin pass:NotSecure -in server.pass.key -out server.key \
-        && rm server.pass.key
-
-# create a request to sign certificate
-RUN openssl req -new -passout pass:NotSecure -key server.key -out server.csr \
-        -subj "/C=SS/ST=SS/L=Gotham City/O=Symfony/CN=${SERVER_NAME}"
-
-# create an extensions configuration file
-RUN set -eux; \
-	{ \
-		echo "[ v3_ca  ]"; \
-		echo "subjectAltName = DNS:${SERVER_NAME}"; \
-		echo "extendedKeyUsage = serverAuth"; \
-	} > extfile.cnf
-
-# create the signed certificate
-RUN openssl x509 -req -sha256 -extensions v3_ca -extfile extfile.cnf -days 365 \
-        -in server.csr -signkey server.key -out server.crt \
-        && rm extfile.cnf \
-        && update-ca-certificates
-
-### "h2-proxy" stage
-FROM nginx:${NGINX_VERSION}-alpine AS symfony_h2-proxy
-
-RUN mkdir -p /etc/nginx/ssl/
-COPY --from=symfony_h2-proxy-cert server.key server.crt /etc/nginx/ssl/
-COPY ./docker/h2-proxy/default.conf /etc/nginx/conf.d/default.conf
+COPY docker/caddy/Caddyfile /etc/caddy/Caddyfile
