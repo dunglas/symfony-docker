@@ -16,7 +16,7 @@ services:
       start_period: 30s
     environment:
       # Run "composer require symfony/orm-pack" to install and configure Doctrine ORM
-      DATABASE_URL: mysql://symfony:ChangeMe@db:3306/app?serverVersion=mariadb-10.5.6
+      DATABASE_URL: ${DATABASE_URL:-mysql://symfony:ChangeMe@db:3306/app?serverVersion=mariadb-10.5.6}
       SYMFONY_VERSION:
 
   caddy:
