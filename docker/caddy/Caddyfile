@@ -4,9 +4,13 @@
 
 {$SERVER_NAME}
 
+log
+
 route {
     root * /srv/app/public
     vulcain
     push
     php_fastcgi php:9000
+    encode gzip
+    file_server
 }
