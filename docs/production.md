@@ -42,7 +42,7 @@ Example in Gandi's UI:
 ![Creating a DNS record at Gandi.net](gandi-dns.png)
 
 Note: Let's Encrypt, the service used by default by Symfony Docker to automatically generate a TLS certificate doesn't support using bare IP addresses.
-Using a domain name if mandatory to use Let's Encrypt.
+Using a domain name is mandatory to use Let's Encrypt.
 
 ## Deploying
 
