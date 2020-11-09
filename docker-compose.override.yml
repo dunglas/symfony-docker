@@ -7,7 +7,7 @@ services:
       - ./:/srv/app:rw,cached
       - ./docker/php/conf.d/symfony.dev.ini:/usr/local/etc/php/conf.d/symfony.ini
       # If you develop on Linux, comment out the following volumes to just use bind-mounted project directory from host
-      # - ./api/var:/srv/app/var:rw
+      # - ./var:/srv/app/var:rw
     environment:
       APP_ENV: dev
 
