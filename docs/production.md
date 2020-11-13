@@ -67,7 +67,7 @@ Go to `https://your-domain-name.example.com` and enjoy!
 
 Alternatively, if you don't want to expose an HTTPS server but only an HTTP one, run the following command:
 
-    $ SERVER_NAME=:80 -f docker-compose.yml -f docker-compose.prod.yml up -d
+    $ SERVER_NAME=:80 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 
 ## Deploying on Multiple Nodes
 
