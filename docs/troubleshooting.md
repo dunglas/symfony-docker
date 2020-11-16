@@ -6,11 +6,14 @@ If you work on linux and cannot edit some of the project files right after the f
 
 ## Fix Chrome/Brave SSL
 
-If you have a SSL trust issues, download the self-signed certificate and run :
+If you have a TLS trust issues, you can copy the self-signed certificate from Caddy and add it to the trusted certificates :
 
-    $ sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain /path/to/you/certificate.cer
+    # Mac
+    $ docker cp $(docker-compose ps -q caddy):/data/caddy/pki/authorities/local/root.crt /tmp/root.crt && sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain /tmp/root.crt
+    # Linux
+    $ docker cp $(docker-compose ps -q caddy):/data/caddy/pki/authorities/local/root.crt /usr/local/share/ca-certificates/root.crt && sudo update-ca-certificates
 
 ## HTTPs and Redirects
 
 If Symfony is generating an internal redirect for an `https://` url, but the resulting url is `http://`, you have to uncomment the `TRUSTED_PROXIES` setting in your `.env` file.
-For more details see the [Symfony internal redirect docuentation](https://symfony.com/doc/current/routing.html#redirecting-to-urls-and-routes-directly-from-a-route).
+For more details see the [Symfony internal redirect documentation](https://symfony.com/doc/current/routing.html#redirecting-to-urls-and-routes-directly-from-a-route).
