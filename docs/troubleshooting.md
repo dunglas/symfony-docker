@@ -9,3 +9,7 @@ If you work on linux and cannot edit some of the project files right after the f
 If you have a SSL trust issues, download the self-signed certificate and run :
 
     $ sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain /path/to/you/certificate.cer
+
+## HTTPs and Redirects
+When Symfony is generating an internal redirect, and you're browsing via `https://...` you're redirected to `http://`.
+To fix this issue uncomment the `TRUSTED_PROXIES` setting in your .env file (see https://github.com/dunglas/symfony-docker/issues/68)
