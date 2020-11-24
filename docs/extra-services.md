@@ -5,5 +5,5 @@ the recipe will automatically modify the `Dockerfile` and `docker-compose.yml` t
 
 The currently supported packages are:
 
-* `symfony/orm-pack`: install a MariaDB service
+* `symfony/orm-pack`: install a PostgreSQL service
 * `symfony/messenger`: install a RabbitMQ service
