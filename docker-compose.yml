@@ -15,6 +15,8 @@ services:
       retries: 3
       start_period: 30s
     environment:
+      # Run "composer require symfony/orm-pack" to install and configure Doctrine ORM
+      DATABASE_URL: postgresql://${POSTGRES_USER:-symfony}:${POSTGRES_PASSWORD:-ChangeMe}@db:5432/${POSTGRES_DB:-app}?serverVersion=${POSTGRES_VERSION:-13}
       SYMFONY_VERSION:
 
   caddy:
