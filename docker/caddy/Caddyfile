@@ -14,7 +14,7 @@ route {
         # Publisher JWT key
         publisher_jwt {$MERCURE_PUBLISHER_JWT}
         # Subscriber JWT key
-        subscriber_jwt {$MERCURE_SUBSRIBER_JWT}
+        subscriber_jwt {$MERCURE_SUBSCRIBER_JWT}
         # Allow anonymous subscribers (double-check that it's what you want)
         anonymous
         # Enable the subscription API (double-check that it's what you want)

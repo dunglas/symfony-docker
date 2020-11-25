@@ -28,7 +28,7 @@ services:
     environment:
       SERVER_NAME: ${SERVER_NAME:-localhost, caddy:80}
       MERCURE_PUBLISHER_JWT: ${MERCURE_PUBLISHER_JWT:-!ChangeMe!}
-      MERCURE_SUBSRIBER_JWT: ${MERCURE_SUBSRIBER_JWT:-!ChangeMe!}
+      MERCURE_SUBSCRIBER_JWT: ${MERCURE_SUBSCRIBER_JWT:-!ChangeMe!}
     restart: unless-stopped
     ports:
       - "80:80"
