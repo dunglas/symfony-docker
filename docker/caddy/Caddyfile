@@ -2,12 +2,24 @@
     experimental_http3
 }
 
-{$SERVER_NAME}
+{$SERVER_NAME}, caddy:80
 
 log
 
 route {
     root * /srv/app/public
+    mercure {
+        # Enable the demo endpoint (you should disable it in production!)
+        #demo
+        # Publisher JWT key
+        publisher_jwt {$MERCURE_PUBLISHER_JWT}
+        # Subscriber JWT key
+        subscriber_jwt {$MERCURE_SUBSRIBER_JWT}
+        # Allow anonymous subscribers (double-check that it's what you want)
+        anonymous
+        # Enable the subscription API (double-check that it's what you want)
+        subscriptions
+    }
     vulcain
     push
     php_fastcgi php:9000

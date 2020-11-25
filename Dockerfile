@@ -109,13 +109,16 @@ CMD ["php-fpm"]
 FROM caddy:${CADDY_VERSION}-builder-alpine AS symfony_caddy_builder
 
 RUN xcaddy build \
-	--with github.com/dunglas/mercure/caddy@main \
+    --with github.com/dunglas/mercure/caddy@main \
     --with github.com/dunglas/vulcain/caddy
 
 FROM caddy:${CADDY_VERSION} AS symfony_caddy
 
 WORKDIR /srv/app
 
+# Mercure UI
+# TODO: add an option to Mrcure to set the path to static files
+#COPY --from=dunglas/mercure:v0.11 /srv/public /srv/public/
 COPY --from=symfony_caddy_builder /usr/bin/caddy /usr/bin/caddy
 COPY --from=symfony_php /srv/app/public public/
 COPY docker/caddy/Caddyfile /etc/caddy/Caddyfile
