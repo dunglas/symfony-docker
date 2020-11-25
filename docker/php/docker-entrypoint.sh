@@ -26,7 +26,7 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
       rm -Rf tmp/
   elif [ "$APP_ENV" != 'prod' ]; then
       rm -f .env.local.php
-      composer install --prefer-dist --no-progress --no-suggest --no-interaction
+      composer install --prefer-dist --no-progress --no-interaction
   fi
 
   if grep -q DATABASE_URL= .env; then
