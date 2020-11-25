@@ -17,6 +17,8 @@ For instance, use the following command to use the `master` branch of Symfony:
 
 ## Customizing the Server Name
 
-Use the `SERVER_NAME` environment variable to define your custom server name.
+Use the `SERVER_NAME` environment variable to define your custom server name(s).
 
-    $ SERVER_NAME=symfony.wip docker-compose up --build
+    $ SERVER_NAME="symfony.wip, caddy:80" docker-compose up --build
+
+If you use Mercure, keep `caddy:80` in the list to allow the PHP container to request the caddy service.
