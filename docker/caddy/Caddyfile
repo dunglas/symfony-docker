@@ -2,7 +2,7 @@
     experimental_http3
 }
 
-{$SERVER_NAME}, caddy:80
+{$SERVER_NAME}
 
 log
 
@@ -10,7 +10,7 @@ route {
     root * /srv/app/public
     mercure {
         # Enable the demo endpoint (disable it in production!)
-
+        {$MERCURE_DEMO}
         # Publisher JWT key
         publisher_jwt {$MERCURE_PUBLISHER_JWT}
         # Subscriber JWT key
