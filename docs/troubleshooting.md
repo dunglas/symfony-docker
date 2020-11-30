@@ -11,5 +11,6 @@ If you have a SSL trust issues, download the self-signed certificate and run :
     $ sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain /path/to/you/certificate.cer
 
 ## HTTPs and Redirects
-When Symfony is generating an internal redirect, and you're browsing via `https://...` you're redirected to `http://`.
-To fix this issue uncomment the `TRUSTED_PROXIES` setting in your .env file (see https://github.com/dunglas/symfony-docker/issues/68)
+
+If Symfony is generating an internal redirect for an `https://` url, but the resulting url is `http://`, you have to uncomment the `TRUSTED_PROXIES` setting in your `.env` file.
+For more details see the [Symfony internal redirect docuentation](https://symfony.com/doc/current/routing.html#redirecting-to-urls-and-routes-directly-from-a-route).
