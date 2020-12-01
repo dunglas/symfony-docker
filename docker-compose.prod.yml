@@ -5,3 +5,9 @@ services:
   php:
     environment:
       APP_ENV: prod
+
+  caddy:
+    environment:
+      MERCURE_DEMO: # Disable the demo
+      MERCURE_PUBLISHER_JWT: ${MERCURE_PUBLISHER_JWT}
+      MERCURE_SUBSCRIBER_JWT: ${MERCURE_SUBSCRIBER_JWT}

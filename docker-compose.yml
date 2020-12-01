@@ -17,6 +17,8 @@ services:
     environment:
       # Run "composer require symfony/orm-pack" to install and configure Doctrine ORM
       DATABASE_URL: postgresql://${POSTGRES_USER:-symfony}:${POSTGRES_PASSWORD:-ChangeMe}@database:5432/${POSTGRES_DB:-app}?serverVersion=${POSTGRES_VERSION:-13}
+      # Run "composer require symfony/mercure-bundle" to install and configure the Mercure integration
+      MERCURE_PUBLISH_URL: ${MERCURE_URL:-http://caddy/.well-known/mercure}
       SYMFONY_VERSION:
 
   caddy:
@@ -24,7 +26,9 @@ services:
       context: .
       target: symfony_caddy
     environment:
-      SERVER_NAME: ${SERVER_NAME:-localhost}
+      SERVER_NAME: ${SERVER_NAME:-localhost, caddy:80}
+      MERCURE_PUBLISHER_JWT: ${MERCURE_PUBLISHER_JWT:-!ChangeMe!}
+      MERCURE_SUBSCRIBER_JWT: ${MERCURE_SUBSCRIBER_JWT:-!ChangeMe!}
     restart: unless-stopped
     ports:
       - "80:80"

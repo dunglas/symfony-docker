@@ -6,4 +6,5 @@ the recipe will automatically modify the `Dockerfile` and `docker-compose.yml` t
 The currently supported packages are:
 
 * `symfony/orm-pack`: install a PostgreSQL service
+* `symfony/mercure-bundle`: use the Mercure.rocks module shipped with Caddy
 * `symfony/messenger`: install a RabbitMQ service

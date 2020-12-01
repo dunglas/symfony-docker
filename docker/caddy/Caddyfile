@@ -8,6 +8,20 @@ log
 
 route {
     root * /srv/app/public
+    mercure {
+        # Transport to use (default to Bolt)
+        transport_url bolt:///data/mercure.db
+        # Enable the demo endpoint (disable it in production!)
+        {$MERCURE_DEMO}
+        # Publisher JWT key
+        publisher_jwt {$MERCURE_PUBLISHER_JWT}
+        # Subscriber JWT key
+        subscriber_jwt {$MERCURE_SUBSCRIBER_JWT}
+        # Allow anonymous subscribers (double-check that it's what you want)
+        anonymous
+        # Enable the subscription API (double-check that it's what you want)
+        subscriptions
+    }
     vulcain
     push
     php_fastcgi php:9000

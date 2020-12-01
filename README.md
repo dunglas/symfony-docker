@@ -14,8 +14,9 @@ A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony
 
 * Production, development and CI ready
 * Automatic HTTPS (in dev and in prod!)
-* HTTP/2, HTTP/3 and [Server Push](https://symfony.com/doc/current/web_link.html) support
-* [Vulcain](https://vulcain.rocks)-enabled
+* HTTP/2, HTTP/3 and [Preload](https://symfony.com/doc/current/web_link.html) support
+* Built-in [Mercure](https://symfony.com/doc/current/mercure.html) hub
+* [Vulcain](https://vulcain.rocks) support
 * Just 2 services (PHP FPM and Caddy server)
 * Super-readable configuration
 
