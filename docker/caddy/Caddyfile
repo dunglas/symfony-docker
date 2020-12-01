@@ -9,6 +9,8 @@ log
 route {
     root * /srv/app/public
     mercure {
+        # Transport to use (default to Bolt)
+        transport_url bolt:///data/mercure.db
         # Enable the demo endpoint (disable it in production!)
         {$MERCURE_DEMO}
         # Publisher JWT key
