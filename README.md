@@ -1,6 +1,6 @@
 # Symfony Docker
 
-A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony](https://symfony.com) web framework, with full [HTTP/2](https://symfony.com/doc/current/weblink.html) and HTTPS support.
+A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony](https://symfony.com) web framework, with full [HTTP/2](https://symfony.com/doc/current/weblink.html), HTTP/3 and HTTPS support.
 
 ![CI](https://github.com/dunglas/symfony-docker/workflows/CI/badge.svg)
 
