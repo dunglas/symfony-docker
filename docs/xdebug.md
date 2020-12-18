@@ -12,7 +12,7 @@ it's recommended to add a custom stage to the end of the `Dockerfile`.
 # Dockerfile
 FROM symfony_php as symfony_php_debug
 
-ARG XDEBUG_VERSION=2.9.8
+ARG XDEBUG_VERSION=3.0.1
 RUN set -eux; \
 	apk add --no-cache --virtual .build-deps $PHPIZE_DEPS; \
 	pecl install xdebug-$XDEBUG_VERSION; \
@@ -39,12 +39,12 @@ services:
     environment:
       # See https://docs.docker.com/docker-for-mac/networking/#i-want-to-connect-from-a-container-to-a-service-on-the-host
       # See https://github.com/docker/for-linux/issues/264
-      # The `remote_host` below may optionally be replaced with `remote_connect_back`
+      # The `client_host` below may optionally be replaced with `discover_client_host=yes`
+      # Add `start_with_request=yes` to start debug seesion on each request
       XDEBUG_CONFIG: >-
-        remote_enable=1
-        remote_host=host.docker.internal
-        remote_port=9001
-        idekey=PHPSTORM
+        client_host=host.docker.internal
+      XDEBUG_MODE: debug
+      XDEBUG_SESSION: PHPSTORM
       # This should correspond to the server declared in PHPStorm `Preferences | Languages & Frameworks | PHP | Servers`
       # Then PHPStorm will use the corresponding path mappings
       PHP_IDE_CONFIG: serverName=symfony
@@ -61,4 +61,4 @@ Inspect the installation with the following command. The requested Xdebug versio
     $ docker-compose exec php php --version
     
     PHP ...
-        with Xdebug v2.8.0 ...
+        with Xdebug v3.0.1 ...
