@@ -40,11 +40,10 @@ services:
       # See https://docs.docker.com/docker-for-mac/networking/#i-want-to-connect-from-a-container-to-a-service-on-the-host
       # See https://github.com/docker/for-linux/issues/264
       # The `client_host` below may optionally be replaced with `discover_client_host=yes`
-      # Add `start_with_request=yes` to start debug seesion on each request
+      # Add `start_with_request=yes` to start debug session on each request
       XDEBUG_CONFIG: >-
         client_host=host.docker.internal
       XDEBUG_MODE: debug
-      XDEBUG_SESSION: PHPSTORM
       # This should correspond to the server declared in PHPStorm `Preferences | Languages & Frameworks | PHP | Servers`
       # Then PHPStorm will use the corresponding path mappings
       PHP_IDE_CONFIG: serverName=symfony
