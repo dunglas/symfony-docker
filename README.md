@@ -33,8 +33,9 @@ A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony
 3. [Support for extra services](docs/extra-services.md)
 4. [Deploying in production](docs/production.md)
 5. [Debugging with Xdebug](docs/xdebug.md)
-6. [Using a Makefile](docs/makefile.md)
-7. [Troubleshooting](docs/troubleshooting.md)
+6. [TLS Certificates](docs/tls.md)
+7. [Using a Makefile](docs/makefile.md)
+8. [Troubleshooting](docs/troubleshooting.md)
 
 ## License
 

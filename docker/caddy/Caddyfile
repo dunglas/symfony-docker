@@ -5,6 +5,8 @@
 
 {$SERVER_NAME}
 
+{$CADDY_EXTRA_CONFIG}
+
 log
 
 route {
