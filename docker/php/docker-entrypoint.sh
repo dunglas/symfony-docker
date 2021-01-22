@@ -34,7 +34,7 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 		ATTEMPTS_LEFT_TO_REACH_DATABASE=60
 		until [ $ATTEMPTS_LEFT_TO_REACH_DATABASE -eq 0 ] || DATABASE_ERROR=$(bin/console doctrine:query:sql "SELECT 1" 2>&1); do
 			if [ $? -eq 255 ]; then
-				# If the doctrine commands exits with 255, another (unrecoverable) error occurred, and we stop retrying
+				# If the Doctrine command exits with 255, an unrecoverable error occurred
 				ATTEMPTS_LEFT_TO_REACH_DATABASE=0
 				break
 			fi
