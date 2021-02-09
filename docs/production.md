@@ -23,7 +23,9 @@ Don't forget to add your SSH key or to create a password then press the "Finaliz
 Then, wait a few seconds while your Droplet is provisioning.
 When your Droplet is ready, use SSH to connect:
 
-    $ ssh root@<droplet-ip>
+```console
+ssh root@<droplet-ip>
+```
 
 ## Configuring a Domain Name
 
@@ -35,7 +37,9 @@ Then create a DNS record of type `A` for your domain name pointing to the IP add
 
 Example:
 
-    your-domain-name.example.com.  IN  A     207.154.233.113
+```dns
+your-domain-name.example.com.  IN  A     207.154.233.113
+````
 
 Example in Gandi's UI:
 
@@ -52,22 +56,36 @@ Deploy keys are also [supported by GitLab](https://docs.gitlab.com/ee/user/proje
 
 Example with Git:
 
-    $ git clone git@github.com:<username>/<project-name>.git
+```console
+git clone git@github.com:<username>/<project-name>.git
+```
 
 Go into the directory containing your project (`<project-name>`), and start the app in production mode:
 
-    $ SERVER_NAME=your-domain-name.example.com docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+```console
+SERVER_NAME=your-domain-name.example.com \
+APP_SECRET=ChangeMe \
+MERCURE_PUBLISHER_JWT_KEY=ChangeMe \
+MERCURE_SUBSCRIBER_JWT_KEY=ChangeMe \
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+```
 
-Be sure to replace `your-domain-name.example.com` by your actual domain name.
+Be sure to replace `your-domain-name.example.com` by your actual domain name and to set the values of `APP_SECRET`, `MERCURE_PUBLISHER_JWT_KEY` and `MERCURE_SUBSCRIBER_JWT_KEY` to cryptographically secure random values.
 
 Your server is up and running, and a Let's Encrypt HTTPS certificate has been automatically generated for you.
 Go to `https://your-domain-name.example.com` and enjoy!
 
-## Disabling HTTPS 
+## Disabling HTTPS
 
 Alternatively, if you don't want to expose an HTTPS server but only an HTTP one, run the following command:
 
-    $ SERVER_NAME=:80 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+```console
+SERVER_NAME=:80 \
+APP_SECRET=ChangeMe \
+MERCURE_PUBLISHER_JWT_KEY=ChangeMe \
+MERCURE_SUBSCRIBER_JWT_KEY=ChangeMe \
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+```
 
 ## Deploying on Multiple Nodes
 
