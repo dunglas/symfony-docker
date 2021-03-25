@@ -2,7 +2,7 @@
     # Debug
     {$DEBUG}
     # HTTP/3 support
-    servers {
+    servers :443 {
         protocol {
             experimental_http3
         }
