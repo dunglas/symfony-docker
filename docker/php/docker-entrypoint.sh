@@ -32,7 +32,7 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 	if grep -q ^DATABASE_URL= .env; then
 		echo "Waiting for db to be ready..."
 		ATTEMPTS_LEFT_TO_REACH_DATABASE=60
-		until [ $ATTEMPTS_LEFT_TO_REACH_DATABASE -eq 0 ] || DATABASE_ERROR=$(bin/console doctrine:query:sql "SELECT 1" 2>&1); do
+		until [ $ATTEMPTS_LEFT_TO_REACH_DATABASE -eq 0 ] || DATABASE_ERROR=$(bin/console dbal:run-sql "SELECT 1" 2>&1); do
 			if [ $? -eq 255 ]; then
 				# If the Doctrine command exits with 255, an unrecoverable error occurred
 				ATTEMPTS_LEFT_TO_REACH_DATABASE=0
