@@ -29,7 +29,7 @@ route {
         # Extra directives
         {$MERCURE_EXTRA_DIRECTIVES}
     }
-    vulcain
+    #vulcain
     push
     php_fastcgi unix//var/run/php/php-fpm.sock
     encode zstd gzip
