@@ -12,7 +12,7 @@ it's recommended to add a custom stage to the end of the `Dockerfile`.
 # Dockerfile
 FROM symfony_php as symfony_php_debug
 
-ARG XDEBUG_VERSION=3.0.1
+ARG XDEBUG_VERSION=3.0.4
 RUN set -eux; \
 	apk add --no-cache --virtual .build-deps $PHPIZE_DEPS; \
 	pecl install xdebug-$XDEBUG_VERSION; \
@@ -60,4 +60,4 @@ Inspect the installation with the following command. The requested Xdebug versio
     $ docker-compose exec php php --version
     
     PHP ...
-        with Xdebug v3.0.1 ...
+        with Xdebug v3.0.4 ...
