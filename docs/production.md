@@ -65,12 +65,11 @@ Go into the directory containing your project (`<project-name>`), and start the 
 ```console
 SERVER_NAME=your-domain-name.example.com \
 APP_SECRET=ChangeMe \
-MERCURE_PUBLISHER_JWT_KEY=ChangeMe \
-MERCURE_SUBSCRIBER_JWT_KEY=ChangeMe \
+CADDY_MERCURE_JWT_SECRET=ChangeMe \
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
 
-Be sure to replace `your-domain-name.example.com` by your actual domain name and to set the values of `APP_SECRET`, `MERCURE_PUBLISHER_JWT_KEY` and `MERCURE_SUBSCRIBER_JWT_KEY` to cryptographically secure random values.
+Be sure to replace `your-domain-name.example.com` by your actual domain name and to set the values of `APP_SECRET`, `CADDY_MERCURE_JWT_SECRET` to cryptographically secure random values.
 
 Your server is up and running, and a Let's Encrypt HTTPS certificate has been automatically generated for you.
 Go to `https://your-domain-name.example.com` and enjoy!
@@ -82,9 +81,8 @@ Alternatively, if you don't want to expose an HTTPS server but only an HTTP one,
 ```console
 SERVER_NAME=:80 \
 APP_SECRET=ChangeMe \
-MERCURE_PUBLISHER_JWT_KEY=ChangeMe \
-MERCURE_SUBSCRIBER_JWT_KEY=ChangeMe \
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+CADDY_MERCURE_JWT_SECRET=ChangeMe \
+-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
 
 ## Deploying on Multiple Nodes
