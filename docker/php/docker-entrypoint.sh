@@ -17,17 +17,22 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 
 	# The first time volumes are mounted, the project needs to be recreated
 	if [ ! -f composer.json ]; then
-		composer create-project "$SKELETON $SYMFONY_VERSION" tmp --stability="$STABILITY" --prefer-dist --no-progress --no-interaction
-		jq '.extra.symfony.docker=true' tmp/composer.json >tmp/composer.tmp.json
-		rm tmp/composer.json
-		mv tmp/composer.tmp.json tmp/composer.json
+		composer create-project "$SKELETON $SYMFONY_VERSION" tmp --stability="$STABILITY" --prefer-dist --no-progress --no-interaction --no-install
 
-		cp -Rp tmp/. .
+		cd tmp
+		jq '.extra.symfony.docker=true' composer.json > composer.tmp.json
+		ls
+		rm composer.json
+		mv composer.tmp.json composer.json
+		cp -Rp . ..
+		cd -
+
 		rm -Rf tmp/
 	elif [ "$APP_ENV" != 'prod' ]; then
 		rm -f .env.local.php
-		composer install --prefer-dist --no-progress --no-interaction
 	fi
+
+	composer install --prefer-dist --no-progress --no-interaction
 
 	if grep -q ^DATABASE_URL= .env; then
 		echo "Waiting for db to be ready..."
