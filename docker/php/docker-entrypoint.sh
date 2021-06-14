@@ -21,10 +21,7 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 		composer create-project "$SKELETON $SYMFONY_VERSION" tmp --stability="$STABILITY" --prefer-dist --no-progress --no-interaction --no-install
 
 		cd tmp
-		jq '.extra.symfony.docker=true' composer.json > composer.tmp.json
-		ls
-		rm composer.json
-		mv composer.tmp.json composer.json
+		composer config --json extra.symfony.docker 'true'
 		cp -Rp . ..
 		cd -
 
@@ -36,8 +33,8 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 	composer install --prefer-dist --no-progress --no-interaction
 
 	if grep -q ^DATABASE_URL= .env; then
-		if [ -z "$CREATION" ]; then
-			echo "Please stop and start docker compose again to finish the installation."
+		if [ "$CREATION" = "1" ]; then
+			echo "To finish the installation please press Ctrl+C to stop Docker Compose and run: docker-compose up --build"
 			sleep infinity
 		fi
 
