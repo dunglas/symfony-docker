@@ -51,13 +51,17 @@ services:
 
 Then run:
 
-    $ docker-compose -f docker-compose.yml -f docker-compose.debug.yml up -d
+```console
+docker-compose -f docker-compose.yml -f docker-compose.debug.yml up -d
+```
 
 ## Troubleshooting
 
 Inspect the installation with the following command. The requested Xdebug version should be displayed in the output.
 
-    $ docker-compose exec php php --version
-    
-    PHP ...
-        with Xdebug v3.0.4 ...
+```console
+$ docker-compose exec php php --version
+
+PHP ...
+    with Xdebug v3.0.4 ...
+```
