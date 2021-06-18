@@ -22,13 +22,13 @@ RUN set -eux; \
 
 ## Configure Xdebug with Docker Compose Override
 
-Using an [override](https://docs.docker.com/compose/reference/overview/#specifying-multiple-compose-files) file named `docker-compose.debug.yaml` ensures that the production
+Using an [override](https://docs.docker.com/compose/reference/overview/#specifying-multiple-compose-files) file named `docker-compose.debug.yml` ensures that the production
 configuration remains untouched.
 
 As example, an override could look like this:
 
 ```yaml
-# docker-compose.debug.yaml
+# docker-compose.debug.yml
 version: "3.4"
 
 services:
