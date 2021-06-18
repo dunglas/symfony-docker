@@ -26,10 +26,11 @@ A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony
 ## Docs
 
 1. [Build options](docs/build.md)
-2. [Support for extra services](docs/extra-services.md)
-3. [Deploying in production](docs/production.md)
-4. [Installing Xdebug](docs/xdebug.md)
-5. [Troubleshooting](docs/troubleshooting.md)
+2. [Using Symfony Docker with an existing project](docs/existing-project.md)
+3. [Support for extra services](docs/extra-services.md)
+4. [Deploying in production](docs/production.md)
+5. [Installing Xdebug](docs/xdebug.md)
+6. [Troubleshooting](docs/troubleshooting.md)
 
 ## Credits
 
