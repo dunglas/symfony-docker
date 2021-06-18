@@ -49,11 +49,26 @@ services:
       PHP_IDE_CONFIG: serverName=symfony
 ```
 
+Build your image with your fresh new xdebug configuration:
+
+```console
+docker-compose -f docker-compose.yml -f docker-compose.debug.yml build
+```
+
 Then run:
 
 ```console
 docker-compose -f docker-compose.yml -f docker-compose.debug.yml up -d
 ```
+
+## Debug with Xdebug with PHPStorm
+
+You can use the [xdebug extension](https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc) if you want to debug on the browser (don't forget to configure it).
+If you don't want to use it, just add on your request this query param: `XDEBUG_SESSION=PHPSTORM`.
+
+On PHPStorm, you just have to click on  the button `Start Listening for PHP Debug Connections` on the `Run` menu.
+
+You can now use the debugger.
 
 ## Troubleshooting
 
