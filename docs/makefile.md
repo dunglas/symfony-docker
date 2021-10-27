@@ -16,6 +16,16 @@ you will probably want to add some targets like running your tests as described
 in [the Symfony book](https://symfony.com/doc/current/the-fast-track/en/17-tests.html#automating-your-workflow-with-a-makefile).
 You can also find a more complete example in this [snippet](https://www.strangebuzz.com/en/snippets/the-perfect-makefile-for-symfony).
 
+If you want to run make from within the `php` container, in the [Dockerfile](/Dockerfile),
+add:
+
+```diff
+gnu-libiconv \
++make \
+```
+
+And rebuild the PHP image.
+
 **PS**: If using Windows, you have to install [chocolatey.org](https://chocolatey.org/)
 or use [Cygwin](http://cygwin.com) to use the `make` command. Check out this
 [StackOverflow question](https://stackoverflow.com/q/2532234/633864) for more explanations. 
@@ -49,7 +59,7 @@ build: ## Builds the Docker images
 up: ## Start the docker hub in detached mode (no logs)
 	@$(DOCKER_COMP) up --detach
 
-start: build up ## Build and starts the containers
+start: build up ## Build and start the containers
 
 down: ## Stop the docker hub
 	@$(DOCKER_COMP) down --remove-orphans
