@@ -21,6 +21,7 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 		composer create-project "$SKELETON $SYMFONY_VERSION" tmp --stability="$STABILITY" --prefer-dist --no-progress --no-interaction --no-install
 
 		cd tmp
+		composer require "php:>=$PHP_VERSION"
 		composer config --json extra.symfony.docker 'true'
 		cp -Rp . ..
 		cd -
