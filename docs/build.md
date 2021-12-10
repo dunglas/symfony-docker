@@ -31,3 +31,11 @@ Use the `SERVER_NAME` environment variable to define your custom server name(s).
     SERVER_NAME="symfony.wip, caddy:80" docker-compose up --build
 
 If you use Mercure, keep `caddy:80` in the list to allow the PHP container to request the caddy service.
+
+## Using custom HTTP ports
+
+Use the environment variables `HTTP_PORT`, `HTTPS_PORT` and/or `HTTP3_PORT` to adjust the ports to your needs, e.g.
+
+    HTTP_PORT=8000 HTTPS_PORT=4443 HTTP3_PORT=4443 docker-compose up --build
+
+to access your appplication on [https://localhost:4443](https://localhost:4443).
