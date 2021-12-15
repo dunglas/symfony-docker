@@ -10,7 +10,7 @@ it's recommended to add a custom stage to the end of the `Dockerfile`.
 
 ```Dockerfile
 # Dockerfile
-FROM symfony_php as symfony_php_debug
+FROM symfony_php AS symfony_php_debug
 
 ARG XDEBUG_VERSION=3.0.4
 RUN set -eux; \
