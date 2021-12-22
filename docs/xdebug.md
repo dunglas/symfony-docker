@@ -1,7 +1,8 @@
 # Installing Xdebug
 
-The default Docker stack is shipped without a Xdebug stage.
-It's easy though to add [Xdebug](https://xdebug.org/) to your project, for development purposes such as debugging tests or API requests remotely.
+The default Docker stack is shipped without [Xdebug](https://xdebug.org/),
+a popular debugger and profiler for PHP.
+It's easy, though, to add it to your project.
 
 ## Add a Debug Stage to the Dockerfile
 
@@ -12,7 +13,7 @@ it's recommended to add a custom stage to the end of the `Dockerfile`.
 # Dockerfile
 FROM symfony_php AS symfony_php_debug
 
-ARG XDEBUG_VERSION=3.0.4
+ARG XDEBUG_VERSION=3.1.2
 RUN set -eux; \
 	apk add --no-cache --virtual .build-deps $PHPIZE_DEPS; \
 	pecl install xdebug-$XDEBUG_VERSION; \
@@ -25,7 +26,7 @@ RUN set -eux; \
 Using an [override](https://docs.docker.com/compose/reference/overview/#specifying-multiple-compose-files) file named `docker-compose.debug.yml` ensures that the production
 configuration remains untouched.
 
-As example, an override could look like this:
+As an example, an override could look like this:
 
 ```yaml
 # docker-compose.debug.yml
@@ -47,9 +48,12 @@ services:
       # This should correspond to the server declared in PHPStorm `Preferences | Languages & Frameworks | PHP | Servers`
       # Then PHPStorm will use the corresponding path mappings
       PHP_IDE_CONFIG: serverName=symfony
+    extra_hosts:
+      # Ensure that host.docker.internal is correctly defined on Linux
+      - host.docker.internal:host-gateway
 ```
 
-Build your image with your fresh new xdebug configuration:
+Build your image with your fresh new XDebug configuration:
 
 ```console
 docker-compose -f docker-compose.yml -f docker-compose.debug.yml build
@@ -65,29 +69,29 @@ docker-compose -f docker-compose.yml -f docker-compose.debug.yml up -d
 
 You can use the **Xdebug extension** for [Chrome](https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc) or [Firefox](https://addons.mozilla.org/fr/firefox/addon/xdebug-helper-for-firefox/) if you want to debug on the browser (don't forget to configure it).
 
-If you don't want to use it, just add on your request this query param: `XDEBUG_SESSION=PHPSTORM`.
+If you don't want to use it, add on your request this query param: `XDEBUG_SESSION=PHPSTORM`.
 
-On PHPStorm, you just have to click on  the button `Start Listening for PHP Debug Connections` on the `Run` menu.
+On PHPStorm, click on `Start Listening for PHP Debug Connections` in the `Run` menu.
 
 Otherwise, you can create a [PHP Remote Debug](https://www.jetbrains.com/help/phpstorm/creating-a-php-debug-server-configuration.html) configuration with the following parameters:
 
 * Server:
-  * Name: **symfony** (must be the same as defined in *PHP_IDE_CONFIG*)
-  * Host: **https://localhost** (or the one defined with *SERVER_NAME*)
-  * Port: **443**
-  * Debugger: **Xdebug**
-  * Absolute path on the server: **/srv/app**
-* IDE key: **PHPSTORM**
+  * Name: `symfony` (must be the same as defined in `PHP_IDE_CONFIG`)
+  * Host: `https://localhost` (or the one defined with `SERVER_NAME`)
+  * Port: `443`
+  * Debugger: `Xdebug`
+  * Absolute path on the server: `/srv/app`
+* IDE key: `PHPSTORM`
 
 You can now use the debugger.
 
 ## Troubleshooting
 
-Inspect the installation with the following command. The requested Xdebug version should be displayed in the output.
+Inspect the installation with the following command. The Xdebug version should be displayed.
 
 ```console
 $ docker-compose exec php php --version
 
 PHP ...
-    with Xdebug v3.0.4 ...
+    with Xdebug v3.1.2 ...
 ```
