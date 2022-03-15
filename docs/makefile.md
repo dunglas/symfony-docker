@@ -5,7 +5,7 @@ To use it, create a new `Makefile` file at the root of your project. Copy/paste
 the content in the template section. To view all the available commands, run `make`.
 
 For example, in the [getting started section](/README.md#getting-started), the
-`docker-composer` commands could be replaced by:
+`docker-compose` commands could be replaced by:
 
 1. Run `make build` to build fresh images
 2. Run `make up` (detached mode without logs)
