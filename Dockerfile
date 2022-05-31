@@ -10,6 +10,8 @@ ARG CADDY_VERSION=2
 # "php" stage
 FROM php:${PHP_VERSION}-fpm-alpine AS symfony_php
 
+RUN apk update
+
 # persistent / runtime deps
 RUN apk add --no-cache \
 		acl \
