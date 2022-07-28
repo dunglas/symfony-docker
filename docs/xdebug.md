@@ -56,13 +56,13 @@ services:
 Build your image with your fresh new XDebug configuration:
 
 ```console
-docker-compose -f docker-compose.yml -f docker-compose.debug.yml build
+docker compose -f docker-compose.yml -f docker-compose.debug.yml build
 ```
 
 Then run:
 
 ```console
-docker-compose -f docker-compose.yml -f docker-compose.debug.yml up -d
+docker compose -f docker-compose.yml -f docker-compose.debug.yml up -d
 ```
 
 ## Debugging with Xdebug and PHPStorm
@@ -90,7 +90,7 @@ You can now use the debugger.
 Inspect the installation with the following command. The Xdebug version should be displayed.
 
 ```console
-$ docker-compose exec php php --version
+$ docker compose exec php php --version
 
 PHP ...
     with Xdebug v3.1.2 ...
