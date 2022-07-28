@@ -24,10 +24,10 @@ Double-check the changes, revert the changes that you don't want to keep:
 
 Build the Docker images:
 
-    docker-compose build --no-cache --pull
+    docker compose build --no-cache --pull
 
 Start the project!
 
-    docker-compose up -d
+    docker compose up -d
 
 Browse `https://localhost`, your Docker configuration is ready!

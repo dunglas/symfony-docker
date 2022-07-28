@@ -66,7 +66,7 @@ Go into the directory containing your project (`<project-name>`), and start the 
 SERVER_NAME=your-domain-name.example.com \
 APP_SECRET=ChangeMe \
 CADDY_MERCURE_JWT_SECRET=ChangeMe \
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
 
 Be sure to replace `your-domain-name.example.com` by your actual domain name and to set the values of `APP_SECRET`, `CADDY_MERCURE_JWT_SECRET` to cryptographically secure random values.
@@ -82,7 +82,7 @@ Alternatively, if you don't want to expose an HTTPS server but only an HTTP one,
 SERVER_NAME=:80 \
 APP_SECRET=ChangeMe \
 CADDY_MERCURE_JWT_SECRET=ChangeMe \
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
 
 ## Deploying on Multiple Nodes

@@ -34,7 +34,7 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 
 	if grep -q ^DATABASE_URL= .env; then
 		if [ "$CREATION" = "1" ]; then
-			echo "To finish the installation please press Ctrl+C to stop Docker Compose and run: docker-compose up --build"
+			echo "To finish the installation please press Ctrl+C to stop Docker Compose and run: docker compose up --build"
 			sleep infinity
 		fi
 
