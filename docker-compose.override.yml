@@ -9,6 +9,11 @@ services:
       # If you develop on Mac you can remove the var/ directory from the bind-mount
       # for better performance by enabling the next line
       # - /srv/app/var
+      # If you develop on Windows you can greatly improve performance by using Docker
+      # volumes for the vendor and var directories by enabling the next 2 lines and 
+      # the "volumes" block at the bottom of this file
+      # - vendor:/srv/app/vendor
+      # - var:/srv/app/var
     environment:
       APP_ENV: dev
 
@@ -19,3 +24,8 @@ services:
 
 ###> symfony/mercure-bundle ###
 ###< symfony/mercure-bundle ###
+
+# You can uncomment this to improve performance on Windows (see above)
+# volumes:
+#   vendor:
+#   var:
