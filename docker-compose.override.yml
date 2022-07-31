@@ -6,14 +6,10 @@ services:
     volumes:
       - ./:/srv/app
       - ./docker/php/conf.d/symfony.dev.ini:/usr/local/etc/php/conf.d/symfony.ini
-      # If you develop on Mac you can remove the var/ directory from the bind-mount
-      # for better performance by enabling the next line
+      # If you develop on Mac or Windows you can remove the var/ and vendor/ directories 
+      #  from the bind-mount for better performance by enabling the next 2 lines
       # - /srv/app/var
-      # If you develop on Windows you can greatly improve performance by using Docker
-      # volumes for the vendor and var directories by enabling the next 2 lines and 
-      # the "volumes" block at the bottom of this file
-      # - vendor:/srv/app/vendor
-      # - var:/srv/app/var
+      # - /srv/app/vendor
     environment:
       APP_ENV: dev
 
@@ -24,8 +20,3 @@ services:
 
 ###> symfony/mercure-bundle ###
 ###< symfony/mercure-bundle ###
-
-# You can uncomment this to improve performance on Windows (see above)
-# volumes:
-#   vendor:
-#   var:
