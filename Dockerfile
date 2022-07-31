@@ -113,7 +113,11 @@ CMD ["php-fpm"]
 # dev stage
 FROM symfony_php AS symfony_php_dev
 
-ENV APP_ENV=dev
+RUN set -eux; \
+	apk add --no-cache --virtual .build-deps $PHPIZE_DEPS; \
+	pecl install xdebug; \
+	docker-php-ext-enable xdebug; \
+	apk del .build-deps
 
 RUN rm $PHP_INI_DIR/conf.d/symfony.prod.ini; \
 	mv "$PHP_INI_DIR/php.ini" "$PHP_INI_DIR/php.ini-production"; \
@@ -121,11 +125,7 @@ RUN rm $PHP_INI_DIR/conf.d/symfony.prod.ini; \
 
 COPY docker/php/conf.d/symfony.dev.ini $PHP_INI_DIR/conf.d/symfony.dev.ini
 
-RUN set -eux; \
-	apk add --no-cache --virtual .build-deps $PHPIZE_DEPS; \
-	pecl install xdebug; \
-	docker-php-ext-enable xdebug; \
-	apk del .build-deps
+RUN rm -f .env.local.php
 
 FROM caddy:${CADDY_VERSION}-builder-alpine AS symfony_caddy_builder
 
