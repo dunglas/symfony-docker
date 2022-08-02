@@ -4,10 +4,18 @@ The default development image is shipped with [Xdebug](https://xdebug.org/),
 a popular debugger and profiler for PHP.
 
 Because it has a significant performance overhead, Xdebug is disabled by default.
-It can be enabled by setting the `XDEBUG_MODE` environment variable to `develop`:
+It can be enabled by setting the `XDEBUG_MODE` environment variable to `debug`.
+
+On Linux, Mac and other Unix-likes:
 
 ```
-XDEBUG_MODE=debug docker compose up
+XDEBUG_MODE=debug docker compose up -d
+```
+
+On Windows:
+
+```
+set XDEBUG_MODE=debug&& docker compose up -d
 ```
 
 ## Debugging with Xdebug and PHPStorm
