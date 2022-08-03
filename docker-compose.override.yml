@@ -15,9 +15,6 @@ services:
     environment:
       # See https://xdebug.org/docs/all_settings#mode 
       XDEBUG_MODE: "${XDEBUG_MODE:-off}"
-      # If you use PHPStorm, this must correspond to the name of the server declared in `Preferences | PHP | Servers`
-      # Then PHPStorm will use the corresponding path mappings
-      PHP_IDE_CONFIG: serverName=symfony
     extra_hosts:
       # Ensure that host.docker.internal is correctly defined on Linux
       - host.docker.internal:host-gateway

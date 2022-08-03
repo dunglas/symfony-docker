@@ -3,10 +3,10 @@
 The default development image is shipped with [Xdebug](https://xdebug.org/),
 a popular debugger and profiler for PHP.
 
-Because it has a significant performance overhead, Xdebug is disabled by default.
+Because it has a significant performance overhead, the step-by-step debugger is disabled by default.
 It can be enabled by setting the `XDEBUG_MODE` environment variable to `debug`.
 
-On Linux, Mac and other Unix-likes:
+On Linux and Mac:
 
 ```
 XDEBUG_MODE=debug docker compose up -d
@@ -15,28 +15,27 @@ XDEBUG_MODE=debug docker compose up -d
 On Windows:
 
 ```
-set XDEBUG_MODE=debug && docker compose up -d & set XDEBUG_MODE=
+set XDEBUG_MODE=debug&& docker compose up -d&set XDEBUG_MODE=
 ```
 
 ## Debugging with Xdebug and PHPStorm
 
-You can use the **Xdebug extension** for [Chrome](https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc) or [Firefox](https://addons.mozilla.org/fr/firefox/addon/xdebug-helper-for-firefox/) if you want to debug on the browser (don't forget to configure it).
+First, [create a PHP debug remote server configuration](https://www.jetbrains.com/help/phpstorm/creating-a-php-debug-server-configuration.html):
 
-If you don't want to use it, add on your request this query parameter: `XDEBUG_SESSION=PHPSTORM`.
+1. In the `Settings/Preferences` dialog, go to `PHP | Servers`
+2. Create a new server:
+   * Host: `localhost` (or the one defined using the `SERVER_NAME` environment variable)
+   * Port: `443`
+   * Debugger: `Xdebug`
+   * Check `Use path mappings`
+   * Absolute path on the server: `/srv/app`
 
-On PHPStorm, click on `Start Listening for PHP Debug Connections` in the `Run` menu.
+You can now use the debugger!
 
-Otherwise, you can create a [PHP Remote Debug](https://www.jetbrains.com/help/phpstorm/creating-a-php-debug-server-configuration.html) configuration with the following parameters:
+1. In PHPStorm, open the `Run` menu and click on `Start Listening for PHP Debug Connections`
+2. Add the `XDEBUG_SESSION=PHPSTORM` query parameter to the URL of the page you want to debug, or use [other available triggers](https://xdebug.org/docs/step_debug#activate_debugger)
 
-* Server:
-  * Name: `symfony` (must be the same as defined in `PHP_IDE_CONFIG`)
-  * Host: `https://localhost` (or the one defined with `SERVER_NAME`)
-  * Port: `443`
-  * Debugger: `Xdebug`
-  * Absolute path on the server: `/srv/app`
-* IDE key: `PHPSTORM`
-
-You can now use the debugger.
+Alternatively, you can use [the **Xdebug extension**](https://xdebug.org/docs/step_debug#browser-extensions) for your preferred web browser. 
 
 ## Troubleshooting
 
