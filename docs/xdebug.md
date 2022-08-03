@@ -15,7 +15,7 @@ XDEBUG_MODE=debug docker compose up -d
 On Windows:
 
 ```
-set XDEBUG_MODE=debug&& docker compose up -d
+set XDEBUG_MODE=debug && docker compose up -d & set XDEBUG_MODE=
 ```
 
 ## Debugging with Xdebug and PHPStorm
