@@ -4,7 +4,7 @@ services:
   php:
     build:
       context: .
-      target: symfony_php
+      target: app_php
       args:
         SYMFONY_VERSION: ${SYMFONY_VERSION:-}
         SKELETON: ${SKELETON:-symfony/skeleton}
@@ -28,7 +28,7 @@ services:
   caddy:
     build:
       context: .
-      target: symfony_caddy
+      target: app_caddy
     depends_on:
       - php
     environment:
