@@ -7,7 +7,7 @@
 ARG PHP_VERSION=8.1
 ARG CADDY_VERSION=2
 
-# prod stage
+# Prod image
 FROM php:${PHP_VERSION}-fpm-alpine AS symfony_php
 
 # persistent / runtime deps
@@ -110,7 +110,7 @@ VOLUME /srv/app/var
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
 
-# dev stage
+# Dev image
 FROM symfony_php AS symfony_php_dev
 
 RUN set -eux; \
@@ -127,6 +127,7 @@ COPY docker/php/conf.d/symfony.dev.ini $PHP_INI_DIR/conf.d/symfony.dev.ini
 
 RUN rm -f .env.local.php
 
+# Build Caddy with the Mercure and Vulcain modules
 FROM caddy:${CADDY_VERSION}-builder-alpine AS symfony_caddy_builder
 
 RUN xcaddy build \
@@ -135,6 +136,7 @@ RUN xcaddy build \
 	--with github.com/dunglas/vulcain \
 	--with github.com/dunglas/vulcain/caddy
 
+# Caddy image
 FROM caddy:${CADDY_VERSION} AS symfony_caddy
 
 WORKDIR /srv/app
