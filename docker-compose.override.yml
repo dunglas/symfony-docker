@@ -3,20 +3,26 @@ version: "3.4"
 # Development environment override
 services:
   php:
+    build:
+      target: symfony_php_dev
     volumes:
       - ./:/srv/app
-      - ./docker/php/conf.d/symfony.dev.ini:/usr/local/etc/php/conf.d/symfony.ini
+      - ./docker/php/conf.d/symfony.dev.ini:/usr/local/etc/php/conf.d/symfony.dev.ini:ro
       # If you develop on Mac or Windows you can remove the var/ and vendor/ directories 
-      #  from the bind-mount for better performance by enabling the next 2 lines
-      # - /srv/app/var
-      # - /srv/app/vendor
+      #  from the bind-mount for better performance by enabling the next 2 lines:
+      #- /srv/app/var
+      #- /srv/app/vendor
     environment:
-      APP_ENV: dev
+      # See https://xdebug.org/docs/all_settings#mode 
+      XDEBUG_MODE: "${XDEBUG_MODE:-off}"
+    extra_hosts:
+      # Ensure that host.docker.internal is correctly defined on Linux
+      - host.docker.internal:host-gateway
 
   caddy:
     volumes:
-      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
       - ./public:/srv/app/public:ro
+      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
 
 ###> symfony/mercure-bundle ###
 ###< symfony/mercure-bundle ###

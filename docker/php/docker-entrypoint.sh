@@ -7,13 +7,9 @@ if [ "${1#-}" != "$1" ]; then
 fi
 
 if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
-	if [ "$APP_ENV" != 'prod' ]; then
-		ln -sf "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
-	fi
-
 	mkdir -p var/cache var/log
 
-	# The first time volumes are mounted, the project needs to be recreated
+	# The first time volumes are mounted, the project needs to be created
 	if [ ! -f composer.json ]; then
 		CREATION=1
 		composer create-project "$SKELETON $SYMFONY_VERSION" tmp --stability="$STABILITY" --prefer-dist --no-progress --no-interaction --no-install
@@ -28,7 +24,6 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 	fi
 
 	if [ "$APP_ENV" != 'prod' ]; then
-		rm -f .env.local.php
 		composer install --prefer-dist --no-progress --no-interaction
 	fi
 

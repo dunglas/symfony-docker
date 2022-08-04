@@ -7,7 +7,7 @@
 ARG PHP_VERSION=8.1
 ARG CADDY_VERSION=2
 
-# "php" stage
+# Prod image
 FROM php:${PHP_VERSION}-fpm-alpine AS symfony_php
 
 # persistent / runtime deps
@@ -19,7 +19,6 @@ RUN apk add --no-cache \
 		git \
 	;
 
-ARG APCU_VERSION=5.1.21
 RUN set -eux; \
 	apk add --no-cache --virtual .build-deps \
 		$PHPIZE_DEPS \
@@ -35,7 +34,7 @@ RUN set -eux; \
 		zip \
 	; \
 	pecl install \
-		apcu-${APCU_VERSION} \
+		apcu \
 	; \
 	pecl clear-cache; \
 	docker-php-ext-enable \
@@ -59,7 +58,8 @@ RUN chmod +x /usr/local/bin/docker-healthcheck
 HEALTHCHECK --interval=10s --timeout=3s --retries=3 CMD ["docker-healthcheck"]
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
-COPY docker/php/conf.d/symfony.prod.ini $PHP_INI_DIR/conf.d/symfony.ini
+COPY docker/php/conf.d/symfony.ini $PHP_INI_DIR/conf.d/symfony.ini
+COPY docker/php/conf.d/symfony.prod.ini $PHP_INI_DIR/conf.d/symfony.prod.ini
 
 COPY docker/php/php-fpm.d/zz-docker.conf /usr/local/etc/php-fpm.d/zz-docker.conf
 
@@ -110,6 +110,24 @@ VOLUME /srv/app/var
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
 
+# Dev image
+FROM symfony_php AS symfony_php_dev
+
+RUN set -eux; \
+	apk add --no-cache --virtual .build-deps $PHPIZE_DEPS; \
+	pecl install xdebug; \
+	docker-php-ext-enable xdebug; \
+	apk del .build-deps
+
+RUN rm $PHP_INI_DIR/conf.d/symfony.prod.ini; \
+	mv "$PHP_INI_DIR/php.ini" "$PHP_INI_DIR/php.ini-production"; \
+	mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
+
+COPY docker/php/conf.d/symfony.dev.ini $PHP_INI_DIR/conf.d/symfony.dev.ini
+
+RUN rm -f .env.local.php
+
+# Build Caddy with the Mercure and Vulcain modules
 FROM caddy:${CADDY_VERSION}-builder-alpine AS symfony_caddy_builder
 
 RUN xcaddy build \
@@ -118,11 +136,11 @@ RUN xcaddy build \
 	--with github.com/dunglas/vulcain \
 	--with github.com/dunglas/vulcain/caddy
 
+# Caddy image
 FROM caddy:${CADDY_VERSION} AS symfony_caddy
 
 WORKDIR /srv/app
 
-COPY --from=dunglas/mercure:v0.11 /srv/public /srv/mercure-assets/
 COPY --from=symfony_caddy_builder /usr/bin/caddy /usr/bin/caddy
 COPY --from=symfony_php /srv/app/public public/
 COPY docker/caddy/Caddyfile /etc/caddy/Caddyfile

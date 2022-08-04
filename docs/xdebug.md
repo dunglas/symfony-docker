@@ -1,89 +1,41 @@
-# Installing Xdebug
+# Using Xdebug
 
-The default Docker stack is shipped without [Xdebug](https://xdebug.org/),
+The default development image is shipped with [Xdebug](https://xdebug.org/),
 a popular debugger and profiler for PHP.
-It's easy, though, to add it to your project.
 
-## Add a Debug Stage to the Dockerfile
+Because it has a significant performance overhead, the step-by-step debugger is disabled by default.
+It can be enabled by setting the `XDEBUG_MODE` environment variable to `debug`.
 
-To avoid deploying Symfony Docker to production with an active Xdebug extension,
-it's recommended to add a custom stage to the end of the `Dockerfile`.
+On Linux and Mac:
 
-```Dockerfile
-# Dockerfile
-FROM symfony_php AS symfony_php_debug
-
-ARG XDEBUG_VERSION=3.1.2
-RUN set -eux; \
-	apk add --no-cache --virtual .build-deps $PHPIZE_DEPS; \
-	pecl install xdebug-$XDEBUG_VERSION; \
-	docker-php-ext-enable xdebug; \
-	apk del .build-deps
+```
+XDEBUG_MODE=debug docker compose up -d
 ```
 
-## Configure Xdebug with Docker Compose Override
+On Windows:
 
-Using an [override](https://docs.docker.com/compose/reference/overview/#specifying-multiple-compose-files) file named `docker-compose.debug.yml` ensures that the production
-configuration remains untouched.
-
-As an example, an override could look like this:
-
-```yaml
-# docker-compose.debug.yml
-version: "3.4"
-
-services:
-  php:
-    build:
-      context: .
-      target: symfony_php_debug
-    environment:
-      # See https://docs.docker.com/docker-for-mac/networking/#i-want-to-connect-from-a-container-to-a-service-on-the-host
-      # See https://github.com/docker/for-linux/issues/264
-      # The `client_host` below may optionally be replaced with `discover_client_host=yes`
-      # Add `start_with_request=yes` to start debug session on each request
-      XDEBUG_CONFIG: >-
-        client_host=host.docker.internal
-      XDEBUG_MODE: debug
-      # This should correspond to the server declared in PHPStorm `Preferences | Languages & Frameworks | PHP | Servers`
-      # Then PHPStorm will use the corresponding path mappings
-      PHP_IDE_CONFIG: serverName=symfony
-    extra_hosts:
-      # Ensure that host.docker.internal is correctly defined on Linux
-      - host.docker.internal:host-gateway
 ```
-
-Build your image with your fresh new XDebug configuration:
-
-```console
-docker compose -f docker-compose.yml -f docker-compose.debug.yml build
-```
-
-Then run:
-
-```console
-docker compose -f docker-compose.yml -f docker-compose.debug.yml up -d
+set XDEBUG_MODE=debug&& docker compose up -d&set XDEBUG_MODE=
 ```
 
 ## Debugging with Xdebug and PHPStorm
 
-You can use the **Xdebug extension** for [Chrome](https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc) or [Firefox](https://addons.mozilla.org/fr/firefox/addon/xdebug-helper-for-firefox/) if you want to debug on the browser (don't forget to configure it).
+First, [create a PHP debug remote server configuration](https://www.jetbrains.com/help/phpstorm/creating-a-php-debug-server-configuration.html):
 
-If you don't want to use it, add on your request this query param: `XDEBUG_SESSION=PHPSTORM`.
+1. In the `Settings/Preferences` dialog, go to `PHP | Servers`
+2. Create a new server:
+   * Host: `localhost` (or the one defined using the `SERVER_NAME` environment variable)
+   * Port: `443`
+   * Debugger: `Xdebug`
+   * Check `Use path mappings`
+   * Absolute path on the server: `/srv/app`
 
-On PHPStorm, click on `Start Listening for PHP Debug Connections` in the `Run` menu.
+You can now use the debugger!
 
-Otherwise, you can create a [PHP Remote Debug](https://www.jetbrains.com/help/phpstorm/creating-a-php-debug-server-configuration.html) configuration with the following parameters:
+1. In PHPStorm, open the `Run` menu and click on `Start Listening for PHP Debug Connections`
+2. Add the `XDEBUG_SESSION=PHPSTORM` query parameter to the URL of the page you want to debug, or use [other available triggers](https://xdebug.org/docs/step_debug#activate_debugger)
 
-* Server:
-  * Name: `symfony` (must be the same as defined in `PHP_IDE_CONFIG`)
-  * Host: `https://localhost` (or the one defined with `SERVER_NAME`)
-  * Port: `443`
-  * Debugger: `Xdebug`
-  * Absolute path on the server: `/srv/app`
-* IDE key: `PHPSTORM`
-
-You can now use the debugger.
+Alternatively, you can use [the **Xdebug extension**](https://xdebug.org/docs/step_debug#browser-extensions) for your preferred web browser. 
 
 ## Troubleshooting
 
