@@ -10,6 +10,14 @@ ARG CADDY_VERSION=2
 # Prod image
 FROM php:${PHP_VERSION}-fpm-alpine AS app_php
 
+# Allow to use development versions of Symfony
+ARG STABILITY="stable"
+ENV STABILITY ${STABILITY}
+
+# Allow to select Symfony version
+ARG SYMFONY_VERSION=""
+ENV SYMFONY_VERSION ${SYMFONY_VERSION}
+
 ENV APP_ENV=prod
 
 WORKDIR /srv/app

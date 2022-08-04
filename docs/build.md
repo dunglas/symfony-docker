@@ -1,12 +1,5 @@
 # Build Options
 
-## Selecting a Symfony Skeleton
-
-By default, Symfony Docker will install the minimalist skeleton.
-To install the ["website skeleton"](https://symfony.com/doc/current/setup.html#creating-symfony-applications), use the following command:
-
-    SKELETON=symfony/website-skeleton docker compose up --build
-
 ## Selecting a Specific Symfony Version
 
 Use the `SYMFONY_VERSION` environment variable to select a specific Symfony version.
