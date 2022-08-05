@@ -7,8 +7,6 @@ if [ "${1#-}" != "$1" ]; then
 fi
 
 if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
-	mkdir -p var/cache var/log
-
 	# Install the project the first time PHP is started
 	# After the installation, the following block can be deleted
 	if [ ! -f composer.json ]; then
