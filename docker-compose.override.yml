@@ -8,9 +8,8 @@ services:
     volumes:
       - ./:/srv/app
       - ./docker/php/conf.d/app.dev.ini:/usr/local/etc/php/conf.d/app.dev.ini:ro
-      # If you develop on Mac or Windows you can remove the var/ and vendor/ directories 
-      #  from the bind-mount for better performance by enabling the next 2 lines:
-      #- /srv/app/var
+      # If you develop on Mac or Windows you can remove the vendor/ directory
+      #  from the bind-mount for better performance by enabling the next line:
       #- /srv/app/vendor
     environment:
       # See https://xdebug.org/docs/all_settings#mode 
