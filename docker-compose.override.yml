@@ -4,10 +4,10 @@ version: "3.4"
 services:
   php:
     build:
-      target: symfony_php_dev
+      target: app_php_dev
     volumes:
       - ./:/srv/app
-      - ./docker/php/conf.d/symfony.dev.ini:/usr/local/etc/php/conf.d/symfony.dev.ini:ro
+      - ./docker/php/conf.d/app.dev.ini:/usr/local/etc/php/conf.d/app.dev.ini:ro
       # If you develop on Mac or Windows you can remove the var/ and vendor/ directories 
       #  from the bind-mount for better performance by enabling the next 2 lines:
       #- /srv/app/var
