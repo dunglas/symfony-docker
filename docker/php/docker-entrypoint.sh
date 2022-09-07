@@ -26,7 +26,7 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 		composer install --prefer-dist --no-progress --no-interaction
 	fi
 
-	if grep -q ^DATABASE_URL= .env; then
+	if grep -q ^DATABASE_URL= .env || [ -n "${DATABASE_URL+x}" ]; then
 		# After the installation, the following block can be deleted
 		if [ "$CREATION" = "1" ]; then
 			echo "To finish the installation please press Ctrl+C to stop Docker Compose and run: docker compose up --build"
