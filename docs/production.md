@@ -65,7 +65,7 @@ Go into the directory containing your project (`<project-name>`), and start the 
 ```console
 SERVER_NAME=your-domain-name.example.com \
 APP_SECRET=ChangeMe \
-CADDY_MERCURE_JWT_SECRET=ChangeMe \
+CADDY_MERCURE_JWT_SECRET=ChangeThisMercureHubJWTSecretKey \
 docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
 
@@ -81,7 +81,7 @@ Alternatively, if you don't want to expose an HTTPS server but only an HTTP one,
 ```console
 SERVER_NAME=:80 \
 APP_SECRET=ChangeMe \
-CADDY_MERCURE_JWT_SECRET=ChangeMe \
+CADDY_MERCURE_JWT_SECRET=ChangeThisMercureHubJWTSecretKey \
 docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
 
