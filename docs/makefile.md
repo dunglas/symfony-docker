@@ -20,7 +20,8 @@ If you want to run make from within the `php` container, in the [Dockerfile](/Do
 add:
 
 ```diff
-gnu-libiconv \
+gettext \
+git \
 +make \
 ```
 
