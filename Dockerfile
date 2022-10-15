@@ -41,6 +41,7 @@ RUN set -eux; \
     	zip \
     	apcu \
 		opcache \
+		xsl \
     ;
 
 ###> recipes ###

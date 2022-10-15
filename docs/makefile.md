@@ -11,10 +11,10 @@ For example, in the [getting started section](/README.md#getting-started), the
 2. Run `make up` (detached mode without logs)
 3. Run `make down` to stop the Docker containers
 
-Of course, this template is basic for now. But, as your application is growing,
-you will probably want to add some targets like running your tests as described
+Of course, this template is basic for now. But, as your application grows,
+you will probably want to add some targets, like running your tests as described
 in [the Symfony book](https://symfony.com/doc/current/the-fast-track/en/17-tests.html#automating-your-workflow-with-a-makefile).
-You can also find a more complete example in this [snippet](https://www.strangebuzz.com/en/snippets/the-perfect-makefile-for-symfony).
+You can also find a complete example in this [snippet](https://www.strangebuzz.com/en/snippets/the-perfect-makefile-for-symfony).
 
 If you want to run make from within the `php` container, in the [Dockerfile](/Dockerfile),
 add:
