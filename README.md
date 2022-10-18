@@ -36,6 +36,10 @@ A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony
 6. [Using a Makefile](docs/makefile.md)
 7. [Troubleshooting](docs/troubleshooting.md)
 
+## License
+
+Symfony Docker is available under the MIT License.
+
 ## Credits
 
 Created by [Kévin Dunglas](https://dunglas.fr), co-maintained by [Maxime Helias](https://twitter.com/maxhelias) and sponsored by [Les-Tilleuls.coop](https://les-tilleuls.coop).
