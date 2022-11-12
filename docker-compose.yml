@@ -9,6 +9,7 @@ services:
         SYMFONY_VERSION: ${SYMFONY_VERSION:-}
         STABILITY: ${STABILITY:-stable}
     restart: unless-stopped
+    container_name: symfony_php
     volumes:
       - php_socket:/var/run/php
     healthcheck:
