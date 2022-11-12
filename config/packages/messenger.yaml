@@ -12,7 +12,8 @@ framework:
         routing:
             # Route your messages to the transports
             # 'App\Message\YourMessage': async
-
+        buses:
+            messenger.bus.default:
 # when@test:
 #    framework:
 #        messenger:

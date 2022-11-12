@@ -20,5 +20,9 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    App\Framework\Messenger\bus:
+        arguments:
+            $bus: '@messenger.bus.default'
+            
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
