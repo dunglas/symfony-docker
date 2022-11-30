@@ -6,7 +6,12 @@ Use the `SYMFONY_VERSION` environment variable to select a specific Symfony vers
 
 For instance, use the following command to install Symfony 5.4:
 
+On Linux:
+
     SYMFONY_VERSION=5.4.* docker compose up --build
+On Windows:
+
+    set SYMFONY_VERSION=5.4.*&& docker compose up --build&set SYMFONY_VERSION=
 
 ## Installing Development Versions of Symfony
 
@@ -15,7 +20,13 @@ The value must be [a valid Composer stability option](https://getcomposer.org/do
 
 For instance, use the following command to use the development branch of Symfony:
 
+On Linux:
+
     STABILITY=dev docker compose up --build
+On Windows:
+    
+    set STABILITY=dev&& docker compose up --build&set STABILITY=
+  
 
 ## Customizing the Server Name
 
