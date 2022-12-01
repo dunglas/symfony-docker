@@ -29,7 +29,7 @@ And rebuild the PHP image.
 
 **PS**: If using Windows, you have to install [chocolatey.org](https://chocolatey.org/)
 or use [Cygwin](http://cygwin.com) to use the `make` command. Check out this
-[StackOverflow question](https://stackoverflow.com/q/2532234/633864) for more explanations. 
+[StackOverflow question](https://stackoverflow.com/q/2532234/633864) for more explanations.
 
 ## The template
 
@@ -47,7 +47,7 @@ SYMFONY  = $(PHP_CONT) bin/console
 
 # Misc
 .DEFAULT_GOAL = help
-.PHONY        = help build up start down logs sh composer vendor sf cc
+.PHONY        : help build up start down logs sh composer vendor sf cc
 
 ## —— 🎵 🐳 The Symfony Docker Makefile 🐳 🎵 ——————————————————————————————————
 help: ## Outputs this help screen
