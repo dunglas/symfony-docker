@@ -1,3 +1,7 @@
+# A starter environment for elogbooks backend test
+
+Please create a new branch from here and create a pull request into master
+
 # Symfony Docker
 
 A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony](https://symfony.com) web framework, with full [HTTP/2](https://symfony.com/doc/current/weblink.html), HTTP/3 and HTTPS support.
