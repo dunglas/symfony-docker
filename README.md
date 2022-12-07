@@ -1,6 +1,6 @@
 # A starter environment for elogbooks backend test
 
-Please create a new branch from here and create a pull request into master
+To create a PR to this repository you will have to fork this repository, creating your version which you will have write access to, write to that version, and then send a pull request from that version back to the original repository.
 
 # Symfony Docker
 
