@@ -4,8 +4,11 @@
 # https://docs.docker.com/develop/develop-images/multistage-build/#stop-at-a-specific-build-stage
 # https://docs.docker.com/compose/compose-file/#target
 
+# https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact
+ARG PHP_VERSION=8.2
+
 # Prod image
-FROM php:8.2-fpm-alpine AS app_php
+FROM php:${PHP_VERSION}-fpm-alpine AS app_php
 
 # Allow to use development versions of Symfony
 ARG STABILITY="stable"
