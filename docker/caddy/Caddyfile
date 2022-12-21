@@ -26,7 +26,6 @@ route {
         {$MERCURE_EXTRA_DIRECTIVES}
     }
     vulcain
-    push
     php_fastcgi unix//var/run/php/php-fpm.sock
     encode zstd gzip
     file_server
