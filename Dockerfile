@@ -5,7 +5,7 @@
 # https://docs.docker.com/compose/compose-file/#target
 
 # Prod image
-FROM php:8.2-fpm-alpine AS app_php
+FROM php:8.2-fpm-alpine AS app_composer
 
 # Allow to use development versions of Symfony
 ARG STABILITY="stable"
@@ -87,6 +87,15 @@ RUN set -eux; \
 		chmod +x bin/console; sync; \
     fi
 
+FROM node AS yarn_builder
+COPY --link --from=app_composer /srv/app /app/
+WORKDIR /app
+RUN yarn install
+RUN yarn build
+
+FROM app_composer AS app_php
+COPY --from=yarn_builder --link /app/public/build /srv/app/public/build/
+
 # Dev image
 FROM app_php AS app_php_dev
 
@@ -121,3 +130,5 @@ WORKDIR /srv/app
 COPY --from=app_caddy_builder --link /usr/bin/caddy /usr/bin/caddy
 COPY --from=app_php --link /srv/app/public public/
 COPY --link docker/caddy/Caddyfile /etc/caddy/Caddyfile
+COPY --from=yarn_builder --link /app/public/build /srv/app/public/build/
+
