@@ -36,7 +36,7 @@ Use the `SERVER_NAME` environment variable to define your custom server name(s).
 
 If you use Mercure, keep `caddy:80` in the list to allow the PHP container to request the caddy service.
 
-*Tips : You can define your server name variable in your `.env` file to keep it at each up*
+*Tips: You can define your server name variable in your `.env` file to keep it at each up*
 
 ## Using custom HTTP ports
 
