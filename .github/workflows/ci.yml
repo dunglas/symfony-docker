@@ -40,3 +40,6 @@ jobs:
               run: curl http://localhost
             - name: Check HTTPS reachability
               run: curl -k https://localhost
+            - name: Log
+              if: always()
+              run: docker-compose logs

@@ -26,7 +26,11 @@ route {
         {$MERCURE_EXTRA_DIRECTIVES}
     }
     vulcain
-    php_fastcgi unix//var/run/php/php-fpm.sock
+    php_fastcgi unix//var/run/php/php-fpm.sock {
+        health_uri /ping
+        health_interval 1s
+        lb_try_duration 5s
+    }
     encode zstd gzip
     file_server
 }
