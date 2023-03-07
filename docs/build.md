@@ -16,7 +16,7 @@ On Windows:
 ## Installing Development Versions of Symfony
 
 To install a non-stable version of Symfony, use the `STABILITY` environment variable during the build.
-The value must be [a valid Composer stability option](https://getcomposer.org/doc/04-schema.md#minimum-stability) .
+The value must be [a valid Composer stability option](https://getcomposer.org/doc/04-schema.md#minimum-stability).
 
 For instance, use the following command to use the development branch of Symfony:
 
