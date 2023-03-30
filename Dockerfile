@@ -114,7 +114,9 @@ RUN rm "$PHP_INI_DIR/conf.d/app.prod.ini"; \
 COPY --link docker/php/conf.d/app.dev.ini $PHP_INI_DIR/conf.d/
 
 RUN set -eux; \
-	install-php-extensions xdebug
+	install-php-extensions \
+    	xdebug \
+    ;
 
 RUN rm -f .env.local.php
 
