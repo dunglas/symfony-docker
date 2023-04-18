@@ -47,10 +47,10 @@ RUN apk add --no-cache \
 
 RUN set -eux; \
     install-php-extensions \
-    	apcu \
-    	intl \
+		apcu \
+		intl \
 		opcache \
-    	zip \
+		zip \
     ;
 
 ###> recipes ###
