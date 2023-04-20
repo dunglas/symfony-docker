@@ -1,0 +1,11 @@
+{
+    "controllers": {
+        "@symfony/ux-react": {
+            "react": {
+                "enabled": true,
+                "fetch": "eager"
+            }
+        }
+    },
+    "entrypoints": []
+}

@@ -9,12 +9,19 @@
         "php": ">=8.1.13",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "doctrine/doctrine-bundle": "^2.9",
+        "doctrine/doctrine-migrations-bundle": "^3.2",
+        "doctrine/orm": "^2.14",
         "symfony/console": "6.2.*",
         "symfony/dotenv": "6.2.*",
         "symfony/flex": "^2",
         "symfony/framework-bundle": "6.2.*",
         "symfony/runtime": "6.2.*",
-        "symfony/yaml": "6.2.*"
+        "symfony/twig-bundle": "6.2.*",
+        "symfony/ux-react": "^2.7",
+        "symfony/webpack-encore-bundle": "^1.16",
+        "symfony/yaml": "6.2.*",
+        "twig/twig": "^2.0"
     },
     "config": {
         "allow-plugins": {
@@ -63,5 +70,9 @@
             "require": "6.2.*",
             "docker": true
         }
+    },
+    "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
+        "symfony/maker-bundle": "^1.48"
     }
 }
