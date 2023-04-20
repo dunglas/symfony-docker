@@ -24,6 +24,19 @@ class JobFixtures extends Fixture
         $manager->persist($property);
         $manager->persist($job);
 
+        $job = new Job();
+        $job->setSummary('Test Summary');
+        $job->setDescription('Test Desc');
+        $job->setStatus('Closed');
+
+        $property = new Property();
+        $property->setName('The Cottage');
+
+        $job->setProperty($property);
+
+        $manager->persist($property);
+        $manager->persist($job);
+
         $manager->flush();
     }
 }
