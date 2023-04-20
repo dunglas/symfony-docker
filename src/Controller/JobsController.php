@@ -29,10 +29,7 @@ class JobsController extends AbstractController
                 'summary' => $job->getSummary(),
                 'description' => $job->getDescription(),
                 'status' => $job->getStatus(),
-                'property' => [
-                    'id' => $property->getId(),
-                    'name' => $property->getName(),
-                ],
+                'property' => $property->getName(),
             ];
         }
 
@@ -66,5 +63,18 @@ class JobsController extends AbstractController
 
         $job->setProperty($property);
         $repository->save($job);
+
+        $data[] = [
+            'id' => $job->getId(),
+            'summary' => $job->getSummary(),
+            'description' => $job->getDescription(),
+            'status' => $job->getStatus(),
+            'property' => [
+                'id' => $property->getId(),
+                'name' => $property->getName(),
+            ],
+        ];
+
+        return $this->json($data);
     }
 }
