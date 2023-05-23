@@ -43,7 +43,7 @@ PHP_CONT = $(DOCKER_COMP) exec php
 # Executables
 PHP      = $(PHP_CONT) php
 COMPOSER = $(PHP_CONT) composer
-SYMFONY  = $(PHP_CONT) bin/console
+SYMFONY  = $(PHP) bin/console
 
 # Misc
 .DEFAULT_GOAL = help
