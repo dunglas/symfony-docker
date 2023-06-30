@@ -24,5 +24,18 @@ services:
       - ./public:/srv/app/public:ro
       - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
 
+  node:
+    build:
+      context: .
+      target: symfony_node
+    volumes:
+      - ./:/app
+    ports:
+     - target: 8080
+       published: 8080
+       protocol: tcp
+    command: 'sh -c "npm install; npm run dev-server -- --live-reload --server-type https --client-web-socket-url https://localhost:8080/ws --host 0.0.0.0 --public https://localhost:8080"'
+
+
 ###> symfony/mercure-bundle ###
 ###< symfony/mercure-bundle ###

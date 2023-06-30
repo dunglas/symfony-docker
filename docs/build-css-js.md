@@ -9,9 +9,7 @@ Modify `Dockerfile` to build your assets :
 
 - At the top of the file before anything else
 ```diff
-ARG PHP_VERSION=8.1
-ARG CADDY_VERSION=2
-+ARG NODE_VERSION=18
++ARG NODE_VERSION=19
 +
 +# node "stage"
 +FROM node:${NODE_VERSION}-alpine AS symfony_node

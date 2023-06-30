@@ -4,6 +4,8 @@
 # https://docs.docker.com/develop/develop-images/multistage-build/#stop-at-a-specific-build-stage
 # https://docs.docker.com/compose/compose-file/#target
 
+ARG NODE_VERSION=19
+
 # Build Caddy with the Mercure and Vulcain modules
 # Temporary fix for https://github.com/dunglas/mercure/issues/770
 FROM caddy:2.7-builder-alpine AS app_caddy_builder
@@ -13,7 +15,7 @@ RUN xcaddy build v2.6.4 \
 	--with github.com/dunglas/vulcain/caddy
 
 # Prod image
-FROM php:8.2-fpm-alpine AS app_php
+FROM php:8.2-fpm-alpine AS app_composer
 
 # Allow to use development versions of Symfony
 ARG STABILITY="stable"
@@ -96,6 +98,22 @@ RUN set -eux; \
 		chmod +x bin/console; sync; \
     fi
 
+
+# node "stage"
+FROM node:${NODE_VERSION}-alpine AS symfony_node
+
+COPY --link --from=app_composer /srv/app /app/
+
+WORKDIR /app
+
+RUN npm install --force
+RUN npm run build
+## If you are building your code for production
+# RUN npm ci --only=production
+
+FROM app_composer AS app_php
+COPY --from=symfony_node --link /app/public/build /srv/app/public/build/
+
 # Dev image
 FROM app_php AS app_php_dev
 
@@ -123,3 +141,4 @@ WORKDIR /srv/app
 COPY --from=app_caddy_builder --link /usr/bin/caddy /usr/bin/caddy
 COPY --from=app_php --link /srv/app/public public/
 COPY --link docker/caddy/Caddyfile /etc/caddy/Caddyfile
+COPY --from=symfony_node --link /app/public/build /srv/app/public/build/
