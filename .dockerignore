@@ -20,6 +20,7 @@
 .github/
 docs/
 public/bundles/
+node_modules/
 tests/
 var/
 vendor/
