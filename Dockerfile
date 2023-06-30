@@ -102,17 +102,25 @@ RUN set -eux; \
 # node "stage"
 FROM node:${NODE_VERSION}-alpine AS symfony_node
 
-COPY --link --from=app_composer /srv/app /app/
+COPY --link --from=app_composer /srv/app/package*.json* /app/
+COPY --link --from=app_composer /srv/app/vendor* /app/vendor
+
 
 WORKDIR /app
 
-RUN npm install --force
-RUN npm run build
-## If you are building your code for production
-# RUN npm ci --only=production
+RUN if [-f package*.json]; then \
+    	npm install --force; \
+    fi
+
+COPY --link --from=app_composer /srv/app/assets* /app/assets
+COPY --link --from=app_composer /srv/app/webpack.config.js* /app/
+
+RUN if [-f webpack.config.js]; then \
+    	npm run build; \
+    fi
 
 FROM app_composer AS app_php
-COPY --from=symfony_node --link /app/public/build /srv/app/public/build/
+COPY --from=symfony_node --link /app/public*/build /srv/app/public/build/
 
 # Dev image
 FROM app_php AS app_php_dev
@@ -141,4 +149,4 @@ WORKDIR /srv/app
 COPY --from=app_caddy_builder --link /usr/bin/caddy /usr/bin/caddy
 COPY --from=app_php --link /srv/app/public public/
 COPY --link docker/caddy/Caddyfile /etc/caddy/Caddyfile
-COPY --from=symfony_node --link /app/public/build /srv/app/public/build/
+COPY --from=symfony_node --link /app/public*/build /srv/app/public/build/
