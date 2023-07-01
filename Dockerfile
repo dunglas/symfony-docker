@@ -103,7 +103,7 @@ RUN set -eux; \
 FROM node:${NODE_VERSION}-alpine AS symfony_node
 
 COPY --link --from=app_php /srv/app/package*.json* /app/
-COPY --link --from=app_php /srv/app/vendor* /app/vendor
+COPY --link --from=app_php /srv/app/vendor /app/vendor
 
 WORKDIR /app
 
@@ -111,6 +111,7 @@ RUN if [ -f package.json ]; then \
     	npm install --force; \
     fi
 
+# webpack-encore build
 COPY --link --from=app_php /srv/app/assets* /app/assets
 COPY --link --from=app_php /srv/app/webpack.config.js* /app/
 
