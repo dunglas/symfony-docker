@@ -15,7 +15,7 @@ RUN xcaddy build v2.6.4 \
 	--with github.com/dunglas/vulcain/caddy
 
 # Prod image
-FROM php:8.2-fpm-alpine AS app_php
+FROM php:8.2-fpm-alpine AS app_composer
 
 # Allow to use development versions of Symfony
 ARG STABILITY="stable"
@@ -98,25 +98,26 @@ RUN set -eux; \
 		chmod +x bin/console; sync; \
     fi
 
-
 # node "stage"
 FROM node:${NODE_VERSION}-alpine AS symfony_node
 
-COPY --link --from=app_php /srv/app/package*.json* /app/
-COPY --link --from=app_php /srv/app/vendor* /app/vendor
+COPY --link --from=app_composer /srv/app/package*.json /app/
+COPY --link --from=app_composer /srv/app/vendor /app/vendor
 
 WORKDIR /app
 
-RUN if [ -f package.json ]; then \
-    	npm install --force; \
-    fi
+RUN npm install --force
 
-COPY --link --from=app_php /srv/app/assets* /app/assets
-COPY --link --from=app_php /srv/app/webpack.config.js* /app/
+COPY --link --from=app_composer /srv/app/assets /app/assets
+COPY --link --from=app_composer /srv/app/webpack.config.js /app/
 
-RUN if [ -f webpack.config.js ]; then \
-    	npm run build; \
-    fi
+RUN npm run build
+
+# Prod image
+
+FROM app_composer as app_php
+
+COPY --from=symfony_node --link /app/public/build /srv/app/public/build/
 
 # Dev image
 FROM app_php AS app_php_dev
@@ -145,4 +146,4 @@ WORKDIR /srv/app
 COPY --from=app_caddy_builder --link /usr/bin/caddy /usr/bin/caddy
 COPY --from=app_php --link /srv/app/public public/
 COPY --link docker/caddy/Caddyfile /etc/caddy/Caddyfile
-COPY --from=symfony_node --link /app/public*/build /srv/app/public/build/
+COPY --from=symfony_node --link /app/public/build /srv/app/public/build/
