@@ -27,7 +27,6 @@ services:
   node:
     build:
       context: .
-      target: symfony_node
     volumes:
       - ./:/app
     ports:
