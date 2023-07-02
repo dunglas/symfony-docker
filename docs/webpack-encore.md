@@ -80,6 +80,3 @@ This will provide you with hot module reloading.
 +    command: 'sh -c "npm install;
 +      npm run dev-server -- --live-reload --server-type https --client-web-socket-url https://localhost:8080/ws --host 0.0.0.0 --public https://localhost:8080"'
 ```
-
-If file changes are not picked up, refer to this page:
-https://symfony.com/doc/current/frontend/encore/virtual-machine.html#file-watching-issues
