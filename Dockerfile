@@ -114,7 +114,6 @@ COPY --link --from=app_composer /srv/app/webpack.config.js /app/
 RUN npm run build
 
 # Prod image
-
 FROM app_composer as app_php
 
 COPY --from=symfony_node --link /app/public/build /srv/app/public/build/
@@ -146,4 +145,3 @@ WORKDIR /srv/app
 COPY --from=app_caddy_builder --link /usr/bin/caddy /usr/bin/caddy
 COPY --from=app_php --link /srv/app/public public/
 COPY --link docker/caddy/Caddyfile /etc/caddy/Caddyfile
-COPY --from=symfony_node --link /app/public/build /srv/app/public/build/
