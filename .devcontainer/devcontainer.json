@@ -34,7 +34,7 @@
 	// "shutdownAction": "none",
 
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "cat /etc/os-release",
+	"postCreateCommand": ". .devcontainer/install-dev-tools.sh",
 
 	// Configure tool-specific properties.
 	"customizations": {
