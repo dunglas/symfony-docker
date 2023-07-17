@@ -45,7 +45,9 @@
 				"eamodio.gitlens",
 				"jaguadoromero.vscode-php-create-class",
 				"xdebug.php-debug",
-				"bmewburn.vscode-intelephense-client"
+				"bmewburn.vscode-intelephense-client",
+				"recca0120.vscode-phpunit",
+				"kokororin.vscode-phpfmt"
 			]
 		}
 	}
