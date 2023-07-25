@@ -40,14 +40,29 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
+				// PHP intellisense by Intelephense.
+				"bmewburn.vscode-intelephense-client",
+				"xdebug.php-debug",
+				"recca0120.vscode-phpunit",
+
+				// // PHP intellisense by IntelliSense.
+				// "xdebug.php-pack",
+				// "recca0120.vscode-phpunit",
+
+				// // PHP intellisense by Devsense.
+				// "DEVSENSE.phptools-vscode",
+
+
+				// Extra PHP formatter.
+				"kokororin.vscode-phpfmt",
+				// Symfony.
 				"TheNouillet.symfony-vscode",
-				"ms-vscode.powershell",
+				// Add extra extra extentions you like here.
 				"eamodio.gitlens",
 				"jaguadoromero.vscode-php-create-class",
-				"xdebug.php-debug",
-				"bmewburn.vscode-intelephense-client",
-				"recca0120.vscode-phpunit",
-				"kokororin.vscode-phpfmt"
+				"ms-vscode.powershell",
+				"streetsidesoftware.code-spell-checker",
+				"yzhang.markdown-all-in-one"
 			]
 		}
 	}
