@@ -8,10 +8,10 @@ For instance, use the following command to install Symfony 5.4:
 
 On Linux:
 
-    SYMFONY_VERSION=5.4.* docker compose up --build
+    SYMFONY_VERSION=5.4.* docker compose up --wait
 On Windows:
 
-    set SYMFONY_VERSION=5.4.*&& docker compose up --build&set SYMFONY_VERSION=
+    set SYMFONY_VERSION=5.4.*&& docker compose up --wait&set SYMFONY_VERSION=
 
 ## Installing Development Versions of Symfony
 
@@ -22,19 +22,17 @@ For instance, use the following command to use the development branch of Symfony
 
 On Linux:
 
-    STABILITY=dev docker compose up --build
+    STABILITY=dev docker compose up --wait
+
 On Windows:
     
-    set STABILITY=dev&& docker compose up --build&set STABILITY=
-  
+    set STABILITY=dev&& docker compose up --wait&set STABILITY=
 
 ## Customizing the Server Name
 
 Use the `SERVER_NAME` environment variable to define your custom server name(s).
 
-    SERVER_NAME="app.localhost, caddy:80" docker compose up --build
-
-If you use Mercure, keep `caddy:80` in the list to allow the PHP container to request the caddy service.
+    SERVER_NAME="app.localhost" docker compose up --wait
 
 *Tips: You can define your server name variable in your `.env` file to keep it at each up*
 
@@ -42,7 +40,7 @@ If you use Mercure, keep `caddy:80` in the list to allow the PHP container to re
 
 Use the environment variables `HTTP_PORT`, `HTTPS_PORT` and/or `HTTP3_PORT` to adjust the ports to your needs, e.g.
 
-    HTTP_PORT=8000 HTTPS_PORT=4443 HTTP3_PORT=4443 docker compose up --build
+    HTTP_PORT=8000 HTTPS_PORT=4443 HTTP3_PORT=4443 docker compose up --wait
 
 to access your application on [https://localhost:4443](https://localhost:4443).
 

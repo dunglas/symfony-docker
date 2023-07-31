@@ -3,11 +3,17 @@ version: "3.4"
 # Production environment override
 services:
   php:
+    build:
+      context: .
+      target: php_prod
     environment:
       APP_SECRET: ${APP_SECRET}
       MERCURE_JWT_SECRET: ${CADDY_MERCURE_JWT_SECRET}
 
   caddy:
+    build:
+      context: .
+      target: caddy_prod
     environment:
       MERCURE_PUBLISHER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET}
       MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET}

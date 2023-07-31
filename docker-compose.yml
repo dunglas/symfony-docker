@@ -2,12 +2,7 @@ version: "3.4"
 
 services:
   php:
-    build:
-      context: .
-      target: app_php
-      args:
-        SYMFONY_VERSION: ${SYMFONY_VERSION:-}
-        STABILITY: ${STABILITY:-stable}
+    image: ${IMAGES_PREFIX:-}app-php
     restart: unless-stopped
     volumes:
       - php_socket:/var/run/php
@@ -17,6 +12,11 @@ services:
       retries: 3
       start_period: 30s
     environment:
+      TRUSTED_PROXIES: ${TRUSTED_PROXIES:-127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16}
+      TRUSTED_HOSTS: ^${SERVER_NAME:-example\.com|localhost}|caddy$$
+      # The two next lines can be removed after initial installation
+      SYMFONY_VERSION: ${SYMFONY_VERSION:-}
+      STABILITY: ${STABILITY:-stable}
       # Run "composer require symfony/orm-pack" to install and configure Doctrine ORM
       DATABASE_URL: postgresql://${POSTGRES_USER:-app}:${POSTGRES_PASSWORD:-!ChangeMe!}@database:5432/${POSTGRES_DB:-app}?serverVersion=${POSTGRES_VERSION:-15}&charset=${POSTGRES_CHARSET:-utf8}
       # Run "composer require symfony/mercure-bundle" to install and configure the Mercure integration
@@ -25,13 +25,11 @@ services:
       MERCURE_JWT_SECRET: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
 
   caddy:
-    build:
-      context: .
-      target: app_caddy
+    image: ${IMAGES_PREFIX:-}app-caddy
     depends_on:
       - php
     environment:
-      SERVER_NAME: ${SERVER_NAME:-localhost, caddy:80}
+      SERVER_NAME: ${SERVER_NAME:-localhost}, caddy:80
       MERCURE_PUBLISHER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
       MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
     restart: unless-stopped

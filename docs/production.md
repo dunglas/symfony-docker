@@ -31,7 +31,6 @@ ssh root@<droplet-ip>
 
 In most cases, you'll want to associate a domain name to your website.
 If you don't own a domain name yet, you'll have to buy one through a registrar.
-Use [this affiliate link](https://gandi.link/f/93650337) to redeem a 20% discount at Gandi.net.
 
 Then create a DNS record of type `A` for your domain name pointing to the IP address of your server.
 
@@ -40,10 +39,6 @@ Example:
 ```dns
 your-domain-name.example.com.  IN  A     207.154.233.113
 ````
-
-Example in Gandi's UI:
-
-![Creating a DNS record at Gandi.net](gandi-dns.png)
 
 Note: Let's Encrypt, the service used by default by Symfony Docker to automatically generate a TLS certificate doesn't support using bare IP addresses.
 Using a domain name is mandatory to use Let's Encrypt.
@@ -66,7 +61,7 @@ Go into the directory containing your project (`<project-name>`), and start the 
 SERVER_NAME=your-domain-name.example.com \
 APP_SECRET=ChangeMe \
 CADDY_MERCURE_JWT_SECRET=ChangeThisMercureHubJWTSecretKey \
-docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+docker compose -f docker-compose.yml -f docker-compose.prod.yml up --wait
 ```
 
 Be sure to replace `your-domain-name.example.com` by your actual domain name and to set the values of `APP_SECRET`, `CADDY_MERCURE_JWT_SECRET` to cryptographically secure random values.
@@ -82,7 +77,7 @@ Alternatively, if you don't want to expose an HTTPS server but only an HTTP one,
 SERVER_NAME=:80 \
 APP_SECRET=ChangeMe \
 CADDY_MERCURE_JWT_SECRET=ChangeThisMercureHubJWTSecretKey \
-docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+docker compose -f docker-compose.yml -f docker-compose.prod.yml up --wait
 ```
 
 ## Deploying on Multiple Nodes

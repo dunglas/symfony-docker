@@ -4,7 +4,8 @@ version: "3.4"
 services:
   php:
     build:
-      target: app_php_dev
+      context: .
+      target: php_dev
     volumes:
       - ./:/srv/app
       - ./docker/php/conf.d/app.dev.ini:/usr/local/etc/php/conf.d/app.dev.ini:ro
@@ -12,17 +13,22 @@ services:
       #  from the bind-mount for better performance by enabling the next line:
       #- /srv/app/vendor
     environment:
-      # See https://xdebug.org/docs/all_settings#mode 
+      # See https://xdebug.org/docs/all_settings#mode
       XDEBUG_MODE: "${XDEBUG_MODE:-off}"
     extra_hosts:
       # Ensure that host.docker.internal is correctly defined on Linux
       - host.docker.internal:host-gateway
 
   caddy:
-    command: ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile", "--watch"]
+    command: [ "caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile", "--watch" ]
+    build:
+      context: .
+      target: caddy_base
     volumes:
       - ./public:/srv/app/public:ro
       - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+    environment:
+      MERCURE_EXTRA_DIRECTIVES: demo
 
 ###> symfony/mercure-bundle ###
 ###< symfony/mercure-bundle ###
