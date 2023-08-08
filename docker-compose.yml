@@ -7,6 +7,7 @@ services:
     volumes:
       - php_socket:/var/run/php
     healthcheck:
+      test: ["CMD", "docker-healthcheck"]
       interval: 10s
       timeout: 3s
       retries: 3
