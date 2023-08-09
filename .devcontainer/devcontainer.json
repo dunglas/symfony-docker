@@ -55,8 +55,13 @@
 
 				// Extra PHP formatter.
 				"kokororin.vscode-phpfmt",
+
 				// Symfony.
 				"TheNouillet.symfony-vscode",
+				// Alternativly, to not get this error promped https://github.com/TheNouillet/symfony-vscode/issues/49 comment the above line and install this from the command line:
+				// wget -O /tmp/symfony-vscode-1.0.3.vsix https://github.com/QISCT/symfony-vscode/releases/download/v1.0.3/symfony-vscode-1.0.3.vsix
+				// code --install-extension /tmp/symfony-vscode-1.0.3.vsix
+
 				// Add extra extra extentions you like here.
 				"eamodio.gitlens",
 				"jaguadoromero.vscode-php-create-class",

@@ -13,6 +13,12 @@
             "pathMappings": {
                 "/srv/app": "${workspaceFolder}/api"
             },
+            "ignore": [
+                // "**/vendor/**",
+                "**/bootstrap.php",
+                "**/EnvVarProcessor.php",
+                "**/BaseTestRunner.php",
+            ],
             // "stopOnEntry": true,
         },
         {
@@ -21,6 +27,12 @@
             "request": "launch",
             "port": 9003,
             // "log": true,
+            "ignore": [
+                // "**/vendor/**",
+                "**/bootstrap.php",
+                "**/EnvVarProcessor.php",
+                "**/BaseTestRunner.php",
+            ],
             // "stopOnEntry": true,
         },
         {
