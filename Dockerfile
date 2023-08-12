@@ -111,7 +111,7 @@ RUN curl -JLO "https://dl.filippo.io/mkcert/latest?for=linux/amd64"; \
     cp mkcert-v*-linux-amd64 /usr/local/bin/mkcert; \
     rm -Rf mkcert-v*-linux-amd64;
 
-RUN mkcert -key-file key.pem -cert-file cert.pem ${SERVER_NAME:-localhost}
+RUN mkcert -key-file key.pem -cert-file cert.pem "${SERVER_NAME:-localhost}"
 
 # Prod Nginx image
 FROM nginx_base as nginx_prod
