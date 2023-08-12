@@ -1,6 +1,6 @@
 # Build Options
 
-## Selecting a Specific Symfony Version
+## Selecting a Specific Laravel Version
 
 Use the `LARAVEL_VERSION` environment variable to select a specific Laravel version.
 
@@ -19,7 +19,7 @@ On Windows:
 To install a non-stable version of Laravel, use the `STABILITY` environment variable during the build.
 The value must be [a valid Composer stability option](https://getcomposer.org/doc/04-schema.md#minimum-stability).
 
-For instance, use the following command to use the development branch of Symfony:
+For instance, use the following command to use the development branch of Laravel:
 
 On Linux:
 
