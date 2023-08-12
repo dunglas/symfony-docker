@@ -1,10 +1,9 @@
 #syntax=docker/dockerfile:1.4
-
 # Versions
 FROM php:8.2-fpm-alpine AS php_upstream
 FROM mlocati/php-extension-installer:2 AS php_extension_installer_upstream
 FROM composer/composer:2-bin AS composer_upstream
-FROM caddy:2-alpine AS caddy_upstream
+FROM nginx:stable-alpine3.17 AS nginx_upstream
 
 
 # The different stages of this Dockerfile are meant to be built into separate images
@@ -38,9 +37,6 @@ RUN set -eux; \
 		zip \
     ;
 
-###> recipes ###
-###< recipes ###
-
 COPY --link docker/php/conf.d/app.ini $PHP_INI_DIR/conf.d/
 
 COPY --link docker/php/php-fpm.d/zz-docker.conf /usr/local/etc/php-fpm.d/zz-docker.conf
@@ -68,7 +64,6 @@ COPY --from=composer_upstream --link /composer /usr/bin/composer
 FROM php_base AS php_dev
 
 ENV APP_ENV=dev XDEBUG_MODE=off
-VOLUME /srv/app/var/
 
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
@@ -88,7 +83,7 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 COPY --link docker/php/conf.d/app.prod.ini $PHP_INI_DIR/conf.d/
 
 # prevent the reinstallation of vendors at every changes in the source code
-COPY --link composer.* symfony.* ./
+COPY --link composer.* ./
 RUN set -eux; \
 	composer install --no-cache --prefer-dist --no-dev --no-autoloader --no-scripts --no-progress
 
@@ -97,26 +92,28 @@ COPY --link . ./
 RUN rm -Rf docker/
 
 RUN set -eux; \
-	mkdir -p var/cache var/log; \
 	composer dump-autoload --classmap-authoritative --no-dev; \
-	composer dump-env prod; \
-	composer run-script --no-dev post-install-cmd; \
-	chmod +x bin/console; sync;
+	chmod +x artisan; sync;
 
-
-# Base Caddy image
-FROM caddy_upstream AS caddy_base
-
-ARG TARGETARCH
+# Base Nginx image
+FROM nginx_upstream as nginx_base
 
 WORKDIR /srv/app
 
-# Download Caddy compiled with the Mercure and Vulcain modules
-ADD --chmod=500 https://caddyserver.com/api/download?os=linux&arch=$TARGETARCH&p=github.com/dunglas/mercure/caddy&p=github.com/dunglas/vulcain/caddy /usr/bin/caddy
+COPY --link docker/nginx/templates/ /etc/nginx/templates/
 
-COPY --link docker/caddy/Caddyfile /etc/caddy/Caddyfile
+FROM nginx_base as nginx_dev
 
-# Prod Caddy image
-FROM caddy_base AS caddy_prod
+RUN rm -Rf /etc/nginx/app.conf
+
+RUN curl -JLO "https://dl.filippo.io/mkcert/latest?for=linux/amd64"; \
+    chmod +x mkcert-v*-linux-amd64; \
+    cp mkcert-v*-linux-amd64 /usr/local/bin/mkcert; \
+    rm -Rf mkcert-v*-linux-amd64;
+
+RUN mkcert -key-file key.pem -cert-file cert.pem ${SERVER_NAME:-localhost}
+
+# Prod Nginx image
+FROM nginx_base as nginx_prod
 
 COPY --from=php_prod --link /srv/app/public public/
