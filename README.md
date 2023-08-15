@@ -37,6 +37,9 @@ A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony
 7. [Using a Makefile](docs/makefile.md)
 8. [Troubleshooting](docs/troubleshooting.md)
 
+## For Laravel developers
+If you develop using [Laravel](https://laravel.com) you can use [Laravel Docker](https://github.com/FunkyOz/laravel-docker) by [FunkyOz](https://github.com/FunkyOz).  
+
 ## License
 
 Symfony Docker is available under the MIT License.
