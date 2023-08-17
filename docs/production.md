@@ -57,6 +57,13 @@ git clone git@github.com:<username>/<project-name>.git
 
 Go into the directory containing your project (`<project-name>`), and start the app in production mode:
 
+Building images:
+
+```console
+docker compose -f docker-compose.yml -f docker-compose.prod.yml build --pull --no-cache
+```
+Running containers:
+
 ```console
 SERVER_NAME=your-domain-name.example.com \
 APP_SECRET=ChangeMe \
