@@ -13,7 +13,6 @@ A [Docker](https://www.docker.com/)-based installer and runtime for the PHP, wit
 ## Features
 
 * Production, development and CI ready
-* [Installation of extra Docker Compose services](docs/extra-services.md) with Symfony Flex
 * Automatic HTTPS (in dev and in prod!)
 * Native [XDebug](docs/xdebug.md) integration
 * Just 2 services (PHP FPM and Caddy server)
