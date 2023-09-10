@@ -34,7 +34,7 @@ A [Docker](https://www.docker.com/)-based installer and runtime for the PHP, wit
 
 ## License
 
-Symfony Docker is available under the MIT License.
+PHP Docker is available under the MIT License.
 
 ## Credits
 This project is a fork of [symfony-docker](https://github.com/dunglas/symfony-docker) trimmed and simplified for plain php use. Credits to [Kévin Dunglas](https://dunglas.fr) and [Maxime Helias](https://twitter.com/maxhelias).
