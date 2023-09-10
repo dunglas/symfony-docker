@@ -38,9 +38,6 @@ RUN set -eux; \
 		zip \
     ;
 
-###> recipes ###
-###< recipes ###
-
 COPY --link docker/php/conf.d/app.ini $PHP_INI_DIR/conf.d/
 
 COPY --link docker/php/php-fpm.d/zz-docker.conf /usr/local/etc/php-fpm.d/zz-docker.conf
@@ -88,7 +85,7 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 COPY --link docker/php/conf.d/app.prod.ini $PHP_INI_DIR/conf.d/
 
 # prevent the reinstallation of vendors at every changes in the source code
-COPY --link composer.* symfony.* ./
+COPY --link composer.* ./
 RUN set -eux; \
 	composer install --no-cache --prefer-dist --no-dev --no-autoloader --no-scripts --no-progress
 
@@ -97,11 +94,11 @@ COPY --link . ./
 RUN rm -Rf docker/
 
 RUN set -eux; \
-	mkdir -p var/cache var/log; \
+#	mkdir -p var/cache var/log; \
 	composer dump-autoload --classmap-authoritative --no-dev; \
 	composer dump-env prod; \
-	composer run-script --no-dev post-install-cmd; \
-	chmod +x bin/console; sync;
+	composer run-script --no-dev post-install-cmd;
+#	chmod +x bin/console; sync;
 
 
 # Base Caddy image
@@ -112,7 +109,7 @@ ARG TARGETARCH
 WORKDIR /srv/app
 
 # Download Caddy compiled with the Mercure and Vulcain modules
-ADD --chmod=500 https://caddyserver.com/api/download?os=linux&arch=$TARGETARCH&p=github.com/dunglas/mercure/caddy&p=github.com/dunglas/vulcain/caddy /usr/bin/caddy
+ADD --chmod=500 https://caddyserver.com/api/download?os=linux&arch=$TARGETARCH /usr/bin/caddy
 
 COPY --link docker/caddy/Caddyfile /etc/caddy/Caddyfile
 

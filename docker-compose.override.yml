@@ -27,8 +27,3 @@ services:
     volumes:
       - ./public:/srv/app/public:ro
       - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
-    environment:
-      MERCURE_EXTRA_DIRECTIVES: demo
-
-###> symfony/mercure-bundle ###
-###< symfony/mercure-bundle ###
