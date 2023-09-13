@@ -29,7 +29,7 @@ First, [create a PHP debug remote server configuration](https://www.jetbrains.co
    * Port: `443`
    * Debugger: `Xdebug`
    * Check `Use path mappings`
-   * Absolute path on the server: `/srv/app`
+   * Absolute path on the server: `/app`
 
 You can now use the debugger!
 

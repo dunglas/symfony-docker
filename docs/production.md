@@ -85,16 +85,3 @@ docker compose -f docker-compose.yml -f docker-compose.prod.yml up --wait
 If you want to deploy your app on a cluster of machines, you can use [Docker Swarm](https://docs.docker.com/engine/swarm/stack-deploy/),
 which is compatible with the provided Compose files.
 To deploy on Kubernetes, take a look at [the Helm chart provided with API Platform](https://api-platform.com/docs/deployment/kubernetes/), which can be easily adapted for use with Symfony Docker.
-
-## Configuring a Load Balancer or a Reverse Proxy
-
-Since Caddy 2.5, XFF values of incoming requests will be ignored to prevent spoofing.
-So if Caddy is not the first server being connected to by your clients (for example when a CDN is in front of Caddy), you may configure `trusted_proxies` with a list of IP ranges (CIDRs) from which incoming requests are trusted to have sent good values for these headers.
-As a shortcut, `private_ranges` may be configured to trust all private IP ranges.
-
-```diff
--php_fastcgi unix//var/run/php/php-fpm.sock
-+php_fastcgi unix//var/run/php/php-fpm.sock {
-+    trusted_proxies private_ranges
-+}
-```

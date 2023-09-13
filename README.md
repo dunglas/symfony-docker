@@ -1,6 +1,7 @@
 # Symfony Docker
 
-A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony](https://symfony.com) web framework, with full [HTTP/2](https://symfony.com/doc/current/weblink.html), HTTP/3 and HTTPS support.
+A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony](https://symfony.com) web framework,
+with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) inside!
 
 ![CI](https://github.com/dunglas/symfony-docker/workflows/CI/badge.svg)
 
@@ -15,13 +16,14 @@ A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony
 ## Features
 
 * Production, development and CI ready
+* Just 1 service by default
+* Blazing-fast performance thanks to [the worker mode of FrankenPHP](https://github.com/dunglas/frankenphp/blob/main/docs/worker.md) (automatically enabled in prod mode)
 * [Installation of extra Docker Compose services](docs/extra-services.md) with Symfony Flex
-* Automatic HTTPS (in dev and in prod!)
-* HTTP/2, HTTP/3 and [Preload](https://symfony.com/doc/current/web_link.html) support
-* Built-in [Mercure](https://symfony.com/doc/current/mercure.html) hub
+* Automatic HTTPS (in dev and prod)
+* HTTP/3 and [Early Hints](https://symfony.com/blog/new-in-symfony-6-3-early-hints) support
+* Real-time messaging thanks to a built-in [Mercure hub](https://symfony.com/doc/current/mercure.html)
 * [Vulcain](https://vulcain.rocks) support
 * Native [XDebug](docs/xdebug.md) integration
-* Just 2 services (PHP FPM and Caddy server)
 * Super-readable configuration
 
 **Enjoy!**
@@ -43,4 +45,4 @@ Symfony Docker is available under the MIT License.
 
 ## Credits
 
-Created by [Kévin Dunglas](https://dunglas.fr), co-maintained by [Maxime Helias](https://twitter.com/maxhelias) and sponsored by [Les-Tilleuls.coop](https://les-tilleuls.coop).
+Created by [Kévin Dunglas](https://dunglas.dev), co-maintained by [Maxime Helias](https://twitter.com/maxhelias) and sponsored by [Les-Tilleuls.coop](https://les-tilleuls.coop).
