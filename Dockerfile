@@ -48,7 +48,7 @@ RUN mkdir -p /var/run/php
 
 COPY --link --chmod=755 docker/php/docker-healthcheck.sh /usr/local/bin/docker-healthcheck
 
-HEALTHCHECK --interval=10s --timeout=3s --retries=3 CMD ["docker-healthcheck"]
+HEALTHCHECK --interval=10s --timeout=3s --retries=3 --start-period=40s CMD ["docker-healthcheck"]
 
 COPY --link --chmod=755 docker/php/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 
