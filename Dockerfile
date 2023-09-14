@@ -47,11 +47,9 @@ COPY --link docker/php/php-fpm.d/zz-docker.conf /usr/local/etc/php-fpm.d/zz-dock
 RUN mkdir -p /var/run/php
 
 COPY --link --chmod=755 docker/php/docker-healthcheck.sh /usr/local/bin/docker-healthcheck
-
-HEALTHCHECK --interval=10s --timeout=3s --retries=3 --start-period=40s CMD ["docker-healthcheck"]
+HEALTHCHECK --start-period=1m CMD docker-healthcheck
 
 COPY --link --chmod=755 docker/php/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
-
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
 
@@ -113,6 +111,7 @@ WORKDIR /srv/app
 ADD --chmod=500 https://caddyserver.com/api/download?os=linux&arch=$TARGETARCH&p=github.com/dunglas/mercure/caddy&p=github.com/dunglas/vulcain/caddy /usr/bin/caddy
 
 COPY --link docker/caddy/Caddyfile /etc/caddy/Caddyfile
+HEALTHCHECK CMD wget --no-verbose --tries=1 --spider https://localhost/healthz || exit 1
 
 # Prod Caddy image
 FROM caddy_base AS caddy_prod

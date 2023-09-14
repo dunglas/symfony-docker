@@ -1,32 +1,46 @@
 {
-    # Debug
-    {$CADDY_DEBUG}
+	{$CADDY_GLOBAL_OPTIONS}
 }
 
-{$SERVER_NAME}
+{$SERVER_NAME:localhost} 
 
 {$CADDY_EXTRA_CONFIG}
 
-log
+log {
+	# Redact the authorization query parameter that can be set by Mercure
+	format filter {
+		wrap console
+		fields {
+			uri query {
+				replace authorization REDACTED
+			}
+		}
+	}
+}
 
 route {
-    root * /srv/app/public
-    mercure {
-        # Transport to use (default to Bolt)
-        transport_url {$MERCURE_TRANSPORT_URL:bolt:///data/mercure.db}
-        # Publisher JWT key
-        publisher_jwt {env.MERCURE_PUBLISHER_JWT_KEY} {env.MERCURE_PUBLISHER_JWT_ALG}
-        # Subscriber JWT key
-        subscriber_jwt {env.MERCURE_SUBSCRIBER_JWT_KEY} {env.MERCURE_SUBSCRIBER_JWT_ALG}
-        # Allow anonymous subscribers (double-check that it's what you want)
-        anonymous
-        # Enable the subscription API (double-check that it's what you want)
-        subscriptions
-        # Extra directives
-        {$MERCURE_EXTRA_DIRECTIVES}
-    }
-    vulcain
-    php_fastcgi unix//var/run/php/php-fpm.sock
-    encode zstd gzip
-    file_server
+	# Healthcheck URL
+	respond /healthz 200
+	skip_log /healthz
+
+	root * /srv/app/public
+	mercure {
+		# Transport to use (default to Bolt)
+		transport_url {$MERCURE_TRANSPORT_URL:bolt:///data/mercure.db}
+		# Publisher JWT key
+		publisher_jwt {env.MERCURE_PUBLISHER_JWT_KEY} {env.MERCURE_PUBLISHER_JWT_ALG}
+		# Subscriber JWT key
+		subscriber_jwt {env.MERCURE_SUBSCRIBER_JWT_KEY} {env.MERCURE_SUBSCRIBER_JWT_ALG}
+		# Allow anonymous subscribers (double-check that it's what you want)
+		anonymous
+		# Enable the subscription API (double-check that it's what you want)
+		subscriptions
+		# Extra directives
+		{$MERCURE_EXTRA_DIRECTIVES}
+	}
+	vulcain
+
+	php_fastcgi unix//var/run/php/php-fpm.sock
+	encode zstd gzip
+	file_server
 }
