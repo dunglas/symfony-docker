@@ -2,7 +2,7 @@
 	{$CADDY_GLOBAL_OPTIONS}
 }
 
-{$SERVER_NAME:localhost} 
+{$SERVER_NAME:localhost}
 
 {$CADDY_EXTRA_CONFIG}
 
@@ -19,10 +19,6 @@ log {
 }
 
 route {
-	# Healthcheck URL
-	respond /healthz 200
-	skip_log /healthz
-
 	root * /srv/app/public
 	mercure {
 		# Transport to use (default to Bolt)
