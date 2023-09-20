@@ -1,12 +1,7 @@
 #!/bin/sh
 set -e
 
-# first arg is `-f` or `--some-option`
-if [ "${1#-}" != "$1" ]; then
-	set -- php-fpm "$@"
-fi
-
-if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
+if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 	# Install the project the first time PHP is started
 	# After the installation, the following block can be deleted
 	if [ ! -f composer.json ]; then
@@ -18,7 +13,7 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 		cd -
 		rm -Rf tmp/
 
-		composer require "php:>=$PHP_VERSION"
+		composer require "php:>=$PHP_VERSION" runtime/frankenphp-symfony
 		composer config --json extra.symfony.docker 'true'
 
 		if grep -q ^DATABASE_URL= .env; then

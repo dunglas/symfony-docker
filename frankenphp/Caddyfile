@@ -1,5 +1,9 @@
 {
 	{$CADDY_GLOBAL_OPTIONS}
+
+	frankenphp {
+		{$FRANKENPHP_CONFIG}
+	}
 }
 
 {$SERVER_NAME:localhost}
@@ -19,7 +23,7 @@ log {
 }
 
 route {
-	root * /srv/app/public
+	root * /app/public
 	mercure {
 		# Transport to use (default to Bolt)
 		transport_url {$MERCURE_TRANSPORT_URL:bolt:///data/mercure.db}
@@ -36,7 +40,26 @@ route {
 	}
 	vulcain
 
-	php_fastcgi unix//var/run/php/php-fpm.sock
+	# Add trailing slash for directory requests
+	@canonicalPath {
+		file {path}/index.php
+		not path */
+	}
+	redir @canonicalPath {path}/ 308
+
+	# If the requested file does not exist, try index files
+	@indexFiles file {
+		try_files {path} {path}/index.php index.php
+		split_path .php
+	}
+	rewrite @indexFiles {http.matchers.file.relative}
+
+	# FrankenPHP!
+	@phpFiles path *.php
+	php @phpFiles
+
 	encode zstd gzip
 	file_server
+
+	respond 404
 }

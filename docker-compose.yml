@@ -4,34 +4,22 @@ services:
   php:
     image: ${IMAGES_PREFIX:-}app-php
     restart: unless-stopped
-    volumes:
-      - php_socket:/var/run/php
     environment:
+      SERVER_NAME: ${SERVER_NAME:-localhost}, php:80
+      MERCURE_PUBLISHER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
+      MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
       TRUSTED_PROXIES: ${TRUSTED_PROXIES:-127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16}
-      TRUSTED_HOSTS: ^${SERVER_NAME:-example\.com|localhost}|caddy$$
-      # The two next lines can be removed after initial installation
-      SYMFONY_VERSION: ${SYMFONY_VERSION:-}
-      STABILITY: ${STABILITY:-stable}
+      TRUSTED_HOSTS: ^${SERVER_NAME:-example\.com|localhost}|php$$
       # Run "composer require symfony/orm-pack" to install and configure Doctrine ORM
       DATABASE_URL: postgresql://${POSTGRES_USER:-app}:${POSTGRES_PASSWORD:-!ChangeMe!}@database:5432/${POSTGRES_DB:-app}?serverVersion=${POSTGRES_VERSION:-15}&charset=${POSTGRES_CHARSET:-utf8}
       # Run "composer require symfony/mercure-bundle" to install and configure the Mercure integration
-      MERCURE_URL: ${CADDY_MERCURE_URL:-http://caddy/.well-known/mercure}
+      MERCURE_URL: ${CADDY_MERCURE_URL:-http://php/.well-known/mercure}
       MERCURE_PUBLIC_URL: https://${SERVER_NAME:-localhost}/.well-known/mercure
       MERCURE_JWT_SECRET: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
-
-  caddy:
-    image: ${IMAGES_PREFIX:-}app-caddy
-    depends_on:
-      php:
-        condition: service_healthy
-        restart: true
-    environment:
-      SERVER_NAME: ${SERVER_NAME:-localhost}, caddy:80
-      MERCURE_PUBLISHER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
-      MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
-    restart: unless-stopped
+      # The two next lines can be removed after initial installation
+      SYMFONY_VERSION: ${SYMFONY_VERSION:-}
+      STABILITY: ${STABILITY:-stable}
     volumes:
-      - php_socket:/var/run/php
       - caddy_data:/data
       - caddy_config:/config
     ports:
@@ -53,7 +41,6 @@ services:
 ###< symfony/mercure-bundle ###
 
 volumes:
-  php_socket:
   caddy_data:
   caddy_config:
 ###> symfony/mercure-bundle ###
