@@ -9,7 +9,7 @@ To deploy your application in production, you need a server.
 In this tutorial we will use a virtual machine provided by DigitalOcean, but any Linux server can work.
 If you already have a Linux server with Docker Compose installed, you can skip straight to [the next section](#configuring-a-domain-name).
 
-Otherwise, use [this affiliate link](https://m.do.co/c/5d8aabe3ab80) to get $100 of free credit, create an account, then click on "Create a Droplet".
+Otherwise, use [this affiliate link](https://m.do.co/c/5d8aabe3ab8000) to get $100 of free credit, create an account, then click on "Create a Droplet".
 Then, click on the "Marketplace" tab under the "Choose an image" section and search for the app named "Docker".
 This will provision an Ubuntu server with the latest versions of Docker and Docker Compose already installed!
 
@@ -74,7 +74,7 @@ Go to `https://your-domain-name.example.com` and enjoy!
 Alternatively, if you don't want to expose an HTTPS server but only an HTTP one, run the following command:
 
 ```console
-SERVER_NAME=:80 \
+SERVER_NAME=:8000 \
 APP_SECRET=ChangeMe \
 CADDY_MERCURE_JWT_SECRET=ChangeThisMercureHubJWTSecretKey \
 docker compose -f docker-compose.yml -f docker-compose.prod.yml up --wait
