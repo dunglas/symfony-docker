@@ -17,7 +17,7 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 		composer config --json extra.symfony.docker 'true'
 
 		if grep -q ^DATABASE_URL= .env; then
-			echo "To finish the installation please press Ctrl+C to stop Docker Compose and run: docker compose up --build --wait"
+			echo "To finish the installation please press Ctrl+C to stop Docker Compose and run: docker compose up --build -d --wait"
 			sleep infinity
 		fi
 	fi
