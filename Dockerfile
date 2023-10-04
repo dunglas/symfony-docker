@@ -25,12 +25,12 @@ RUN apk add --no-cache \
 	;
 
 RUN set -eux; \
-    install-php-extensions \
+	install-php-extensions \
 		apcu \
 		intl \
 		opcache \
 		zip \
-    ;
+	;
 
 ###> recipes ###
 ###< recipes ###
@@ -60,8 +60,8 @@ RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
 RUN set -eux; \
 	install-php-extensions \
-    	xdebug \
-    ;
+		xdebug \
+	;
 
 COPY --link frankenphp/conf.d/app.dev.ini $PHP_INI_DIR/conf.d/
 
