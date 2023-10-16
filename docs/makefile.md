@@ -46,7 +46,7 @@ SYMFONY  = $(PHP) bin/console
 
 # Misc
 .DEFAULT_GOAL = help
-.PHONY        : help build up start down logs sh composer vendor sf cc
+.PHONY        : help build up start down logs sh composer vendor sf cc test
 
 ## —— 🎵 🐳 The Symfony Docker Makefile 🐳 🎵 ——————————————————————————————————
 help: ## Outputs this help screen
@@ -69,6 +69,11 @@ logs: ## Show live logs
 
 sh: ## Connect to the FrankenPHP container
 	@$(PHP_CONT) sh
+
+test: ## Start tests with phpunit, pass the parameter "c=" to add options to phpunit, example: make test c="--group e2e --stop-on-failure"
+	@$(eval c ?=)
+	@$(DOCKER_COMP) exec -e APP_ENV=test php bin/phpunit $(c)
+
 
 ## —— Composer 🧙 ——————————————————————————————————————————————————————————————
 composer: ## Run composer, pass the parameter "c=" to run a given command, example: make composer c='req symfony/orm-pack'
