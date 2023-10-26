@@ -11,7 +11,7 @@ On Linux:
     SYMFONY_VERSION=5.4.* docker compose up -d --wait
 On Windows:
 
-    set SYMFONY_VERSION=5.4.*&& docker compose up -d --wait&set SYMFONY_VERSION=
+    set SYMFONY_VERSION=5.4.* && docker compose up -d --wait&set SYMFONY_VERSION=
 
 ## Installing Development Versions of Symfony
 
@@ -26,7 +26,7 @@ On Linux:
 
 On Windows:
     
-    set STABILITY=dev&& docker compose up -d --wait&set STABILITY=
+    set STABILITY=dev && docker compose up -d --wait&set STABILITY=
 
 ## Customizing the Server Name
 
