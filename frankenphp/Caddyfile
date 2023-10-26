@@ -4,26 +4,31 @@
 	frankenphp {
 		{$FRANKENPHP_CONFIG}
 	}
-}
 
-{$SERVER_NAME:localhost}
+	# https://caddyserver.com/docs/caddyfile/directives#sorting-algorithm
+	order mercure after encode
+	order vulcain after reverse_proxy
+	order php_server before file_server
+}
 
 {$CADDY_EXTRA_CONFIG}
 
-log {
-	# Redact the authorization query parameter that can be set by Mercure
-	format filter {
-		wrap console
-		fields {
-			uri query {
-				replace authorization REDACTED
+{$SERVER_NAME:localhost} {
+	log {
+		# Redact the authorization query parameter that can be set by Mercure
+		format filter {
+			wrap console
+			fields {
+				uri query {
+					replace authorization REDACTED
+				}
 			}
 		}
 	}
-}
 
-route {
 	root * /app/public
+	encode zstd gzip
+
 	mercure {
 		# Transport to use (default to Bolt)
 		transport_url {$MERCURE_TRANSPORT_URL:bolt:///data/mercure.db}
@@ -38,28 +43,11 @@ route {
 		# Extra directives
 		{$MERCURE_EXTRA_DIRECTIVES}
 	}
+
 	vulcain
 
-	# Add trailing slash for directory requests
-	@canonicalPath {
-		file {path}/index.php
-		not path */
-	}
-	redir @canonicalPath {path}/ 308
+	# Disable Topics tracking if not enabled explicitly: https://github.com/jkarlin/topics
+	header ?Permissions-Policy "browsing-topics=()"
 
-	# If the requested file does not exist, try index files
-	@indexFiles file {
-		try_files {path} {path}/index.php index.php
-		split_path .php
-	}
-	rewrite @indexFiles {http.matchers.file.relative}
-
-	# FrankenPHP!
-	@phpFiles path *.php
-	php @phpFiles
-
-	encode zstd gzip
-	file_server
-
-	respond 404
+	php_server
 }
