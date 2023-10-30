@@ -1,5 +1,6 @@
 version: "3.4"
 
+# Development environment override
 services:
   php:
     image: ${IMAGES_PREFIX:-}app-php
@@ -19,9 +20,18 @@ services:
       # The two next lines can be removed after initial installation
       SYMFONY_VERSION: ${SYMFONY_VERSION:-}
       STABILITY: ${STABILITY:-stable}
+      MERCURE_EXTRA_DIRECTIVES: demo
+      # See https://xdebug.org/docs/all_settings#mode
+      XDEBUG_MODE: "${XDEBUG_MODE:-off}"
+    extra_hosts:
+      # Ensure that host.docker.internal is correctly defined on Linux
+      - host.docker.internal:host-gateway
     volumes:
-      - caddy_data:/data
-      - caddy_config:/config
+      - ./frankenphp/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./frankenphp/conf.d/app.dev.ini:/usr/local/etc/php/conf.d/app.dev.ini:ro
+      - ./:/app
+      - ./../monolog/:/app/vendor/monolog/monolog
+    
     ports:
       # HTTP
       - target: 80
@@ -35,13 +45,5 @@ services:
       - target: 443
         published: ${HTTP3_PORT:-443}
         protocol: udp
-
-# Mercure is installed as a Caddy module, prevent the Flex recipe from installing another service
-###> symfony/mercure-bundle ###
-###< symfony/mercure-bundle ###
-
-volumes:
-  caddy_data:
-  caddy_config:
 ###> symfony/mercure-bundle ###
 ###< symfony/mercure-bundle ###
