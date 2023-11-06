@@ -10,6 +10,9 @@
             "request": "launch",
             "port": 9003,
             // "log": true,
+            // "xdebugSettings": {
+            //     "max_data": -1,
+            // },
             "pathMappings": {
                 "/srv/app": "${workspaceFolder}/api"
             },
@@ -18,6 +21,8 @@
                 "**/bootstrap.php",
                 "**/EnvVarProcessor.php",
                 "**/BaseTestRunner.php",
+                "**/ReflectionExtractor.php",
+                "**/AttributeDriver.php",
             ],
             // "stopOnEntry": true,
         },

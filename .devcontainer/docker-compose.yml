@@ -23,6 +23,9 @@ services:
       # Override api/docker/php/conf.d/app.dev.ini
       XDEBUG_CONFIG: "client_host=localhost"
 
+      # This Unset APP_ENV to allow Symfony to use the value from .env so you can set it on the fly.
+      # APP_ENV:
+
     # Uncomment the next four lines if you will use a ptrace-based debugger like C++, Go, and Rust.
     # cap_add:
     #   - SYS_PTRACE
