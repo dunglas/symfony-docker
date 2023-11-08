@@ -14,7 +14,7 @@
             //     "max_data": -1,
             // },
             "pathMappings": {
-                "/srv/app": "${workspaceFolder}/api"
+                "/app": "${workspaceFolder}/api"
             },
             "ignore": [
                 // "**/vendor/**",
