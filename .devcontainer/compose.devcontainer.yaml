@@ -13,7 +13,7 @@ services:
 
     volumes:
       # Update this to wherever you want VS Code to mount the folder of your project
-      - .:/workspace:cached
+      - .:/app:cached
 
     environment:
       # See https://xdebug.org/docs/all_settings#mode

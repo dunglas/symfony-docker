@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Listen for Xdebug (Caddy)",
+            "name": "Listen for Xdebug",
             "type": "php",
             "request": "launch",
             "port": 9003,
@@ -13,9 +13,6 @@
             // "xdebugSettings": {
             //     "max_data": -1,
             // },
-            "pathMappings": {
-                "/app": "${workspaceFolder}/api"
-            },
             "ignore": [
                 // "**/vendor/**",
                 "**/bootstrap.php",
@@ -23,20 +20,6 @@
                 "**/BaseTestRunner.php",
                 "**/ReflectionExtractor.php",
                 "**/AttributeDriver.php",
-            ],
-            // "stopOnEntry": true,
-        },
-        {
-            "name": "Listen for Xdebug (CLI)",
-            "type": "php",
-            "request": "launch",
-            "port": 9003,
-            // "log": true,
-            "ignore": [
-                // "**/vendor/**",
-                "**/bootstrap.php",
-                "**/EnvVarProcessor.php",
-                "**/BaseTestRunner.php",
             ],
             // "stopOnEntry": true,
         },
