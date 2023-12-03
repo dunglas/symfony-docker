@@ -26,11 +26,11 @@ For instance, to use self-signed certificates created with [mkcert](https://gith
    `mkdir frankenphp/certs -p`
 3. Generate the certificates for your local host (example: "server-name.localhost"):
    `mkcert -cert-file frankenphp/certs/tls.pem -key-file frankenphp/certs/tls.key "server-name.localhost"`
-4. Add these lines to the `./compose.override.yaml` file about `CADDY_EXTRA_CONFIG` environment and volume for the `php` service :
+4. Add these lines to the `./compose.override.yaml` file about `CADDY_SERVER_EXTRA_DIRECTIVES` environment and volume for the `php` service :
     ```diff
     php:
       environment:
-    +    CADDY_EXTRA_CONFIG: "tls /etc/caddy/certs/tls.pem /etc/caddy/certs/tls.key"
+    +    CADDY_SERVER_EXTRA_DIRECTIVES: "tls /etc/caddy/certs/tls.pem /etc/caddy/certs/tls.key"
         # ...
       volumes:
     +    - ./frankenphp/certs:/etc/caddy/certs:ro
