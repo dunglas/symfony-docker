@@ -40,8 +40,8 @@ Example:
 your-domain-name.example.com.  IN  A     207.154.233.113
 ````
 
-Note: Let's Encrypt, the service used by default by Symfony Docker to automatically generate a TLS certificate doesn't support using bare IP addresses.
-Using a domain name is mandatory to use Let's Encrypt.
+> [!NOTE]  
+> Let's Encrypt, the service used by default by Symfony Docker to automatically generate a TLS certificate doesn't support using bare IP addresses. Using a domain name is mandatory to use Let's Encrypt.
 
 ## Deploying
 
@@ -66,8 +66,14 @@ docker compose -f compose.yaml -f compose.prod.yaml up -d --wait
 
 Be sure to replace `your-domain-name.example.com` by your actual domain name and to set the values of `APP_SECRET`, `CADDY_MERCURE_JWT_SECRET` to cryptographically secure random values.
 
-Your server is up and running, and a Let's Encrypt HTTPS certificate has been automatically generated for you.
+Your server is up and running, and a HTTPS certificate has been automatically generated for you.
 Go to `https://your-domain-name.example.com` and enjoy!
+
+> [!NOTE]
+> The worker mode of FrankenPHP is enabled by default in prod. To disabled it, add the env var FRANKENPHP_CONFIG as empty to the compose.prod.yaml file.
+
+> [!CAUTION]
+> Docker can have a cache layer, make sure you have the right build for each deployment or rebuild your project with --no-cache option to avoid cache issue 
 
 ## Disabling HTTPS
 
