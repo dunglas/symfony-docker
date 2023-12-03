@@ -27,9 +27,8 @@ git \
 
 And rebuild the PHP image.
 
-**PS**: If using Windows, you have to install [chocolatey.org](https://chocolatey.org/)
-or use [Cygwin](http://cygwin.com) to use the `make` command. Check out this
-[StackOverflow question](https://stackoverflow.com/q/2532234/633864) for more explanations.
+> [!NOTE]  
+> If you are using Windows, you have to install [chocolatey.org](https://chocolatey.org/) or [Cygwin](http://cygwin.com) to use the `make` command. Check out this [StackOverflow question](https://stackoverflow.com/q/2532234/633864) for more explanations.
 
 ## The template
 
