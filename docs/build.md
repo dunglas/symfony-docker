@@ -4,14 +4,14 @@
 
 Use the `SYMFONY_VERSION` environment variable to select a specific Symfony version.
 
-For instance, use the following command to install Symfony 5.4:
+For instance, use the following command to install Symfony 6.4:
 
 On Linux:
 
-    SYMFONY_VERSION=5.4.* docker compose up -d --wait
+    SYMFONY_VERSION=6.4.* docker compose up -d --wait
 On Windows:
 
-    set SYMFONY_VERSION=5.4.* && docker compose up -d --wait&set SYMFONY_VERSION=
+    set SYMFONY_VERSION=6.4.* && docker compose up -d --wait&set SYMFONY_VERSION=
 
 ## Installing Development Versions of Symfony
 
