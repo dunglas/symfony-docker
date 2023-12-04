@@ -1,10 +1,13 @@
-# Update your project
+# Update Your Project
 
-You-ve started a project with symfony-docker template and you'd like to benefit from the latest enhancements (i.e. FrankenPHP). Juste use this git based tool
-[template-sync](https://github.com/mano-lis/template-sync) by running :
-```shell
-curl -sSL https://raw.githubusercontent.com/mano-lis/template-sync/main/template-sync.sh | sh -s -- [<url-of-the-template>](https://github.com/dunglas/symfony-docker)https://github.com/dunglas/symfony-docker
+You have started a project with the Symfony Docker template and you would like to benefit from the latest enhancements introduced since you created your project (i.e. FrankenPHP). Juste use this git based tool
+[The *template-sync* project](https://github.com/mano-lis/template-sync) got you covered.
+
+Run the following command to import the changes since your last update:
+
+```console
+curl -sSL https://raw.githubusercontent.com/mano-lis/template-sync/main/template-sync.sh | sh -s -- https://github.com/dunglas/symfony-docker
 ```
-Resolve potential conflicts, run `git cherry-pick --continue` and job is done.
+Resolve potential conflicts, run `git cherry-pick --continue` and you are done!
 
-Full documentation [here](https://github.com/mano-lis/template-sync/blob/main/README.md)
+[Full documentation](https://github.com/mano-lis/template-sync/blob/main/README.md)
