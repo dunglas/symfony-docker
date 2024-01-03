@@ -1,7 +1,7 @@
 # Updating Your Project
 
 To import the changes made to the *Symfony Docker* template into your project, we recommend using
-[*template-sync*](https://github.com/mano-lis/template-sync):
+[*template-sync*](https://github.com/coopTilleuls/template-sync):
 
 1. Run the script to synchronize your project with the latest version of the skeleton:
 
