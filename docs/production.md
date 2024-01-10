@@ -47,7 +47,7 @@ your-domain-name.example.com.  IN  A     207.154.233.113
 
 Copy your project on the server using `git clone`, `scp`, or any other tool that may fit your need.
 If you use GitHub, you may want to use [a deploy key](https://docs.github.com/en/free-pro-team@latest/developers/overview/managing-deploy-keys#deploy-keys).
-Deploy keys are also [supported by GitLab](https://docs.gitlab.com/ee/user/project/deploy_keys/). 
+Deploy keys are also [supported by GitLab](https://docs.gitlab.com/ee/user/project/deploy_keys/).
 
 Example with Git:
 
