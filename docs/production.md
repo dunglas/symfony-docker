@@ -29,16 +29,18 @@ ssh root@<droplet-ip>
 
 ## Configuring a Domain Name
 
-In most cases, you'll want to associate a domain name with your website.
+In most cases, you'll want to associate a domain name with your site.
 If you don't own a domain name yet, you'll have to buy one through a registrar.
 
-Then create a DNS record of type `A` for your domain name pointing to the IP address of your server.
-
-Example:
+Then create a DNS record of type `A` for your domain name pointing to the IP address of your server:
 
 ```dns
 your-domain-name.example.com.  IN  A     207.154.233.113
-````
+```
+
+Example with the DigitalOcean Domains service ("Networking" > "Domains"):
+
+![Configuring DNS on DigitalOcean](digitalocean-dns.png)
 
 > [!NOTE]  
 > Let's Encrypt, the service used by default by Symfony Docker to automatically generate a TLS certificate doesn't support using bare IP addresses. Using a domain name is mandatory to use Let's Encrypt.
@@ -73,7 +75,7 @@ Go to `https://your-domain-name.example.com` and enjoy!
 > The worker mode of FrankenPHP is enabled by default in prod. To disable it, add the env var FRANKENPHP_CONFIG as empty to the compose.prod.yaml file.
 
 > [!CAUTION]
-> Docker can have a cache layer, make sure you have the right build for each deployment or rebuild your project with --no-cache option to avoid cache issue 
+> Docker can have a cache layer, make sure you have the right build for each deployment or rebuild your project with --no-cache option to avoid cache issue
 
 ## Disabling HTTPS
 
