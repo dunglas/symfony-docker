@@ -2,8 +2,6 @@
 
 # Versions
 FROM dunglas/frankenphp:1-alpine AS frankenphp_upstream
-FROM composer/composer:2-bin AS composer_upstream
-
 
 # The different stages of this Dockerfile are meant to be built into separate images
 # https://docs.docker.com/develop/develop-images/multistage-build/#stop-at-a-specific-build-stage
@@ -26,11 +24,15 @@ RUN apk add --no-cache \
 
 RUN set -eux; \
 	install-php-extensions \
+		@composer \
 		apcu \
 		intl \
 		opcache \
 		zip \
 	;
+
+# https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
+ENV COMPOSER_ALLOW_SUPERUSER=1
 
 ###> recipes ###
 ###< recipes ###
@@ -40,12 +42,6 @@ COPY --link --chmod=755 frankenphp/docker-entrypoint.sh /usr/local/bin/docker-en
 COPY --link frankenphp/Caddyfile /etc/caddy/Caddyfile
 
 ENTRYPOINT ["docker-entrypoint"]
-
-# https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
-ENV COMPOSER_ALLOW_SUPERUSER=1
-ENV PATH="${PATH}:/root/.composer/vendor/bin"
-
-COPY --from=composer_upstream --link /composer /usr/bin/composer
 
 HEALTHCHECK --start-period=60s CMD curl -f http://localhost:2019/metrics || exit 1
 CMD [ "frankenphp", "run", "--config", "/etc/caddy/Caddyfile" ]
