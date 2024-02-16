@@ -1,4 +1,4 @@
-# Symfony Docker
+# Laravel Docker
 
 A [Docker](https://www.docker.com/)-based installer and runtime for the [Laravel](https://laravel.com) web framework,
 with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) inside!
