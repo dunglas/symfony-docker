@@ -1,6 +1,6 @@
 # Symfony Docker
 
-A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony](https://symfony.com) web framework,
+A [Docker](https://www.docker.com/)-based installer and runtime for the [Laravel](https://laravel.com) web framework,
 with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) inside!
 
 ![CI](https://github.com/dunglas/symfony-docker/workflows/CI/badge.svg)
@@ -18,11 +18,9 @@ with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) 
 * Production, development and CI ready
 * Just 1 service by default
 * Blazing-fast performance thanks to [the worker mode of FrankenPHP](https://github.com/dunglas/frankenphp/blob/main/docs/worker.md) (automatically enabled in prod mode)
-* [Installation of extra Docker Compose services](docs/extra-services.md) with Symfony Flex
+* [Installation of extra Docker Compose services](docs/extra-services.md)
 * Automatic HTTPS (in dev and prod)
 * HTTP/3 and [Early Hints](https://symfony.com/blog/new-in-symfony-6-3-early-hints) support
-* Real-time messaging thanks to a built-in [Mercure hub](https://symfony.com/doc/current/mercure.html)
-* [Vulcain](https://vulcain.rocks) support
 * Native [XDebug](docs/xdebug.md) integration
 * Super-readable configuration
 
@@ -42,8 +40,8 @@ with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) 
 
 ## License
 
-Symfony Docker is available under the MIT License.
+Laravel Docker is available under the MIT License.
 
 ## Credits
 
-Created by [Kévin Dunglas](https://dunglas.dev), co-maintained by [Maxime Helias](https://twitter.com/maxhelias) and sponsored by [Les-Tilleuls.coop](https://les-tilleuls.coop).
+Original created by [Kévin Dunglas](https://dunglas.dev), co-maintained by [Maxime Helias](https://twitter.com/maxhelias) and sponsored by [Les-Tilleuls.coop](https://les-tilleuls.coop).
