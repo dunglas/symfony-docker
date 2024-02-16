@@ -1,17 +1,11 @@
 * text=auto eol=lf
 
-*.conf text eol=lf
-*.html text eol=lf
-*.ini text eol=lf
-*.js text eol=lf
-*.json text eol=lf
-*.md text eol=lf
-*.php text eol=lf
-*.sh text eol=lf
-*.yaml text eol=lf
-*.yml text eol=lf
-bin/console text eol=lf
-composer.lock text eol=lf merge=ours
+*.blade.php diff=html
+*.css diff=css
+*.html diff=html
+*.md diff=markdown
+*.php diff=php
 
-*.ico binary
-*.png binary
+/.github export-ignore
+CHANGELOG.md export-ignore
+.styleci.yml export-ignore
