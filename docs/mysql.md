@@ -28,9 +28,11 @@ Change the database image to use MySQL instead of PostgreSQL in `compose.yaml`:
 -     # - ./docker/db/data:/var/lib/postgresql/data:rw
 +     # - ./docker/db/data:/var/lib/mysql:rw
 ###< doctrine/doctrine-bundle ###
+```
+
 Depending on the database configuration, modify the environment in the same file at `services.php.environment.DATABASE_URL`
 ```
-DATABASE_URL: mysql://mysqluser:p4ssw0rd@database:3306/nucast?serverVersion=8.0.32&charset=utf8mb4
+DATABASE_URL: mysql://${MYSQL_USER:-app}:${MYSQL_PASSWORD:-!ChangeMe!}@database:3306/${MYSQL_DATABASE:-app}?serverVersion=${MYSQL_VERSION:-8}&charset=${MYSQL_CHARSET:-utf8mb4}
 ```
 
 Since we changed the port, we also have to define this in the `compose.override.yaml`:
