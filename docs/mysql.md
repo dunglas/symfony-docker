@@ -36,13 +36,13 @@ DATABASE_URL: mysql://${MYSQL_USER:-app}:${MYSQL_PASSWORD:-!ChangeMe!}@database:
 ```
 
 Since we changed the port, we also have to define this in the `compose.override.yaml`:
-```yaml
+```diff
 ###> doctrine/doctrine-bundle ###
   database:
     ports:
-      - "3306:3306"
+-     - "5432:5432"
++     - "3306:3306"
 ###< doctrine/doctrine-bundle ###
-```
 
 Last but not least, we need to install the MySQL driver in `Dockerfile`:
 ```diff
