@@ -40,8 +40,8 @@ Since we changed the port, we also have to define this in the `compose.override.
 ###> doctrine/doctrine-bundle ###
   database:
     ports:
--     - "5432:5432"
-+     - "3306:3306"
+-     - "5432"
++     - "3306"
 ###< doctrine/doctrine-bundle ###
 ```
 
