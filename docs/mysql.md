@@ -1,7 +1,7 @@
 # Using MySQL
 
-The Docker configuration in this repository defaults to using PostgreSQL.
-If you prefer to work with MySQL, some adjustments need to be made.
+The Docker configuration of this repository is extensible thanks to Flex recipes. By default, the recipe installs PostgreSQL.
+If you prefer to work with MySQL, follow these steps:
 
 First, install the doctrine/orm pack as described: `make composer c='req symfony/orm-pack`
 
