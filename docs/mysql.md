@@ -43,6 +43,7 @@ Since we changed the port, we also have to define this in the `compose.override.
 -     - "5432:5432"
 +     - "3306:3306"
 ###< doctrine/doctrine-bundle ###
+```
 
 Last but not least, we need to install the MySQL driver in `Dockerfile`:
 ```diff
