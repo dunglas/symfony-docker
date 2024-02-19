@@ -5,7 +5,7 @@ If you prefer to work with MySQL, some adjustments need to be made.
 
 First, install the doctrine/orm pack as described: `make composer c='req symfony/orm-pack`
 
-## Docker configuration
+## Docker Configuration
 Change the database image to use MySQL instead of PostgreSQL in `compose.yaml`:
 
 ```diff
