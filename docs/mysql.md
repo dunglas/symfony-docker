@@ -42,7 +42,7 @@ Since we changed the port, we also have to define this in the `compose.override.
 ###< doctrine/doctrine-bundle ###
 ```
 
-Last but not least, we need to install the mysql driver in `Dockerfile`:
+Last but not least, we need to install the MySQL driver in `Dockerfile`:
 ```diff
 ###> doctrine/doctrine-bundle ###
 -RUN install-php-extensions pdo_pgsql
