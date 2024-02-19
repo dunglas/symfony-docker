@@ -8,19 +8,26 @@ First, install the doctrine/orm pack as described: `make composer c='req symfony
 ## Docker configuration
 Change the database image to use MySQL instead of PostgreSQL in `compose.yaml`:
 
-```yaml
+```diff
 ###> doctrine/doctrine-bundle ###
-  database:
-    image: 'mysql:8.0'
+-   image: postgres:${POSTGRES_VERSION:-15}-alpine
++   image: mysql:${MYSQL_VERSION:-8}
     environment:
-      - MYSQL_ROOT_PASSWORD=r007_p4ssw0rd
-      - MYSQL_DATABASE=databasename
-      - MYSQL_USER=mysqluser
-      - MYSQL_PASSWORD=p4ssw0rd
+-     POSTGRES_DB: ${POSTGRES_DB:-app}
++     MYSQL_DATABASE: ${MYSQL_DATABASE:-app}
+      # You should definitely change the password in production
++     MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-!ChangeMe!}
+-     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
++     MYSQL_PASSWORD: ${MYSQL_PASSWORD:-!ChangeMe!}
+-     POSTGRES_USER: ${POSTGRES_USER:-app}
++     MYSQL_USER: ${MYSQL_USER:-app}
     volumes:
-      - database_data:/var/lib/mysql:rw
+-     - database_data:/var/lib/postgresql/data:rw
++     - database_data:/var/lib/mysql:rw
+      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
+-     # - ./docker/db/data:/var/lib/postgresql/data:rw
++     # - ./docker/db/data:/var/lib/mysql:rw
 ###< doctrine/doctrine-bundle ###
-```
 Depending on the database configuration, modify the environment in the same file at `services.php.environment.DATABASE_URL`
 ```
 DATABASE_URL: mysql://mysqluser:p4ssw0rd@database:3306/nucast?serverVersion=8.0.32&charset=utf8mb4
