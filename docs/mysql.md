@@ -52,7 +52,7 @@ Last but not least, we need to install the mysql driver in `Dockerfile`:
 
 ## Change environment
 ```dotenv 
-DATABASE_URL="mysql://mysqluser:p4ssw0rd@database:3306/databasename?serverVersion=8.0.32&charset=utf8mb4"
+DATABASE_URL=mysql://${MYSQL_USER:-app}:${MYSQL_PASSWORD:-!ChangeMe!}@database:3306/${MYSQL_DATABASE:-app}?serverVersion=${MYSQL_VERSION:-8}&charset=${MYSQL_CHARSET:-utf8mb4}
 ```
 
 ## Final steps
