@@ -54,6 +54,8 @@ Last but not least, we need to install the MySQL driver in `Dockerfile`:
 ```
 
 ## Change Environment
+Change the database configuration in `.env`:
+
 ```dotenv 
 DATABASE_URL=mysql://${MYSQL_USER:-app}:${MYSQL_PASSWORD:-!ChangeMe!}@database:3306/${MYSQL_DATABASE:-app}?serverVersion=${MYSQL_VERSION:-8}&charset=${MYSQL_CHARSET:-utf8mb4}
 ```
