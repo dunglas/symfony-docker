@@ -16,7 +16,7 @@ Change the database image to use MySQL instead of PostgreSQL in `compose.yaml`:
 -     POSTGRES_DB: ${POSTGRES_DB:-app}
 +     MYSQL_DATABASE: ${MYSQL_DATABASE:-app}
       # You should definitely change the password in production
-+     MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-!ChangeMe!}
++     MYSQL_RANDOM_ROOT_PASSWORD: "true"
 -     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
 +     MYSQL_PASSWORD: ${MYSQL_PASSWORD:-!ChangeMe!}
 -     POSTGRES_USER: ${POSTGRES_USER:-app}
