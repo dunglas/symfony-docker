@@ -37,8 +37,9 @@ with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) 
 5. [Debugging with Xdebug](docs/xdebug.md)
 6. [TLS Certificates](docs/tls.md)
 7. [Using a Makefile](docs/makefile.md)
-8. [Troubleshooting](docs/troubleshooting.md)
-9. [Updating the template](docs/updating.md)
+8. [Using MySQL instead of PostgreSQL](docs/mysql.md)
+9. [Troubleshooting](docs/troubleshooting.md)
+10. [Updating the template](docs/updating.md)
 
 ## License
 
