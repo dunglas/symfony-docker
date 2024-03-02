@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New LandingPageLead{% endblock %}
+
+{% block body %}
+    <h1>Create new LandingPageLead</h1>
+
+    {{ include('landing_page_lead/_form.html.twig') }}
+
+    <a href="{{ path('app_landing_page_lead_index') }}">back to list</a>
+{% endblock %}

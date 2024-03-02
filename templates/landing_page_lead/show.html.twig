@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LandingPageLead{% endblock %}
+
+{% block body %}
+    <h1>LandingPageLead</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ landing_page_lead.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ landing_page_lead.name }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ landing_page_lead.email }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ landing_page_lead.phone }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_landing_page_lead_index') }}">back to list</a>
+
+    <a href="{{ path('app_landing_page_lead_edit', {'id': landing_page_lead.id}) }}">edit</a>
+
+    {{ include('landing_page_lead/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Landing Page Lead index{% endblock %}
+
+{% block body %}
+    <h1>Landing Page Lead index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for landing_page_lead in landing_page_leads %}
+            <tr>
+                <td>{{ landing_page_lead.id }}</td>
+                <td>{{ landing_page_lead.name }}</td>
+                <td>{{ landing_page_lead.email }}</td>
+                <td>{{ landing_page_lead.phone }}</td>
+                <td>
+                    <a href="{{ path('app_landing_page_lead_show', {'id': landing_page_lead.id}) }}">show</a>
+                    <a href="{{ path('app_landing_page_lead_edit', {'id': landing_page_lead.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_landing_page_lead_new') }}">Create new</a>
+{% endblock %}

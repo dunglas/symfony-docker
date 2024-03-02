@@ -1,0 +1,215 @@
+@media (max-width: 1024px) {
+    .hero-section {
+        background-size: cover;
+        height: 750px;
+        background-position: -48px 0
+    }
+
+    .hero-content p br {
+        display: none
+    }
+}
+
+@media (max-width: 992px) {
+    .sm-padding {
+        padding: 15px
+    }
+
+    h2 br {
+        display: none
+    }
+
+    .header-section .navbar-brand {
+        height: 80px;
+        padding: 0;
+        display: flex;
+        align-items: center
+    }
+
+    .menu-btn, .js #mainmenu {
+        display: none
+    }
+
+    .js .slicknav_menu {
+        display: block
+    }
+
+    .header-right .menu-btn {
+        margin-right: 50px
+    }
+
+    .error-content .error-info {
+        padding-left: 10px
+    }
+
+    .hero-section {
+        background: #8e2de2;
+        background: -webkit-linear-gradient(to right, #5c6690, #424966);
+        background: linear-gradient(to right, #5c6690, #424966)
+    }
+
+    .hero-wrap {
+        align-items: center
+    }
+
+    .hero-content {
+        font-size: 36px;
+        line-height: 46px
+    }
+
+    .hero-content h2 {
+        font-size: 36px;
+        line-height: 46px
+    }
+
+    .cta-section {
+        margin-bottom: -190px
+    }
+}
+
+@media all and (min-width: 480px) and (max-width: 768px) {
+}
+
+@media all and (max-width: 767px) {
+    body, p {
+        font-size: 12px;
+        line-height: 22px
+    }
+
+    h1 {
+        font-size: 30px
+    }
+
+    h2 {
+        font-size: 22px
+    }
+
+    h3 {
+        font-size: 16px
+    }
+
+    p br {
+        display: none
+    }
+
+    .padding {
+        padding: 60px 0
+    }
+
+    .xs-padding {
+        padding: 15px
+    }
+
+    .page-header {
+        height: 250px
+    }
+
+    .page-content h2 {
+        font-size: 30px;
+        margin: 0
+    }
+
+    .error-content {
+        display: block
+    }
+
+    .error-content .error-info h2 {
+        font-size: 120px;
+        line-height: 120px;
+        margin-bottom: 30px
+    }
+
+    .error-content .error-info a {
+        display: block
+    }
+
+    .contact-form .form-group .col-sm-6:first-child {
+        margin-bottom: 15px
+    }
+
+    .contact-info h2 {
+        line-height: 28px
+    }
+
+    .sidebar-wrap {
+        padding-left: 0
+    }
+
+    .blog-single-content h2 a {
+        font-size: 22px;
+        line-height: 28px
+    }
+
+    .blog-single-content h2 {
+        line-height: 28px
+    }
+
+    blockquote p {
+        line-height: 32px
+    }
+
+    .hero-section {
+        height: 545px
+    }
+
+    .content-img {
+        margin-bottom: 25px
+    }
+
+    .content-item {
+        text-align: center;
+        margin-bottom: 40px
+    }
+
+    .content-item h2, .section-heading h2 {
+        line-height: 35px
+    }
+
+    .about-content a {
+        margin-bottom: 20px
+    }
+
+    .cta-section {
+        margin-bottom: -210px
+    }
+
+    .cta-wrap {
+        text-align: center
+    }
+
+    .cta-content h2 {
+        line-height: 35px;
+        margin-bottom: 25px
+    }
+
+    .cta-btn {
+    }
+
+    .header-right .menu-btn {
+        margin-right: 42px
+    }
+
+    .content-area-section .content-item h2 {
+        margin-bottom: 10px
+    }
+
+    .team-content span {
+        margin-bottom: 20px
+    }
+}
+
+@media all and (max-width: 580px) {
+    .subscribe-form {
+        width: 100%
+    }
+
+    .counter-wrap .col-lg-4:first-child {
+        margin-bottom: 50px
+    }
+}
+
+@media all and (max-width: 420px) {
+}
+
+@media all and (max-width: 380px) {
+}
