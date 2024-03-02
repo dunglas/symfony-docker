@@ -63,7 +63,7 @@
   $(":input").inputmask();
   // handle symfony form submit
 
-  $("form").on("submit", async (e) => {
+  $(".fetch-form").on("submit", async (e) => {
     e.preventDefault();
     let body = new FormData(e.target);
     let action = $(e.target).attr("action");

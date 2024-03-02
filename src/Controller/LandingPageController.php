@@ -38,10 +38,10 @@ class LandingPageController extends AbstractController
             $lead = $form->getData();
             $entityManager->persist($lead);
             $entityManager->flush();
-            return $this->json(["message" => "created"]);
+            return $this->redirectToRoute('app_landing_page_obrigado');
         }
 
-        return $this->json(["message"=>"error","errors"=>$form->getErrors()],400);
+        return $this->redirectToRoute('app_landing_page_obrigado');
     }
     #[Route('/submit/feedback', name: 'app_landing_pagelead_submit_feedback', methods: ['POST'])]
     public function submitFeedback(Request $request, EntityManagerInterface $entityManager): Response
@@ -58,5 +58,11 @@ class LandingPageController extends AbstractController
         }
 
         return $this->json(["message"=>"error","errors"=>$form->getErrors()],400);
+    }
+
+    #[Route('/obrigado', name: 'app_landing_page_obrigado')]
+    public function obrigado(): Response
+    {
+        return $this->render('landing_page/obrigado.html.twig');
     }
 }
