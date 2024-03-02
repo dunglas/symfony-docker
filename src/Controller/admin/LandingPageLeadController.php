@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\admin;
 
 use App\Entity\LandingPageLead;
-use App\Form\LandingPageLead1Type;
+use App\Form\LandingPageLeadType;
 use App\Repository\LandingPageLeadRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/landing/page/lead')]
+#[Route('/admin/landing/page/lead')]
 class LandingPageLeadController extends AbstractController
 {
     #[Route('/', name: 'app_landing_page_lead_index', methods: ['GET'])]
@@ -26,7 +26,7 @@ class LandingPageLeadController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $landingPageLead = new LandingPageLead();
-        $form = $this->createForm(LandingPageLead1Type::class, $landingPageLead);
+        $form = $this->createForm(LandingPageLeadType::class, $landingPageLead);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -53,7 +53,7 @@ class LandingPageLeadController extends AbstractController
     #[Route('/{id}/edit', name: 'app_landing_page_lead_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, LandingPageLead $landingPageLead, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(LandingPageLead1Type::class, $landingPageLead);
+        $form = $this->createForm(LandingPageLeadType::class, $landingPageLead);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
