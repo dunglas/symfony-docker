@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New LandingPageFeedback{% endblock %}
+
+{% block body %}
+    <h1>Create new LandingPageFeedback</h1>
+
+    {{ include('landing_page_feedback/_form.html.twig') }}
+
+    <a href="{{ path('app_landing_page_feedback_index') }}">back to list</a>
+{% endblock %}

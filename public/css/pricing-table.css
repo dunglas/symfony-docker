@@ -1,6 +1,6 @@
 /* --------------------------------
 
-Main Components 
+Main Components
 
 -------------------------------- */
 
@@ -103,7 +103,6 @@ Main Components
     }
 
     .cd-pricing-list > li {
-        width: 50%;
         float: left;
     }
 
@@ -279,7 +278,7 @@ Main Components
 
 /* --------------------------------
 
-xkeyframes 
+xkeyframes
 
 -------------------------------- */
 @-webkit-keyframes cd-rotate {
@@ -489,13 +488,13 @@ xkeyframes
 /*Pricing Style*/
 .pricing-box {
     background-color: #fff;
-    padding: 30px;
     -webkit-box-shadow: 0px 50px 100px 0px rgba(60, 1, 4, 0.1), 0px -6px 0px 0px rgba(248, 99, 107, 0.004);
     box-shadow: 0px 50px 100px 0px rgba(60, 1, 4, 0.1), 0px -6px 0px 0px rgba(248, 99, 107, 0.004);
     border-radius: 5px;
     text-align: center;
     position: relative;
     overflow: hidden;
+    padding: 30px;
 }
 
 .pricing-box.premium .pricing-head h3,

@@ -14,12 +14,13 @@
     <link rel="stylesheet" href="./css/elegant-line-icons.css">
     <link rel="stylesheet" href="./css/elegant-font-icons.css">
     <link rel="stylesheet" href="./css/animate.min.css">
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/slicknav.min.css">
     <link rel="stylesheet" href="./css/pricing-table.css">
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <script src="./js/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 </head>
 <body data-spy="scroll" data-target="#navmenu" data-offset="70" class="loaded">
@@ -69,7 +70,7 @@
                 </div>
                 <div class="header-right">
                     <a class="menu-btn default-btn btn-white"
-                       href="#">Contrate<span style="top: 49.5px; left: 14.8624px;"></span></a>
+                       href="#planos-e-precos">Contrate<span style="top: 49.5px; left: 14.8624px;"></span></a>
                 </div>
             </div>
         </nav>
@@ -258,7 +259,8 @@
                         para se adaptar ao momento do seu negócio.
                     </p>
                     <p>Não perca tempo e faça parte da modernização do ponto digital agora mesmo!</p>
-                    <a href="#planos-e-precos"
+                    <a href="#contato"
+                       data-selected-plan="1_user"
                        class="default-btn">Contratar agora<span style="top: 24.25px; left: 127px;"></span></a>
                 </div>
             </div>
@@ -321,7 +323,8 @@
                                         <li>2FA</li>
                                     </ul>
                                     <div class="pricing-footer">
-                                        <a href="#"
+                                        <a href="#contato"
+                                           data-selected-plan="1_user"
                                            class="default-btn btn-blue">Contrate agora<span></span></a>
                                     </div>
                                 </li>
@@ -350,7 +353,8 @@
                                         <li>2FA</li>
                                     </ul>
                                     <div class="pricing-footer">
-                                        <a href="#"
+                                        <a href="#contato"
+                                           data-selected-plan="1_user"
                                            class="default-btn btn-blue">Contrate agora<span></span></a>
                                     </div>
                                 </li>
@@ -381,7 +385,8 @@
                                         <li>2FA</li>
                                     </ul>
                                     <div class="pricing-footer">
-                                        <a href="#"
+                                        <a href="#contato"
+                                           data-selected-plan="5_users"
                                            class="default-btn btn-blue">Contrate agora<span></span></a>
                                     </div>
                                 </li>
@@ -410,7 +415,8 @@
                                         <li>2FA</li>
                                     </ul>
                                     <div class="pricing-footer">
-                                        <a href="#"
+                                        <a href="#contato"
+                                           data-selected-plan="5_users"
                                            class="default-btn btn-blue">Contrate agora<span></span></a>
                                     </div>
                                 </li>
@@ -441,7 +447,8 @@
                                         <li>2FA</li>
                                     </ul>
                                     <div class="pricing-footer">
-                                        <a href="#"
+                                        <a href="#contato"
+                                           data-selected-plan="25_users"
                                            class="default-btn btn-blue">Contrate agora<span></span></a>
                                     </div>
                                 </li>
@@ -470,7 +477,8 @@
                                         <li>2FA</li>
                                     </ul>
                                     <div class="pricing-footer">
-                                        <a href="#"
+                                        <a href="#contato"
+                                           data-selected-plan="25_users"
                                            class="default-btn btn-blue">Contrate agora<span></span></a>
                                     </div>
                                 </li>
@@ -492,7 +500,8 @@
                                     </ul>
 
                                     <div class="pricing-footer">
-                                        <a href="#"
+                                        <a href="#contato"
+                                           data-selected-plan="on_demand"
                                            class="default-btn btn-blue">Contato<span
                                                 style="top: 49.5px; left: 14.8624px;"></span></a>
                                     </div>
@@ -512,7 +521,8 @@
                                     </ul>
 
                                     <div class="pricing-footer">
-                                        <a href="#"
+                                        <a href="#contato"
+                                           data-selected-plan="on_demand"
                                            class="default-btn btn-blue">Contato<span
                                                 style="top: 49.5px; left: 14.8624px;"></span></a>
                                     </div>
@@ -701,15 +711,9 @@
                     <h2>Pronto para se juntar a essa revolução? <br/>Fale com um dos nossos especialistas</h2>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="cta-btn">
-                    <a href="https://wa.me/+5511958039555"
-                       target="_blank"
-                       class="default-btn">Falar com um especialista <span></span></a>
-                </div>
-            </div>
+
             <div class="col-md-12">
-                {{ include('landing_page/form.html.twig', {'button_label': 'Enviar'}) }}
+                {{ include('landing_page/contact_form.html.twig', {'button_label': 'Falar com um especialista'}) }}
             </div>
         </div>
     </div>
@@ -740,25 +744,16 @@
                 <div class="widget-content">
                     <h4>Endereço</h4>
                     <p>Rua Nova América da Colina, 256 - São Paulo - Guarulhos</p>
-                    <span><a href="mailto:contato@pontonet.site?subject=Assunto do email&cc=copia@provedor.com.br&bcc=copiaoculta@provedor.com.br&body=Conteúdo do email que será preenchido automaticamente">contato@pontonet.site</a></span>
+                    <span><a href="mailto:contato@pontonet.site?subject=Contato ponto net&cc=contato@pontonet.site&bcc=andrechavesg@gmail.com&body=Ola, gostaria de saber mais sobre a ponto net!">contato@pontonet.site</a></span>
                     <span>(+55) 11 958039555</span>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12 sm-padding">
                 <div class="widget-content">
                     <h4>Não encontrou o que queria?</h4>
-                    <p>Deixe aqui sua sugestão <br>de melhoria e o que você busca</p>
                     <div class="subscribe-box clearfix">
                         <div class="subscribe-form-wrap">
-                            <form action="#"
-                                  class="subscribe-form">
-                                <input type="email" name="email" id="subs-email" class="form-input"
-                                       placeholder="Digite aqui">
-                                <button type="submit" class="submit-btn">Enviar</button>
-                                <div id="subscribe-result">
-                                    <p class="subscription-success"></p>
-                                    <p class="subscription-error"></p>
-                                </div>
+                            {{ include('landing_page/feedback_form.html.twig', {'button_label': 'Enviar sugestao'}) }}
                             </form>
                         </div>
                     </div>
@@ -772,38 +767,17 @@
 </footer>
 <a data-scroll="" href="#header" id="scroll-to-top" style="display: none;" class=""><i
         class="arrow_carrot-up"></i></a>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
 <script src="./js/jquery-1.12.4.min.js"></script>
-<script src="./js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="./js/tether.min.js"></script>
 <script src="./js/jquery.slicknav.min.js"></script>
 <script src="./js/smooth-scroll.min.js"></script>
 <script src="./js/jquery.ajaxchimp.min.js"></script>
 <script src="./js/pricing-switcher.js"></script>
 <script src="./js/wow.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js" integrity="sha512-efAcjYoYT0sXxQRtxGY37CKYmqsFVOIwMApaEbrxJr4RwqVVGw8o+Lfh/+59TU07+suZn1BWq4fDl5fdgyCNkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="./js/main.js"></script>
-<script>
-    let formSelector = "form[name='landing_page_lead']";
-    console.log(formSelector)
-    $(formSelector).on("submit",async (e) => {
-        e.preventDefault();
-        let body = new FormData($(formSelector)[0]);
-        let action = $(formSelector).attr("action");
-        let method = $(formSelector).attr("method");
-
-        const response = await fetch(action,{
-            body: body,
-            method: method,
-            mode: "cors",
-            cache: "default",
-        });
-
-        if(response.status === 200) {
-            alert("Obrigado! Um dos nossos especialistas entrará em contato em breve.")
-        } else {
-            alert("Ocorreu um erro, por favor envie um email para contato@pontonet.site")
-        }
-    })
-</script>
 </body>
 </html>

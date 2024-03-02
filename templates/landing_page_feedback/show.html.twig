@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LandingPageFeedback{% endblock %}
+
+{% block body %}
+    <h1>LandingPageFeedback</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ landing_page_feedback.id }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ landing_page_feedback.content }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_landing_page_feedback_index') }}">back to list</a>
+
+    <a href="{{ path('app_landing_page_feedback_edit', {'id': landing_page_feedback.id}) }}">edit</a>
+
+    {{ include('landing_page_feedback/_delete_form.html.twig') }}
+{% endblock %}

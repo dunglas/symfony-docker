@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LandingPageFeedback index{% endblock %}
+
+{% block body %}
+    <h1>LandingPageFeedback index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Content</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for landing_page_feedback in landing_page_feedbacks %}
+            <tr>
+                <td>{{ landing_page_feedback.id }}</td>
+                <td>{{ landing_page_feedback.content }}</td>
+                <td>
+                    <a href="{{ path('app_landing_page_feedback_show', {'id': landing_page_feedback.id}) }}">show</a>
+                    <a href="{{ path('app_landing_page_feedback_edit', {'id': landing_page_feedback.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_landing_page_feedback_new') }}">Create new</a>
+{% endblock %}

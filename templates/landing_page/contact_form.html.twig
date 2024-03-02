@@ -1,0 +1,7 @@
+<div style="background:rgba(255,255,255,0.8);padding:2em;border-radius:5px;margin-top:2em;">
+{{ form_start(contact_form, {'attr': {'success_message': 'Um dos nossos especialistas entrará em contato em breve.'}} ) }}
+
+    {{ form_widget(contact_form) }}
+    <button class="default-btn">{{ button_label|default('Enviar') }}<span></span></button>
+{{ form_end(contact_form) }}
+</div>

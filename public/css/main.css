@@ -450,9 +450,6 @@ button {
     }
 }
 
-.btn-group {
-}
-
 .btn-group a {
     margin: 5px
 }
@@ -481,7 +478,8 @@ button {
     -webkit-transition: all ease 700ms;
     -ms-transition: all ease 700ms;
     -o-transition: all ease 700ms;
-    z-index: 1
+    z-index: 1;
+    cursor: pointer;
 }
 
 .default-btn:hover {
@@ -511,9 +509,6 @@ button {
 .default-btn:hover span {
     height: 562.5px;
     width: 562.5px
-}
-
-.section-heading h2 {
 }
 
 .section-heading span {
@@ -886,10 +881,6 @@ a, a:hover, .overlay, img, .form-control, .form-control:hover, button {
     z-index: 999;
     padding: 0 15px
 }
-
-ul.nav {
-}
-
 ul.nav > li {
     position: relative
 }
@@ -937,9 +928,6 @@ ul.nav > li > a {
     top: 20px;
     font-size: 10px;
     right: -10px
-}
-
-.cart-icon.transparent {
 }
 
 .cart-icon.transparent i {
@@ -1197,10 +1185,6 @@ ul.nav > li > a:hover, ul.nav > li > a:focus, ul.nav > li > a.active {
     visibility: visible
 }
 
-#dl-popup-search-box .box-inner-wrap:hover {
-    cursor: url(../img/cross.png), auto
-}
-
 #dl-popup-search-box .box-inner-wrap {
     width: 100%;
     height: 100%
@@ -1280,9 +1264,6 @@ ul.nav > li > a:hover, ul.nav > li > a:focus, ul.nav > li > a.active {
     height: 100vh
 }
 
-.hero-wrap {
-}
-
 .hero-content span {
     color: #fff;
     display: block;
@@ -1312,9 +1293,6 @@ ul.nav > li > a:hover, ul.nav > li > a:focus, ul.nav > li > a.active {
     padding: 50px 0 80px
 }
 
-.promo-wrap {
-}
-
 .promo-content {
     text-align: center;
     display: inline-block;
@@ -1331,33 +1309,9 @@ ul.nav > li > a:hover, ul.nav > li > a:focus, ul.nav > li > a.active {
     text-align: center
 }
 
-.promo-content h3 {
-}
-
-.promo-content p {
-}
-
-.content-section {
-}
-
-.content-section .section-heading {
-}
-
-.content-section .section-heading h2 {
-}
-
-.content-section .section-heading p {
-}
-
 .content-wrap {
     display: flex;
     align-items: center
-}
-
-.content-img {
-}
-
-.content-info {
 }
 
 .content-info li {
@@ -1368,8 +1322,6 @@ ul.nav > li > a:hover, ul.nav > li > a:focus, ul.nav > li > a.active {
     margin-bottom: 0
 }
 
-.content-info li h3 {
-}
 
 .content-info li h3 span {
     display: inline-block;
@@ -1382,14 +1334,8 @@ ul.nav > li > a:hover, ul.nav > li > a:focus, ul.nav > li > a.active {
     margin-right: 15px
 }
 
-.content-info p {
-}
-
 .feature-section {
     position: relative
-}
-
-.feature-section .section-heading {
 }
 
 .feature-section .section-heading span {
@@ -1397,9 +1343,6 @@ ul.nav > li > a:hover, ul.nav > li > a:focus, ul.nav > li > a.active {
     display: block;
     font-weight: 600;
     margin-bottom: 5px
-}
-
-.feature-wrap {
 }
 
 .feature-content {
@@ -1423,20 +1366,8 @@ ul.nav > li > a:hover, ul.nav > li > a:focus, ul.nav > li > a.active {
     margin-bottom: 20px
 }
 
-.feature-content h3 {
-}
-
-.feature-content p {
-}
-
 .content-area-section {
     position: relative
-}
-
-.content-area-section .content-wrap {
-}
-
-.content-area-section .content-item {
 }
 
 .content-area-section .content-item h2 {
@@ -1448,24 +1379,9 @@ ul.nav > li > a:hover, ul.nav > li > a:focus, ul.nav > li > a.active {
     margin-bottom: 20px
 }
 
-.content-area-section .content-item a {
-}
-
-.team-section {
-}
-
-.team-wrap {
-}
-
-.team-box {
-}
-
 .team-info {
     position: relative;
     overflow: hidden
-}
-
-.team-info img {
 }
 
 .team-info .team-social {
@@ -1604,9 +1520,6 @@ ul.nav > li > a:hover, ul.nav > li > a:focus, ul.nav > li > a.active {
     align-items: center
 }
 
-.page-content {
-}
-
 .page-content h2 {
     color: #fff
 }
@@ -1675,7 +1588,6 @@ ul.nav > li > a:hover, ul.nav > li > a:focus, ul.nav > li > a.active {
     height: 100%;
     left: 0;
     top: 0;
-    background: url(../img/bg-dots.png) 0 0 repeat;
     z-index: -1
 }
 
@@ -1719,15 +1631,9 @@ ul.nav > li > a:hover, ul.nav > li > a:focus, ul.nav > li > a.active {
     height: 400px
 }
 
-.about-section {
-}
-
 .about-wrap {
     display: flex;
     align-items: center
-}
-
-.about-content {
 }
 
 .about-content span {
@@ -1741,9 +1647,6 @@ ul.nav > li > a:hover, ul.nav > li > a:focus, ul.nav > li > a.active {
 
 .about-content p {
     margin-bottom: 20px
-}
-
-.about-content a {
 }
 
 .cta-section {
@@ -1776,9 +1679,6 @@ ul.nav > li > a:hover, ul.nav > li > a:focus, ul.nav > li > a.active {
     margin-bottom: 50px
 }
 
-.cta-content {
-}
-
 .cta-content h2 {
     color: #fff;
     line-height: 50px;
@@ -1789,17 +1689,8 @@ ul.nav > li > a:hover, ul.nav > li > a:focus, ul.nav > li > a.active {
     text-align: center
 }
 
-.cta-btn a {
-}
-
-.blog-section {
-}
-
 .blog-section.inner {
     padding-bottom: 0
-}
-
-.blog-wrap {
 }
 
 .blog-item {
@@ -1876,9 +1767,6 @@ ul.nav > li > a:hover, ul.nav > li > a:focus, ul.nav > li > a.active {
     height: 4px;
     left: 0;
     top: calc(50% - 2px)
-}
-
-.pagination-wrap {
 }
 
 .pagination-wrap li {
@@ -1995,16 +1883,12 @@ ul.nav > li > a:hover, ul.nav > li > a:focus, ul.nav > li > a.active {
     color: #8d9aa8 !important
 }
 
-.thumb-post {
-}
-
 .thumb-post li {
     display: -webkit-flex;
     display: -moz-flex;
     display: -ms-flex;
     display: -o-flex;
     display: flex;
-    align-items: top;
     margin-bottom: 20px
 }
 
@@ -2031,9 +1915,6 @@ ul.nav > li > a:hover, ul.nav > li > a:focus, ul.nav > li > a.active {
     text-decoration: underline
 }
 
-.widget-content .tags {
-}
-
 .widget-content .tags li {
     display: inline-block
 }
@@ -2052,9 +1933,6 @@ ul.nav > li > a:hover, ul.nav > li > a:focus, ul.nav > li > a.active {
     background-color: #263a4f;
     color: #fff;
     box-shadow: 0 1px 3px rgba(0, 0, 0, .1)
-}
-
-.blog-thumb {
 }
 
 .blog-thumb img {
@@ -2111,7 +1989,6 @@ blockquote .dots {
     height: 100%;
     left: 0;
     top: 0;
-    background: url(../img/bg-dots.png) 0 0 repeat;
     z-index: -1
 }
 
@@ -2170,9 +2047,6 @@ blockquote span {
     font-size: 18px;
     line-height: 28px;
     margin-bottom: 5px
-}
-
-.author-box .social-icon {
 }
 
 .author-box .social-icon li {
@@ -2345,9 +2219,6 @@ blockquote span {
     text-decoration: underline
 }
 
-.blog-single-wrap .comment-respond {
-}
-
 .blog-single-wrap .comment-respond .comment-reply-title {
     font-size: 22px;
     font-weight: 600;
@@ -2422,11 +2293,7 @@ blockquote span {
     height: 100%;
     left: 0;
     top: 0;
-    background: url(../img/bg-dots.png) 0 0 repeat;
     z-index: -1
-}
-
-.sponsor-item {
 }
 
 .sponsor-item img {
@@ -2443,28 +2310,14 @@ blockquote span {
     border-bottom: 1px solid #e5e5e5
 }
 
-.widget-content {
-}
-
 .widget-content img {
     margin-bottom: 20px
-}
-
-.widget-content h4 {
-}
-
-.widget-content p {
 }
 
 .widget-content span {
     display: block
 }
 
-.widget-content .widget-links {
-}
-
-.widget-content .widget-links li {
-}
 
 .widget-content .widget-links li a {
     color: #8d9aa8;
@@ -2476,16 +2329,20 @@ blockquote span {
 }
 
 .subscribe-form {
-    position: relative
+    position: relative;
+    display: flex;
+    flex-direction:column;
+    height:120px;
 }
-
+.subscribe-form .mb-3 {
+    margin:0!important;
+}
 .subscribe-form .form-input {
     border: 1px solid #e5e5e5;
     width: 100%;
-    height: 50px;
-    padding: 10px;
-    padding-right: 140px;
-    border-radius: 2px
+    padding: 10px 140px 10px 10px;
+    resize: none;
+    height:70px!important;
 }
 
 .subscribe-form .submit-btn {
@@ -2498,15 +2355,14 @@ blockquote span {
     border-radius: 2px;
     line-height: 50px;
     font-weight: 600;
-    display: inline-block;
     letter-spacing: .5px;
     padding: 0 30px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    cursor: pointer
+    cursor: pointer;
+    width:100%;
 }
-
+.subscribe-form .submit-btn:hover {
+    color: #05144D;
+}
 .footer-section {
     background-image: url(../img/footer-bg.png);
     background-repeat: no-repeat;
@@ -2517,17 +2373,8 @@ blockquote span {
     z-index: 1
 }
 
-.footer-section .widget-content {
-}
-
 .footer-section .widget-content h4, .footer-section .widget-content a, .footer-section .widget-content span, .footer-section .widget-content p {
     color: #fff
-}
-
-.footer-section .widget-links {
-}
-
-.footer-section .widget-links li {
 }
 
 .footer-section .widget-links li a {

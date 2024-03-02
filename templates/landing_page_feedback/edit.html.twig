@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit LandingPageFeedback{% endblock %}
+
+{% block body %}
+    <h1>Edit LandingPageFeedback</h1>
+
+    {{ include('landing_page_feedback/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_landing_page_feedback_index') }}">back to list</a>
+
+    {{ include('landing_page_feedback/_delete_form.html.twig') }}
+{% endblock %}
