@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\LandingPageLead;
-use App\Form\LandingPageLeadType;
+use App\Form\Admin\LandingPageLeadType;
 use App\Repository\LandingPageLeadRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
