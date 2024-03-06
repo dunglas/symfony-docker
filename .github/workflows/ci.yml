@@ -40,10 +40,11 @@ jobs:
         run: docker compose up --wait --no-build
       -
         name: Check HTTP reachability
-        run: curl -v -o /dev/null http://localhost
+        run: curl -v --fail-with-body http://localhost
       -
         name: Check HTTPS reachability
-        run: curl -vk -o /dev/null https://localhost
+        if: false # Remove this line when the homepage will be configured, or change the path to check
+        run: curl -vk --fail-with-body https://localhost
       -
         name: Create test database
         if: false # Remove this line if Doctrine ORM is installed
