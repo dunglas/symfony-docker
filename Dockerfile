@@ -31,6 +31,9 @@ RUN set -eux; \
 		zip \
 	;
 
+# change the default shell to allow up and down arrow to scroll through previous commands used in sh
+RUN ln -sf /bin/bash /bin/sh
+
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
