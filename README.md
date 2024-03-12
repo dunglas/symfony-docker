@@ -36,10 +36,11 @@ with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) 
 4. [Deploying in production](docs/production.md)
 5. [Debugging with Xdebug](docs/xdebug.md)
 6. [TLS Certificates](docs/tls.md)
-7. [Using a Makefile](docs/makefile.md)
-8. [Using MySQL instead of PostgreSQL](docs/mysql.md)
-9. [Troubleshooting](docs/troubleshooting.md)
+7. [Using MySQL instead of PostgreSQL](docs/mysql.md)
+8. [Using Alpine Linux instead of Debian](docs/alpine.md)
+9. [Using a Makefile](docs/makefile.md)
 10. [Updating the template](docs/updating.md)
+11. [Troubleshooting](docs/troubleshooting.md)
 
 ## License
 
