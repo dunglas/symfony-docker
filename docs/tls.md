@@ -22,7 +22,7 @@ But sometimes you may prefer using custom certificates.
 For instance, to use self-signed certificates created with [mkcert](https://github.com/FiloSottile/mkcert) do as follows:
 
 1. Locally install `mkcert`
-2. Create the folder storing the certs: 
+2. Create the folder storing the certs:
    `mkdir frankenphp/certs -p`
 3. Generate the certificates for your local host (example: "server-name.localhost"):
    `mkcert -cert-file frankenphp/certs/tls.pem -key-file frankenphp/certs/tls.key "server-name.localhost"`
@@ -37,3 +37,16 @@ For instance, to use self-signed certificates created with [mkcert](https://gith
         - ./public:/app/public:ro
     ```
 5. Restart your `php` service
+
+## Disabling HTTPS for Local Development
+
+To disable HTTPS, configure your environment to use HTTP by setting the following variables and starting the project with this command:
+
+```bash
+SERVER_NAME=http://localhost \
+MERCURE_PUBLIC_URL=http://localhost/.well-known/mercure \
+TRUSTED_HOSTS='^localhost|php$' \
+docker compose up --pull always -d --wait
+```
+
+Ensure your application is accessible over HTTP by visiting `http://localhost` in your web browser.
