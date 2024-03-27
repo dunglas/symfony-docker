@@ -9,7 +9,7 @@ You can copy the contents of the repository using git and tar. This will not con
 
     git archive --format=tar HEAD | tar -xC my-existing-project/
 
-If you downloaded the skeleton with zip you can just copy the extracted files:
+If you downloaded the skeleton as a zip you can just copy the extracted files:
 
     cp -Rp symfony-docker/. my-existing-project/
 
