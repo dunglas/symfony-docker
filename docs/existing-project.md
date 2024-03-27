@@ -2,9 +2,13 @@
 
 It's also possible to use Symfony Docker with existing projects!
 
-First, [download this skeleton](https://github.com/dunglas/symfony-docker). If you clone the Git repository, be sure to remove the `.git` directory to prevent conflicts with the `.git` directory already in your existing project.
+First, [download this skeleton](https://github.com/dunglas/symfony-docker).
 
-Then, copy the Docker-related files from the skeleton to your existing project:
+If you cloned the Git repository you can copy the files from the repository using git and tar:
+
+    git archive --format=tar HEAD | tar -xC my-existing-project/
+
+If you downloaded the skeleton with zip you can just copy the extracted files:
 
     cp -Rp symfony-docker/. my-existing-project/
 
