@@ -20,7 +20,7 @@ Enable the Docker support of Symfony Flex:
 Re-execute the recipes to update the Docker-related files according to the packages you use
 
     rm symfony.lock
-    composer symfony:sync-recipes --force --verbose
+    composer recipes:install --force --verbose
 
 Double-check the changes, revert the changes that you don't want to keep:
 
