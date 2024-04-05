@@ -45,7 +45,7 @@ to access your application on [https://localhost:4443](https://localhost:4443).
 > Let's Encrypt only supports the standard HTTP and HTTPS ports. Creating a Let's Encrypt certificate for another port will not work, you have to use the standard ports or to configure Caddy to use another provider.
 
 
-# Caddyfile Options
+## Caddyfile Options
 
 You can also customize the `Caddyfile` by using the following environment variables to inject options block, directive or configuration.
 
