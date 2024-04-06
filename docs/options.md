@@ -66,6 +66,6 @@ You can also customize the `Caddyfile` by using the following environment variab
 | `MERCURE_SUBSCRIBER_JWT_ALG`    | the JWT algorithm to use for subscribers                                                                                                                                                | `HS256`                   |
 | `MERCURE_EXTRA_DIRECTIVES`      | a list of extra [Mercure directives](https://mercure.rocks/docs/hub/config), one per line                                                                                               |                           |
 
-## Example of server name customize:
+### Example of server name customize:
 
     SERVER_NAME="app.localhost" docker compose up -d --wait
