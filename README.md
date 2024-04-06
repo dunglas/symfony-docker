@@ -30,7 +30,7 @@ with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) 
 
 ## Docs
 
-1. [Build options](docs/build.md)
+1. [Options available](docs/options.md)
 2. [Using Symfony Docker with an existing project](docs/existing-project.md)
 3. [Support for extra services](docs/extra-services.md)
 4. [Deploying in production](docs/production.md)
