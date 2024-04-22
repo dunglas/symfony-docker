@@ -13,6 +13,8 @@ FROM frankenphp_upstream AS frankenphp_base
 
 WORKDIR /app
 
+VOLUME /app/var/
+
 # persistent / runtime deps
 # hadolint ignore=DL3008
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -50,7 +52,6 @@ CMD [ "frankenphp", "run", "--config", "/etc/caddy/Caddyfile" ]
 FROM frankenphp_base AS frankenphp_dev
 
 ENV APP_ENV=dev XDEBUG_MODE=off
-VOLUME /app/var/
 
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
