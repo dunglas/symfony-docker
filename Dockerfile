@@ -13,7 +13,6 @@ FROM frankenphp_upstream AS frankenphp_base
 
 WORKDIR /app
 
-# symfony loves caching but to keep the overlay clean, var/ shall be a volume on all stages
 VOLUME /app/var/
 
 # persistent / runtime deps
