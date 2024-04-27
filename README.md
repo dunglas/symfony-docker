@@ -13,6 +13,8 @@ with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) 
 4. Open `https://localhost` in your favorite web browser and [accept the auto-generated TLS certificate](https://stackoverflow.com/a/15076602/1352334)
 5. Run `docker compose down --remove-orphans` to stop the Docker containers.
 
+> **_NOTE:_**  `docker compose up --pull always -d --wait` will set up a Symfony Flex application. 
+
 ## Features
 
 * Production, development and CI ready
