@@ -51,6 +51,10 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 		if [ "$( find ./migrations -iname '*.php' -print -quit )" ]; then
 			php bin/console doctrine:migrations:migrate --no-interaction --all-or-nothing
 		fi
+		if [ "$APP_ENV" != 'prod' ]; then
+   			# https://github.com/api-platform/api-platform/issues/1819
+   			chmod +x bin/phpunit
+		fi
 	fi
 
 	setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX var
