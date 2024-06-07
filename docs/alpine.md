@@ -10,7 +10,7 @@ To switch to Alpine-based images, apply the following changes to the `Dockerfile
 
 ```patch
 -FROM dunglas/frankenphp:1-php8.3 AS frankenphp_upstream
-+FROM dunglas/frankenphp:1-alpine-php8.3 AS frankenphp_upstream
++FROM dunglas/frankenphp:1-php8.3-alpine AS frankenphp_upstream
 
 -# hadolint ignore=DL3008
 -RUN apt-get update && apt-get install -y --no-install-recommends \
