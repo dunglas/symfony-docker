@@ -64,9 +64,7 @@ COPY --link frankenphp/conf.d/app.dev.ini $PHP_INI_DIR/conf.d/
 
 CMD [ "frankenphp", "run", "--config", "/etc/caddy/Caddyfile", "--watch" ]
 
-ARG NODE_VERSION=20-alpine
-
-FROM node:${NODE_VERSION} AS build
+FROM node:20-alpine AS build
 
 WORKDIR /app
 
