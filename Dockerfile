@@ -64,6 +64,27 @@ COPY --link frankenphp/conf.d/app.dev.ini $PHP_INI_DIR/conf.d/
 
 CMD [ "frankenphp", "run", "--config", "/etc/caddy/Caddyfile", "--watch" ]
 
+ARG NODE_VERSION=20-alpine
+
+FROM node:${NODE_VERSION} AS build
+
+WORKDIR /app
+
+RUN npm config set update-notifier false && npm set progress=false
+
+COPY --link package*.json ./
+
+RUN if [ -f $ROOT/package-lock.json ]; \
+    then \
+    npm ci --loglevel=error --no-audit; \
+    else \
+    npm install --loglevel=error --no-audit; \
+    fi
+
+COPY --link . .
+
+RUN npm run build
+
 # Prod FrankenPHP image
 FROM frankenphp_base AS frankenphp_prod
 
@@ -82,8 +103,14 @@ RUN set -eux; \
 COPY --link . ./
 RUN rm -Rf frankenphp/
 
+# copy build assets
+COPY --link --from=build /app/public ./public
+
 RUN set -eux; \
-    mkdir -p storage/framework/{sessions,views,cache,testing} storage/logs bootstrap/cache; \
+    mkdir -p storage/framework/{sessions,views,cache,testing} \
+    storage/logs \
+    bootstrap/cache; \
     chmod -R a+rw storage; \
 	composer install --classmap-authoritative --no-interaction --no-ansi --no-dev; \
-	php artisan storage:link;
+    composer cache:clear; \
+	php artisan optimize; sync;
