@@ -42,11 +42,12 @@ PHP_CONT = $(DOCKER_COMP) exec php
 # Executables
 PHP      = $(PHP_CONT) php
 COMPOSER = $(PHP_CONT) composer
+NPM      = $(PHP_CONT) npm
 LARAVEL  = $(PHP) artisan
 
 # Misc
 .DEFAULT_GOAL = help
-.PHONY        : help build up start down logs sh composer vendor a cc test
+.PHONY        : help build up start down logs sh composer vendor npm dev a cc test
 
 ## —— 🎵 🐳 The Laravel Docker Makefile 🐳 🎵 ——————————————————————————————————
 help: ## Outputs this help screen
@@ -83,6 +84,14 @@ composer: ## Run composer, pass the parameter "c=" to run a given command, examp
 vendor: ## Install vendors according to the current composer.lock file
 vendor: c=install --prefer-dist --no-dev --no-progress --no-scripts --no-interaction
 vendor: composer
+
+## —— Npm 🟩 ——————————————————————————————————————————————————————————————
+npm: ## Run npm, pass the parameter "c=" to run a given command, example: make npm c='install'
+	@$(eval c ?=)
+	@$(NPM) $(c)
+
+dev: ## Run npm run dev
+	@$(NPM) run dev
 
 ## —— Laravel 🟥 ———————————————————————————————————————————————————————————————
 a: ## List all Laravel commands or pass the parameter "c=" to run a given command, example: make a c=about
