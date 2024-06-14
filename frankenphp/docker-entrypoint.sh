@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-if [ "$1" = 'frankenphp' ]; then
+if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 	# Install the project the first time PHP is started
 	# After the installation, the following block can be deleted
 	if [ ! -f composer.json ]; then
