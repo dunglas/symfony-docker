@@ -7,7 +7,6 @@ FROM dunglas/frankenphp:1-php8.3 AS frankenphp_upstream
 # https://docs.docker.com/develop/develop-images/multistage-build/#stop-at-a-specific-build-stage
 # https://docs.docker.com/compose/compose-file/#target
 
-
 # Base FrankenPHP image
 FROM frankenphp_upstream AS frankenphp_base
 
@@ -54,6 +53,11 @@ FROM frankenphp_base AS frankenphp_dev
 ENV APP_ENV=local XDEBUG_MODE=off
 
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
+
+RUN curl -fsSL https://deb.nodesource.com/setup_lts.x -o nodesource_setup.sh; \
+    bash nodesource_setup.sh; \
+    apt-get install -y nodejs; \
+    rm nodesource_setup.sh;
 
 RUN set -eux; \
 	install-php-extensions \
