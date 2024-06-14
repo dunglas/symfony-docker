@@ -85,7 +85,7 @@ vendor: c=install --prefer-dist --no-dev --no-progress --no-scripts --no-interac
 vendor: composer
 
 ## —— Laravel 🟥 ———————————————————————————————————————————————————————————————
-a: ## List all Laravel commands or pass the parameter "c=" to run a given command, example: make sf c=about
+a: ## List all Laravel commands or pass the parameter "c=" to run a given command, example: make a c=about
 	@$(eval c ?=)
 	@$(LARAVEL) $(c)
 
