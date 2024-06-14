@@ -14,8 +14,8 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 		rm -Rf tmp/
 	fi
 
-	setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX storage bootstrap/cache
-	setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX storage bootstrap/cache
+	setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX storage
+	setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX storage
 fi
 
 exec docker-php-entrypoint "$@"
