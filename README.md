@@ -9,7 +9,7 @@ with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) 
 
 1. If not already done, [install Docker Compose](https://docs.docker.com/compose/install/) (v2.10+)
 2. Run `docker compose build --no-cache` to build fresh images
-3. Run `docker compose up --pull always -d --wait` to start the project
+3. Run `docker compose up --pull always -d --wait` to set up and start a fresh Symfony project
 4. Open `https://localhost` in your favorite web browser and [accept the auto-generated TLS certificate](https://stackoverflow.com/a/15076602/1352334)
 5. Run `docker compose down --remove-orphans` to stop the Docker containers.
 
@@ -28,7 +28,7 @@ with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) 
 
 ## Docs
 
-1. [Build options](docs/build.md)
+1. [Options available](docs/options.md)
 2. [Using Symfony Docker with an existing project](docs/existing-project.md)
 3. [Support for extra services](docs/extra-services.md)
 4. [Deploying in production](docs/production.md)
