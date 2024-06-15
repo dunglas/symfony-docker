@@ -12,8 +12,6 @@ services:
     volumes:
       - caddy_data:/data
       - caddy_config:/config
-      - storage_data:/app/storage
-      - cache_data:/app/bootstrap/cache
     ports:
       # HTTP
       - target: 80
@@ -31,5 +29,3 @@ services:
 volumes:
   caddy_data:
   caddy_config:
-  storage_data:
-  cache_data:
