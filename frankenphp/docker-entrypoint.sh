@@ -26,11 +26,6 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ] || [ "$1" = 'artisan' ]; then
 	setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX storage
 	setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX bootstrap/cache
 	setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX bootstrap/cache
-
-    if [ "$APP_ENV" = 'production' ]; then
-        php artisan storage:link
-        php artisan optimize
-    fi
 fi
 
 exec docker-php-entrypoint "$@"
