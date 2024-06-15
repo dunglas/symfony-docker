@@ -24,6 +24,8 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ] || [ "$1" = 'artisan' ]; then
 
 	setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX storage
 	setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX storage
+	setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX bootstrap/cache
+	setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX bootstrap/cache
 fi
 
 exec docker-php-entrypoint "$@"
