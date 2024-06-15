@@ -112,5 +112,5 @@ RUN set -eux; \
     bootstrap/cache; \
     chmod -R a+rw storage; \
 	composer install --classmap-authoritative --no-interaction --no-ansi --no-dev; \
-    composer cache:clear; \
+    php artisan storage:link; \
 	php artisan optimize; sync;
