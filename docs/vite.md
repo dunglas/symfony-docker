@@ -2,10 +2,16 @@
 
 To take advantage of the benefits of Vite, follow the instructions below.
 
-1. If you haven't already, start the project `docker compose up --pull always -d --wait`
-2. Check that the laravel home page appears correctly `https://localhost`
-3. Run `docker compose exec php npm install @vitejs/plugin-basic-ssl --save-dev`
-4. Update your vite.config.js :
+1. If you haven't already, start the project:
+```
+docker compose up --pull always -d --wait
+```
+2. Check that the laravel home page appears correctly: [https://localhost](https://localhost)
+3. Run:
+```
+docker compose exec php npm install @vitejs/plugin-basic-ssl --save-dev
+```
+4. Update your vite.config.js:
 ```js
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
@@ -35,9 +41,15 @@ export default defineConfig({
     ],
 });
 ```
-5. Just before `</head>` balise on `resources/views/welcome.blade.php`, add this : `@vite(['resources/css/app.css', 'resources/js/app.js'])`
-6. Run `docker compose exec php npm run dev`
-7. Accept certificate `https://localhost:5173`
-8. Enjoy, you have vite refresh : `https://localhost`
+5. Just before `</head>` balise on `resources/views/welcome.blade.php`, add this:
+```javascript
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+```
+6. Run:
+```
+docker compose exec php npm run dev
+```
+7. Accept certificate: [https://localhost:5173](https://localhost:5173)
+8. Enjoy, you have vite refresh: [https://localhost](https://localhost)
 
 Of course, you can also use it with any starter kit.
