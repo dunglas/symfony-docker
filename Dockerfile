@@ -97,7 +97,8 @@ COPY --link frankenphp/conf.d/app.prod.ini $PHP_INI_DIR/conf.d/
 # prevent the reinstallation of vendors at every changes in the source code
 COPY --link composer.* ./
 RUN set -eux; \
-	composer install --no-cache --prefer-dist --no-dev --no-autoloader --no-scripts --no-progress
+    composer install --classmap-authoritative --no-interaction --no-ansi --no-dev; \
+    composer clear-cache; \
 
 # copy sources
 COPY --link . ./
@@ -110,7 +111,4 @@ RUN set -eux; \
     mkdir -p storage/framework/{sessions,views,cache,testing} \
     storage/logs \
     bootstrap/cache; \
-    chmod -R a+rw storage; \
-	composer install --classmap-authoritative --no-interaction --no-ansi --no-dev; \
-    php artisan storage:link; \
-	php artisan optimize; sync;
+    chmod -R a+rw storage; sync;
