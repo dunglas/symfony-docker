@@ -21,6 +21,12 @@ Change the database image to use MySQL instead of PostgreSQL in `compose.yaml`:
 +     MYSQL_PASSWORD: ${MYSQL_PASSWORD:-!ChangeMe!}
 -     POSTGRES_USER: ${POSTGRES_USER:-app}
 +     MYSQL_USER: ${MYSQL_USER:-app}
+    healthcheck:
+-     test: ["CMD", "pg_isready", "-d", "${POSTGRES_DB:-app}", "-U", "${POSTGRES_USER:-app}"]
++     test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 5
+      start_period: 60s
     volumes:
 -     - database_data:/var/lib/postgresql/data:rw
 +     - database_data:/var/lib/mysql:rw
