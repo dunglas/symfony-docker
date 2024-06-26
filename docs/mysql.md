@@ -72,6 +72,11 @@ Rebuild the docker environment:
 docker compose down --remove-orphans && docker compose build --pull --no-cache
 ```
 
+Start the services:
+```shell
+docker compose up -d
+```
+
 Test your setup:
 ```shell
 docker compose exec php bin/console dbal:run-sql -q "SELECT 1" && echo "OK" || echo "Connection is not working"
