@@ -1,0 +1,11 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ cssHref }}">
+{% endblock %}
+
+{% block body %}
+    <h1>{{ title }}</h1>
+
+    <img class="logo" src="{{ logoSrc }}"/>
+{% endblock %}
