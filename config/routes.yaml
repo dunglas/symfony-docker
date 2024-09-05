@@ -1,0 +1,9 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+api_v1_code_search_get:
+    path: /api/v1/code/search
+    controller: App\Controller\Api\RestApiController::searchCodeInRepoProvider
+    methods: GET|HEAD
