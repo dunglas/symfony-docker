@@ -18,7 +18,7 @@ class RestApiController
      * @throws DecodingExceptionInterface
      * @throws ClientExceptionInterface
      */
-    public function searchCodeInRepoProvider(SearchCodeInRepoStrategyInterface $repoStrategy, string $code): jsonResponse
+    public function searchCodeInRepo(SearchCodeInRepoStrategyInterface $repoStrategy, string $code): jsonResponse
     {
         $client = HttpClient::create();
         $response = $client->request('GET', 'https://api.github.com/search/code?q=' . $code );

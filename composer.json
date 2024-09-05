@@ -67,5 +67,8 @@
             "require": "7.1.*",
             "docker": true
         }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9"
     }
 }
