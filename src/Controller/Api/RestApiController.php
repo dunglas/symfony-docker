@@ -12,6 +12,6 @@ class RestApiController
     public function searchCodeInRepo(Request $request): JsonResponse
     {
         $searchInCodeReposeService = new SearchCodeInRepoService(new GithubSearchCodeInRepoStrategy());
-        return $searchInCodeReposeService->searchCodeInRepo($request->get('code'));
+        return $searchInCodeReposeService->searchCodeInRepo($request->get('code'), $request->get('page'), $request->get('per_page'));
     }
 }
