@@ -7,35 +7,33 @@ class CodeSearchResultDTO
     private string $ownerName;
     private string $repoName;
     private string $fileName;
+    private float $score;
 
-    public function __construct($ownerName, $repoName, $fileName)
+    public function __construct($ownerName, $repoName, $fileName, $score)
     {
         $this->ownerName = $ownerName;
         $this->repoName = $repoName;
         $this->fileName = $fileName;
+        $this->score = $score;
     }
 
-    /**
-     * @return string
-     */
     public function getOwnerName(): string
     {
         return $this->ownerName;
     }
 
-    /**
-     * @return string
-     */
     public function getRepoName(): string
     {
         return $this->repoName;
     }
 
-    /**
-     * @return string
-     */
     public function getFileName(): string
     {
         return $this->fileName;
+    }
+
+    public function getScore(): float
+    {
+        return $this->score;
     }
 }

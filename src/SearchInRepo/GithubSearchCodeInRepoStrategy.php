@@ -1,7 +1,7 @@
 <?php
-
 namespace App\SearchInRepo;
-use App\Collection\CodeSearchResultDTOCollection;
+
+use App\DTO\CodeSearchResultDTOCollection;
 use App\DTO\CodeSearchResultDTO;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,16 +19,7 @@ class GithubSearchCodeInRepoStrategy implements SearchCodeInRepoStrategyInterfac
     {
     }
 
-    /**
-     * @param string $code
-     * @return JsonResponse
-     * @throws ClientExceptionInterface
-     * @throws DecodingExceptionInterface
-     * @throws RedirectionExceptionInterface
-     * @throws ServerExceptionInterface
-     * @throws TransportExceptionInterface
-     */
-    public function searchCodeInRepo(string $code, string $page, string $perPage): JsonResponse
+    public function searchCodeInRepo(string $code, string $page, string $perPage, string $sortBy = 'score'): JsonResponse
     {
         $client = HttpClient::create(
             ['headers' => [
@@ -45,10 +36,18 @@ class GithubSearchCodeInRepoStrategy implements SearchCodeInRepoStrategyInterfac
             $codeSearchResultsCollection->add($this->createCodeSearchResultDTO($item));
         }
 
+        $codeSearchResultsCollection->sortBy($sortBy);
+
         return new JsonResponse($codeSearchResultsCollection->toArray());
     }
+
     private function createCodeSearchResultDTO(array $item): CodeSearchResultDTO
     {
-        return new CodeSearchResultDTO($item['repository']['owner']['login'], $item['repository']['name'], $item['name']);
+        return new CodeSearchResultDTO(
+            $item['repository']['owner']['login'],
+            $item['repository']['name'],
+            $item['name'],
+            $item['score']
+        );
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Collection;
+namespace App\DTO;
 
 use App\DTO\CodeSearchResultDTO;
 use Countable;
@@ -41,7 +41,13 @@ class CodeSearchResultDTOCollection implements Countable, IteratorAggregate
         return array_map(fn($item) => [
             'ownerName' => $item->getOwnerName(),
             'repoName' => $item->getRepoName(),
-            'fileName' => $item->getFileName()
+            'fileName' => $item->getFileName(),
+            'score' => $item->getScore()
         ], $this->items);
+    }
+
+    public function sortBy(string $parameter): void
+    {
+        usort($this->items, fn($a, $b) => $b->{'get' . ucfirst($parameter)}() <=> $a->{'get' . ucfirst($parameter)}());
     }
 }
