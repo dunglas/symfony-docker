@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Tests\UnitTests;
+
 use PHPUnit\Framework\TestCase;
 use App\DTO\CodeSearchResultDTO;
 

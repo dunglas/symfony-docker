@@ -28,7 +28,13 @@ class GithubSearchCodeInRepoStrategy implements SearchCodeInRepoStrategyInterfac
      */
     public function searchCodeInRepo(string $code): JsonResponse
     {
-        $client = HttpClient::create();
+        $client = HttpClient::create(
+            ['headers' => [
+                'Accept' => 'application/vnd.github.v3+json',
+                'User-Agent' => 'Symfony',
+                'Authorization' => 'token ' . $_ENV['GITHUB_API_TOKEN']
+            ]]
+        );
         $response = $client->request('GET', self::GITHUB_API_URL . $code );
         return new JsonResponse($response->toArray());
     }
