@@ -6,5 +6,5 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 interface SearchCodeInRepoStrategyInterface
 {
- public function searchCodeInRepo(string $repo, string $code): JsonResponse;
+ public function searchCodeInRepo(string $code): JsonResponse;
 }

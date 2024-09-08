@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Controller\Api;
-use App\SearchInRepo\SearchCodeInRepoStrategyInterface;
-use Symfony\Component\HttpClient\HttpClient;
+use App\SearchInRepo\GithubSearchCodeInRepoStrategy;
+use App\Service\Api\SearchCodeInRepoService;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
@@ -18,10 +19,9 @@ class RestApiController
      * @throws DecodingExceptionInterface
      * @throws ClientExceptionInterface
      */
-    public function searchCodeInRepo(SearchCodeInRepoStrategyInterface $repoStrategy, string $code): jsonResponse
+    public function searchCodeInRepo(string $code): JsonResponse
     {
-        $client = HttpClient::create();
-        $response = $client->request('GET', 'https://api.github.com/search/code?q=' . $code );
-        return new JsonResponse($response->toArray());
+        $searchInCodeReposeService = new SearchCodeInRepoService(new GithubSearchCodeInRepoStrategy());
+        return $searchInCodeReposeService->searchCodeInRepo($code);
     }
 }
