@@ -5,5 +5,5 @@ controllers:
     type: attribute
 api_v1_code_search_get:
     path: /api/v1/code/search
-    controller: App\Controller\Api\RestApiController::searchCodeInRepoProvider
+    controller: App\Controller\Api\RestApiController::searchCodeInRepo
     methods: GET|HEAD

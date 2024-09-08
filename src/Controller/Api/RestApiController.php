@@ -12,13 +12,7 @@ use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
 class RestApiController
 {
-    /**
-     * @throws TransportExceptionInterface
-     * @throws ServerExceptionInterface
-     * @throws RedirectionExceptionInterface
-     * @throws DecodingExceptionInterface
-     * @throws ClientExceptionInterface
-     */
+
     public function searchCodeInRepo(string $code): JsonResponse
     {
         $searchInCodeReposeService = new SearchCodeInRepoService(new GithubSearchCodeInRepoStrategy());
