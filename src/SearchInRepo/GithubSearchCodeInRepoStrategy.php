@@ -35,7 +35,7 @@ class GithubSearchCodeInRepoStrategy implements SearchCodeInRepoStrategyInterfac
                 'Authorization' => 'token ' . $_ENV['GITHUB_API_TOKEN']
             ]]
         );
-        $response = $client->request('GET', self::GITHUB_API_URL . $code );
+        $response = $client->request('GET', self::GITHUB_API_URL . $code . '&page=' . $page . '&per_page=' . $perPage);
         return new JsonResponse($response->toArray());
     }
 }
