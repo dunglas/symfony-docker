@@ -26,7 +26,7 @@ class GithubSearchCodeInRepoStrategy implements SearchCodeInRepoStrategyInterfac
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
-    public function searchCodeInRepo(string $code): JsonResponse
+    public function searchCodeInRepo(string $code, string $page, string $perPage): JsonResponse
     {
         $client = HttpClient::create(
             ['headers' => [

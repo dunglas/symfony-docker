@@ -7,6 +7,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class SearchCodeInRepoService
 {
+    const DEFAULT_PAGE = '1';
+    const DEFAULT_PER_PAGE = '25';
+
     private $searchCodeInRepoStrategy;
 
     public function __construct(SearchCodeInRepoStrategyInterface $searchCodeInRepoStrategy)
@@ -14,8 +17,12 @@ class SearchCodeInRepoService
         $this->searchCodeInRepoStrategy = $searchCodeInRepoStrategy;
     }
 
-    public function searchCodeInRepo(string $code): JsonResponse
+    public function searchCodeInRepo(
+        string $code,
+        string $page = self::DEFAULT_PAGE,
+        string $perPage = self::DEFAULT_PER_PAGE
+    ): JsonResponse
     {
-        return $this->searchCodeInRepoStrategy->searchCodeInRepo($code);
+        return $this->searchCodeInRepoStrategy->searchCodeInRepo($code, $page, $perPage);
     }
 }
