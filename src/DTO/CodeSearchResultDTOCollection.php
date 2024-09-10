@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DTO;
+namespace App\Collection;
 
 use App\DTO\CodeSearchResultDTO;
 use Countable;
