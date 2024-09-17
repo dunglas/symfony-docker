@@ -2,23 +2,19 @@
 
 namespace App\Controller;
 
-use Knp\Snappy\Pdf;
+use App\Tools\ApiClient;
+use App\Tools\FileGenerator;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpClient\Exception\ClientException;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Component\HttpKernel\KernelInterface;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 class DefaultController extends AbstractController
 {
-    const string ENVKEY_DELIVERY_URL = "APP_GET_DELIVERY_URL";
-
-    function __construct(
-        private KernelInterface     $appKernel,
-        private HttpClientInterface $client,
-        private Pdf                 $snappyPdf)
+    function __construct(private ApiClient       $apiClient,
+                         private FileGenerator   $fileGenerator,
+                         private LoggerInterface $logger)
     {
     }
 
@@ -26,50 +22,32 @@ class DefaultController extends AbstractController
     #[Route('/demo', name: 'demo')]
     public function demo(): Response
     {
-        return $this->createPdfResponse("demoFile", ["title" => "Demo File"]);
+        return $this->fileResponse(110, "K07", 1);
     }
 
-    #[Route('/{deliveryId}', name: 'default')]
-    public function get(string $deliveryId): Response
+    /** Default file creation action - z.B. https://localhost/110/1128944659/1 */
+    #[Route('/{clientId}/{igetPo}/{line}', name: 'default')]
+    public function get(int $clientId, string $igetPo, int $line): Response
     {
-        $rGetDelivery = $this->client->request("GET", $_ENV[self::ENVKEY_DELIVERY_URL] . "/$deliveryId");
-        try { // Response is loaded lazily
-            $content = $rGetDelivery->getContent();
-        } catch (ClientException $e) {
-            $content = $e->getMessage();
-        }
+        $this->logger->info(__METHOD__ . "($clientId, $igetPo, $line)");
 
-        $response = new Response($content,
-            $code = $rGetDelivery->getStatusCode());
-
-        if ($code == Response::HTTP_OK) {
-            try {
-                $response = $this->createPdfResponse($deliveryId, json_decode($content, true));
-            } catch (\Exception $e) {
-                $response = new Response($e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
-            }
+        if (!isset(FileGenerator::CLIENT_FILES[$clientId]))
+            $response = new Response("Unsupported client id - $clientId", Response::HTTP_NOT_IMPLEMENTED);
+        elseif ($packageNumber = $this->apiClient->getPackageNumber($igetPo)) {
+            $response = $this->fileResponse($clientId, $packageNumber, $line);
+        } else {
+            $response = new Response($this->apiClient->getLastResponse(), Response::HTTP_BAD_GATEWAY);
         }
 
         return $response;
     }
 
-    private function createPdfResponse(string $fileName, array $content): BinaryFileResponse
+    private function fileResponse(int $clientId, string $packageNumber, int $line): Response
     {
-        $outFile = sys_get_temp_dir() . "/$fileName.pdf";
-
-        if (file_exists($outFile))
-            unlink($outFile);
-
-        $baseDir = $this->appKernel->getProjectDir() . "/public";
-
-        $this->snappyPdf->generateFromHtml($this->renderView("pdf.twig",
-            $content + [
-                "cssHref" => "$baseDir/css/pdf.css",
-                "logoSrc" => "$baseDir/img/logo.svg"
-            ]),
-            $outFile,
-            ["enable-local-file-access" => true]);
-
-        return new BinaryFileResponse($outFile);
+        try {
+            return new BinaryFileResponse($this->fileGenerator->create($clientId, $packageNumber, $line));
+        } catch (\Exception $e) {
+            return new Response($e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }
