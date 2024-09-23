@@ -4,6 +4,10 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    app.zoho_url: 'https://www.zohoapis.eu/crm/v2/functions/getjobuuidforordernumber/actions/execute?auth_type=apikey&zapikey=1003.1801b849b9a8643e57d24584784da150.05c22699cb47711877f083472c6e28ff&orderNumber='
+    app.optipack_api: 
+        url: 'https://optipack.leuchtturmgruppe.de/api/jobs/'
+        token: 'Qvf9mw7QJsxWrLUt'
 
 services:
     # default configuration for services in *this* file

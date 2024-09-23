@@ -3,69 +3,101 @@
 namespace App\Tests;
 
 use App\Controller\DefaultController;
+use App\Tools\ApiClient;
+use App\Tools\FileGenerator;
+use PHPUnit\Framework\MockObject\MockObject;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpClient\MockHttpClient;
-use Symfony\Component\HttpClient\Response\MockResponse;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Contracts\HttpClient\ResponseInterface;
 
 /** @see DefaultController */
 class DefaultControllerTest extends WebTestCase
 {
-    private function performRequest(string $deliveryId, int $code, string $content): Response
+    private KernelBrowser $client;
+
+    protected function setUp(): void
     {
-        $client = static::createClient();
-        $client->getContainer()->set(HttpClientInterface::class,
-            new MockHttpClient(new MockResponse($content, ["http_code" => $code])));
-
-        $client->request('GET', "/$deliveryId");
-        return $client->getResponse();
-    }
-
-    private function getContentFromAssertedApiCode(string $deliveryId, int $code, string $content): string
-    {
-        $response = $this->performRequest($deliveryId, $code, $content);
-        $this->assertEquals($code, $response->getStatusCode());
-
-        return $response->getContent();
-    }
-
-    function testApiError404()
-    {
-        $content = $this->getContentFromAssertedApiCode(
-            $deliveryId = uniqid(),
-            $code = Response::HTTP_NOT_FOUND, '');
-        $this->assertEquals("HTTP $code returned for \"" . $_ENV[DefaultController::ENVKEY_DELIVERY_URL] . "/$deliveryId\".", $content);
-    }
-
-    function testApiError500()
-    {
-        $content = $this->getContentFromAssertedApiCode(
-            $deliveryId = uniqid(),
-            $code = Response::HTTP_INTERNAL_SERVER_ERROR,
-            $apiResponse = __METHOD__);
-        $this->assertStringContainsString($apiResponse, $content);
-        $this->assertStringContainsString("HTTP $code returned for &quot;https://torquato.de/$deliveryId&quot;.", $content);
-    }
-
-    function testCreateError()
-    {
-        $response = $this->performRequest(uniqid(), Response::HTTP_OK, "[]");
-        $this->assertEquals(Response::HTTP_INTERNAL_SERVER_ERROR, $response->getStatusCode());
-        $this->assertEquals('Variable "title" does not exist.', $response->getContent());
-    }
-
-    function testFileCreation()
-    {
-        $this->getContentFromAssertedApiCode(
-            $deliveryId = uniqid(), Response::HTTP_OK,
-            json_encode(["title" => __METHOD__]));
-        $this->assertFileExists(sys_get_temp_dir() . "/$deliveryId.pdf");
+        parent::setUp();
+        $this->client = static::createClient();
     }
 
     function testDemo()
     {
-        static::createClient()->request('GET', "/demo");
-        $this->assertFileExists(sys_get_temp_dir() . "/demoFile.pdf");
+        $this->client->request('GET', "/demo");
+        $this->assertInstanceOf(BinaryFileResponse::class,
+            $response = $this->client->getResponse());
+        $this->assertFileExists($response->getFile()->getPathname());
+    }
+
+    private function request(string $clientId, string $igetPo, string $line): Response
+    {
+        $this->client->request('GET', "/$clientId/$igetPo/$line");
+        return $this->client->getResponse();
+    }
+
+    function testInvalidClientId()
+    {
+        $response = $this->request(
+            $clientId = 1, 0, 0);
+        $this->assertSame(Response::HTTP_NOT_IMPLEMENTED, $response->getStatusCode());
+        $this->assertSame("Unsupported client id - $clientId", $response->getContent());
+    }
+
+    function testApiError()
+    {
+        $this->client->getContainer()->set(ApiClient::class,
+            $apiClient = $this->createMock(ApiClient::class));
+        $apiClient->expects($this->once())->method("getPackageNumber")
+            ->with(
+                $igetPo = uniqid())
+            ->willReturn(null);
+        $apiClient->expects($this->once())->method("getLastResponse")
+            ->willReturn(
+                $apiResponse = uniqid());
+
+        $response = $this->request(110, $igetPo, 0);
+        $this->assertSame(Response::HTTP_BAD_GATEWAY, $response->getStatusCode());
+        $this->assertSame($apiResponse, $response->getContent());
+    }
+
+    private function requestFileCreation(string $filePath): Response
+    {
+        $this->client->getContainer()->set(ApiClient::class,
+            $apiClient = $this->createMock(ApiClient::class));
+        $apiClient->expects($this->once())->method("getPackageNumber")
+            ->with(
+                $igetPo = uniqid())
+            ->willReturn(
+                $packageNumber = uniqid());
+
+        $this->client->getContainer()->set(FileGenerator::class,
+            $fileGenerator = $this->createMock(FileGenerator::class));
+        $fileGenerator->expects($this->once())->method("create")
+            ->with(
+                $clientId = 110, $packageNumber,
+                $line = 0)
+            ->willReturn($filePath);
+
+        return $this->request($clientId, $igetPo, $line);
+    }
+
+    function testFileNotFound()
+    {
+        $response = $this->requestFileCreation(
+            $notExistingFilePath = uniqid());
+        $this->assertSame(Response::HTTP_INTERNAL_SERVER_ERROR, $response->getStatusCode());
+        $this->assertSame("The file \"$notExistingFilePath\" does not exist", $response->getContent());
+    }
+
+    function testFileCreation()
+    {
+        $response = $this->requestFileCreation(
+            $filePath = __FILE__);
+        $this->assertSame(Response::HTTP_OK, $response->getStatusCode());
+        $this->assertInstanceOf(BinaryFileResponse::class, $response);
+        $this->assertEquals(new File($filePath), $response->getFile());
     }
 }
