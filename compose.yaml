@@ -27,6 +27,8 @@ services:
       - target: 443
         published: ${HTTP3_PORT:-443}
         protocol: udp
+    depends_on:
+      - mysql
 
   mysql:
     image: mysql:${MYSQL_VERSION:-8}

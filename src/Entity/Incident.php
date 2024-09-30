@@ -3,34 +3,37 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
-use App\Repository\PhotoRepository;
+use App\Repository\IncidentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: PhotoRepository::class)]
+#[ORM\Entity(repositoryClass: IncidentRepository::class)]
 #[ApiResource]
-class Photo
+class Incident
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $description = null;
-
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $date_add = null;
+    private ?\DateTimeInterface $date_incident = null;
 
-    #[ORM\ManyToOne(inversedBy: 'photos')]
-    private ?User $add_by = null;
+    #[ORM\ManyToOne(inversedBy: 'incidents')]
+    private ?bus $bus = null;
+
+    #[ORM\ManyToOne(inversedBy: 'incidents')]
+    private ?line $line = null;
+
+    #[ORM\ManyToOne(inversedBy: 'incidents')]
+    private ?user $user = null;
 
     /**
      * @var Collection<int, IncidentPhoto>
      */
-    #[ORM\OneToMany(targetEntity: IncidentPhoto::class, mappedBy: 'photo_id')]
+    #[ORM\OneToMany(targetEntity: IncidentPhoto::class, mappedBy: 'incident_id')]
     private Collection $incidentPhotos;
 
     public function __construct()
@@ -43,38 +46,50 @@ class Photo
         return $this->id;
     }
 
-    public function getDescription(): ?string
+    public function getDateIncident(): ?\DateTimeInterface
     {
-        return $this->description;
+        return $this->date_incident;
     }
 
-    public function setDescription(?string $description): static
+    public function setDateIncident(\DateTimeInterface $date_incident): static
     {
-        $this->description = $description;
+        $this->date_incident = $date_incident;
 
         return $this;
     }
 
-    public function getDateAdd(): ?\DateTimeInterface
+    public function getBus(): ?bus
     {
-        return $this->date_add;
+        return $this->bus;
     }
 
-    public function setDateAdd(\DateTimeInterface $date_add): static
+    public function setBus(?bus $bus): static
     {
-        $this->date_add = $date_add;
+        $this->bus = $bus;
 
         return $this;
     }
 
-    public function getAddBy(): ?User
+    public function getLine(): ?line
     {
-        return $this->add_by;
+        return $this->line;
     }
 
-    public function setAddBy(?User $add_by): static
+    public function setLine(?line $line): static
     {
-        $this->add_by = $add_by;
+        $this->line = $line;
+
+        return $this;
+    }
+
+    public function getUser(): ?user
+    {
+        return $this->user;
+    }
+
+    public function setUser(?user $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
@@ -91,7 +106,7 @@ class Photo
     {
         if (!$this->incidentPhotos->contains($incidentPhoto)) {
             $this->incidentPhotos->add($incidentPhoto);
-            $incidentPhoto->setPhoto($this);
+            $incidentPhoto->setIncident($this);
         }
 
         return $this;
@@ -101,8 +116,8 @@ class Photo
     {
         if ($this->incidentPhotos->removeElement($incidentPhoto)) {
             // set the owning side to null (unless already changed)
-            if ($incidentPhoto->getPhoto() === $this) {
-                $incidentPhoto->setPhoto(null);
+            if ($incidentPhoto->getIncident() === $this) {
+                $incidentPhoto->setIncident(null);
             }
         }
 
@@ -111,6 +126,6 @@ class Photo
 
     public function __toString()
     {
-        return (string) $this->getDescription();
+        return (string) $this->getId();
     }
 }
