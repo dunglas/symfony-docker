@@ -39,7 +39,6 @@ class IncidentCrudController extends AbstractCrudController
             AssociationField::new('line', 'Lines'),
             AssociationField::new('user', 'Users'),
             DateTimeField::new('date_incident')
-
         ];
     }
     
