@@ -49,3 +49,14 @@ Symfony Docker is available under the MIT License.
 ## Credits
 
 Created by [Kévin Dunglas](https://dunglas.dev), co-maintained by [Maxime Helias](https://twitter.com/maxhelias) and sponsored by [Les-Tilleuls.coop](https://les-tilleuls.coop).
+
+## Description of the app
+
+App Accident est une application Symfony destinée à gérer les accidents des bus de la RRTHV. Cela comprend de nombreux détails avec plusieurs entités principales : user, bus, line (ligne de bus), incident, photo, incidentPhoto. Elle utilise EasyAdmin pour une interface d'administration intuitive et efficace.
+
+## App Accident Docs
+
+1. [Easy Admin](docs/easyadmin.md)
+
+
+

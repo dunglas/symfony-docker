@@ -51,15 +51,13 @@ class DashboardController extends AbstractDashboardController
     
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Bus', 'fas fa-car', Bus::class);
-        yield MenuItem::linkToCrud('Photos', 'fas fa-google', Photo::class);
-        yield MenuItem::linkToCrud('Lines', 'fas fa-list', Line::class);
-        yield MenuItem::linkToCrud('Incidents', 'fas fa-comment', Incident::class);
-        yield MenuItem::linkToCrud('Incidents Photos', 'fas fa-tags', IncidentPhoto::class);
-        yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class);
-
-        //yield MenuItem::linkToCrud('Line', 'fas fa-user', Line::class);
+        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-house');
+        yield MenuItem::linkToCrud('Bus', 'fa-solid fa-bus', Bus::class);
+        yield MenuItem::linkToCrud('Photos', 'fa-solid fa-camera-retro', Photo::class);
+        yield MenuItem::linkToCrud('Lines', 'fa-solid fa-road', Line::class);
+        yield MenuItem::linkToCrud('Incidents', 'fa-solid fa-car-burst', Incident::class);
+        yield MenuItem::linkToCrud('Incidents Photos', 'fa-solid fa-images', IncidentPhoto::class);
+        yield MenuItem::linkToCrud('Users', 'fas fa-user-gear', User::class);
 
     }
     

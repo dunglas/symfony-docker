@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PhotoRepository::class)]
 #[ApiResource]
+#[ORM\HasLifecycleCallbacks]
 class Photo
 {
     #[ORM\Id]
@@ -22,7 +23,7 @@ class Photo
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $date_add = null;
+    private ?\DateTimeInterface $date_add = null;    
 
     #[ORM\ManyToOne(inversedBy: 'photos')]
     private ?User $add_by = null;
@@ -32,6 +33,9 @@ class Photo
      */
     #[ORM\OneToMany(targetEntity: IncidentPhoto::class, mappedBy: 'photo_id')]
     private Collection $incidentPhotos;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $file = null;
 
     public function __construct()
     {
@@ -60,11 +64,10 @@ class Photo
         return $this->date_add;
     }
 
-    public function setDateAdd(\DateTimeInterface $date_add): static
+    #[ORM\PrePersist]
+    public function setDateAdd(): void
     {
-        $this->date_add = $date_add;
-
-        return $this;
+        $this->date_add = $date_add = new \DateTimeImmutable;
     }
 
     public function getAddBy(): ?User
@@ -112,5 +115,17 @@ class Photo
     public function __toString()
     {
         return (string) $this->getDescription();
+    }
+
+    public function getFile(): ?string
+    {
+        return $this->file;
+    }
+
+    public function setFile(string $file): static
+    {
+        $this->file = $file;
+
+        return $this;
     }
 }
