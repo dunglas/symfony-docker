@@ -14,7 +14,7 @@ EasyAdmin est déjà installé dans le projet via Composer. Si vous avez besoin 
 composer require easycorp/easyadmin-bundle 
 ```
 
-Dans le config/bundles.php :
+Dans le 'config/bundles.php' :
 
 ````php
 return [
@@ -31,7 +31,7 @@ php bin/console make:admin:dashboard
 php bin/console make:admin:crud
 ````
 
-Modifier les fonctions dans [IncidentCrudController.php](Admin/IncidentCrudController.php)
+Modifier les fonctions dans 'IncidentCrudController.php'
 
 ````php
     public function configureCrud(Crud $crud): Crud
@@ -46,7 +46,9 @@ Modifier les fonctions dans [IncidentCrudController.php](Admin/IncidentCrudContr
             AssociationField::new('user', 'Users'), //qui permet de récupérer les enregistrements d'une autre table dans le formulaire de création des incidents, dans ce cas, on récupère la table 'user'
         ];
     }
-    ```
+    ````
+
+
 
 
 
