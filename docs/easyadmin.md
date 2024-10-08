@@ -31,7 +31,7 @@ php bin/console make:admin:dashboard
 php bin/console make:admin:crud
 ````
 
-Modifier les fonctions dans [IncidentCrudController.php](src/Controller/Admin/IncidentCrudController.php)
+Modifier les fonctions dans [IncidentCrudController.php](Admin/IncidentCrudController.php)
 
 ````php
     public function configureCrud(Crud $crud): Crud
