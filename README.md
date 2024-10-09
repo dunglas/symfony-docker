@@ -14,7 +14,7 @@ Pour les personnes administratives, cette App permettra d'analyser les données 
 - **📷 Association d'incidents avec des photos** : Les conducteurs peuvent ajouter des images aux rapports d'incidents pour un contexte visuel.
 - **🏢 Gestion des entités principales** : Suivi des utilisateurs, des bus, des lignes de bus et des incidents.
 - **🛠️ Interface d'administration via EasyAdmin** : Un tableau de bord intuitif pour gérer facilement les données de l'application.
-- **📊 sRapports analytiques** : Génération de rapports basés sur les incidents enregistrés, permettant une prise de décision informée.
+- **📊 Rapports analytiques** : Génération de rapports basés sur les incidents enregistrés, permettant une prise de décision informée.
  
 ## 💻 Technologies utilisées
  
