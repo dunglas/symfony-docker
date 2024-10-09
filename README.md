@@ -24,7 +24,7 @@ Pour les personnes administratives, cette App permettra d'analyser les données 
 4. **[phpMyAdmin](https://www.phpmyadmin.net/)** : Outil de gestion de base de données via une interface web pour simplifier l'administration de MySQL.
 5. **[Twig](https://twig.symfony.com/)** : Moteur de templates utilisé pour la gestion des vues dans Symfony.
 6. **[Doctrine ORM](https://www.doctrine-project.org/projects/doctrine-orm/en/latest/index.html)** : Outil de mappage objet-relationnel pour interagir avec la base de données.
-7. **[ApiPlatform](https://api-platform.com/)** : qui permet de gérer l'API simplement. 
+7. **[ApiPlatform](https://api-platform.com/)** : qui permet de gérer l'API. 
 
 ## Prérequis
 
