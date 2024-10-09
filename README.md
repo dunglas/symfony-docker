@@ -1,6 +1,6 @@
 # Description de l'application
 
-__Ce projet est en cours de développement__
+_Ce projet est en cours de développement, certaines fonctionnalités ne sont pas encore présentes et ce fichier sera très probablement ammener à être modifier_
 
 App Accident est une application Symfony destinée à gérer les accidents des bus de la RRTHV. Cela comprend de nombreux détails avec plusieurs entités principales : user, bus, line (ligne de bus), incident, photo, incidentPhoto.
 
@@ -24,7 +24,7 @@ Pour les personnes administratives, cette App permettra d'analyser les données 
 4. **[phpMyAdmin](https://www.phpmyadmin.net/)** : Outil de gestion de base de données via une interface web pour simplifier l'administration de MySQL.
 5. **[Twig](https://twig.symfony.com/)** : Moteur de templates utilisé pour la gestion des vues dans Symfony.
 6. **[Doctrine ORM](https://www.doctrine-project.org/projects/doctrine-orm/en/latest/index.html)** : Outil de mappage objet-relationnel pour interagir avec la base de données.
-7. **[ApiPlateform](https://api-platform.com/)** : qui permet de gérer l'API simplement. 
+7. **[ApiPlatform](https://api-platform.com/)** : qui permet de gérer l'API simplement. 
 
 ## Prérequis
 
@@ -39,8 +39,10 @@ Avant de démarrer, assurez-vous d'avoir installé les outils suivants :
 
 ## Documentation
 
+L'application est composée de 6 entités dont une entité (table) de relation (IncidentPhoto.php).
+
 1. Pour la gestion des entités incluant les CRUD j'utilise [Easy Admin](docs/easyadmin.md)
-2. Pour la gestion de l'Api j'utilise l'outil ApiPlateform
+2. Pour la gestion de l'Api j'utilise l'outil ApiPlatform
 
 ## Licence
 
@@ -51,13 +53,6 @@ Symfony Docker est disponible sous la licence MIT.
 Created by [Kévin Dunglas](https://dunglas.dev), co-maintained by [Maxime Helias](https://twitter.com/maxhelias) and sponsored by [Les-Tilleuls.coop](https://les-tilleuls.coop).
 
 
-### Cette version du README comprend :
-
-- Une description complète de l'application.
-- Les fonctionnalités principales détaillées.
-- La liste des technologies utilisées avec des descriptions.
-- Des instructions détaillées sur l'installation et la mise en route.
-- Une documentation pour faciliter la compréhension.
 
 
 
