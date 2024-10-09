@@ -1,5 +1,7 @@
 # Description de l'application
 
+__Ce projet est en cours de développement__
+
 App Accident est une application Symfony destinée à gérer les accidents des bus de la RRTHV. Cela comprend de nombreux détails avec plusieurs entités principales : user, bus, line (ligne de bus), incident, photo, incidentPhoto.
 
 Cette application permettra pour les conducteurs de bus, à enregistrer un accident via un formulaire.
@@ -8,19 +10,25 @@ Pour les personnes administratives, cette App permettra d'analyser les données 
 
 ## Fonctionnalités principales
 
-- Gestion des incidents de bus (création, mise à jour, suppression).
-- Association d'incidents avec des photos.
-- Gestion des entités principales : utilisateurs, bus, lignes de bus, incidents.
-- Interface d'administration via **EasyAdmin** pour gérer facilement les données.
+- **Gestion des incidents de bus** : Permet la création, la mise à jour et la suppression d'incidents, garantissant une traçabilité complète des événements.
+- **Association d'incidents avec des photos** : Les conducteurs peuvent ajouter des images aux rapports d'incidents pour un contexte visuel.
+- **Gestion des entités principales** : Suivi des utilisateurs, des bus, des lignes de bus et des incidents.
+- **Interface d'administration via EasyAdmin** : Un tableau de bord intuitif pour gérer facilement les données de l'application.
+- **Rapports analytiques** : Génération de rapports basés sur les incidents enregistrés, permettant une prise de décision informée.
 
 ## Technologies utilisées
 
-Ce projet utilise : 
-1. [Docker](https://www.docker.com/)
-2. Le Framework [Symfony](https://symfony.com/)
-3. Une base de données [MySQL](https://www.mysql.com/fr/) avec [phpMyAdmin](https://www.phpmyadmin.net/) pour la gestion de celle-ci.
+1. **[Docker](https://www.docker.com/)** : Pour la conteneurisation de l'application, facilitant le déploiement et la gestion des environnements.
+2. **[Symfony](https://symfony.com/)** : Framework PHP robuste pour le développement d'applications web.
+3. **[MySQL](https://www.mysql.com/fr/)** : Base de données relationnelle utilisée pour stocker les informations de l'application.
+4. **[phpMyAdmin](https://www.phpmyadmin.net/)** : Outil de gestion de base de données via une interface web pour simplifier l'administration de MySQL.
+5. **[Twig](https://twig.symfony.com/)** : Moteur de templates utilisé pour la gestion des vues dans Symfony.
+6. **[Doctrine ORM](https://www.doctrine-project.org/projects/doctrine-orm/en/latest/index.html)** : Outil de mappage objet-relationnel pour interagir avec la base de données.
+7. **[ApiPlateform](https://api-platform.com/)** : qui permet de gérer l'API simplement. 
 
 ## Prérequis
+
+Avant de démarrer, assurez-vous d'avoir installé les outils suivants :
 
 1. Si ce n'est pas déjà fait, [installez Docker Compose](https://docs.docker.com/compose/install/) (v2.10+).
 2. Clonez ce projet
@@ -31,15 +39,28 @@ Ce projet utilise :
 
 ## Documentation
 
-1. [Easy Admin](docs/easyadmin.md)
+1. Pour la gestion des entités incluant les CRUD j'utilise [Easy Admin](docs/easyadmin.md)
+2. Pour la gestion de l'Api j'utilise l'outil ApiPlateform
 
 ## Licence
 
-Symfony Docker is disponible sous la licenc MIT.
+Symfony Docker est disponible sous la licence MIT.
 
 ## Credits
 
 Created by [Kévin Dunglas](https://dunglas.dev), co-maintained by [Maxime Helias](https://twitter.com/maxhelias) and sponsored by [Les-Tilleuls.coop](https://les-tilleuls.coop).
+
+
+### Cette version du README comprend :
+
+- Une description complète de l'application.
+- Les fonctionnalités principales détaillées.
+- La liste des technologies utilisées avec des descriptions.
+- Des instructions détaillées sur l'installation et la mise en route.
+- Une documentation pour faciliter la compréhension.
+
+
+
 
 
 
