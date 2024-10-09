@@ -1,4 +1,4 @@
-## EasyAdmin
+# EasyAdmin
 
 - [Documentation officielle d'EasyAdmin](https://symfony.com/doc/current/bundles/EasyAdminBundle/index.html)
 
@@ -23,7 +23,7 @@ return [
 ];
 ````
 
-### Exemple de gestion avec l'entité Incident
+## Exemple de gestion avec l'entité Incident (en relation avec plusieurs tables)
 
 ````bash
 php bin/console make:admin:dashboard

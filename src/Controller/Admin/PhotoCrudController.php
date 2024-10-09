@@ -20,7 +20,8 @@ class PhotoCrudController extends AbstractCrudController
         return [
             TextField::new('description'),
             //DateTimeField::new('date_add'),
-            ImageField::new('file')->setUploadDir('public/uploads/profiles'),
+            ImageField::new('file')->setBasePath('uploads/profiles'),
+
         ];
     }
     

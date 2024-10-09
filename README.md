@@ -1,62 +1,48 @@
-# Symfony Docker
+# Description de l'application
 
-A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony](https://symfony.com) web framework,
-with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) inside!
+App Accident est une application Symfony destinée à gérer les accidents des bus de la RRTHV. Cela comprend de nombreux détails avec plusieurs entités principales : user, bus, line (ligne de bus), incident, photo, incidentPhoto.
 
-![CI](https://github.com/dunglas/symfony-docker/workflows/CI/badge.svg)
+Cette application permettra pour les conducteurs de bus, à enregistrer un accident via un formulaire.
 
-## Getting Started
+Pour les personnes administratives, cette App permettra d'analyser les données récoltées dans la BDD pour pouvoir les traiter.
 
-1. If not already done, [install Docker Compose](https://docs.docker.com/compose/install/) (v2.10+)
-2. Run `docker compose build --no-cache` to build fresh images
-3. Run `docker compose up --pull always -d --wait` to set up and start a fresh Symfony project
-4. Open `https://localhost` in your favorite web browser and [accept the auto-generated TLS certificate](https://stackoverflow.com/a/15076602/1352334)
-5. Run `docker compose down --remove-orphans` to stop the Docker containers.
+## Fonctionnalités principales
 
-## Features
+- Gestion des incidents de bus (création, mise à jour, suppression).
+- Association d'incidents avec des photos.
+- Gestion des entités principales : utilisateurs, bus, lignes de bus, incidents.
+- Interface d'administration via **EasyAdmin** pour gérer facilement les données.
 
-* Production, development and CI ready
-* Just 1 service by default
-* Blazing-fast performance thanks to [the worker mode of FrankenPHP](https://github.com/dunglas/frankenphp/blob/main/docs/worker.md) (automatically enabled in prod mode)
-* [Installation of extra Docker Compose services](docs/extra-services.md) with Symfony Flex
-* Automatic HTTPS (in dev and prod)
-* HTTP/3 and [Early Hints](https://symfony.com/blog/new-in-symfony-6-3-early-hints) support
-* Real-time messaging thanks to a built-in [Mercure hub](https://symfony.com/doc/current/mercure.html)
-* [Vulcain](https://vulcain.rocks) support
-* Native [XDebug](docs/xdebug.md) integration
-* Super-readable configuration
+## Technologies utilisées
 
-**Enjoy!**
+Ce projet utilise : 
+1. [Docker](https://www.docker.com/)
+2. Le Framework [Symfony](https://symfony.com/)
+3. Une base de données [MySQL](https://www.mysql.com/fr/) avec [phpMyAdmin](https://www.phpmyadmin.net/) pour la gestion de celle-ci.
 
-## Docs
+## Prérequis
 
-1. [Options available](docs/options.md)
-2. [Using Symfony Docker with an existing project](docs/existing-project.md)
-3. [Support for extra services](docs/extra-services.md)
-4. [Deploying in production](docs/production.md)
-5. [Debugging with Xdebug](docs/xdebug.md)
-6. [TLS Certificates](docs/tls.md)
-7. [Using MySQL instead of PostgreSQL](docs/mysql.md)
-8. [Using Alpine Linux instead of Debian](docs/alpine.md)
-9. [Using a Makefile](docs/makefile.md)
-10. [Updating the template](docs/updating.md)
-11. [Troubleshooting](docs/troubleshooting.md)
+1. Si ce n'est pas déjà fait, [installez Docker Compose](https://docs.docker.com/compose/install/) (v2.10+).
+2. Clonez ce projet
+3. Exécutez `docker compose build --no-cache` pour construire des images fraîches.
+4. Exécutez `docker compose up --pull always -d --wait` pour configurer et démarrer un nouveau projet Symfony.
+5. Ouvrez `https://localhost` dans votre navigateur web préféré et [acceptez le certificat TLS auto-généré](https://stackoverflow.com/a/15076602/1352334).
+6. Exécutez `docker compose down --remove-orphans` pour arrêter les conteneurs Docker.
 
-## License
+## Documentation
 
-Symfony Docker is available under the MIT License.
+1. [Easy Admin](docs/easyadmin.md)
+
+## Licence
+
+Symfony Docker is disponible sous la licenc MIT.
 
 ## Credits
 
 Created by [Kévin Dunglas](https://dunglas.dev), co-maintained by [Maxime Helias](https://twitter.com/maxhelias) and sponsored by [Les-Tilleuls.coop](https://les-tilleuls.coop).
 
-## Description of the app
 
-App Accident est une application Symfony destinée à gérer les accidents des bus de la RRTHV. Cela comprend de nombreux détails avec plusieurs entités principales : user, bus, line (ligne de bus), incident, photo, incidentPhoto. Elle utilise EasyAdmin pour une interface d'administration intuitive et efficace.
 
-## App Accident Docs
-
-1. [Easy Admin](docs/easyadmin.md)
 
 
 
