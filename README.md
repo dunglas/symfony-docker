@@ -41,7 +41,7 @@ Avant de démarrer, assurez-vous d'avoir installé les outils suivants :
 
 L'application est composée de 6 entités dont une entité (table) de relation (IncidentPhoto.php).
 
-1. Pour la gestion des entités incluant les CRUD j'utilise [Easy Admin](docs/easyadmin.md)
+1. Pour la [gestion des entités](docs/easyadmin.md) incluant les CRUD j'utilise EasyAdmin
 2. Pour la gestion de l'Api j'utilise l'outil ApiPlatform
 
 ## Licence
