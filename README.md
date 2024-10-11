@@ -43,3 +43,11 @@ L'application est composée de 6 entités dont une entité (table) de relation (
  
 1. Pour la [gestion des entités](docs/easyadmin.md) incluant les CRUD j'utilise EasyAdmin
 2. Pour la gestion de l'Api j'utilise l'outil ApiPlatform
+
+## Gestion de projet
+
+**[Trello](https://trello.com/b/hDAe2WVR/app-accident)**
+
+## Maquette et Mockup
+
+**[Figma](https://www.figma.com/design/6VyqRg6VQuUghBtTyQ7zLY/WireFrame-Maquette-RRTHV?node-id=30-128&t=F64onRHmzqbnMeZS-1)**
