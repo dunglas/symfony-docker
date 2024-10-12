@@ -40,7 +40,8 @@ with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) 
 8. [Using Alpine Linux instead of Debian](docs/alpine.md)
 9. [Using a Makefile](docs/makefile.md)
 10. [Updating the template](docs/updating.md)
-11. [Troubleshooting](docs/troubleshooting.md)
+11. [Manage multiple process with Supervisor](docs/supervisord.md)
+12. [Troubleshooting](docs/troubleshooting.md)
 
 ## License
 
