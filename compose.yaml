@@ -72,6 +72,15 @@ services:
       retries: 5
     restart: unless-stopped
 
+  redis:
+    image: "redis:latest"
+    container_name: "redis_service"
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./data:/data
+    command: ["redis-server", "--appendonly", "yes"]
+
 volumes:
   caddy_data:
   caddy_config:

@@ -25,13 +25,15 @@ return [
 
 ## Exemple de gestion avec l'entité Incident (en relation avec plusieurs tables)
 
+création du tableau de bord et d'un CRUD :
+
 ````bash
 php bin/console make:admin:dashboard
 
 php bin/console make:admin:crud
 ````
 
-Modifier les fonctions dans 'IncidentCrudController.php'
+Modifier les fonctions dans 'IncidentCrudController.php' :
 
 ````php
     public function configureCrud(Crud $crud): Crud

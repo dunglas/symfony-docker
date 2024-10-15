@@ -58,7 +58,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Incidents', 'fa-solid fa-car-burst', Incident::class);
         yield MenuItem::linkToCrud('Incidents Photos', 'fa-solid fa-images', IncidentPhoto::class);
         yield MenuItem::linkToCrud('Users', 'fas fa-user-gear', User::class);
-
+        
     }
     
 }

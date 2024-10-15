@@ -23,7 +23,7 @@ class Photo
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $date_add = null;    
+    private ?\DateTimeInterface $date_photo = null;    
 
     #[ORM\ManyToOne(inversedBy: 'photos')]
     private ?User $add_by = null;
@@ -31,7 +31,7 @@ class Photo
     /**
      * @var Collection<int, IncidentPhoto>
      */
-    #[ORM\OneToMany(targetEntity: IncidentPhoto::class, mappedBy: 'photo_id')]
+    #[ORM\OneToMany(targetEntity: IncidentPhoto::class, mappedBy: 'photo')]
     private Collection $incidentPhotos;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -59,15 +59,15 @@ class Photo
         return $this;
     }
 
-    public function getDateAdd(): ?\DateTimeInterface
+    public function getDatePhoto(): ?\DateTimeInterface
     {
-        return $this->date_add;
+        return $this->date_photo;
     }
 
     #[ORM\PrePersist]
-    public function setDateAdd(): void
+    public function setDatePhoto(): void
     {
-        $this->date_add = $date_add = new \DateTimeImmutable;
+        $this->date_photo = new \DateTimeImmutable('now', new \DateTimeZone('Europe/Paris'));
     }
 
     public function getAddBy(): ?User

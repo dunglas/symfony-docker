@@ -33,7 +33,7 @@ class Bus
     /**
      * @var Collection<int, Incident>
      */
-    #[ORM\OneToMany(targetEntity: Incident::class, mappedBy: 'bus_id')]
+    #[ORM\OneToMany(targetEntity: Incident::class, mappedBy: 'bus')]
     private Collection $incidents;
 
     public function __construct()

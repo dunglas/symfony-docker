@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: IncidentRepository::class)]
 #[ApiResource]
+#[ORM\HasLifecycleCallbacks]
 class Incident
 {
     #[ORM\Id]
@@ -25,7 +26,7 @@ class Incident
     private ?bus $bus = null;
 
     #[ORM\ManyToOne(inversedBy: 'incidents')]
-    private ?line $line = null;
+    private ?Line $line = null;
 
     #[ORM\ManyToOne(inversedBy: 'incidents')]
     private ?user $user = null;
@@ -33,7 +34,7 @@ class Incident
     /**
      * @var Collection<int, IncidentPhoto>
      */
-    #[ORM\OneToMany(targetEntity: IncidentPhoto::class, mappedBy: 'incident_id')]
+    #[ORM\OneToMany(targetEntity: IncidentPhoto::class, mappedBy: 'incident')]
     private Collection $incidentPhotos;
 
     public function __construct()
@@ -51,11 +52,10 @@ class Incident
         return $this->date_incident;
     }
 
-    public function setDateIncident(\DateTimeInterface $date_incident): static
+    #[ORM\PrePersist]
+    public function setDateIncident(): void
     {
-        $this->date_incident = $date_incident;
-
-        return $this;
+        $this->date_incident = new \DateTimeImmutable('now', new \DateTimeZone('Europe/Paris'));
     }
 
     public function getBus(): ?bus

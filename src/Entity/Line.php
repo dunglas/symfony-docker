@@ -23,7 +23,7 @@ class Line
     /**
      * @var Collection<int, Incident>
      */
-    #[ORM\OneToMany(targetEntity: Incident::class, mappedBy: 'line_id')]
+    #[ORM\OneToMany(targetEntity: Incident::class, mappedBy: 'line')]
     private Collection $incidents;
 
     public function __construct()
