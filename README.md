@@ -31,11 +31,12 @@ Pour les personnes administratives, cette App permettra d'analyser les données 
 Avant de démarrer, assurez-vous d'avoir installé les outils suivants :
  
 1. Si ce n'est pas déjà fait, [installez Docker Compose](https://docs.docker.com/compose/install/) (v2.10+).
-2. Clonez ce projet
-3. Exécutez `docker compose build --no-cache` pour construire des images fraîches.
-4. Exécutez `docker compose up --pull always -d --wait` pour configurer et démarrer un nouveau projet Symfony.
-5. Ouvrez `https://localhost` dans votre navigateur web préféré et [acceptez le certificat TLS auto-généré](https://stackoverflow.com/a/15076602/1352334).
-6. Exécutez `docker compose down --remove-orphans` pour arrêter les conteneurs Docker.
+2. Clonez ce projet : `https://github.com/Raphaelstrd/app-accident-backend.git `
+3. Exécutez `docker compose build` pour construire des images.
+4. Exécutez `docker compose up` pour configurer et démarrer un nouveau projet Symfony.
+5. Exécutez `composer install` dans le conteneur php.
+6. Ouvrez `https://localhost` dans votre navigateur web préféré et [acceptez le certificat TLS auto-généré](https://stackoverflow.com/a/15076602/1352334).
+7. Exécutez `docker compose down` pour arrêter les conteneurs Docker.
  
 ## 📖 Documentation
  
