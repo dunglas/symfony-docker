@@ -24,7 +24,7 @@ Pour les personnes administratives, cette App permettra d'analyser les données 
 4. **🛠️[phpMyAdmin](https://www.phpmyadmin.net/)** : Outil de gestion de base de données via une interface web pour simplifier l'administration de MySQL.
 5. **📄[Twig](https://twig.symfony.com/)** : Moteur de templates utilisé pour la gestion des vues dans Symfony.
 6. **🔗[Doctrine ORM](https://www.doctrine-project.org/projects/doctrine-orm/en/latest/index.html)** : Outil de mappage objet-relationnel pour interagir avec la base de données.
-7. **💩[ApiPlatform](https://api-platform.com/)** : qui permet de gérer l'API. 
+7. **🔭[ApiPlatform](https://api-platform.com/)** : qui permet de gérer l'API. 
  
 ## 🛠️ Prérequis
  
@@ -44,10 +44,10 @@ L'application est composée de 6 entités dont une entité (table) de relation (
 1. Pour la [gestion des entités](docs/easyadmin.md) incluant les CRUD j'utilise EasyAdmin
 2. Pour la gestion de l'Api j'utilise l'outil ApiPlatform
 
-## Gestion de projet
+## 🪛 Gestion de projet 
 
 **[Trello](https://trello.com/b/hDAe2WVR/app-accident)**
 
-## Maquette et Mockup
+## 🖌️ Maquette et Mockup 
 
 **[Figma](https://www.figma.com/design/6VyqRg6VQuUghBtTyQ7zLY/WireFrame-Maquette-RRTHV?node-id=30-128&t=F64onRHmzqbnMeZS-1)**
