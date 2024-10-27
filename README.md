@@ -39,8 +39,9 @@ with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) 
 7. [Using MySQL instead of PostgreSQL](docs/mysql.md)
 8. [Using Alpine Linux instead of Debian](docs/alpine.md)
 9. [Using a Makefile](docs/makefile.md)
-10. [Updating the template](docs/updating.md)
-11. [Troubleshooting](docs/troubleshooting.md)
+10. [Using async Symfony Messenger](docs/symfony-messenger.md)
+11. [Updating the template](docs/updating.md)
+12. [Troubleshooting](docs/troubleshooting.md)
 
 ## License
 
