@@ -55,7 +55,7 @@ Add new services to the `compose.prod.yaml`:
     image: ${IMAGES_PREFIX:-}app-php-worker-async
     build:
       context: .
-      target: frankenphp_dev
+      target: frankenphp_prod
     command: ['/app/bin/console', 'messenger:consume', 'async', '-vv', '--time-limit=60', '--limit=10', '--memory-limit=128M']
     depends_on:
       php:
