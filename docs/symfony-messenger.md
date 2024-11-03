@@ -41,7 +41,7 @@ Two instances of `php-worker-async` will start after `php` container which does 
 
 To add additional workers just copy `php-worker-async` service and replace every usage of the `async` in the new service with appropriate value for the new worker.
 
-Add new service to the `compose.prod.yaml`:
+Add new services to the `compose.prod.yaml`:
 ```yaml
   php-worker:
     profiles:
