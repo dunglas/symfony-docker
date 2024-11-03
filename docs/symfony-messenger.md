@@ -3,15 +3,14 @@
 Add new service to the `compose.yaml`:
 ```yaml
   php-worker:
-  image: ${IMAGES_PREFIX:-}app-php-worker
-  restart: unless-stopped
-  environment:
-    - RUN_MIGRATIONS=false
-  healthcheck:
-    disable: true
-  depends_on:
-    - php
-```
+    image: ${IMAGES_PREFIX:-}app-php-worker
+    restart: unless-stopped
+    environment:
+      - RUN_MIGRATIONS=false
+    healthcheck:
+      disable: true
+    depends_on:
+      - php
 
 Add new services to the `compose.override.yaml`:
 ```yaml
@@ -44,18 +43,16 @@ To add additional workers just copy `php-worker-async` service and replace every
 Add new service to the `compose.prod.yaml`:
 ```yaml
   php-worker:
-  build:
-    context: .
-    target: frankenphp_prod
-  environment:
-    APP_SECRET: ${APP_SECRET}
-```
+    build:
+      context: .
+      target: frankenphp_prod
+    environment:
+      APP_SECRET: ${APP_SECRET}
 
 Apply the following changes to the `frankenphp/docker-entrypoint.sh`:
 ```patch
 -	if grep -q ^DATABASE_URL= .env; then
-+	run_migrations=${RUN_MIGRATIONS:-true}
-+	if grep -q ^DATABASE_URL= .env && [ "$run_migrations" = "true" ]; then
++	if grep -q ^DATABASE_URL= .env && [ "${RUN_MIGRATIONS:-true}" = "true" ]; then
 ```
 
 > [!NOTE]
