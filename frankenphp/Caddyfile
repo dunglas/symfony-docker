@@ -10,6 +10,7 @@
 
 {$SERVER_NAME:localhost} {
 	log {
+		{$CADDY_SERVER_LOG_OPTIONS}
 		# Redact the authorization query parameter that can be set by Mercure
 		format filter {
 			request>uri query {
