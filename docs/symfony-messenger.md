@@ -52,6 +52,7 @@ Add new services to the `compose.prod.yaml`:
     extends:
       file: compose.yaml
       service: php-worker
+    image: ${IMAGES_PREFIX:-}app-php-worker-async
     build:
       context: .
       target: frankenphp_prod
