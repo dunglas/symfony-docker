@@ -44,11 +44,22 @@ To add additional workers just copy `php-worker-async` service and replace every
 Add new service to the `compose.prod.yaml`:
 ```yaml
   php-worker:
+    profiles:
+      - donotstart
+
+  php-worker-async:
+    scale: 2
+    extends:
+      file: compose.yaml
+      service: php-worker
+    image: ${IMAGES_PREFIX:-}app-php-worker-async
     build:
       context: .
-      target: frankenphp_prod
-    environment:
-      APP_SECRET: ${APP_SECRET}
+      target: frankenphp_dev
+    command: ['/app/bin/console', 'messenger:consume', 'async', '-vv', '--time-limit=60', '--limit=10', '--memory-limit=128M']
+    depends_on:
+      php:
+        condition: service_healthy
 ```
 
 Apply the following changes to the `frankenphp/docker-entrypoint.sh`:
