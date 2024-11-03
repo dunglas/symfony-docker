@@ -11,6 +11,7 @@ Add new service to the `compose.yaml`:
       disable: true
     depends_on:
       - php
+```
 
 Add new services to the `compose.override.yaml`:
 ```yaml
@@ -48,6 +49,7 @@ Add new service to the `compose.prod.yaml`:
       target: frankenphp_prod
     environment:
       APP_SECRET: ${APP_SECRET}
+```
 
 Apply the following changes to the `frankenphp/docker-entrypoint.sh`:
 ```patch
