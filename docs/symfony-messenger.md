@@ -28,7 +28,7 @@ Add new services to the `compose.override.yaml`:
     build:
       context: .
       target: frankenphp_dev
-    command: ['/app/bin/console', 'messenger:consume', 'async', '-vv', '--time-limit=60', '--limit=10', '--memory-limit=128M']
+    command: ['bin/console', 'messenger:consume', 'async', '-vv', '--time-limit=60', '--limit=10', '--memory-limit=128M']
     volumes:
       - ./:/app
       - /app/var/
@@ -56,7 +56,7 @@ Add new services to the `compose.prod.yaml`:
     build:
       context: .
       target: frankenphp_prod
-    command: ['/app/bin/console', 'messenger:consume', 'async', '-vv', '--time-limit=60', '--limit=10', '--memory-limit=128M']
+    command: ['bin/console', 'messenger:consume', 'async', '-vv', '--time-limit=60', '--limit=10', '--memory-limit=128M']
     depends_on:
       php:
         condition: service_healthy
