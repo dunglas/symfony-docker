@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier un article{% endblock %}
+
+{% block body %}
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">Modification de l'article</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="{{ path('app_dashboard') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{ path('article_show') }}">Liste des articles</a></li>
+                    <li class="breadcrumb-item active">Modifier l'article</li>
+                </ol>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Modification de l'article</h5>
+                        
+                        {# Affichage du formulaire de modification de l'article #}
+                        {{ form_start(form) }}
+                            <div class="form-group">
+                                {{ form_row(form.titre) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.texte) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.publie) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.date) }}
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}

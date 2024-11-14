@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des articles{% endblock %}
+
+{% block body %}
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">Listes des articles</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Liste des articles</li>
+                </ol>
+
+                <div class="row">
+                    {% if articles is empty %}
+                        <p class="text-center">Aucun article n'est disponible pour le moment.</p>
+                    {% else %}
+                        {% for article in articles %}
+                            <div class="col-md-4 mb-4">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ article.titre }} (ID: {{ article.id }})</h5>
+                                        <p class="card-text">{{ article.texte|slice(0, 150) ~ '...' }}</p>
+                                        <p class="card-text">
+                                            <small class="text-muted">Créé le {{ article.date|date('d/m/Y') }}</small>
+                                        </p>
+                                        
+                                        <!-- Bouton Modifier (bleu) -->
+                                        <a href="{{ path('app_article_update', { id: article.id }) }}" class="btn btn-primary btn-sm">Modifier</a>
+                                        
+                                        <!-- Bouton Supprimer (rouge) -->
+                                        
+                                        <form action="{{ path('article_delete', { id: article.id }) }}" method="post" style="display:inline;" onsubmit="return confirm('Voulez-vous vraiment supprimer cet article ?');">         
+                                        <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                                        </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div style="height: 100vh"></div>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}
