@@ -1,3 +1,4 @@
+---
 name: CI
 
 on:
@@ -62,12 +63,16 @@ jobs:
         if: false # Remove this line if Doctrine ORM is installed
         run: docker compose exec -T php bin/console -e test doctrine:schema:validate
   lint:
-    name: Docker Lint
+    name: Lint
     runs-on: ubuntu-latest
     steps:
       -
         name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       -
-        name: Lint Dockerfile
-        uses: hadolint/hadolint-action@v3.1.0
+        name: Lint Code Base
+        uses: super-linter/super-linter@v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
