@@ -19,7 +19,7 @@
 		}
 	}
 
-	root * /app/public
+	root /app/public
 	encode zstd br gzip
 
 	mercure {
@@ -44,5 +44,9 @@
 	# Disable Topics tracking if not enabled explicitly: https://github.com/jkarlin/topics
 	header ?Permissions-Policy "browsing-topics=()"
 
-	php_server
+	@phpRoute not file {path}
+	rewrite @phpRoute index.php
+	@frontController path index.php
+	php @frontController
+	file_server
 }
