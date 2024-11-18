@@ -45,8 +45,8 @@
 	header ?Permissions-Policy "browsing-topics=()"
 
 	@phpRoute {
+		not path /.well-known/mercure*
 		not file {path}
-		not path /.well-known/mercure
 	}
 	rewrite @phpRoute index.php
 
