@@ -9,6 +9,15 @@ First, install the `symfony/orm-pack` package as described: `docker compose exec
 Change the database image to use MySQL instead of PostgreSQL in `compose.yaml`:
 
 ```diff
+services:
+    php:
+    environment:
+...
+-     DATABASE_URL: postgresql://${POSTGRES_USER:-app}:${POSTGRES_PASSWORD:-!ChangeMe!}@database:5432/${POSTGRES_DB:-app}?serverVersion=${POSTGRES_VERSION:-15}&charset=${POSTGRES_CHARSET:-utf8}
++     DATABASE_URL=mysql://${MYSQL_USER:-app}:${MYSQL_PASSWORD:-!ChangeMe!}@database:3306/${MYSQL_DATABASE:-app}?serverVersion=${MYSQL_VERSION:-8}&charset=${MYSQL_CHARSET:-utf8mb4}
+...
+
+...
 ###> doctrine/doctrine-bundle ###
 -   image: postgres:${POSTGRES_VERSION:-15}-alpine
 +   image: mysql:${MYSQL_VERSION:-8}
