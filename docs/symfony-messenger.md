@@ -37,9 +37,11 @@ Add new services to the `compose.override.yaml`:
         condition: service_healthy
 ```
 
-Two instances of `php-worker-async` will start after `php` container which does installation of Symfony. They will share app folder because of `- ./:/app` in volumes configuration. `- /app/var/` defines that every container will have its own and separate `/app/var/` folder, [note missing `:`](https://stackoverflow.com/questions/46166304/docker-compose-volumes-without-colon).
+Two instances, which are defined by `scale` property, of `php-worker-async` will start after `php` container which does installation of Symfony and runs database migrations. They will share app folder because of `- ./:/app` in volumes configuration. `- /app/var/` defines that every container will have its own and separate `/app/var/` folder, [note missing `:`](https://stackoverflow.com/questions/46166304/docker-compose-volumes-without-colon).
 
 To add additional workers just copy `php-worker-async` service and replace every usage of the `async` in the new service with appropriate value for the new worker.
+
+In `compose.yaml` we have base `php-worker` service which is extended by `php-worker-async` in `compose.override.yaml` and in `compose.prod.yaml` with `extends` property. [`donotstart` service profile](https://docs.docker.com/compose/how-tos/profiles/) on `php-worker` service is used to prevent it from starting, because it is only used as a base for eventual multiple workers with different configuration.
 
 Add new services to the `compose.prod.yaml`:
 ```yaml
