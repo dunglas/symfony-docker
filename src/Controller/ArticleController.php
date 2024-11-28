@@ -25,6 +25,7 @@ class ArticleController extends AbstractController
 
     public function create(EntityManagerInterface $entityManager,Request $request): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $article = new Article();
         $form=$this->createForm(ArticleType::class,$article);
 
@@ -48,6 +49,7 @@ class ArticleController extends AbstractController
 
     public function update(Request $request, EntityManagerInterface $entityManager, int $id): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $article = $entityManager->getRepository(Article::class)->find($id);
 
         if (!$article) {
@@ -86,7 +88,7 @@ class ArticleController extends AbstractController
 
     public function delete(EntityManagerInterface $entityManager, int $id)
     {
-
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $article = $entityManager->getRepository(Article::class)->find($id);
         $entityManager->remove($article); 
         $entityManager->flush();

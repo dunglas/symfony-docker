@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">Register</h1>
+
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Create an Account</h5>
+
+                                <div class="w3-panel w3-pale-red w3-border">
+                                    {{ form_errors(registrationForm) }}
+                                </div>
+
+                                {{ form_start(registrationForm) }}
+                                    <div class="mb-3">
+                                        {{ form_row(registrationForm.email) }}
+                                    </div>
+
+                                    <div class="mb-3">
+                                        {{ form_row(registrationForm.plainPassword, {
+                                            label: 'Password',
+                                        }) }}
+                                    </div>
+
+                                    <div class="mb-3">
+                                        {{ form_row(registrationForm.agreeTerms, {
+                                        }) }}
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Register</button>
+                                {{ form_end(registrationForm) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="height: 100vh"></div>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        This is the end of the registration form.
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}

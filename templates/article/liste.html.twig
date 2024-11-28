@@ -20,6 +20,8 @@
                             <div class="col-md-4 mb-4">
                                 <div class="card h-100">
                                     <div class="card-body">
+                                    <!-- todo : faire pour afficher l'image de l'article -->
+                                        <img src="{{ asset('uploads/' ~ article.image) }}" alt="{{ article.titre }}" class="img-fluid mb-3">
                                         <h5 class="card-title">{{ article.titre }} (ID: {{ article.id }})</h5>
                                         <p class="card-text">{{ article.texte|slice(0, 150) ~ '...' }}</p>
                                         <p class="card-text">
