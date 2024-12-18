@@ -46,6 +46,27 @@ You can now use the debugger!
     XDEBUG_SESSION=1 PHP_IDE_CONFIG="serverName=symfony" php bin/console ...
     ```
 
+## Debugging with Xdebug and VScode
+
+1. Install necessery [PHP extension for VScode](https://marketplace.visualstudio.com/items?itemName=DEVSENSE.phptools-vscode).
+2. Add [debug configuration](https://code.visualstudio.com/docs/editor/debugging#_launch-configurations) into your `.vscode\launch.json` file.
+
+    Example:
+    
+    ```
+    {
+        "name": "Listen for Xdebug",
+        "type": "php",
+        "request": "launch",
+        "port": 9003,
+        "pathMappings": {
+            "/app": "${workspaceFolder}"
+        }
+    }
+    ```
+    
+3. Use [Run and Debug](https://code.visualstudio.com/docs/editor/debugging) options and run  `Listen for Xdebug` command to listen for upcomming connections with [the **Xdebug extension**](https://xdebug.org/docs/step_debug#browser-extensions) installed and active.
+
 ## Troubleshooting
 
 Inspect the installation with the following command. The Xdebug version should be displayed.
