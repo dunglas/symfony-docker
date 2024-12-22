@@ -32,9 +32,29 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted()&& $form->isValid()){
             $article = $form ->getData();
+            $imageFile = $form->get('image')->getData();
+
+    
+
+            if ($imageFile) {
+                // Donnez un nom unique au fichier
+                $newFilename = uniqid().'.'.$imageFile->guessExtension();
+
+                // Déplacez le fichier vers le répertoire configuré
+                $imageFile->move(
+                    $this->getParameter('images_directory'), // Répertoire défini dans les paramètres
+                    $newFilename
+                );
+
+                // Enregistrez le nom du fichier dans l'entité
+                $article->setImage($newFilename);
+            }
+
 
             $entityManager->persist($article);
             $entityManager->flush();
+            return $this->redirectToRoute('article_show');
+
         }
 
         return $this->render('article/creer.html.twig', [
@@ -62,12 +82,32 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('image')->getData();
+
+            if ($imageFile) {
+                // Supprimer l'ancienne image si elle existe
+                if ($article->getImage()) {
+                    $oldImagePath = $this->getParameter('images_directory') . '/' . $article->getImage();
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
+
+                // Télécharger et enregistrer la nouvelle image
+                $newFilename = uniqid().'.'.$imageFile->guessExtension();
+                $imageFile->move(
+                    $this->getParameter('images_directory'),
+                    $newFilename
+                );
+                $article->setImage($newFilename);
+            }
+
             $entityManager->flush(); // Sauvegarde des modifications
     
             return $this->redirectToRoute('article_show');
         }
 
-        return $this->render('article/creer.html.twig', [
+        return $this->render('article/modifier.html.twig', [
             'form' => $form->createView(),
             'article' => $article
         ]);

@@ -37,10 +37,6 @@ class ArticleType extends AbstractType
                 'label_attr' => ['class' => 'form-label mt-2'],
                 'widget' => 'single_text'
             ])
-            ->add('save', SubmitType::class, [
-                'label' => 'Créer l\'article',
-                'attr' => ['class' => 'btn btn-primary mt-5']
-            ])
             ->add('image', FileType::class, [
                 'attr' => ['class' => 'form-control'],
                 'label_attr' => ['class' => 'form-label mt-2'],
@@ -56,7 +52,12 @@ class ArticleType extends AbstractType
                         'mimeTypesMessage' => 'Veuillez télécharger une image au format png ou jpeg',
                     ]),
                 ],
+            ])
+            ->add('save', SubmitType::class, [
+                'label' => 'Créer l\'article',
+                'attr' => ['class' => 'btn btn-primary mt-5']
             ]);
+            
     }
 
     public function configureOptions(OptionsResolver $resolver): void

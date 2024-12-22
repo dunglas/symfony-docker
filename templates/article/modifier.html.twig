@@ -8,7 +8,7 @@
             <div class="container-fluid px-4">
                 <h1 class="mt-4">Modification de l'article</h1>
                 <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item"><a href="{{ path('app_dashboard') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                     <li class="breadcrumb-item"><a href="{{ path('article_show') }}">Liste des articles</a></li>
                     <li class="breadcrumb-item active">Modifier l'article</li>
                 </ol>
@@ -31,8 +31,9 @@
                             <div class="form-group">
                                 {{ form_row(form.date) }}
                             </div>
-
-                            <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                            <div class= "form-group">
+                                {{ form_row(form.image) }}
+                            </div>
                         {{ form_end(form) }}
                     </div>
                 </div>

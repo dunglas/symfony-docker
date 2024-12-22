@@ -6,7 +6,7 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Login</h1>
+                <h1 class="mt-4">Se connecter</h1>
 
                 <div class="row">
                     <div class="col-md-6 mb-4">
@@ -21,11 +21,11 @@
                                 {% if app.user %}
                                     <div class="mb-3">
                                         You are logged in as {{ app.user.userIdentifier }}, 
-                                        <a href="{{ path('app_logout') }}">Logout</a>
+                                        <a href="{{ path('app_logout') }}">Se déconnecter</a>
                                     </div>
                                 {% endif %}
 
-                                <h5 class="card-title">Please sign in</h5>
+                                <h5 class="card-title">Connectez-vous</h5>
 
                                 <form method="post">
                                     <div class="mb-3">
@@ -34,7 +34,7 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="password" class="form-label">Password</label>
+                                        <label for="password" class="form-label">Mot de passe</label>
                                         <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
                                     </div>
 
@@ -50,7 +50,7 @@
                                         </div>
                                     #}
 
-                                    <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
+                                    <button class="btn btn-lg btn-primary" type="submit">Se connecter</button>
                                 </form>
                             </div>
                         </div>
