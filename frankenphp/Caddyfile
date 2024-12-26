@@ -44,6 +44,12 @@
 	# Disable Topics tracking if not enabled explicitly: https://github.com/jkarlin/topics
 	header ?Permissions-Policy "browsing-topics=()"
 
+    # Block direct access to index.php
+    @blockIndexPHP {
+        path /index.php
+    }
+    respond @blockIndexPHP 404
+
 	@phpRoute {
 		not path /.well-known/mercure*
 		not file {path}
