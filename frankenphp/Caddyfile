@@ -54,6 +54,6 @@
 	php @frontController
 
 	file_server {
-		hide index.php
+		hide *.php
 	}
 }
