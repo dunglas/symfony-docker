@@ -53,5 +53,7 @@
 	@frontController path index.php
 	php @frontController
 
-	file_server
+	file_server {
+		hide index.php
+	}
 }
