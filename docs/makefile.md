@@ -95,3 +95,16 @@ sf: ## List all Symfony commands or pass the parameter "c=" to run a given comma
 cc: c=c:c ## Clear the cache
 cc: sf
 ```
+
+## Adding and modifying jobs
+
+Make sure to add this configuration to the [.editorconfig](/.editorconfig) file, so that it forces your editor to use tabs instead of spaces (Makefiles are not compatible with spaces by default).
+
+```.editorconfig
+
+[Makefile]
+indent_style = tab
+
+```
+
+If you still want to use space, you can configure the prefix in the Makefile itself. See [this answer on StackExchange](https://retrocomputing.stackexchange.com/a/20303).
