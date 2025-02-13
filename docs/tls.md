@@ -31,6 +31,7 @@ For instance, to use self-signed certificates created with [mkcert](https://gith
     php:
       environment:
     +    CADDY_SERVER_EXTRA_DIRECTIVES: "tls /etc/caddy/certs/tls.pem /etc/caddy/certs/tls.key"
+    +    SERVER_NAME: server-name.localhost"
         # ...
       volumes:
     +    - ./frankenphp/certs:/etc/caddy/certs:ro
