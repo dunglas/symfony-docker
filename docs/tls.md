@@ -23,7 +23,7 @@ For instance, to use self-signed certificates created with [mkcert](https://gith
 
 1. Locally install `mkcert`
 2. Create the folder storing the certs:
-   `mkdir frankenphp/certs -p`
+   `mkdir -p frankenphp/certs`
 3. Generate the certificates for your local host (example: "server-name.localhost"):
    `mkcert -cert-file frankenphp/certs/tls.pem -key-file frankenphp/certs/tls.key "server-name.localhost"`
 4. Add these lines to the `./compose.override.yaml` file about `CADDY_SERVER_EXTRA_DIRECTIVES` environment and volume for the `php` service :
