@@ -84,7 +84,7 @@ Then, you can start your dev container(s) by running: `docker compose up -d`.
 
 <summary>Output expected for the production build process</summary>
 
-Start by building the image production.
+Start by building the production image.
 You <ins>have to</ins> specify the `compose.yaml` and `compose.prod.yaml` files.
 
 ```
