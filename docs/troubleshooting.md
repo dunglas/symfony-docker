@@ -58,7 +58,7 @@ docker compose up -d
 <summary>Output expected for the production build process</summary>
 
 To build the production image, you <ins>have to</ins> specify the `compose.yaml` and `compose.prod.yaml` files.
-This means you have to run: `docker compose -f compose.yaml -f compose.prod.yaml up -d` in order to build your image
+This means you have to run: `docker compose -f compose.yaml -f compose.prod.yaml build` in order to build your image
 (careful: the order of `-f` arguments is important).
 
 That way, you will see that `frankenphp_base` and `frankenphp_prod` are built this time, which is what you will need for production purposes.
