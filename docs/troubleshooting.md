@@ -13,7 +13,7 @@ See more in the [TLS section](tls.md)
 ### How to properly build fresh images for production use
 
 Remember that, by default, if you run `docker compose up -d`, only the files `compose.yaml` and `compose.override.yaml` will be used.
-See https://docs.docker.com/compose/intro/compose-application-model.
+See https://docs.docker.com/compose/intro/compose-application-model and https://docs.docker.com/compose/how-tos/multiple-compose-files/merge.
 
 If you need to build images for production environment, you have to use the following command:
 
