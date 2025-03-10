@@ -42,7 +42,12 @@ This means that running `docker compose <command>` or `docker compose -f compose
 And in doing so, images `frankenphp_base` and `frankenphp_dev` are built. And not `frankenphp_prod`.
 Which is good enough for dev purposes.
 
-Then, you can start your dev container(s) by running: `docker compose up -d`.
+Then, you can start your dev container(s) by running:
+
+```console
+docker compose up -d
+```
+
 
 </details>
 
