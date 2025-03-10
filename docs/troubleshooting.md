@@ -58,7 +58,11 @@ This means you have to run: `docker compose -f compose.yaml -f compose.prod.yaml
 
 That way, you will see that `frankenphp_base` and `frankenphp_prod` are built this time, which is what you will need for production purposes.
 
-You can finally start your prod container(s) by running: `docker compose -f compose.yaml -f compose.prod.yaml up -d`.
+You can finally start your prod container(s) by running:
+
+```console
+docker compose -f compose.yaml -f compose.prod.yaml up -d
+```
 
 </details>
 
