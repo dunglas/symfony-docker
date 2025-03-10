@@ -16,7 +16,10 @@ Remember that, by default, if you run `docker compose up -d`, only the files `co
 See https://docs.docker.com/compose/intro/compose-application-model.
 
 If you need to build images for production environment, you have to use the following command:
-`docker compose -f compose.yaml -f compose.prod.yaml build --no-cache`.
+
+```console
+docker compose -f compose.yaml -f compose.prod.yaml build --no-cache
+```
 
 ### Why application outputs `phpinfo()`
 
