@@ -60,6 +60,10 @@ git clone git@github.com:<username>/<project-name>.git
 Go into the directory containing your project (`<project-name>`), and start the app in production mode:
 
 ```console
+# Build fresh production image
+docker compose -f compose.yaml -f compose.prod.yaml build --no-cache
+
+# Start container
 SERVER_NAME=your-domain-name.example.com \
 APP_SECRET=ChangeMe \
 CADDY_MERCURE_JWT_SECRET=ChangeThisMercureHubJWTSecretKey \
