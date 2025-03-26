@@ -3,6 +3,12 @@
 
 	frankenphp {
 		{$FRANKENPHP_CONFIG}
+
+		worker {
+			file ./public/index.php
+			env APP_RUNTIME Runtime\FrankenPhpSymfony\Runtime
+			{$FRANKENPHP_WORKER_CONFIG}
+		}
 	}
 }
 
