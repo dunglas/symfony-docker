@@ -10,7 +10,7 @@ Change the database image to use MySQL instead of PostgreSQL in `compose.yaml`:
 
 ```diff
 ###> doctrine/doctrine-bundle ###
--   image: postgres:${POSTGRES_VERSION:-15}-alpine
+-   image: postgres:${POSTGRES_VERSION:-16}-alpine
 +   image: mysql:${MYSQL_VERSION:-8}
     environment:
 -     POSTGRES_DB: ${POSTGRES_DB:-app}
