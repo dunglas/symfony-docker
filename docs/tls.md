@@ -34,7 +34,7 @@ For instance, to use self-signed certificates created with [mkcert](https://gith
         # ...
       volumes:
     +    - ./frankenphp/certs:/etc/caddy/certs:ro
-        - ./public:/app/public:ro
+        # ...
     ```
 5. Restart your `php` service
 
