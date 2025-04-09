@@ -12,13 +12,13 @@ See more in the [TLS section](tls.md)
 
 ### How to properly build fresh images for production use
 
-Remember that, by default, if you run `docker compose up -d`, only the files `compose.yaml` and `compose.override.yaml` will be used.
+Remember that, by default, if you run `docker compose up --wait`, only the files `compose.yaml` and `compose.override.yaml` will be used.
 See https://docs.docker.com/compose/intro/compose-application-model and https://docs.docker.com/compose/how-tos/multiple-compose-files/merge.
 
 If you need to build images for production environment, you have to use the following command:
 
 ```console
-docker compose -f compose.yaml -f compose.prod.yaml build --no-cache
+docker compose -f compose.yaml -f compose.prod.yaml build --pull --no-cache
 ```
 
 ### Why application outputs `phpinfo()`
@@ -27,7 +27,7 @@ Both dev and prod images have the same image tag (`<...>app-php:latest`). This c
 It is important to make sure that your image is the appropriate one for the current environment.
 
 If you are not careful about this, and try to run your production container(s) with
-`docker compose -f compose.yaml -f compose.prod.yaml up -d`
+`docker compose -f compose.yaml -f compose.prod.yaml up --wait`
 without the right build process beforehand, your application **will still launch**, but will be displaying an output of `phpinfo()` (or possibly even a HTTP 500 error page).
 
 See details below.
@@ -45,7 +45,7 @@ Which is good enough for dev purposes.
 Then, you can start your dev container(s) by running:
 
 ```console
-docker compose up -d
+docker compose up --wait
 ```
 
 
@@ -58,7 +58,7 @@ docker compose up -d
 <summary>Output expected for the production build process</summary>
 
 To build the production image, you <ins>have to</ins> specify the `compose.yaml` and `compose.prod.yaml` files.
-This means you have to run: `docker compose -f compose.yaml -f compose.prod.yaml build` in order to build your image
+This means you have to run: `docker compose -f compose.yaml -f compose.prod.yaml build --pull --no-cache` in order to build your image
 (careful: the order of `-f` arguments is important).
 
 That way, you will see that `frankenphp_base` and `frankenphp_prod` are built this time, which is what you will need for production purposes.
@@ -66,7 +66,7 @@ That way, you will see that `frankenphp_base` and `frankenphp_prod` are built th
 You can finally start your prod container(s) by running:
 
 ```console
-docker compose -f compose.yaml -f compose.prod.yaml up -d
+docker compose -f compose.yaml -f compose.prod.yaml up --wait
 ```
 
 </details>
