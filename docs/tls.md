@@ -45,7 +45,7 @@ To disable HTTPS, configure your environment to use HTTP by setting the followin
 ```bash
 SERVER_NAME=http://localhost \
 MERCURE_PUBLIC_URL=http://localhost/.well-known/mercure \
-docker compose up --pull always -d --wait
+docker compose up --wait
 ```
 
 Ensure your application is accessible over HTTP by visiting `http://localhost` in your web browser.

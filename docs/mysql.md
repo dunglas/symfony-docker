@@ -74,7 +74,7 @@ docker compose down --remove-orphans && docker compose build --pull --no-cache
 
 Start the services:
 ```shell
-docker compose up -d
+docker compose up --wait
 ```
 
 Test your setup:

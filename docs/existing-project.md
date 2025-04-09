@@ -29,11 +29,11 @@ Double-check the changes, revert the changes that you don't want to keep:
 
 Build the Docker images:
 
-    docker compose build --no-cache --pull
+    docker compose build --pull --no-cache
 
 Start the project!
 
-    docker compose up -d
+    docker compose up --wait
 
 Browse `https://localhost`, your Docker configuration is ready!
 
