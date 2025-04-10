@@ -48,7 +48,7 @@ You can now use the debugger!
 
 ## Debugging with Xdebug and VScode
 
-1. Install necessery [PHP extension for VScode](https://marketplace.visualstudio.com/items?itemName=DEVSENSE.phptools-vscode).
+1. Install necessary [PHP extension for VScode](https://marketplace.visualstudio.com/items?itemName=DEVSENSE.phptools-vscode).
 2. Add [debug configuration](https://code.visualstudio.com/docs/debugtest/debugging-configuration#_launch-configurations) into your `.vscode\launch.json` file.
 
     Example:
