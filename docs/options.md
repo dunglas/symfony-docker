@@ -13,10 +13,10 @@ For instance, use the following command to install Symfony 6.4:
 
 On Linux:
 
-    SYMFONY_VERSION=6.4.* docker compose up -d --wait
+    SYMFONY_VERSION=6.4.* docker compose up --wait
 On Windows:
 
-    set SYMFONY_VERSION=6.4.* && docker compose up -d --wait&set SYMFONY_VERSION=
+    set SYMFONY_VERSION=6.4.* && docker compose up --wait&set SYMFONY_VERSION=
 
 ## Installing Development Versions of Symfony
 
@@ -27,17 +27,17 @@ For instance, use the following command to use the development branch of Symfony
 
 On Linux:
 
-    STABILITY=dev docker compose up -d --wait
+    STABILITY=dev docker compose up --wait
 
 On Windows:
     
-    set STABILITY=dev && docker compose up -d --wait&set STABILITY=
+    set STABILITY=dev && docker compose up --wait&set STABILITY=
 
 ## Using custom HTTP ports
 
 Use the environment variables `HTTP_PORT`, `HTTPS_PORT` and/or `HTTP3_PORT` to adjust the ports to your needs, e.g.
 
-    HTTP_PORT=8000 HTTPS_PORT=4443 HTTP3_PORT=4443 docker compose up -d --wait
+    HTTP_PORT=8000 HTTPS_PORT=4443 HTTP3_PORT=4443 docker compose up --wait
 
 to access your application on [https://localhost:4443](https://localhost:4443).
 
@@ -69,4 +69,4 @@ You can also customize the `Caddyfile` by using the following environment variab
 
 ### Example of server name customize:
 
-    SERVER_NAME="app.localhost" docker compose up -d --wait
+    SERVER_NAME="app.localhost" docker compose up --wait

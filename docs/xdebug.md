@@ -9,13 +9,13 @@ It can be enabled by setting the `XDEBUG_MODE` environment variable to `debug`.
 On Linux and Mac:
 
 ```
-XDEBUG_MODE=debug docker compose up -d
+XDEBUG_MODE=debug docker compose up --wait
 ```
 
 On Windows:
 
 ```
-set XDEBUG_MODE=debug&& docker compose up -d&set XDEBUG_MODE=
+set XDEBUG_MODE=debug&& docker compose up --wait&set XDEBUG_MODE=
 ```
 
 ## Debugging with Xdebug and PHPStorm
