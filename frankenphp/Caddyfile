@@ -1,4 +1,6 @@
 {
+	skip_install_trust
+
 	{$CADDY_GLOBAL_OPTIONS}
 
 	frankenphp {
