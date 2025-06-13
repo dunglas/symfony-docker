@@ -29,7 +29,7 @@ Double-check the changes, revert the changes that you don't want to keep:
 
 Build the Docker images:
 
-    docker compose build --pull --no-cache
+    COMPOSE_BAKE=true docker compose build --pull --no-cache
 
 Start the project!
 

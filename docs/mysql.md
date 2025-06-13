@@ -69,7 +69,7 @@ DATABASE_URL=mysql://${MYSQL_USER:-app}:${MYSQL_PASSWORD:-!ChangeMe!}@database:3
 ## Final steps
 Rebuild the docker environment:
 ```shell
-docker compose down --remove-orphans && docker compose build --pull --no-cache
+docker compose down --remove-orphans && COMPOSE_BAKE=true docker compose build --pull --no-cache
 ```
 
 Start the services:
