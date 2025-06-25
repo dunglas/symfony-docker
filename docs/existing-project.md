@@ -22,6 +22,10 @@ Re-execute the recipes to update the Docker-related files according to the packa
     rm symfony.lock
     composer recipes:install --force --verbose
 
+Add frankenphp runtime for Symfony
+    
+    composer require runtime/frankenphp-symfony
+
 Double-check the changes, revert the changes that you don't want to keep:
 
     git diff
