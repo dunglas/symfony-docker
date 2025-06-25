@@ -43,4 +43,4 @@ Browse `https://localhost`, your Docker configuration is ready!
 
 > [!NOTE]
 > The worker mode of FrankenPHP is enabled by default in the Caddyfile. To disabled it, comment the `worker {}` section of this file.
-> You may also remove `runtime/frankenphp-symfony` if you never play on using the worker mode.
+> You may also remove `runtime/frankenphp-symfony` if you never plan on using the worker mode.
