@@ -2,10 +2,10 @@
 services:
   php:
     build:
-      context: .
-      target: frankenphp_dev
+      context: ..
+      dockerfile: docker/Dockerfile
     volumes:
-      - ./:/app
+      - ../sulu:/app
       - ./frankenphp/Caddyfile:/etc/frankenphp/Caddyfile:ro
       - ./frankenphp/conf.d/20-app.dev.ini:/usr/local/etc/php/app.conf.d/20-app.dev.ini:ro
       # If you develop on Mac or Windows you can remove the vendor/ directory

@@ -20,6 +20,9 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 			echo 'To finish the installation please press Ctrl+C to stop Docker Compose and run: docker compose up --build --wait'
 			sleep infinity
 		fi
+	else
+		COMPOSER_MEMORY_LIMIT=-1 composer require "php:>=$PHP_VERSION" symfony/runtime runtime/frankenphp-symfony
+        COMPOSER_MEMORY_LIMIT=-1 composer config --json extra.symfony.docker 'true'
 	fi
 
 	if [ -z "$(ls -A 'vendor/' 2>/dev/null)" ]; then
@@ -57,8 +60,8 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 		fi
 	fi
 
-	setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX var
-	setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX var
+	setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX var vendor composer.lock
+	setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX var vendor composer.lock
 
 	echo 'PHP app ready!'
 fi
