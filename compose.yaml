@@ -10,7 +10,8 @@ services:
       MERCURE_PUBLISHER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
       MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
       # Run "composer require symfony/orm-pack" to install and configure Doctrine ORM
-      DATABASE_URL: mysql://${MYSQL_USER:-guillaume}:${MYSQL_PASSWORD:-my-secret-pw}@192.168.1.201:3306/${MYSQL_DATABASE:-app}?serverVersion=${MYSQL_VERSION:-8}&charset=${MYSQL_CHARSET:-utf8mb4}      # Run "composer require symfony/mercure-bundle" to install and configure the Mercure integration
+      DATABASE_URL: mysql://${MYSQL_USER:-guillaume}:${MYSQL_PASSWORD:-my-secret-pw}@192.168.1.201:3306/${MYSQL_DATABASE:-sulu}?serverVersion=${MYSQL_VERSION:-8}&charset=${MYSQL_CHARSET:-utf8mb4}
+      # Run "composer require symfony/mercure-bundle" to install and configure the Mercure integration
       # Run "composer require symfony/mercure-bundle" to install and configure the Mercure integration
       MERCURE_URL: ${CADDY_MERCURE_URL:-http://php/.well-known/mercure}
       MERCURE_PUBLIC_URL: ${CADDY_MERCURE_PUBLIC_URL:-https://${SERVER_NAME:-localhost}:${HTTPS_PORT:-443}/.well-known/mercure}
@@ -20,6 +21,7 @@ services:
       STABILITY: ${STABILITY:-stable}
     volumes:
       - ../sulu:/app # Montage du code Symfony dans /app
+      - ../sulu/var:/app/var
       - caddy_data:/data
       - caddy_config:/config
       - ../docker-permanently/php/uploads/media:/app/var/uploads/media:rwo
