@@ -21,6 +21,9 @@ If you want to use the [worker mode of FrankenPHP](https://github.com/php/franke
     
     composer require runtime/frankenphp-symfony
 
+> [!TIP]
+> With Symfony 7.4, the `runtime/frankenphp-symfony` package isn't required anymore, as Symfony Runtime natively supports FrankenPHP worker mode.
+
 Re-execute the recipes to update the Docker-related files according to the packages you use:
 
     rm symfony.lock
