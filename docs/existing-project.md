@@ -17,7 +17,14 @@ Enable the Docker support of Symfony Flex:
 
     composer config --json extra.symfony.docker 'true'
 
-Re-execute the recipes to update the Docker-related files according to the packages you use
+If you want to use the [worker mode of FrankenPHP](https://github.com/php/frankenphp/blob/main/docs/worker.md), add the FrankenPHP runtime for Symfony:
+    
+    composer require runtime/frankenphp-symfony
+
+> [!TIP]
+> With Symfony 7.4, the `runtime/frankenphp-symfony` package isn't required anymore, as Symfony Runtime natively supports FrankenPHP worker mode.
+
+Re-execute the recipes to update the Docker-related files according to the packages you use:
 
     rm symfony.lock
     composer recipes:install --force --verbose
@@ -38,7 +45,5 @@ Start the project!
 Browse `https://localhost`, your Docker configuration is ready!
 
 > [!NOTE]
-> If you want to use the worker mode of FrankenPHP, make sure you required the `runtime/frankenphp-symfony` package.
-
-> [!NOTE]
 > The worker mode of FrankenPHP is enabled by default in the Caddyfile. To disabled it, comment the `worker {}` section of this file.
+> You may also remove `runtime/frankenphp-symfony` if you never plan on using the worker mode.
