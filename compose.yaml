@@ -25,6 +25,7 @@ services:
       - caddy_data:/data
       - caddy_config:/config
       - ../docker-permanently/php/uploads/media:/app/var/uploads/media:rwo
+      - /var/run/docker.sock:/var/run/docker.sock
     ports:
       # HTTP
       - target: 80

@@ -18,6 +18,10 @@ VOLUME /app/var/
 RUN apt-get update && apt-get install -y tzdata
 RUN date  # Vérifie l'heure
 
+RUN apt-get update && apt-get install -y \
+    docker.io \
+    curl \
+    && apt-get clean
 # persistent / runtime deps
 # hadolint ignore=DL3008
 RUN apt-get update && apt-get install -y --no-install-recommends \
