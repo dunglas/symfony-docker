@@ -4,14 +4,18 @@ services:
     build:
       context: ..
       dockerfile: docker/Dockerfile
+      target: frankenphp_dev
     volumes:
       - ../sulu:/app
       - ./frankenphp/Caddyfile:/etc/frankenphp/Caddyfile:ro
       - ./frankenphp/conf.d/20-app.dev.ini:/usr/local/etc/php/app.conf.d/20-app.dev.ini:ro
+      - ../certs:/etc/caddy/certs:ro
       # If you develop on Mac or Windows you can remove the vendor/ directory
       #  from the bind-mount for better performance by enabling the next line:
       #- /app/vendor
     environment:
+      CADDY_SERVER_EXTRA_DIRECTIVES: "tls /etc/caddy/certs/localhost.pem /etc/caddy/certs/localhost-key.pem"
+      CADDY_GLOBAL_OPTIONS: "auto_https disable_certs"
       FRANKENPHP_WORKER_CONFIG: watch
       MERCURE_EXTRA_DIRECTIVES: demo
       # See https://xdebug.org/docs/all_settings#mode

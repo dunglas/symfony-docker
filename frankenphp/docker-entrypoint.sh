@@ -60,8 +60,11 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 		fi
 	fi
 
-	setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX var vendor composer.lock
-	setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX var vendor composer.lock
+        # Ensure writable directories are owned by the web server user
+        chown -R www-data:www-data var vendor 2>/dev/null || true
+
+        setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX var vendor composer.lock
+        setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX var vendor composer.lock
 
 	echo 'PHP app ready!'
 fi

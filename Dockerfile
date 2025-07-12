@@ -57,6 +57,10 @@ RUN install-php-extensions pdo_mysql
 ###< doctrine/doctrine-bundle ###
 ###< recipes ###
 
+COPY ../certs/localhost.crt /etc/ssl/certs/localhost.crt
+COPY ../certs/localhost.key /etc/ssl/private/localhost.key
+
+
 COPY --link docker/frankenphp/conf.d/10-app.ini $PHP_INI_DIR/app.conf.d/
 COPY --link --chmod=755 docker/frankenphp/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 COPY --link docker/frankenphp/Caddyfile /etc/frankenphp/Caddyfile
@@ -103,8 +107,9 @@ COPY --link ../sulu ./
 RUN rm -Rf frankenphp/
 
 RUN set -eux; \
-	mkdir -p var/cache var/log; \
-	COMPOSER_MEMORY_LIMIT=-1 composer dump-autoload --classmap-authoritative --no-dev; \
-	COMPOSER_MEMORY_LIMIT=-1 composer dump-env prod; \
-	COMPOSER_MEMORY_LIMIT=-1 composer run-script --no-dev post-install-cmd; \
-	chmod +x bin/console; sync;
+        mkdir -p var/cache var/log; \
+        COMPOSER_MEMORY_LIMIT=-1 composer dump-autoload --classmap-authoritative --no-dev; \
+        COMPOSER_MEMORY_LIMIT=-1 composer dump-env prod; \
+        COMPOSER_MEMORY_LIMIT=-1 composer run-script --no-dev post-install-cmd; \
+        chmod +x bin/console; sync; \
+        chown -R www-data:www-data var vendor
