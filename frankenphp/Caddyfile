@@ -60,6 +60,6 @@
 	php @frontController
 
 	file_server {
-		hide *.php
+		hide *.php .env .env.*
 	}
 }
