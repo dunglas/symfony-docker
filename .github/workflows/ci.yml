@@ -39,6 +39,9 @@ jobs:
         name: Start services
         run: docker compose up --wait --no-build
       -
+        name: Mark /app as safe directory for Git
+        run: docker compose exec -T php git config --global --add safe.directory /app
+      -
         name: Check HTTP reachability
         run: curl -v --fail-with-body http://localhost
       -
