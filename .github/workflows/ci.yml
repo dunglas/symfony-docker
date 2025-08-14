@@ -39,6 +39,9 @@ jobs:
         name: Start services
         run: docker compose up --wait --no-build
       -
+        name: Run CS fixer
+        run: docker compose exec -T php vendor/bin/php-cs-fixer check
+      -
         name: Check HTTP reachability
         run: curl -v --fail-with-body http://localhost
       -
