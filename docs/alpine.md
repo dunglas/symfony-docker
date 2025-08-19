@@ -16,16 +16,12 @@ To switch to Alpine-based images, apply the following changes to the `Dockerfile
 
 -# hadolint ignore=DL3008
 -RUN apt-get update && apt-get install -y --no-install-recommends \
--	acl \
 -	file \
--	gettext \
 -	git \
 -	&& rm -rf /var/lib/apt/lists/*
 +# hadolint ignore=DL3018
 +RUN apk add --no-cache \
-+	acl \
 +	file \
-+	gettext \
 +	git
 ```
 
