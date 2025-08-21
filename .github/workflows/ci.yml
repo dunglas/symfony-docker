@@ -18,7 +18,7 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -43,7 +43,7 @@ jobs:
         run: curl -v --fail-with-body http://localhost
       -
         name: Check HTTPS reachability
-        if: false # Remove this line when the homepage will be configured, or change the path to check
+        if: false # Remove this line when the homepage is configured, or change the path to check
         run: curl -v --insecure --fail-with-body https://localhost
       -
         name: Check Mercure reachability
@@ -70,7 +70,7 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       -
         name: Lint Dockerfile
         uses: hadolint/hadolint-action@v3.1.0
