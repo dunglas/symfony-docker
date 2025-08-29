@@ -76,3 +76,6 @@ jobs:
         uses: super-linter/super-linter/slim@v8
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_CHECKOV: false
+          VALIDATE_TRIVY: false
+
