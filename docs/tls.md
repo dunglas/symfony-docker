@@ -27,15 +27,15 @@ For instance, to use self-signed certificates created with [mkcert](https://gith
 3. Generate the certificates for your local host (example: "server-name.localhost"):
    `mkcert -cert-file frankenphp/certs/tls.pem -key-file frankenphp/certs/tls.key "server-name.localhost"`
 4. Add these lines to the `./compose.override.yaml` file about `CADDY_SERVER_EXTRA_DIRECTIVES` environment and volume for the `php` service :
-    ```diff
-    php:
-      environment:
-    +    CADDY_SERVER_EXTRA_DIRECTIVES: "tls /etc/caddy/certs/tls.pem /etc/caddy/certs/tls.key"
-        # ...
-      volumes:
-    +    - ./frankenphp/certs:/etc/caddy/certs:ro
-        # ...
-    ```
+   ```diff
+   php:
+     environment:
+   +    CADDY_SERVER_EXTRA_DIRECTIVES: "tls /etc/caddy/certs/tls.pem /etc/caddy/certs/tls.key"
+       # ...
+     volumes:
+   +    - ./frankenphp/certs:/etc/caddy/certs:ro
+       # ...
+   ```
 5. Restart your `php` service
 
 ## Disabling HTTPS for Local Development

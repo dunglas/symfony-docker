@@ -30,7 +30,7 @@ And rebuild the PHP image.
 > [!NOTE]  
 > If you are using Windows, you have to install [chocolatey.org](https://chocolatey.org/) or [Cygwin](http://cygwin.com) to use the `make` command. Check out this [StackOverflow question](https://stackoverflow.com/q/2532234/633864) for more explanations.
 
-## The template
+## The Template
 
 ```Makefile
 # Executables (local)
@@ -96,7 +96,7 @@ cc: c=c:c ## Clear the cache
 cc: sf
 ```
 
-## Adding and modifying jobs
+## Adding and Modifying Jobs
 
 Make sure to add this configuration to the [.editorconfig](/.editorconfig) file, so that it forces your editor to use tabs instead of spaces (Makefiles are not compatible with spaces by default).
 
@@ -107,4 +107,4 @@ indent_style = tab
 
 ```
 
-If you still want to use space, you can configure the prefix in the Makefile itself. See [this answer on StackExchange](https://retrocomputing.stackexchange.com/a/20303).
+If you still want to use space, you can configure the prefix in the Makefile itself. See [this answer on Stack Exchange](https://retrocomputing.stackexchange.com/a/20303).

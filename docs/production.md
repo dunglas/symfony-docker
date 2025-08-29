@@ -107,8 +107,8 @@ If you want to pass them to your containers, you can use the [`env_file` attribu
 # compose.prod.yml
 
 services:
-    php:
-        env_file:
-            - .env.prod.local
-        # ...
+  php:
+    env_file:
+      - .env.prod.local
+    # ...
 ```
