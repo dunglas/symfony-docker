@@ -10,8 +10,6 @@ on:
 
 permissions:
   contents: read
-  packages: read
-  statuses: write
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
@@ -64,6 +62,10 @@ jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+      statuses: write
     steps:
       - name: Checkout
         uses: actions/checkout@v5

@@ -11,6 +11,8 @@ FROM dunglas/frankenphp:1-php8.4 AS frankenphp_upstream
 # Base FrankenPHP image
 FROM frankenphp_upstream AS frankenphp_base
 
+ARG USER=symfony
+
 WORKDIR /app
 
 VOLUME /app/var/
@@ -47,6 +49,16 @@ ENV PHP_INI_SCAN_DIR=":$PHP_INI_DIR/app.conf.d"
 COPY --link frankenphp/conf.d/10-app.ini $PHP_INI_DIR/app.conf.d/
 COPY --link --chmod=755 frankenphp/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 COPY --link frankenphp/Caddyfile /etc/frankenphp/Caddyfile
+
+RUN \
+	# Use "adduser -D ${USER}" for alpine based distros
+	useradd ${USER}; \
+	# Add additional capability to bind to port 80 and 443
+	setcap CAP_NET_BIND_SERVICE=+eip /usr/local/bin/frankenphp; \
+	# Give write access to /config/caddy and /data/caddy
+	chown -R ${USER}:${USER} /config/caddy /data/caddy
+
+USER ${USER}
 
 ENTRYPOINT ["docker-entrypoint"]
 
