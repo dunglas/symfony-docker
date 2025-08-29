@@ -107,4 +107,4 @@ indent_style = tab
 
 ```
 
-If you still want to use space, you can configure the prefix in the Makefile itself. See [this answer on StackExchange](https://retrocomputing.stackexchange.com/a/20303).
+If you still want to use space, you can configure the prefix in the Makefile itself. See [this answer on Stack Exchange](https://retrocomputing.stackexchange.com/a/20303).

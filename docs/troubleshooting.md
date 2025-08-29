@@ -2,18 +2,18 @@
 
 ## Editing Permissions on Linux
 
-If you work on linux and cannot edit some of the project files right after the first installation, you can run `docker compose run --rm php chown -R $(id -u):$(id -g) .` to set yourself as owner of the project files that were created by the docker container.
+If you work on Linux and cannot edit some of the project files right after the first installation, you can run `docker compose run --rm php chown -R $(id -u):$(id -g) .` to set yourself as owner of the project files that were created by the Docker container.
 
 ## TLS/HTTPS Issues
 
 See more in the [TLS section](tls.md)
 
-## Production issues
+## Production Issues
 
-### How to properly build fresh images for production use
+### How To Properly Build Fresh Images for Production Use
 
 Remember that, by default, if you run `docker compose up --wait`, only the files `compose.yaml` and `compose.override.yaml` will be used.
-See https://docs.docker.com/compose/intro/compose-application-model and https://docs.docker.com/compose/how-tos/multiple-compose-files/merge.
+See ["How Compose works"](https://docs.docker.com/compose/intro/compose-application-model) and ["Merge Compose files"](https://docs.docker.com/compose/how-tos/multiple-compose-files/merge).
 
 If you need to build images for production environment, you have to use the following command:
 
@@ -21,7 +21,7 @@ If you need to build images for production environment, you have to use the foll
 docker compose -f compose.yaml -f compose.prod.yaml build --pull --no-cache
 ```
 
-### Why application outputs `phpinfo()`
+### Why Application Outputs `phpinfo()`?
 
 Both dev and prod images have the same image tag (`<...>app-php:latest`). This can cause confusion when working with images.
 It is important to make sure that your image is the appropriate one for the current environment.
@@ -48,7 +48,6 @@ Then, you can start your dev container(s) by running:
 docker compose up --wait
 ```
 
-
 </details>
 
 <br>
@@ -70,4 +69,3 @@ docker compose -f compose.yaml -f compose.prod.yaml up --wait
 ```
 
 </details>
-
