@@ -1,13 +1,17 @@
 # Updating Your Project
 
-To import the changes made to the _Symfony Docker_ template into your project, we recommend using
-[_template-sync_](https://github.com/coopTilleuls/template-sync):
+To import the changes made to the _Symfony Docker_ template into your project,
+we recommend using [_template-sync_](https://github.com/coopTilleuls/template-sync):
 
 1. Run the script to synchronize your project with the latest version of the skeleton:
+
+   <!-- markdownlint-disable MD013 -->
 
    ```console
    curl -sSL https://raw.githubusercontent.com/coopTilleuls/template-sync/main/template-sync.sh | sh -s -- https://github.com/dunglas/symfony-docker
    ```
+
+   <!-- markdownlint-enable MD013 -->
 
 2. Resolve conflicts, if any
 3. Run `git cherry-pick --continue`

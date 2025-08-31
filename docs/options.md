@@ -2,8 +2,10 @@
 
 You can customize the Docker build process using these environment variables.
 
-> [!NOTE]  
-> All Symfony-specific environment variables are used only if no `composer.json` file is found in the project directory.
+> [!NOTE]
+>
+> All Symfony-specific environment variables are used only if no `composer.json`
+> file is found in the project directory.
 
 ## Selecting a Specific Symfony Version
 
@@ -21,7 +23,9 @@ On Windows:
 
 ## Installing Development Versions of Symfony
 
-To install a non-stable version of Symfony, use the `STABILITY` environment variable during the build.
+To install a non-stable version of Symfony,
+use the `STABILITY` environment variable during the build.
+
 The value must be [a valid Composer stability option](https://getcomposer.org/doc/04-schema.md#minimum-stability).
 
 For instance, use the following command to use the development branch of Symfony:
@@ -34,23 +38,32 @@ On Windows:
 
     set STABILITY=dev && docker compose up --wait&set STABILITY=
 
-## Using custom HTTP ports
+## Using Custom HTTP Ports
 
-Use the environment variables `HTTP_PORT`, `HTTPS_PORT` and/or `HTTP3_PORT` to adjust the ports to your needs, e.g.
+Use the environment variables `HTTP_PORT`, `HTTPS_PORT` and/or `HTTP3_PORT`
+to adjust the ports to your needs, e.g.
 
     HTTP_PORT=8000 HTTPS_PORT=4443 HTTP3_PORT=4443 docker compose up --wait
 
 to access your application on [https://localhost:4443](https://localhost:4443).
 
-> [!NOTE]  
-> Let's Encrypt only supports the standard HTTP and HTTPS ports. Creating a Let's Encrypt certificate for another port will not work, you have to use the standard ports or to configure Caddy to use another provider.
+> [!NOTE]
+>
+> Let's Encrypt only supports the standard HTTP and HTTPS ports.
+> Creating a Let's Encrypt certificate for another port will not work,
+> you have to use the standard ports or to configure Caddy to use another provider.
 
-## Caddyfile Options
+## `Caddyfile` Options
 
-You can also customize the `Caddyfile` by using the following environment variables to inject options block, directive or configuration.
+You can also customize the `Caddyfile` by using the following environment variables
+to inject options block, directive or configuration.
 
-> [!TIP]  
-> All the following environment variables can be defined in your `.env` file at the root of the project to keep them persistent at each startup
+> [!TIP]
+>
+> All the following environment variables can be defined in your `.env` file
+> at the root of the project to keep them persistent at each startup
+
+<!-- markdownlint-disable MD013 -->
 
 | Environment variable            | Description                                                                                                                                                                             | Default value             |
 | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -67,6 +80,8 @@ You can also customize the `Caddyfile` by using the following environment variab
 | `MERCURE_SUBSCRIBER_JWT_ALG`    | the JWT algorithm to use for subscribers                                                                                                                                                | `HS256`                   |
 | `MERCURE_EXTRA_DIRECTIVES`      | a list of extra [Mercure directives](https://mercure.rocks/docs/hub/config), one per line                                                                                               |                           |
 
-### Example of server name customize:
+<!-- markdownlint-enable MD013 -->
+
+### Customizing the Server Name
 
     SERVER_NAME="app.localhost" docker compose up --wait
