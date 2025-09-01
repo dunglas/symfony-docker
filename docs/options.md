@@ -43,7 +43,9 @@ On Windows:
 Use the environment variables `HTTP_PORT`, `HTTPS_PORT` and/or `HTTP3_PORT`
 to adjust the ports to your needs, e.g.
 
-    HTTP_PORT=8000 HTTPS_PORT=4443 HTTP3_PORT=4443 docker compose up --wait
+```console
+HTTP_PORT=8000 HTTPS_PORT=4443 HTTP3_PORT=4443 docker compose up --wait
+```
 
 to access your application on [https://localhost:4443](https://localhost:4443).
 
