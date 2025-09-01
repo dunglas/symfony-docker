@@ -15,11 +15,15 @@ For instance, use the following command to install Symfony 6.4:
 
 On Linux:
 
-    SYMFONY_VERSION=6.4.* docker compose up --wait
+```console
+SYMFONY_VERSION=6.4.* docker compose up --wait
+```
 
 On Windows:
 
-    set SYMFONY_VERSION=6.4.* && docker compose up --wait&set SYMFONY_VERSION=
+```console
+set SYMFONY_VERSION=6.4.* && docker compose up --wait&set SYMFONY_VERSION=
+```
 
 ## Installing Development Versions of Symfony
 
@@ -32,11 +36,15 @@ For instance, use the following command to use the development branch of Symfony
 
 On Linux:
 
-    STABILITY=dev docker compose up --wait
+```console
+STABILITY=dev docker compose up --wait
+```
 
 On Windows:
 
-    set STABILITY=dev && docker compose up --wait&set STABILITY=
+```console
+set STABILITY=dev && docker compose up --wait&set STABILITY=
+```
 
 ## Using Custom HTTP Ports
 
@@ -86,4 +94,6 @@ to inject options block, directive or configuration.
 
 ### Customizing the Server Name
 
-    SERVER_NAME="app.localhost" docker compose up --wait
+```console
+SERVER_NAME="app.localhost" docker compose up --wait
+```
