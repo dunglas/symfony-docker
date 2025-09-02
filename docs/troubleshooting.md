@@ -73,7 +73,7 @@ This means you have to run the following command in order to build your image:
 docker compose -f compose.yaml -f compose.prod.yaml build --pull --no-cache
 ```
 
-> [!WARINING]
+> [!WARNING]
 >
 > The order of `-f` arguments matters.
 
