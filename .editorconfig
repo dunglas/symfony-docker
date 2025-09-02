@@ -5,53 +5,18 @@
 root = true
 
 [*]
-# Change these settings to your own preference
-indent_style = space
-indent_size = 4
-
-# We recommend you to keep these unchanged
-end_of_line = lf
 charset = utf-8
-trim_trailing_whitespace = true
 insert_final_newline = true
-
-[*.{js,html,ts,tsx}]
-indent_size = 2
-
-[*.json]
-indent_size = 2
-
-[*.md]
-trim_trailing_whitespace = false
-
-[*.sh]
-indent_style = tab
-
-[*.xml.dist]
+end_of_line = lf
 indent_style = space
 indent_size = 4
 
-[*.{yaml,yml}]
-trim_trailing_whitespace = false
+[**/{Dockerfile,Caddyfile,*.sh}]
+indent_style = tab
 
-[.github/workflows/*.yml]
+[{compose.*yaml,.github/**/*.yaml}]
 indent_size = 2
 
-[.gitmodules]
-indent_style = tab
-
-[.php_cs.dist]
-indent_style = space
-indent_size = 4
-
-[composer.json]
-indent_size = 4
-
-[{compose,docker-compose}.{*.yaml,*.yml,yaml,yml}]
-indent_size = 2
-
-[*.*Dockerfile]
-indent_style = tab
-
-[{Caddyfile,*.*Caddyfile}]
-indent_style = tab
+[**.md]
+indent_size = unset
+indent_style = unset
