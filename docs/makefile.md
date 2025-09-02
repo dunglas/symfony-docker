@@ -19,11 +19,15 @@ You can also find a more complete example in this [snippet](https://www.strangeb
 If you want to run make from within the `php` container, in the [Dockerfile](/Dockerfile),
 add:
 
+<!-- markdownlint-disable MD010 -->
+
 ```diff
-gettext \
-git \
-+make \
+ 	gettext \
+ 	git \
++	make \
 ```
+
+<!-- markdownlint-enable MD010 -->
 
 And rebuild the PHP image.
 
