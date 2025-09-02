@@ -22,4 +22,4 @@ The currently supported packages are:
 > [!WARNING]
 >
 > We recommend that you use the `composer require` command inside the container
-> in development mode so that recipes can be applied correctly
+> in development mode so that recipes can be applied correctly.
