@@ -59,13 +59,13 @@ do as follows:
    environment and volume for the `php` service:
 
    ```diff
-   php:
-     environment:
+    php:
+      environment:
    +    CADDY_SERVER_EXTRA_DIRECTIVES: "tls /etc/caddy/certs/tls.pem /etc/caddy/certs/tls.key"
-       # ...
-     volumes:
+        # ...
+      volumes:
    +    - ./frankenphp/certs:/etc/caddy/certs:ro
-       # ...
+        # ...
    ```
 
 5. Restart your `php` service
