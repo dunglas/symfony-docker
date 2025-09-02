@@ -48,7 +48,7 @@ Change the database image to use MySQL instead of PostgreSQL in `compose.yaml`:
 <!-- markdownlint-enable MD013 -->
 
 Depending on the database configuration,
-modify the environment in the same file at `services.php.environment.DATABASE_URL`
+modify the environment in the same file at `services.php.environment.DATABASE_URL`:
 
 ```yaml
 DATABASE_URL: mysql://${MYSQL_USER:-app}:${MYSQL_PASSWORD:-!ChangeMe!}@database:3306/${MYSQL_DATABASE:-app}?serverVersion=${MYSQL_VERSION:-8}&charset=${MYSQL_CHARSET:-utf8mb4}
