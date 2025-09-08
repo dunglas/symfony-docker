@@ -79,7 +79,7 @@ You can now use the debugger!
    ```
 
 3. Use [Run and Debug](https://code.visualstudio.com/docs/debugtest/debugging#_start-a-debugging-session)
-   options and run `Listen for Xdebug` command to listen for upcomming connections
+   options and run `Listen for Xdebug` command to listen for upcoming connections
    with [the **Xdebug extension**](https://xdebug.org/docs/step_debug#browser-extensions)
    installed and active.
 
