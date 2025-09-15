@@ -34,11 +34,11 @@ SHELL := /bin/bash
 CONTAINER_EXEC := docker compose exec -i -e APP_ENV=test <your_dev_container> php
 
 tests:
-	$(CONTAINER_EXEC) bin/console doctrine:database:drop --force || true
-	$(CONTAINER_EXEC) bin/console doctrine:database:create
-	$(CONTAINER_EXEC) bin/console doctrine:migrations:migrate -n
-	$(CONTAINER_EXEC) bin/console doctrine:fixtures:load -n
-	$(CONTAINER_EXEC) bin/phpunit $(MAKECMDGOALS)
+    $(CONTAINER_EXEC) bin/console doctrine:database:drop --force || true
+    $(CONTAINER_EXEC) bin/console doctrine:database:create
+    $(CONTAINER_EXEC) bin/console doctrine:migrations:migrate -n
+    $(CONTAINER_EXEC) bin/console doctrine:fixtures:load -n
+    $(CONTAINER_EXEC) bin/phpunit $(MAKECMDGOALS)
 .PHONY: tests
 ```
 
