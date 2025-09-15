@@ -26,7 +26,7 @@ So if you try to use `php bin/phpunit`, you will execute your tests in the
 tests against your database.
 
 The solution is to use a Makefile
-(https://symfony.com/doc/current/the-fast-track/en/17-tests.html#automating-your-workflow-with-a-makefile).
+(check out [Automating your Workflow with a Makefile](https://symfony.com/doc/current/the-fast-track/en/17-tests.html#automating-your-workflow-with-a-makefile)).
 You can start from this template:
 
 ```makefile
