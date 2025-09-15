@@ -31,7 +31,7 @@ You can start from this template:
 
 ```makefile
 SHELL := /bin/bash
-CONTAINER_EXEC := docker exec -i -e APP_ENV=test <your_dev_container> php
+CONTAINER_EXEC := docker compose exec -i -e APP_ENV=test <your_dev_container> php
 
 tests:
 	$(CONTAINER_EXEC) bin/console doctrine:database:drop --force || true
