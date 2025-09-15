@@ -12,7 +12,7 @@ but you will need to set APP_ENV to test.
 You can set this value in `compose.override.yaml` directly, or provide your environment values
 with a specific `env-file`:
 
-```
+```bash
 docker compose --env-file <your-env-file> up --wait
 ```
 
