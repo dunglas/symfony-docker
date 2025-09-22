@@ -53,7 +53,7 @@ do as follows:
    mkcert -cert-file frankenphp/certs/tls.pem -key-file frankenphp/certs/tls.key "server-name.localhost"
    ```
 
-     <!-- markdownlint-enable MD013 -->
+   <!-- markdownlint-enable MD013 -->
 
 4. Add these lines to the `./compose.override.yaml` file about `CADDY_SERVER_EXTRA_DIRECTIVES`
    environment and volume for the `php` service:

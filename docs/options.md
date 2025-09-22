@@ -71,7 +71,7 @@ to inject options block, directive or configuration.
 > [!TIP]
 >
 > All the following environment variables can be defined in your `.env` file
-> at the root of the project to keep them persistent at each startup
+> at the root of the project to keep them persistent at each startup.
 
 <!-- markdownlint-disable MD013 -->
 
