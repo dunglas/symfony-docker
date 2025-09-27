@@ -1,4 +1,8 @@
 #syntax=docker/dockerfile:1
+ARG UID=${UID:-1000}
+ARG GID=${GID:-1000}
+ARG USER=${USER:-frankenphp}
+ARG GROUP=${GROUP:-frankenphp}
 
 # Versions
 FROM dunglas/frankenphp:1-php8.4 AS frankenphp_upstream
@@ -10,6 +14,11 @@ FROM dunglas/frankenphp:1-php8.4 AS frankenphp_upstream
 
 # Base FrankenPHP image
 FROM frankenphp_upstream AS frankenphp_base
+
+ARG UID
+ARG GID
+ARG USER
+ARG GROUP
 
 WORKDIR /app
 
@@ -46,6 +55,16 @@ COPY --link frankenphp/conf.d/10-app.ini $PHP_INI_DIR/app.conf.d/
 COPY --link --chmod=755 frankenphp/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 COPY --link frankenphp/Caddyfile /etc/frankenphp/Caddyfile
 
+RUN set -eux; \
+    groupadd -g $GID $GROUP; \
+    useradd -u $UID -g $GID --no-create-home $USER; \
+    setcap CAP_NET_BIND_SERVICE=+eip /usr/local/bin/frankenphp; \
+    chown -R $UID:$GID /data/ /config/; \
+    mkdir -p var/cache var/log; \
+    chown -R $UID:$GID var/cache var/log
+
+USER $USER
+
 ENTRYPOINT ["docker-entrypoint"]
 
 HEALTHCHECK --start-period=60s CMD curl -f http://localhost:2019/metrics || exit 1
@@ -54,9 +73,13 @@ CMD [ "frankenphp", "run", "--config", "/etc/frankenphp/Caddyfile" ]
 # Dev FrankenPHP image
 FROM frankenphp_base AS frankenphp_dev
 
+ARG USER
+
 ENV APP_ENV=dev
 ENV XDEBUG_MODE=off
 ENV FRANKENPHP_WORKER_CONFIG=watch
+
+USER root
 
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
@@ -67,12 +90,20 @@ RUN set -eux; \
 
 COPY --link frankenphp/conf.d/20-app.dev.ini $PHP_INI_DIR/app.conf.d/
 
+USER $USER
+
 CMD [ "frankenphp", "run", "--config", "/etc/frankenphp/Caddyfile", "--watch" ]
 
 # Prod FrankenPHP image
 FROM frankenphp_base AS frankenphp_prod
 
+ARG UID
+ARG GID
+ARG USER
+
 ENV APP_ENV=prod
+
+USER root
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
@@ -92,4 +123,6 @@ RUN set -eux; \
 	composer dump-autoload --classmap-authoritative --no-dev; \
 	composer dump-env prod; \
 	composer run-script --no-dev post-install-cmd; \
-	chmod +x bin/console; sync;
+	chown -R $UID:$GID /app/var
+
+USER $USER
