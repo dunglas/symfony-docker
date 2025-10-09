@@ -17,7 +17,7 @@ with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) 
 
 - Production, development and CI ready
 - Just 1 service by default
-- Blazing-fast performance thanks to [the worker mode of FrankenPHP](https://github.com/dunglas/frankenphp/blob/main/docs/worker.md) (automatically enabled in prod mode)
+- Blazing-fast performance thanks to [the worker mode of FrankenPHP](https://frankenphp.dev/docs/worker/)
 - [Installation of extra Docker Compose services](docs/extra-services.md) with Symfony Flex
 - Automatic HTTPS (in dev and prod)
 - HTTP/3 and [Early Hints](https://symfony.com/blog/new-in-symfony-6-3-early-hints) support
