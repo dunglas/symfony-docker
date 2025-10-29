@@ -20,7 +20,7 @@ Change the database image to use MySQL instead of PostgreSQL in `compose.yaml`:
 ```diff
  ###> doctrine/doctrine-bundle ###
 -    image: postgres:${POSTGRES_VERSION:-16}-alpine
-+    image: mysql:${MYSQL_VERSION:-8}
++    image: mysql:${MYSQL_VERSION:-8.0.32}
      environment:
 -      POSTGRES_DB: ${POSTGRES_DB:-app}
 +      MYSQL_DATABASE: ${MYSQL_DATABASE:-app}
@@ -51,7 +51,7 @@ Depending on the database configuration,
 modify the environment in the same file at `services.php.environment.DATABASE_URL`:
 
 ```yaml
-DATABASE_URL: mysql://${MYSQL_USER:-app}:${MYSQL_PASSWORD:-!ChangeMe!}@database:3306/${MYSQL_DATABASE:-app}?serverVersion=${MYSQL_VERSION:-8}&charset=${MYSQL_CHARSET:-utf8mb4}
+DATABASE_URL: mysql://${MYSQL_USER:-app}:${MYSQL_PASSWORD:-!ChangeMe!}@database:3306/${MYSQL_DATABASE:-app}?serverVersion=${MYSQL_VERSION:-8.0.32}&charset=${MYSQL_CHARSET:-utf8mb4}
 ```
 
 Since we changed the port, we also have to define this in the `compose.override.yaml`:
@@ -79,7 +79,7 @@ Last but not least, we need to install the MySQL driver in `Dockerfile`:
 Change the database configuration in `.env`:
 
 ```dotenv
-DATABASE_URL=mysql://${MYSQL_USER:-app}:${MYSQL_PASSWORD:-!ChangeMe!}@database:3306/${MYSQL_DATABASE:-app}?serverVersion=${MYSQL_VERSION:-8}&charset=${MYSQL_CHARSET:-utf8mb4}
+DATABASE_URL=mysql://${MYSQL_USER:-app}:${MYSQL_PASSWORD:-!ChangeMe!}@database:3306/${MYSQL_DATABASE:-app}?serverVersion=${MYSQL_VERSION:-8.0.32}&charset=${MYSQL_CHARSET:-utf8mb4}
 ```
 
 ## Final steps
