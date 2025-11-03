@@ -13,6 +13,30 @@ with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) 
 4. Open `https://localhost` in your favorite web browser and [accept the auto-generated TLS certificate](https://stackoverflow.com/a/15076602/1352334)
 5. Run `docker compose down --remove-orphans` to stop the Docker containers.
 
+## Makefile Usage Instructions
+
+This project includes a `Makefile` to simplify common Docker and Docker Compose operations. Below are the available commands and their descriptions.
+
+### Prerequisites
+
+- `make` (usually preinstalled on Linux/macOS; available via package managers on Windows like WSL or Cygwin)
+
+---
+
+### Available Commands
+
+| Command             | Description                                                                                        |
+|---------------------|----------------------------------------------------------------------------------------------------|
+| `make` or `make up` | Start all containers in foreground (with logs).                                                    |
+| `make down`         | Stop and remove all containers, networks, and volumes.                                             |
+| `make build`        | Clean up previous containers and volumes, then rebuild images and start services in detached mode. |
+| `make list`         | List all running Docker containers.                                                                |
+| `make lf`           | Follow logs from the `fluent-bit-cn` container (streaming).                                        |
+| `make lp`           | Show logs from the `php-fpm` container.                                                            |
+| `make p`            | Open a shell inside the running `php` container (useful for debugging, running commands, etc.).    |
+
+---
+
 ## Features
 
 - Production, development and CI ready
