@@ -85,3 +85,24 @@ You can finally start your prod container(s) by running:
 ```console
 docker compose -f compose.yaml -f compose.prod.yaml up --wait
 ```
+
+## Cache issues on Windows
+
+On Windows, Docker Desktop can sometimes cause cache-related issues. To avoid this, it is recommended to use a Linux distribution under WSL (e.g., Ubuntu, Debian) when working with Docker and Symfony.
+
+Install Ubuntu on WSL
+
+```
+wsl --install -d Ubuntu
+```
+
+Install Docker on Ubuntu
+
+```
+sudo apt update
+sudo apt install -y docker.io
+sudo systemctl enable --now docker
+sudo usermod -aG docker $USER
+```
+
+Note: Docker Desktop can work as an alternative, but installing Docker natively in Linux is generally faster and avoids cache-related problems.
