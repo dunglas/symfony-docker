@@ -61,7 +61,10 @@ do as follows:
    ```diff
     php:
       environment:
-   +    CADDY_SERVER_EXTRA_DIRECTIVES: "tls /etc/caddy/certs/tls.pem /etc/caddy/certs/tls.key"
+   +    CADDY_EXTRA_CONFIG: |
+   +      https:// {
+   +          tls /etc/caddy/certs/tls.pem /etc/caddy/certs/tls.key
+   +      }
         # ...
       volumes:
    +    - ./frankenphp/certs:/etc/caddy/certs:ro
