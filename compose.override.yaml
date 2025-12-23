@@ -14,7 +14,12 @@ services:
       #- /app/vendor
     environment:
       FRANKENPHP_WORKER_CONFIG: watch
-      MERCURE_EXTRA_DIRECTIVES: demo
+      MERCURE_EXTRA_DIRECTIVES: |
+        demo
+        transport bolt {
+          path mercure.db
+          cleanup_frequency 0.2
+        }
       # See https://xdebug.org/docs/all_settings#mode
       XDEBUG_MODE: "${XDEBUG_MODE:-off}"
       APP_ENV: "${APP_ENV:-dev}"
