@@ -68,7 +68,19 @@ do as follows:
         # ...
    ```
 
-5. Restart your `php` service
+5. If you want to use HTTPS, update this line in `compose.yaml`:
+
+```console
+SERVER_NAME: ${SERVER_NAME:-localhost}, php:80
+```
+
+Replace `80` by `443`.
+
+6. Restart your `php` service using your local host:
+
+```console
+SERVER_NAME=https://server-name.localhost docker compose up --wait
+```
 
 ## Disabling HTTPS for Local Development
 
