@@ -33,6 +33,20 @@ To use it with Symfony ≤ 7.3, install the FrankenPHP runtime:
 composer require runtime/frankenphp-symfony
 ```
 
+Then update worker configuration:
+
+<!-- markdownlint-disable MD010 -->
+
+```diff
+ worker {
+ 	file ./public/index.php
++	env APP_RUNTIME Runtime\FrankenPhpSymfony\Runtime
+ 	{$FRANKENPHP_WORKER_CONFIG}
+ }
+```
+
+<!-- markdownlint-enable MD010 -->
+
 > [!TIP]
 >
 > You can disable worker mode by removing the `worker` directive from the `frankenphp`
