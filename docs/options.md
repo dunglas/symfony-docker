@@ -25,6 +25,28 @@ On Windows:
 set SYMFONY_VERSION=6.4.* && docker compose up --wait&set SYMFONY_VERSION=
 ```
 
+> [!NOTE]
+>
+> If you install a Symfony 6.4 version, you also need to do these steps:
+>
+> ```console
+> composer require runtime/frankenphp-symfony
+> ```
+>
+> Add this content `env APP_RUNTIME Runtime\FrankenPhpSymfony\Runtime` in the `frankenphp/Caddyfile` on the `worker`section.
+>
+> ```Caddyfile
+> frankenphp {
+>   {$FRANKENPHP_CONFIG}
+>
+>   worker {
+>       file ./public/index.php
+>       env APP_RUNTIME Runtime\FrankenPhpSymfony\Runtime
+>       {$FRANKENPHP_WORKER_CONFIG}
+>   }
+> }
+> ```
+
 ## Installing Development Versions of Symfony
 
 To install a non-stable version of Symfony,
