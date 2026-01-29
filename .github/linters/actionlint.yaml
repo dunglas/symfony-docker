@@ -2,4 +2,4 @@
 paths:
   .github/workflows/ci.yaml:
     ignore:
-      - 'condition "false" is always evaluated to false. remove the if:.+'
+      - 'constant expression "false" in condition. remove the if:.+'
