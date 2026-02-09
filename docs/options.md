@@ -25,6 +25,8 @@ On Windows:
 set SYMFONY_VERSION=6.4.* && docker compose up --wait&set SYMFONY_VERSION=
 ```
 
+<!-- markdownlint-disable MD010 -->
+
 > [!NOTE]
 >
 > If you're using Symfony 7.3 or earlier with FrankenPHP in worker mode, you also need to follow these steps
@@ -42,6 +44,8 @@ set SYMFONY_VERSION=6.4.* && docker compose up --wait&set SYMFONY_VERSION=
 > 	{$FRANKENPHP_WORKER_CONFIG}
 > }
 > ```
+
+<!-- markdownlint-enable MD010 -->
 
 ## Installing Development Versions of Symfony
 

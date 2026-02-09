@@ -1,5 +1,0 @@
----
-paths:
-  .github/workflows/ci.yaml:
-    ignore:
-      - 'condition "false" is always evaluated to false. remove the if:.+'
