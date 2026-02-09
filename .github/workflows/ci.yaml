@@ -43,23 +43,23 @@ jobs:
         run: docker compose up --wait --no-build
       - name: Check HTTP reachability
         run: curl -v --fail-with-body http://localhost
-      - name: Check HTTPS reachability
-        if: false # Remove this line when the homepage is configured, or change the path to check
-        run: curl -v --insecure --fail-with-body https://localhost
+      # Uncomment when the homepage is configured, or change the path to check
+      # - name: Check HTTPS reachability
+      #   run: curl -v --insecure --fail-with-body https://localhost
       - name: Check Mercure reachability
         run: curl -vI --insecure --fail-with-body https://localhost/.well-known/mercure?topic=test
-      - name: Create test database
-        if: false # Remove this line if Doctrine ORM is installed
-        run: docker compose exec -T php bin/console -e test doctrine:database:create
-      - name: Run migrations
-        if: false # Remove this line if Doctrine Migrations is installed
-        run: docker compose exec -T php bin/console -e test doctrine:migrations:migrate --no-interaction
-      - name: Run PHPUnit
-        if: false # Remove this line if PHPUnit is installed
-        run: docker compose exec -T php bin/phpunit
-      - name: Doctrine Schema Validator
-        if: false # Remove this line if Doctrine ORM is installed
-        run: docker compose exec -T php bin/console -e test doctrine:schema:validate
+      # Uncomment if Doctrine ORM is installed
+      # - name: Create test database
+      #   run: docker compose exec -T php bin/console -e test doctrine:database:create
+      # Uncomment if Doctrine Migrations is installed
+      # - name: Run migrations
+      #   run: docker compose exec -T php bin/console -e test doctrine:migrations:migrate --no-interaction
+      # Uncomment if PHPUnit is installed
+      # - name: Run PHPUnit
+      #   run: docker compose exec -T php bin/phpunit
+      # Uncomment if Doctrine ORM is installed
+      # - name: Doctrine Schema Validator
+      #   run: docker compose exec -T php bin/console -e test doctrine:schema:validate
   lint:
     name: Lint
     runs-on: ubuntu-latest
