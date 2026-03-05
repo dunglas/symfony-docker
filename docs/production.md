@@ -68,7 +68,7 @@ Example with the DigitalOcean Domains service ("Networking" > "Domains"):
 Copy your project on the server using `git clone`, `scp`, or any other tool
 that may fit your need.
 If you use GitHub, you may want to use [a deploy key](https://docs.github.com/en/free-pro-team@latest/developers/overview/managing-deploy-keys#deploy-keys).
-Deploy keys are also [supported by GitLab](https://docs.gitlab.com/ee/user/project/deploy_keys/).
+Deploy keys are also [supported by GitLab](https://docs.gitlab.com/user/project/deploy_keys/).
 
 Example with Git:
 
@@ -127,7 +127,7 @@ which can be easily adapted for use with Symfony Docker.
 ## Passing local environment variables to containers
 
 By default, `.env.local` and `.env.*.local` files are excluded from production images.
-If you want to pass them to your containers, you can use the [`env_file` attribute](https://docs.docker.com/compose/environment-variables/set-environment-variables/#use-the-env_file-attribute):
+If you want to pass them to your containers, you can use the [`env_file` attribute](https://docs.docker.com/compose/how-tos/environment-variables/set-environment-variables/#use-the-env_file-attribute):
 
 ```yaml
 # compose.prod.yml
