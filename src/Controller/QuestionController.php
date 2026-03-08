@@ -34,7 +34,7 @@ final class QuestionController extends AbstractController
             return $this->redirectToRoute('app_question', ['id' => $question->getId()]);
         }
 
-        return $this->render('newQuestion.html.twig', [
+        return $this->render('question/newQuestion.html.twig', [
             'form' => $form,
         ]);
     }
@@ -48,7 +48,7 @@ final class QuestionController extends AbstractController
         $repo = $entityManager->getRepository(Question::class);
         $question = $repo->find($id);
         
-        return $this->render('details.html.twig', [
+        return $this->render('question/details.html.twig', [
             'question' => $question,
         ]);
 

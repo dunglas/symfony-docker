@@ -3,14 +3,243 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;600&display=swap" rel="stylesheet">
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+        <style>
+            :root {
+                --bg: #0f0f13;
+                --surface: #1a1a24;
+                --border: #2e2e42;
+                --accent: #7c6af7;
+                --accent-soft: #a89ef9;
+                --green: #4ade80;
+                --text: #e8e8f0;
+                --muted: #7a7a9a;
+            }
 
-        {% block javascripts %}
-        {% endblock %}
+            * { box-sizing: border-box; margin: 0; padding: 0; }
+
+            body {
+                background: var(--bg);
+                color: var(--text);
+                font-family: 'Sora', sans-serif;
+                font-size: 15px;
+                min-height: 100vh;
+            }
+
+            nav {
+                background: var(--surface);
+                border-bottom: 1px solid var(--border);
+                padding: 14px 32px;
+                display: flex;
+                gap: 8px;
+                align-items: center;
+            }
+
+            nav a {
+                color: var(--muted);
+                text-decoration: none;
+                font-family: 'Space Mono', monospace;
+                font-size: 13px;
+                padding: 6px 14px;
+                border-radius: 6px;
+                transition: all 0.2s;
+                border: 1px solid transparent;
+            }
+
+            nav a:hover {
+                color: var(--text);
+                background: var(--border);
+                border-color: var(--border);
+            }
+
+            nav a:first-child {
+                color: var(--accent-soft);
+                border-color: var(--accent);
+            }
+
+            .container {
+                max-width: 860px;
+                margin: 40px auto;
+                padding: 0 24px;
+            }
+
+            h1 {
+                font-family: 'Space Mono', monospace;
+                font-size: 28px;
+                color: var(--text);
+                margin-bottom: 24px;
+                letter-spacing: -0.5px;
+            }
+
+            h2 {
+                font-size: 16px;
+                color: var(--accent-soft);
+                margin: 32px 0 12px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+
+            p { color: var(--muted); line-height: 1.6; margin-bottom: 12px; }
+
+            a {
+                color: var(--accent-soft);
+                text-decoration: none;
+                transition: color 0.2s;
+            }
+
+            a:hover { color: #fff; }
+
+            /* Tabellen */
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 16px 0;
+            }
+
+            th {
+                font-family: 'Space Mono', monospace;
+                font-size: 12px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: var(--muted);
+                padding: 10px 14px;
+                border-bottom: 1px solid var(--border);
+                text-align: left;
+            }
+
+            td {
+                padding: 12px 14px;
+                border-bottom: 1px solid var(--border);
+                color: var(--text);
+            }
+
+            tr:hover td { background: var(--surface); }
+
+            /* Buttons */
+            button, .btn {
+                background: var(--accent);
+                color: #fff;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 8px;
+                font-family: 'Sora', sans-serif;
+                font-size: 14px;
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+
+            button:hover, .btn:hover {
+                background: var(--accent-soft);
+                transform: translateY(-1px);
+            }
+
+            button[style*="red"], .btn-danger {
+                background: #ef4444;
+            }
+
+            /* Formulare */
+            input[type="text"],
+            input[type="password"],
+            input[type="email"],
+            select,
+            textarea {
+                background: var(--surface);
+                border: 1px solid var(--border);
+                color: var(--text);
+                padding: 10px 14px;
+                border-radius: 8px;
+                font-family: 'Sora', sans-serif;
+                font-size: 14px;
+                width: 100%;
+                transition: border-color 0.2s;
+            }
+
+            input:focus, select:focus, textarea:focus {
+                outline: none;
+                border-color: var(--accent);
+            }
+
+            label {
+                display: block;
+                color: var(--muted);
+                font-size: 13px;
+                margin-bottom: 6px;
+            }
+
+            /* Listen */
+            ul { list-style: none; padding: 0; }
+
+            ul li {
+                padding: 12px 16px;
+                border: 1px solid var(--border);
+                border-radius: 8px;
+                margin-bottom: 8px;
+                background: var(--surface);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            ol { padding-left: 20px; }
+
+            ol li {
+                padding: 10px 0;
+                border-bottom: 1px solid var(--border);
+                color: var(--text);
+            }
+
+            /* Progress Bar */
+            .progress-bar {
+                background: var(--border);
+                border-radius: 999px;
+                height: 10px;
+                width: 100%;
+                overflow: hidden;
+                margin: 8px 0;
+            }
+
+            .progress-bar-fill {
+                background: linear-gradient(90deg, var(--accent), var(--green));
+                height: 100%;
+                border-radius: 999px;
+                transition: width 0.5s ease;
+            }
+
+            /* Cards */
+            .card {
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: 12px;
+                padding: 20px 24px;
+                margin-bottom: 16px;
+            }
+
+            /* Pagination */
+            .pagination {
+                display: flex;
+                gap: 8px;
+                align-items: center;
+                margin-top: 24px;
+                color: var(--muted);
+                font-family: 'Space Mono', monospace;
+                font-size: 13px;
+            }
+        </style>
+        {% block stylesheets %}{% endblock %}
+        {% block javascripts %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <nav>
+            <a href="{{ path('app_home') }}">⌂ Home</a>
+            <a href="{{ path('app_questions') }}">Fragen</a>
+            <a href="{{ path('app_simulation') }}">Simulation</a>
+        </nav>
+
+        <div class="container">
+            {% block body %}{% endblock %}
+        </div>
     </body>
 </html>
