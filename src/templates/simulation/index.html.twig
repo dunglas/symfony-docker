@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Simulation{% endblock %}
+
+{% block body %}
+    <a href="{{ path('app_home') }}">Home</a>
+
+    <h1>Lektion auswählen</h1>
+
+    {% if lessons is empty %}
+        <p>Keine Lektionen vorhanden.</p>
+    {% else %}
+        <ul>
+            {% for lesson in lessons %}
+                <li>
+                    <strong>{{ lesson.title }}</strong>
+                    ({{ lesson.duration }} min)
+                    {% if lesson.done %} ✅ {% endif %}
+                    <a href="{{ path('app_simulation_lesson', { id: lesson.id }) }}">Weiter →</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

@@ -37,13 +37,23 @@ class QuestionRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    
+
     public function findPaginated(int $page = 1, int $limit = 10): array
     {
         return $this->createQueryBuilder('q')
             ->orderBy('q.id', 'ASC')
             ->setFirstResult(($page - 1) * $limit)
             ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findByLesson(int $lessonId): array
+    {
+        return $this->createQueryBuilder('q')
+            ->andWhere('q.lesson = :lessonId')
+            ->setParameter('lessonId', $lessonId)
+            ->orderBy('q.id', 'ASC')
             ->getQuery()
             ->getResult();
     }

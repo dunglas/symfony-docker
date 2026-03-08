@@ -1,0 +1,27 @@
+{% set percentage = total > 0 ? (done / total * 100)|round : 0 %}
+
+<h1>Willkommen</h1>
+
+<h2>Fortschritt</h2>
+<p>{{ done }} / {{ total }} Lektionen abgeschlossen</p>
+
+<div style="background:#e0e0e0; border-radius:8px; height:24px; width:100%;">
+    <div style="background:#4caf50; width:{{ percentage }}%; height:100%; border-radius:8px; transition: width 0.3s;">
+    </div>
+</div>
+<p>{{ percentage }}%</p>
+
+<h2>Fragen</h2>
+<ul>
+    <li><a href="{{ path('app_questions') }}">Alle Fragen</a></li>
+    <li><a href="{{ path('app_question_new') }}">Neue Frage erstellen</a></li>
+    <li><a href="{{ path('app_questions_search') }}">Fragen suchen</a></li>
+</ul>
+
+<h2>Simulation</h2>
+<ul>
+    <li><a href="{{ path('app_simulation') }}">Lesson auswählen</a></li>
+</ul>
+
+
+

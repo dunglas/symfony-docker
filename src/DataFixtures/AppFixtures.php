@@ -16,12 +16,12 @@ class AppFixtures extends Fixture
         // Benutzer anlegen
         // =========================
         $user1 = new User();
-        $user1->setName('JohnDoe');
+        $user1->setUsername('JohnDoe');
         $user1->setPassword('password123');
         $manager->persist($user1);
 
         $user2 = new User();
-        $user2->setName('JaneDoe');
+        $user2->setUsername('JaneDoe');
         $user2->setPassword('password456');
         $manager->persist($user2);
 
@@ -34,11 +34,11 @@ class AppFixtures extends Fixture
             $lesson->setTitle("Lesson $i");
             $lesson->setDescription("Description for Lesson $i");
             $lesson->setDuration(45);
+            $lesson->setDone(false);
             $manager->persist($lesson);
 
             // 3 Fragen pro Lesson
             for ($j = 1; $j <= 20; $j++) {
-
                 $question = new Question();
                 $question->setText("Question $j for Lesson $i");
                 $question->setLesson($lesson); // Beziehung setzen

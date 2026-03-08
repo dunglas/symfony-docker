@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ lesson.title }}{% endblock %}
+
+{% block body %}
+    <h1>{{ lesson.title }}</h1>
+    <p>{{ lesson.description }}</p>
+    <p>Dauer: {{ lesson.duration }} min</p>
+
+    <h2>Fragen</h2>
+
+    {% if questions is empty %}
+        <p>Keine Fragen vorhanden.</p>
+    {% else %}
+        <ol>
+            {% for question in questions %}
+                <li>{{ question.text }}</li>
+            {% endfor %}
+        </ol>
+    {% endif %}
+
+    <form method="post" action="{{ path('app_simulation_done', { id: lesson.id }) }}">
+        <button type="submit">✅ Lektion abgeschlossen</button>
+    </form>
+
+    <a href="{{ path('app_simulation') }}">← Zurück</a>
+{% endblock %}

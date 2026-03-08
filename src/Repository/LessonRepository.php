@@ -16,6 +16,24 @@ class LessonRepository extends ServiceEntityRepository
         parent::__construct($registry, Lesson::class);
     }
 
+    public function countTotal(): int
+    {
+        return $this->createQueryBuilder('l')
+            ->select('COUNT(l.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function countDone(): int
+    {   
+        return $this->createQueryBuilder('l')
+            ->select('COUNT(l.id)')
+            ->andWhere('l.done = true')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+
     //    /**
     //     * @return Lesson[] Returns an array of Lesson objects
     //     */
