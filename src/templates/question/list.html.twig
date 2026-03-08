@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Alle Fragen{% endblock %}
+
+{% block body %}
+    <h1>Alle Fragen</h1>
+
+    <a href="{{ path('app_questions_search') }}">Suche</a>
+    <a href="{{ path('app_question_new') }}">Neue Frage</a>
+
+    {% if questions is empty %}
+        <p>Keine Fragen gefunden.</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Text</th>
+                    <th>Lektion</th>
+                    <th>Aktionen</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for question in questions %}
+                    <tr>
+                        <td>{{ question.id }}</td>
+                        <td>{{ question.text }}</td>
+                        <td>{{ question.lesson.title }}</td>
+                        <td>
+                            <a href="{{ path('app_question', { id: question.id }) }}">Details</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div>
+            {% if page > 1 %}
+                <a href="{{ path('app_questions', { page: page - 1 }) }}">← Zurück</a>
+            {% endif %}
+
+            <span>Seite {{ page }}</span>
+
+            {% if questions|length == 10 %}
+                <a href="{{ path('app_questions', { page: page + 1 }) }}">Weiter →</a>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

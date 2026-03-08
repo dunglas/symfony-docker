@@ -1,11 +1,17 @@
+{% extends 'base.html.twig' %}
+
 {% block title %}Question #{{ question.id }}{% endblock %}
 
 {% block body %}
-    <div>
-        <h1>Question #{{ question.id }}</h1>
+    <h1>Question #{{ question.id }}</h1>
 
-        <p><strong>Text:</strong> {{ question.text }}</p>
+    <p><strong>Text:</strong> {{ question.text }}</p>
+    <p><strong>Lektion:</strong> {{ question.lesson.title }}</p>
 
-        <p><strong>Lesson:</strong> {{ question.lesson.title }}</p>
-    </div>
+    <a href="{{ path('app_question_edit', { id: question.id }) }}">Bearbeiten</a>
+
+    <form method="post" action="{{ path('app_question_delete', { id: question.id }) }}"
+          onsubmit="return confirm('Frage wirklich löschen?')">
+        <button type="submit">Löschen</button>
+    </form>
 {% endblock %}

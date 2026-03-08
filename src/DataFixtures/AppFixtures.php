@@ -37,7 +37,7 @@ class AppFixtures extends Fixture
             $manager->persist($lesson);
 
             // 3 Fragen pro Lesson
-            for ($j = 1; $j <= 3; $j++) {
+            for ($j = 1; $j <= 20; $j++) {
 
                 $question = new Question();
                 $question->setText("Question $j for Lesson $i");

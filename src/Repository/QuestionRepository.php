@@ -26,6 +26,31 @@ class QuestionRepository extends ServiceEntityRepository
             ;
     }
 
+
+    public function findByText(string $search): array
+    {
+        return $this->createQueryBuilder('q')
+            ->andWhere('q.text LIKE :search')
+            ->setParameter('search', '%' . $search . '%')
+            ->orderBy('q.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    
+    public function findPaginated(int $page = 1, int $limit = 10): array
+    {
+        return $this->createQueryBuilder('q')
+            ->orderBy('q.id', 'ASC')
+            ->setFirstResult(($page - 1) * $limit)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+
+
+
     //    /**
     //     * @return Question[] Returns an array of Question objects
     //     */
