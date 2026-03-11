@@ -2,6 +2,7 @@
 # Production environment override
 services:
   php:
+    image: ${IMAGES_PREFIX:-}app-php-prod
     build:
       context: .
       target: frankenphp_prod

@@ -1,7 +1,6 @@
 ---
 services:
   php:
-    image: ${IMAGES_PREFIX:-}app-php
     restart: unless-stopped
     environment:
       SERVER_NAME: ${SERVER_NAME:-localhost}, php:80
