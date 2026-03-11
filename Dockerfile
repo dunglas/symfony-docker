@@ -23,7 +23,6 @@ RUN set -eux; \
 		file \
 		git \
 	; \
-	rm -rf /var/lib/apt/lists/*; \
 	install-php-extensions \
 		@composer \
 		apcu \
