@@ -17,12 +17,13 @@ VOLUME /app/var/
 
 # persistent / runtime deps
 # hadolint ignore=DL3008
-RUN set -eux; \
-	apt-get update; \
+RUN <<-EOF
+	set -eux
+	apt-get update
 	apt-get install -y --no-install-recommends \
 		file \
 		git \
-	; \
+	;
 	install-php-extensions \
 		@composer \
 		apcu \
@@ -30,6 +31,7 @@ RUN set -eux; \
 		opcache \
 		zip \
 	;
+EOF
 
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER=1
@@ -57,10 +59,12 @@ ENV FRANKENPHP_WORKER_CONFIG=watch
 
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
-RUN set -eux; \
+RUN <<-EOF
+	set -eux
 	install-php-extensions \
 		xdebug \
 	;
+EOF
 
 COPY --link frankenphp/conf.d/20-app.dev.ini $PHP_INI_DIR/app.conf.d/
 
@@ -77,18 +81,22 @@ COPY --link frankenphp/conf.d/20-app.prod.ini $PHP_INI_DIR/app.conf.d/
 
 # prevent the reinstallation of vendors at every changes in the source code
 COPY --link composer.* symfony.* ./
-RUN set -eux; \
+RUN <<-EOF
+	set -eux
 	composer install --no-cache --prefer-dist --no-dev --no-autoloader --no-scripts --no-progress
+EOF
 
 # copy sources
 COPY --link --exclude=frankenphp/ . ./
 
-RUN set -eux; \
-	mkdir -p var/cache var/log var/share; \
-	composer dump-autoload --classmap-authoritative --no-dev; \
-	composer dump-env prod; \
-	composer run-script --no-dev post-install-cmd; \
-	if [ -f importmap.php ]; then \
-		php bin/console asset-map:compile; \
-	fi; \
-	chmod +x bin/console; sync;
+RUN <<-EOF
+	set -eux
+	mkdir -p var/cache var/log var/share
+	composer dump-autoload --classmap-authoritative --no-dev
+	composer dump-env prod
+	composer run-script --no-dev post-install-cmd
+	if [ -f importmap.php ]; then
+		php bin/console asset-map:compile
+	fi
+	chmod +x bin/console; sync
+EOF
