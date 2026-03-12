@@ -1,6 +1,6 @@
 # Deploying in Production
 
-Symfony Docker provides Docker images, and a Docker Compose definition optimized
+Symfony Docker provides Docker images and a Docker Compose definition optimized
 for production usage.
 In this tutorial, we will learn how to deploy our Symfony application
 on a single server using Docker Compose.
@@ -102,7 +102,7 @@ Go to `https://your-domain-name.example.com` and enjoy!
 >
 > Docker can have a cache layer, make sure you have the right build
 > for each deployment or rebuild your project with `--no-cache` option
-> to avoid cache issue.
+> to avoid cache issues.
 
 ## Disabling HTTPS
 
@@ -130,7 +130,7 @@ By default, `.env.local` and `.env.*.local` files are excluded from production i
 If you want to pass them to your containers, you can use the [`env_file` attribute](https://docs.docker.com/compose/how-tos/environment-variables/set-environment-variables/#use-the-env_file-attribute):
 
 ```yaml
-# compose.prod.yml
+# compose.prod.yaml
 
 services:
   php:
