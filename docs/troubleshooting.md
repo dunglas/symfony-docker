@@ -12,7 +12,7 @@ docker compose run --rm php chown -R $(id -u):$(id -g) .
 
 ## TLS/HTTPS Issues
 
-See more in the [TLS section](tls.md)
+See the [TLS section](tls.md) for more details.
 
 ## Production Issues
 

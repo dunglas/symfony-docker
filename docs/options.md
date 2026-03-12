@@ -35,7 +35,7 @@ set SYMFONY_VERSION=6.4.* && docker compose up --wait&set SYMFONY_VERSION=
 > composer require runtime/frankenphp-symfony
 > ```
 >
-> Add this content `env APP_RUNTIME Runtime\FrankenPhpSymfony\Runtime` in the `frankenphp/Caddyfile` on the `worker`section.
+> Add `env APP_RUNTIME Runtime\FrankenPhpSymfony\Runtime` in the `frankenphp/Caddyfile` in the `worker` section.
 >
 > ```diff
 >  worker {

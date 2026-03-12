@@ -25,6 +25,7 @@ with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) 
 - [Vulcain](https://vulcain.rocks) support
 - Native [XDebug](docs/xdebug.md) integration
 - Super-readable configuration
+- Rootless, slim production image
 
 **Enjoy!**
 

@@ -41,11 +41,11 @@ You can now use the debugger!
    Alternatively, you can use [the **Xdebug extension**](https://xdebug.org/docs/step_debug#browser-extensions)
    for your preferred web browser.
 
-3. On command line, we might need to tell PhpStorm which
+3. On the command line, we might need to tell PhpStorm which
    [path mapping configuration](https://www.jetbrains.com/help/phpstorm/zero-configuration-debugging-cli.html#configure-path-mappings)
    should be used, set the value of the PHP_IDE_CONFIG environment variable to
    `serverName=symfony`, where `symfony` is the name of the debug server configured
-   higher.
+   above.
 
    Example:
 
