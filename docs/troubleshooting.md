@@ -30,58 +30,24 @@ command:
 docker compose -f compose.yaml -f compose.prod.yaml build --pull --no-cache
 ```
 
-### Why Application Outputs `phpinfo()`?
+### Building Dev and Prod Images
 
-Both dev and prod images have the same image tag (`<...>app-php:latest`).
-This can cause confusion when working with images.
-It is important to make sure that your image is the appropriate one
-for the current environment.
+Dev and prod images use distinct image names (`app-php-dev` and `app-php-prod`),
+so they won't conflict with each other.
 
-If you are not careful about this, and try to run your production container(s) with
-`docker compose -f compose.yaml -f compose.prod.yaml up --wait`
-without the right build process beforehand, your application **will still launch**,
-but will be displaying an output of `phpinfo()`
-(or possibly even a HTTP 500 error page).
-
-See details below.
-
-#### Output of a basic build process
-
-In the case of a dev image, you need the `compose.yaml` and
-`compose.override.yaml` files, which are the default files for Docker Compose.
-
-This means that running `docker compose <command>` or
-`docker compose -f compose.yaml -f compose.override.yaml <command>` is the same thing.
-
-In doing so, images `frankenphp_base` and `frankenphp_dev` are built,
-but not `frankenphp_prod`, which is good enough for dev purposes.
-
-Then, you can start your dev container(s) by running:
+To build and start the dev image:
 
 ```console
 docker compose up --wait
 ```
 
-#### Output expected for the production build process
-
-To build the production image, you have to specify the `compose.yaml` and
-`compose.prod.yaml` files.
-
-This means you have to run the following command in order to build your image:
+To build and start the prod image:
 
 ```console
 docker compose -f compose.yaml -f compose.prod.yaml build --pull --no-cache
+docker compose -f compose.yaml -f compose.prod.yaml up --wait
 ```
 
 > [!WARNING]
 >
 > The order of `-f` arguments matters.
-
-That way, you will see that `frankenphp_base` and `frankenphp_prod` are built,
-which is what you will need for production purposes.
-
-You can finally start your prod container(s) by running:
-
-```console
-docker compose -f compose.yaml -f compose.prod.yaml up --wait
-```
