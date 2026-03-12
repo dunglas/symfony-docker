@@ -66,7 +66,7 @@ COPY --link frankenphp/conf.d/20-app.dev.ini $PHP_INI_DIR/app.conf.d/
 
 CMD [ "frankenphp", "run", "--config", "/etc/frankenphp/Caddyfile", "--watch" ]
 
-# Prod FrankenPHP image (build)
+# Builder for the prod FrankenPHP image
 FROM frankenphp_base AS frankenphp_prod_builder
 
 ENV APP_ENV=prod
@@ -110,7 +110,7 @@ RUN <<-'EOF'
 	rm -rf /var/lib/apt/lists/*
 EOF
 
-# Hardened prod FrankenPHP image
+# Prod FrankenPHP image
 FROM debian:13-slim AS frankenphp_prod
 
 SHELL ["/bin/bash", "-euxo", "pipefail", "-c"]
