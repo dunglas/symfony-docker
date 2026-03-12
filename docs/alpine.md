@@ -18,31 +18,33 @@ To switch to Alpine-based images, apply the following changes to the `Dockerfile
 +SHELL ["/bin/ash", "-euxo", "-c"]
 
 -# hadolint ignore=DL3008
--RUN apt-get update; \
+-RUN <<-EOF
+-	apt-get update
 -	apt-get install -y --no-install-recommends \
 -		file \
--		git \
--	; \
+-		git
 +# hadolint ignore=DL3018
-+RUN apk add --no-cache \
++RUN <<-EOF
++	apk add --no-cache \
 +		file \
-+		git \
-+	; \
++		git
  	install-php-extensions \
 
 -# hadolint ignore=DL3008,SC3054,DL4006
--RUN apt-get update; \
--	apt-get install -y --no-install-recommends libtree; \
+-RUN <<-'EOF'
+-	apt-get update
+-	apt-get install -y --no-install-recommends libtree
 +# hadolint ignore=DL3018,SC3054,DL4006
-+RUN apk add --no-cache libtree; \
- 	mkdir -p /tmp/libs; \
--	BINARIES=(frankenphp php file); \
++RUN <<-'EOF'
++	apk add --no-cache libtree
+ 	mkdir -p /tmp/libs
+-	BINARIES=(frankenphp php file)
 -	for target in $(printf '%s\n' "${BINARIES[@]}" | xargs -I{} which {}) \
-+	BINARIES="frankenphp php file"; \
++	BINARIES="frankenphp php file"
 +	for target in $(printf '%s\n' $BINARIES | xargs -I{} which {}) \
-+
--		libtree -pv "$target" 2>/dev/null | grep -oP '(?:── )\K/\S+(?= \[)' | while IFS= read -r lib; do \
-+		libtree -pv "$target" 2>/dev/null | sed -n 's/.*── \(\/[^ ]*\) \[.*/\1/p' | while IFS= read -r lib; do \
+
+-		libtree -pv "$target" 2>/dev/null | grep -oP '(?:── )\K/\S+(?= \[)' | while IFS= read -r lib; do
++		libtree -pv "$target" 2>/dev/null | sed -n 's/.*── \(\/[^ ]*\) \[.*/\1/p' | while IFS= read -r lib; do
 
 -	rm -rf /var/lib/apt/lists/*
 

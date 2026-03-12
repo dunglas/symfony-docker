@@ -19,19 +19,19 @@ VOLUME /app/var/
 
 # persistent deps
 # hadolint ignore=DL3008
-RUN apt-get update; \
+RUN <<-EOF
+	apt-get update
 	apt-get install -y --no-install-recommends \
 		file \
-		git \
-	; \
+		git
 	install-php-extensions \
 		@composer \
 		apcu \
 		intl \
 		opcache \
-		zip \
-	; \
+		zip
 	rm -rf /var/lib/apt/lists/*
+EOF
 
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER=1
@@ -57,8 +57,10 @@ ENV APP_ENV=dev
 ENV XDEBUG_MODE=off
 ENV FRANKENPHP_WORKER_CONFIG=watch
 
-RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"; \
+RUN <<-EOF
+	mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 	install-php-extensions xdebug
+EOF
 
 COPY --link frankenphp/conf.d/20-app.dev.ini $PHP_INI_DIR/app.conf.d/
 
@@ -80,29 +82,33 @@ RUN composer install --no-cache --prefer-dist --no-dev --no-autoloader --no-scri
 # copy sources
 COPY --link --exclude=frankenphp/ . ./
 
-RUN mkdir -p var/cache var/log var/share; \
-	composer dump-autoload --classmap-authoritative --no-dev; \
-	composer dump-env prod; \
-	composer run-script --no-dev post-install-cmd; \
-	if [ -f importmap.php ]; then \
-		php bin/console asset-map:compile; \
-	fi; \
-	chmod +x bin/console; sync;
+RUN <<-EOF
+	mkdir -p var/cache var/log var/share
+	composer dump-autoload --classmap-authoritative --no-dev
+	composer dump-env prod
+	composer run-script --no-dev post-install-cmd
+	if [ -f importmap.php ]; then
+		php bin/console asset-map:compile
+	fi
+	chmod +x bin/console; sync
+EOF
 
 # Collect shared libraries needed by FrankenPHP and PHP extensions
 # hadolint ignore=DL3008,SC3054,DL4006
-RUN apt-get update; \
-	apt-get install -y --no-install-recommends libtree; \
-	mkdir -p /tmp/libs; \
-	BINARIES=(frankenphp php file); \
+RUN <<-'EOF'
+	apt-get update
+	apt-get install -y --no-install-recommends libtree
+	mkdir -p /tmp/libs
+	BINARIES=(frankenphp php file)
 	for target in $(printf '%s\n' "${BINARIES[@]}" | xargs -I{} which {}) \
-		$(find "$(php -r 'echo ini_get("extension_dir");')" -maxdepth 2 -name "*.so"); do \
-		libtree -pv "$target" 2>/dev/null | grep -oP '(?:── )\K/\S+(?= \[)' | while IFS= read -r lib; do \
-			[ -f "$lib" ] && cp -n "$lib" /tmp/libs/; \
-		done; \
-	done; \
-	sed -i 's/opcache.preload_user = root/opcache.preload_user = www-data/' "$PHP_INI_DIR/app.conf.d/20-app.prod.ini"; \
+		$(find "$(php -r 'echo ini_get("extension_dir");')" -maxdepth 2 -name "*.so"); do
+		libtree -pv "$target" 2>/dev/null | grep -oP '(?:── )\K/\S+(?= \[)' | while IFS= read -r lib; do
+			[ -f "$lib" ] && cp -n "$lib" /tmp/libs/
+		done
+	done
+	sed -i 's/opcache.preload_user = root/opcache.preload_user = www-data/' "$PHP_INI_DIR/app.conf.d/20-app.prod.ini"
 	rm -rf /var/lib/apt/lists/*
+EOF
 
 # Hardened prod FrankenPHP image
 FROM debian:13-slim AS frankenphp_prod
@@ -131,10 +137,12 @@ COPY --from=frankenphp_prod_builder /usr/lib/file/magic.mgc /usr/lib/file/magic.
 
 ENV XDG_CONFIG_HOME=/config XDG_DATA_HOME=/data
 
-RUN mkdir -p /data/caddy /config/caddy; \
-	chown -R www-data:www-data /data /config; \
-	# Remove setuid/setgid bits \
+RUN <<-EOF
+	mkdir -p /data/caddy /config/caddy
+	chown -R www-data:www-data /data /config
+	# Remove setuid/setgid bits
 	find / -perm /6000 -type f -exec chmod a-s {} + 2>/dev/null || true
+EOF
 
 COPY --from=frankenphp_prod_builder --chown=www-data:www-data /app /app
 
