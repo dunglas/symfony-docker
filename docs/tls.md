@@ -7,6 +7,9 @@ generated in the Caddy container is not trusted by your local machine.
 
 You must add the authority to the trust store of the host.
 
+> [!WARNING]  
+> The Firefox browser currently does not trust the certificate, see https://github.com/caddyserver/caddy/issues/6891.
+
 <!-- markdownlint-disable MD013 -->
 
 ### Linux
