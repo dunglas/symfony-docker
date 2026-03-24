@@ -57,9 +57,25 @@ ENV APP_ENV=dev
 ENV XDEBUG_MODE=off
 ENV FRANKENPHP_WORKER_CONFIG=watch
 
+# dev dependencies
+# hadolint ignore=DL3008
 RUN <<-EOF
 	mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
+	apt-get update
+	apt-get install -y --no-install-recommends \
+		aggregate \
+		curl \
+		dnsmasq \
+		dnsutils \
+		iproute2 \
+		ipset \
+		iptables \
+		jq \
+		sudo
 	install-php-extensions xdebug
+	rm -rf /var/lib/apt/lists/*
+	useradd -m -s /bin/bash nonroot
+	echo "nonroot ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/nonroot
 EOF
 
 COPY --link frankenphp/conf.d/20-app.dev.ini $PHP_INI_DIR/app.conf.d/

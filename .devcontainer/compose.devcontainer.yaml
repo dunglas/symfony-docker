@@ -1,0 +1,8 @@
+---
+# Dev Container-specific overrides
+# Adds capabilities required by the firewall script (init-firewall.sh)
+# that restricts Claude Code's outbound network access.
+services:
+  php:
+    cap_add:
+      - NET_ADMIN
