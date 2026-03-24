@@ -144,7 +144,9 @@ RUN <<-EOF
 	find / -perm /6000 -type f -exec chmod a-s {} + 2>/dev/null || true
 EOF
 
-COPY --from=frankenphp_prod_builder /app /app
+COPY --link --from=frankenphp_prod_builder /app /app
+
+RUN chown -R www-data:www-data /app/var
 
 COPY --link --chmod=755 frankenphp/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 
