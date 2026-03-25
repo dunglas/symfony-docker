@@ -1,0 +1,29 @@
+{
+    "name": "Symfony Docker",
+    "dockerComposeFile": [
+        "../compose.yaml",
+        "../compose.override.yaml",
+        "compose.devcontainer.yaml"
+    ],
+    "service": "php",
+    "workspaceFolder": "/app",
+    "features": {
+        "ghcr.io/devcontainers/features/node:1": {},
+        "ghcr.io/devcontainers-extra/features/claude-code:1": {}
+    },
+    "remoteUser": "nonroot",
+    "postStartCommand": "sudo .devcontainer/init-firewall.sh",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "anthropic.claude-code",
+                "bmewburn.vscode-intelephense-client",
+                "xdebug.php-debug"
+            ],
+            "settings": {
+                "claudeCode.allowDangerouslySkipPermissions": true,
+                "claudeCode.initialPermissionMode": "bypassPermissions"
+            }
+        }
+    }
+}

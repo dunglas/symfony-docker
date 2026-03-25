@@ -3,6 +3,10 @@
 A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony](https://symfony.com) web framework,
 with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) inside!
 
+Specially tailored for coding agents: ships with a [Dev Container](https://containers.dev/) configuration
+that lets [Claude Code](https://claude.ai/claude-code) (and other AI coding assistants) run in fully autonomous
+mode inside a sandboxed environment.
+
 ![CI](https://github.com/dunglas/symfony-docker/workflows/CI/badge.svg)
 
 ## Getting Started
@@ -26,6 +30,8 @@ with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) 
 - Native [XDebug](docs/xdebug.md) integration
 - Super-readable configuration
 - Rootless, slim production image
+- [Dev Container](https://containers.dev/) support, optimized for AI coding agents
+- [Claude Code YOLO mode](docs/claude-code.md) with network-level sandboxing out of the box
 
 **Enjoy!**
 
@@ -42,6 +48,7 @@ with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) 
 9. [Using a Makefile](docs/makefile.md)
 10. [Updating the template](docs/updating.md)
 11. [Troubleshooting](docs/troubleshooting.md)
+12. [Using Claude Code in YOLO Mode](docs/claude-code.md)
 
 ## License
 
