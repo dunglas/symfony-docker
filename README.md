@@ -21,6 +21,7 @@ mode inside a sandboxed environment.
 
 - Production, development and CI ready
 - Just 1 service by default
+- Super-readable configuration
 - Blazing-fast performance thanks to [the worker mode of FrankenPHP](https://frankenphp.dev/docs/worker/)
 - [Installation of extra Docker Compose services](docs/extra-services.md) with Symfony Flex
 - Automatic HTTPS (in dev and prod)
@@ -28,10 +29,10 @@ mode inside a sandboxed environment.
 - Real-time messaging thanks to a built-in [Mercure hub](https://symfony.com/doc/current/mercure.html)
 - [Vulcain](https://vulcain.rocks) support
 - Native [XDebug](docs/xdebug.md) integration
-- Super-readable configuration
-- Rootless, slim production image
+- [Hot Reloading](https://frankenphp.dev/docs/hot-reload/)
 - [Dev Container](https://containers.dev/) support, optimized for AI coding agents
 - [Claude Code YOLO mode](docs/claude-code.md) with network-level sandboxing out of the box
+- Rootless, slim production image
 
 **Enjoy!**
 
