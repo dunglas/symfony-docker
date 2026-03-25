@@ -5,11 +5,6 @@
 
 	frankenphp {
 		{$FRANKENPHP_CONFIG}
-
-		worker {
-			file ./public/index.php
-			{$FRANKENPHP_WORKER_CONFIG}
-		}
 	}
 }
 
@@ -56,7 +51,12 @@
 	rewrite @phpRoute index.php
 
 	@frontController path index.php
-	php @frontController
+	php @frontController {
+		worker {
+			file ./public/index.php
+			{$FRANKENPHP_WORKER_CONFIG}
+		}
+	}
 
 	file_server {
 		hide *.php
