@@ -2,7 +2,8 @@
 # Adapted from https://github.com/anthropics/claude-code/blob/main/.devcontainer/init-firewall.sh
 #
 # Modifications:
-#   - Added packagist.org and repo.packagist.org to the allowlist (Composer/PHP dependencies)
+#   - Added packagist.org to the allowlist (Composer/PHP dependencies)
+#   - Added cdn.jsdelivr.net to the allowlist (required for AssetMapper)
 #   - Added -exist flag to ipset add calls to handle duplicate IPs across domains
 #   - Added inbound rules for published service ports (HTTP/HTTPS/HTTP3)
 #   - Replaced per-domain IP resolution with dnsmasq --ipset to handle CDN IP rotation:
@@ -95,7 +96,7 @@ listen-address=127.0.0.2
 bind-interfaces
 # Populate the allowed-domains ipset with every IP returned when resolving
 # any of these domains (or their subdomains)
-ipset=/github.com/anthropic.com/sentry.io/statsig.com/registry.npmjs.org/packagist.org/repo.packagist.org/marketplace.visualstudio.com/vscode.blob.core.windows.net/update.code.visualstudio.com/allowed-domains
+ipset=/github.com/anthropic.com/sentry.io/statsig.com/registry.npmjs.org/packagist.org/cdn.jsdelivr.net/marketplace.visualstudio.com/vscode.blob.core.windows.net/update.code.visualstudio.com/allowed-domains
 EOF
 
 # Ensure idempotency when run as a postStartCommand: stop any existing dnsmasq.
@@ -160,11 +161,4 @@ if ! curl --connect-timeout 5 https://api.github.com/zen >/dev/null 2>&1; then
 	exit 1
 else
 	echo "OK: api.github.com is reachable"
-fi
-
-if ! curl --connect-timeout 5 https://repo.packagist.org/packages.json >/dev/null 2>&1; then
-	echo "ERROR: Firewall check failed — unable to reach repo.packagist.org"
-	exit 1
-else
-	echo "OK: repo.packagist.org is reachable"
 fi
