@@ -1,17 +1,20 @@
-# Using Claude Code in YOLO Mode with Dev Containers
+# Using AI Coding Agents with Dev Containers
 
 This project ships with a [Dev Container](https://containers.dev/) configuration that enables
-[Claude Code](https://claude.ai/claude-code) to run in **YOLO mode** (fully autonomous, no permission prompts)
-inside a sandboxed environment with network-level restrictions.
+AI coding agents to run autonomously inside a sandboxed environment with network-level restrictions.
 
-This setup is ideal for letting Claude Code work on your Symfony project autonomously
-while ensuring it cannot reach arbitrary internet hosts.
+[Claude Code](https://claude.ai/claude-code) is pre-installed and configured out of the box,
+but the setup also works with other agents such as [OpenAI Codex CLI](https://github.com/openai/codex)
+and [opencode](https://opencode.ai).
+
+This setup is ideal for letting AI agents work on your Symfony project autonomously
+while ensuring they cannot reach arbitrary internet hosts.
 
 ## Prerequisites
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) (or any Docker-compatible runtime)
 - [Visual Studio Code](https://code.visualstudio.com/) with the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension
-- A valid [Claude Code subscription or API key](https://claude.ai/claude-code)
+- A valid subscription or API key for the agent you want to use
 
 ## Quick Start
 
@@ -79,6 +82,50 @@ ipset=/github.com/anthropic.com/your-domain.com/allowed-domains
 
 Then rebuild the Dev Container for the changes to take effect.
 
+## Using Other Agents
+
+The Dev Container's network sandbox and project context (`.devcontainer/AGENTS.md`) work
+with any AI coding agent. You just need to install the agent and whitelist the domains it
+needs to reach.
+
+### OpenAI Codex CLI
+
+1. Add the OpenAI API domain to the firewall allowlist in `.devcontainer/init-firewall.sh`
+   (see [Customizing the Allowed Domains](#customizing-the-allowed-domains)):
+
+   ```bash
+   ipset=/.../api.openai.com/allowed-domains
+   ```
+
+2. Install and run Codex inside the container:
+
+   ```console
+   npm install -g @openai/codex
+   export OPENAI_API_KEY=your-key
+   codex --full-auto
+   ```
+
+### opencode
+
+1. Add the required API domain to the firewall allowlist (e.g., `api.anthropic.com`,
+   `api.openai.com`, or your provider's domain).
+
+2. Install and run opencode inside the container:
+
+   ```console
+   curl -fsSL https://opencode.ai/install | bash
+   opencode
+   ```
+
+### Other Agents
+
+For any other agent, follow the same pattern:
+
+1. Add the agent's API domain(s) to the firewall allowlist.
+2. Install the agent inside the container.
+3. Run it — the `.devcontainer/AGENTS.md` file provides project context
+   to agents that support the convention.
+
 ## Using Without Visual Studio Code
 
 The Dev Container configuration works with any tool that supports the
@@ -104,7 +151,7 @@ claude --dangerously-skip-permissions
 
 ### Firewall blocks a required domain
 
-If Claude Code or Composer/npm fails to reach a service, check the firewall
+If your agent or Composer/npm fails to reach a service, check the firewall
 logs and add the domain to the dnsmasq allowlist as described above.
 
 ### Container fails to start

@@ -31,7 +31,7 @@ mode inside a sandboxed environment.
 - Native [XDebug](docs/xdebug.md) integration
 - [Hot Reloading](https://frankenphp.dev/docs/hot-reload/)
 - [Dev Container](https://containers.dev/) support, optimized for AI coding agents
-- [Claude Code YOLO mode](docs/claude-code.md) with network-level sandboxing out of the box
+- [AI coding agents](docs/agents.md) with sandboxing out of the box
 - Rootless, slim production image
 
 **Enjoy!**
@@ -49,7 +49,7 @@ mode inside a sandboxed environment.
 9. [Using a Makefile](docs/makefile.md)
 10. [Updating the template](docs/updating.md)
 11. [Troubleshooting](docs/troubleshooting.md)
-12. [Using Claude Code in YOLO Mode](docs/claude-code.md)
+12. [Using AI Coding Agents](docs/agents.md)
 
 ## License
 

@@ -12,6 +12,7 @@
         "ghcr.io/devcontainers-extra/features/claude-code:1": {}
     },
     "remoteUser": "nonroot",
+    "postCreateCommand": "npm install -g intelephense && ln -sf .devcontainer/AGENTS.md AGENTS.md && ln -sf .devcontainer/AGENTS.md CLAUDE.md && ln -sfn .devcontainer/.claude .claude",
     "postStartCommand": "sudo .devcontainer/init-firewall.sh",
     "customizations": {
         "vscode": {
