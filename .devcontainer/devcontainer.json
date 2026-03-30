@@ -23,7 +23,17 @@
             ],
             "settings": {
                 "claudeCode.allowDangerouslySkipPermissions": true,
-                "claudeCode.initialPermissionMode": "bypassPermissions"
+                "claudeCode.initialPermissionMode": "bypassPermissions",
+                "launch": {
+                    "version": "0.2.0",
+                    "configurations": [
+                        {
+                            "name": "Debug PHP",
+                            "type": "php",
+                            "request": "launch"
+                        }
+                    ]
+                }
             }
         }
     }
