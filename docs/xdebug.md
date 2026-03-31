@@ -3,20 +3,23 @@
 The default development image is shipped with [Xdebug](https://xdebug.org/),
 a popular debugger and profiler for PHP.
 
-Because it has a significant performance overhead, the step-by-step debugger
+When using [Dev Containers](https://containers.dev/), Xdebug is pre-configured and works out of the box.
+Open the **Run and Debug** panel in Visual Studio Code and start the **Debug PHP** launch configuration, then set your breakpoints and load a page.
+
+For other setups, because it has a significant performance overhead, the step-by-step debugger
 is disabled by default.
-It can be enabled by setting the `XDEBUG_MODE` environment variable to `debug`.
+It can be enabled by including `debug` in the values of the `XDEBUG_MODE` environment variable.
 
 On Linux and Mac:
 
 ```console
-XDEBUG_MODE=debug docker compose up --wait
+XDEBUG_MODE=develop,debug docker compose up --wait
 ```
 
 On Windows:
 
 ```console
-set XDEBUG_MODE=debug&& docker compose up --wait&set XDEBUG_MODE=
+set XDEBUG_MODE=develop,debug&& docker compose up --wait&set XDEBUG_MODE=
 ```
 
 ## Debugging with Xdebug and PhpStorm
@@ -66,10 +69,9 @@ You can now use the debugger!
      "version": "0.2.0",
      "configurations": [
        {
-         "name": "Listen for Xdebug",
+         "name": "Debug PHP",
          "type": "php",
          "request": "launch",
-         "port": 9003,
          "pathMappings": {
            "/app": "${workspaceFolder}"
          }
@@ -79,7 +81,7 @@ You can now use the debugger!
    ```
 
 3. Use [Run and Debug](https://code.visualstudio.com/docs/debugtest/debugging#_start-a-debugging-session)
-   options and run `Listen for Xdebug` command to listen for upcoming connections
+   options and run `Debug PHP` to listen for upcoming connections
    with [the **Xdebug extension**](https://xdebug.org/docs/step_debug#browser-extensions)
    installed and active.
 
