@@ -162,7 +162,7 @@ RUN <<-EOF
 EOF
 
 COPY --link --exclude=var --from=frankenphp_prod_builder /app /app
-COPY --link --chown=www-data:www-data --from=frankenphp_prod_builder /app/var /app/var
+COPY --chown=www-data:www-data --from=frankenphp_prod_builder /app/var /app/var
 
 COPY --link --chmod=755 frankenphp/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 
