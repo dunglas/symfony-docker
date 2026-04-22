@@ -105,7 +105,11 @@ RUN <<-EOF
 	if [ -f importmap.php ]; then
 		php bin/console asset-map:compile
 	fi
-	chmod +x bin/console; sync
+	chmod +x bin/console
+	# Mirror owner perms to group so arbitrary UIDs running under group 0
+	# (e.g. OpenShift, restricted Kubernetes SCCs) can write under var/.
+	chmod -R g=u var
+	sync
 EOF
 
 # Collect shared libraries needed by FrankenPHP and PHP extensions
@@ -160,11 +164,13 @@ RUN <<-EOF
 EOF
 
 COPY --link --exclude=var --from=frankenphp_prod_builder /app /app
-COPY --chown=www-data:www-data --from=frankenphp_prod_builder /app/var /app/var
-
-# Allow arbitrary UIDs (e.g. OpenShift, restricted SCCs) to write under /app/var:
-# assign the tree to group 0 and mirror owner perms to the group.
-RUN chgrp -R 0 /app/var && chmod -R g=u /app/var
+# Group 0 + g=u perms (set in the builder) let containers running under
+# arbitrary UIDs (OpenShift, restricted Kubernetes SCCs) write under /app/var,
+# while USER www-data keeps working as the owner. COPY re-creates the top-level
+# /app/var directory with default 0755, so restore group-write on just that one
+# entry (single-directory metadata layer, no recursive rewrite).
+COPY --chown=www-data:0 --from=frankenphp_prod_builder /app/var /app/var
+RUN chmod g=u /app/var
 
 COPY --link --chmod=755 frankenphp/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 
