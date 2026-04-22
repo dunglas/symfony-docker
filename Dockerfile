@@ -106,8 +106,6 @@ RUN <<-EOF
 		php bin/console asset-map:compile
 	fi
 	chmod +x bin/console
-	# Mirror owner perms to group so arbitrary UIDs running under group 0
-	# (e.g. OpenShift, restricted Kubernetes SCCs) can write under var/.
 	chmod -R g=u var
 	sync
 EOF
@@ -164,11 +162,7 @@ RUN <<-EOF
 EOF
 
 COPY --link --exclude=var --from=frankenphp_prod_builder /app /app
-# Group 0 + g=u perms (set in the builder) let containers running under
-# arbitrary UIDs (OpenShift, restricted Kubernetes SCCs) write under /app/var,
-# while USER www-data keeps working as the owner. COPY re-creates the top-level
-# /app/var directory with default 0755, so restore group-write on just that one
-# entry (single-directory metadata layer, no recursive rewrite).
+# Group 0 + g=u for arbitrary-UID runtimes (e.g. OpenShift).
 COPY --chown=www-data:0 --from=frankenphp_prod_builder /app/var /app/var
 RUN chmod g=u /app/var
 
