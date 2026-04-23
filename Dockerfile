@@ -15,8 +15,6 @@ SHELL ["/bin/bash", "-euxo", "pipefail", "-c"]
 
 WORKDIR /app
 
-VOLUME /app/var/
-
 # persistent deps
 # hadolint ignore=DL3008
 RUN <<-EOF
@@ -107,7 +105,9 @@ RUN <<-EOF
 	if [ -f importmap.php ]; then
 		php bin/console asset-map:compile
 	fi
-	chmod +x bin/console; sync
+	chmod +x bin/console
+	chmod -R g=u var
+	sync
 EOF
 
 # Collect shared libraries needed by FrankenPHP and PHP extensions
@@ -162,11 +162,11 @@ RUN <<-EOF
 EOF
 
 COPY --link --exclude=var --from=frankenphp_prod_builder /app /app
-COPY --chown=www-data:www-data --from=frankenphp_prod_builder /app/var /app/var
+# Group 0 + g=u for arbitrary-UID runtimes (e.g. OpenShift).
+COPY --chown=www-data:0 --from=frankenphp_prod_builder /app/var /app/var
+RUN chmod g=u /app/var
 
 COPY --link --chmod=755 frankenphp/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
-
-VOLUME /app/var/
 
 USER www-data
 
