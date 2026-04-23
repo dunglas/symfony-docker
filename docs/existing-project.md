@@ -4,7 +4,7 @@ It's also possible to use Symfony Docker with existing projects!
 
 First, [download this skeleton](https://github.com/dunglas/symfony-docker).
 
-If you cloned the Git repository, be sure to not copy the `.git` directory
+:warning: If you cloned the Git repository, be sure to not copy the `.git` directory
 to prevent conflicts with the `.git` directory already in your existing project.
 
 You can copy the contents of the repository using Git and tar.
