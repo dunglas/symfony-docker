@@ -123,7 +123,6 @@ RUN <<-'EOF'
 			[ -f "$lib" ] && cp -n "$lib" /tmp/libs/
 		done
 	done
-	sed -i 's/opcache.preload_user = root/opcache.preload_user = www-data/' "$PHP_INI_DIR/app.conf.d/20-app.prod.ini"
 	rm -rf /var/lib/apt/lists/*
 EOF
 
