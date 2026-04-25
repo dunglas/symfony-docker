@@ -31,11 +31,14 @@ set SYMFONY_VERSION=6.4.* && docker compose up --wait&set SYMFONY_VERSION=
 >
 > If you're using Symfony 7.3 or earlier with FrankenPHP in worker mode, you also need to follow these steps
 >
-> ```console
-> composer require runtime/frankenphp-symfony
+> In `frankenphp/docker-entrypoint.sh`, add `runtime/frankenphp-symfony` right after the existing `composer require` line:
+>
+> ```diff
+>   composer require "php:>=$PHP_VERSION"
+> + composer require runtime/frankenphp-symfony
 > ```
 >
-> Add `env APP_RUNTIME Runtime\FrankenPhpSymfony\Runtime` in the `frankenphp/Caddyfile` in the `worker` section.
+> In `frankenphp/Caddyfile`, add `env APP_RUNTIME Runtime\FrankenPhpSymfony\Runtime` in the `worker` section:
 >
 > ```diff
 >  worker {
