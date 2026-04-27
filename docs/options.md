@@ -11,7 +11,47 @@ You can customize the Docker build process using these environment variables.
 
 Use the `SYMFONY_VERSION` environment variable to select a specific Symfony version.
 
-For instance, use the following command to install Symfony 6.4:
+### Install Symfony 7.4+
+
+On Linux:
+
+```console
+SYMFONY_VERSION=7.4.* docker compose up --wait
+```
+
+On Windows:
+
+```console
+set SYMFONY_VERSION=7.4.* && docker compose up --wait&set SYMFONY_VERSION=
+```
+
+### Install Symfony pre-7.4
+
+If you're using Symfony 7.3 or earlier with FrankenPHP in worker mode,
+you need to prepare two files **before** running `docker compose up`.
+
+In `frankenphp/docker-entrypoint.sh`, add `runtime/frankenphp-symfony` to the existing `composer require` line:
+
+```diff
+- composer require "php:>=$PHP_VERSION"
++ composer require "php:>=$PHP_VERSION" runtime/frankenphp-symfony
+```
+
+In `frankenphp/Caddyfile`, add `env APP_RUNTIME Runtime\FrankenPhpSymfony\Runtime` in the `worker` section:
+
+<!-- markdownlint-disable MD010 -->
+
+```diff
+ worker {
+ 	file ./public/index.php
++	env APP_RUNTIME Runtime\FrankenPhpSymfony\Runtime
+ 	{$FRANKENPHP_WORKER_CONFIG}
+ }
+```
+
+<!-- markdownlint-enable MD010 -->
+
+Then start the project:
 
 On Linux:
 
@@ -24,31 +64,6 @@ On Windows:
 ```console
 set SYMFONY_VERSION=6.4.* && docker compose up --wait&set SYMFONY_VERSION=
 ```
-
-<!-- markdownlint-disable MD010 -->
-
-> [!NOTE]
->
-> If you're using Symfony 7.3 or earlier with FrankenPHP in worker mode, you also need to follow these steps
->
-> In `frankenphp/docker-entrypoint.sh`, add `runtime/frankenphp-symfony` right after the existing `composer require` line:
->
-> ```diff
->   composer require "php:>=$PHP_VERSION"
-> + composer require runtime/frankenphp-symfony
-> ```
->
-> In `frankenphp/Caddyfile`, add `env APP_RUNTIME Runtime\FrankenPhpSymfony\Runtime` in the `worker` section:
->
-> ```diff
->  worker {
->  	file ./public/index.php
-> +	env APP_RUNTIME Runtime\FrankenPhpSymfony\Runtime
->  	{$FRANKENPHP_WORKER_CONFIG}
->  }
-> ```
-
-<!-- markdownlint-enable MD010 -->
 
 ## Installing Development Versions of Symfony
 
