@@ -60,6 +60,8 @@
 		}
 	}
 
+	# You may also enable assets file compression
+	# https://frankenphp.dev/docs/symfony/#pre-compressing-assets
 	file_server {
 		hide *.php
 	}
