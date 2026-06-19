@@ -9,6 +9,10 @@
 #   - Replaced per-domain IP resolution with dnsmasq --ipset to handle CDN IP rotation:
 #     dnsmasq intercepts all DNS queries and adds resolved IPs for allowed domains to the
 #     ipset dynamically, so the ipset is always current regardless of CDN IP rotation.
+#
+# Locks down the coding agent's outbound network access: only the domains listed in the
+# dnsmasq `ipset=` block (plus GitHub CIDRs and private networks) are reachable. Local model
+# runtimes (e.g. Ollama on the host) are reached via the already-allowed host gateway IP.
 set -euo pipefail
 IFS=$'\n\t'
 
@@ -96,7 +100,7 @@ listen-address=127.0.0.2
 bind-interfaces
 # Populate the allowed-domains ipset with every IP returned when resolving
 # any of these domains (or their subdomains)
-ipset=/github.com/anthropic.com/sentry.io/statsig.com/registry.npmjs.org/packagist.org/cdn.jsdelivr.net/marketplace.visualstudio.com/vscode.blob.core.windows.net/update.code.visualstudio.com/allowed-domains
+ipset=/github.com/registry.npmjs.org/packagist.org/cdn.jsdelivr.net/marketplace.visualstudio.com/vscode.blob.core.windows.net/update.code.visualstudio.com/allowed-domains
 EOF
 
 # Ensure idempotency when run as a postStartCommand: stop any existing dnsmasq.

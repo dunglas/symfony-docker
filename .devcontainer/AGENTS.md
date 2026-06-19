@@ -13,7 +13,7 @@ If an outbound request fails (e.g., `curl`, `composer require`, `npm install` to
 Edit `.devcontainer/init-firewall.sh` and add the domain to the `ipset=` line in the dnsmasq configuration block:
 
 ```bash
-ipset=/github.com/anthropic.com/.../NEW_DOMAIN.COM/allowed-domains
+ipset=/github.com/.../NEW_DOMAIN.COM/allowed-domains
 ```
 
 Then rebuild the Dev Container to apply the change.

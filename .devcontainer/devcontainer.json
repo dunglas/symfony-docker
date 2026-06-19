@@ -8,22 +8,23 @@
     "service": "php",
     "workspaceFolder": "/app",
     "features": {
-        "ghcr.io/devcontainers/features/node:1": {},
-        "ghcr.io/devcontainers-extra/features/claude-code:2": {}
+        "ghcr.io/devcontainers/features/node:1": {}
     },
     "remoteUser": "nonroot",
-    "postCreateCommand": "npm install -g intelephense && ln -sf .devcontainer/AGENTS.md AGENTS.md && ln -sf .devcontainer/AGENTS.md CLAUDE.md && ln -sfn .devcontainer/.claude .claude",
+    "remoteEnv": {
+        "XDG_DATA_HOME": "/home/nonroot/.local/share",
+        "XDG_CONFIG_HOME": "/home/nonroot/.config"
+    },
+    "postCreateCommand": "npm install -g intelephense && ln -sf .devcontainer/AGENTS.md AGENTS.md",
     "postStartCommand": "sudo .devcontainer/init-firewall.sh",
     "customizations": {
         "vscode": {
             "extensions": [
-                "anthropic.claude-code",
+                "kilocode.kilo-code",
                 "bmewburn.vscode-intelephense-client",
                 "xdebug.php-debug"
             ],
             "settings": {
-                "claudeCode.allowDangerouslySkipPermissions": true,
-                "claudeCode.initialPermissionMode": "bypassPermissions",
                 "launch": {
                     "version": "0.2.0",
                     "configurations": [

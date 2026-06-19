@@ -3,9 +3,8 @@
 A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony](https://symfony.com) web framework,
 with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) inside!
 
-Specially tailored for coding agents: ships with a [Dev Container](https://containers.dev/) configuration
-that lets [Claude Code](https://claude.ai/claude-code) (and other AI coding assistants) run in fully autonomous
-mode inside a sandboxed environment.
+Tailored for coding agents: Includes a Dev Container configuration enabling [Kilo Code](https://kilocode.ai) (and other AI assistants like Claude Code)
+to run local or remote models autonomously inside a sandboxed environment.
 
 ![CI](https://github.com/dunglas/symfony-docker/workflows/CI/badge.svg)
 
@@ -31,7 +30,7 @@ mode inside a sandboxed environment.
 - Native [XDebug](docs/xdebug.md) integration
 - [Hot Reloading](https://frankenphp.dev/docs/hot-reload/)
 - [Dev Container](https://containers.dev/) support, optimized for AI coding agents
-- [AI coding agents](docs/agents.md) with sandboxing out of the box
+- [Coding agents](docs/agents.md) (Kilo Code or Claude Code) support with local + remote model support and sandboxing out of the box
 - Rootless, slim production image
 
 **Enjoy!**
