@@ -59,7 +59,7 @@ point Kilo Code at it from inside the container.
       "provider": {
          "ollama": {
             "options": {
-               "baseURL": "http://localhost:11434/v1"
+               "baseURL": "http://host.docker.internal:11434/v1"
             },
             "models": {
                "qwen3-coder-next": {
