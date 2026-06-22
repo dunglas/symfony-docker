@@ -12,7 +12,7 @@ the container's outbound traffic when you let an agent run autonomously.
 ## Prerequisites
 
 - [Docker Engine](https://docs.docker.com/engine/) (or any Docker-compatible runtime)
-- [A *Development Container*-compatible editor](https://containers.dev/supporting#editors) (Visual Studio Code, PhpStorm, Emacs...)
+- [A _Development Container_-compatible editor](https://containers.dev/supporting#editors) (Visual Studio Code, PhpStorm, Emacs...)
 
 In Visual Studio Code, after editing `.devcontainer/devcontainer.json`, run **Dev Containers: Rebuild Container** from
 the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`) to apply the change.
@@ -20,21 +20,21 @@ the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`) to apply the change.
 ## OpenCode (recommended)
 
 There is no official Dev Container feature for OpenCode yet, so install the CLI from the
-`postCreateCommand` and add the VS Code extension. Edit `.devcontainer/devcontainer.json`:
+`postCreateCommand` and add the Visual Studio Code extension. Edit `.devcontainer/devcontainer.json`:
 
 ```jsonc
 {
-    // Install the CLI on container creation (alongside the existing intelephense install)
-    "postCreateCommand": "npm install -g intelephense && curl -fsSL https://opencode.ai/install | bash",
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "sst-dev.opencode",
-                "bmewburn.vscode-intelephense-client",
-                "xdebug.php-debug"
-            ]
-        }
-    }
+  // Install the CLI on container creation (alongside the existing intelephense install)
+  "postCreateCommand": "npm install -g intelephense && curl -fsSL https://opencode.ai/install | bash",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "sst-dev.opencode",
+        "bmewburn.vscode-intelephense-client",
+        "xdebug.php-debug",
+      ],
+    },
+  },
 }
 ```
 
@@ -66,23 +66,23 @@ to the allowlist.
 ## Claude Code
 
 Install [Claude Code](https://claude.ai/claude-code) (proprietary) through a Dev Container feature and add its
-VS Code extension. Edit `.devcontainer/devcontainer.json`:
+Visual Studio Code extension. Edit `.devcontainer/devcontainer.json`:
 
 ```jsonc
 {
-    "features": {
-        "ghcr.io/devcontainers/features/node:1": {},
-        "ghcr.io/devcontainers-extra/features/claude-code:2": {}
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/devcontainers-extra/features/claude-code:2": {},
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "anthropic.claude-code",
+        "bmewburn.vscode-intelephense-client",
+        "xdebug.php-debug",
+      ],
     },
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "anthropic.claude-code",
-                "bmewburn.vscode-intelephense-client",
-                "xdebug.php-debug"
-            ]
-        }
-    }
+  },
 }
 ```
 
@@ -105,23 +105,23 @@ Edit the `frankenphp_dev` stage in the `Dockerfile`:
 ```dockerfile
 # hadolint ignore=DL3008
 RUN <<-EOF
-	mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
-	apt-get update
-	apt-get install -y --no-install-recommends \
-		aggregate \
-		curl \
-		dnsmasq \
-		dnsutils \
-		iproute2 \
-		ipset \
-		iptables \
-		jq \
-		sudo
-	install-php-extensions xdebug
-	rm -rf /var/lib/apt/lists/*
-	useradd -m -s /bin/bash nonroot
-	echo "nonroot ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/nonroot
-	git config --system --add safe.directory /app
+  mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
+  apt-get update
+  apt-get install -y --no-install-recommends \
+    aggregate \
+    curl \
+    dnsmasq \
+    dnsutils \
+    iproute2 \
+    ipset \
+    iptables \
+    jq \
+    sudo
+  install-php-extensions xdebug
+  rm -rf /var/lib/apt/lists/*
+  useradd -m -s /bin/bash nonroot
+  echo "nonroot ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/nonroot
+  git config --system --add safe.directory /app
 EOF
 ```
 
@@ -169,12 +169,12 @@ ipset destroy allowed-domains 2>/dev/null || true
 #    `iptables -t nat -I OUTPUT ...`, so they precede these Docker rules. Only
 #    dnsmasq's upstream queries (which are exempt from our redirect) pass through them.
 if [ -n "$DOCKER_DNS_RULES" ]; then
-	echo "Restoring Docker DNS rules..."
-	iptables -t nat -N DOCKER_OUTPUT 2>/dev/null || true
-	iptables -t nat -N DOCKER_POSTROUTING 2>/dev/null || true
-	echo "$DOCKER_DNS_RULES" | xargs -L 1 iptables -t nat
+  echo "Restoring Docker DNS rules..."
+  iptables -t nat -N DOCKER_OUTPUT 2>/dev/null || true
+  iptables -t nat -N DOCKER_POSTROUTING 2>/dev/null || true
+  echo "$DOCKER_DNS_RULES" | xargs -L 1 iptables -t nat
 else
-	echo "No Docker DNS rules to restore"
+  echo "No Docker DNS rules to restore"
 fi
 
 # Allow DNS (outbound only; return traffic is handled by ESTABLISHED,RELATED)
@@ -191,23 +191,23 @@ ipset create allowed-domains hash:net
 echo "Fetching GitHub IP ranges..."
 gh_ranges=$(curl -s --connect-timeout 10 --max-time 30 --fail https://api.github.com/meta)
 [ -z "$gh_ranges" ] && {
-	echo "ERROR: Failed to fetch GitHub IP ranges"
-	exit 1
+  echo "ERROR: Failed to fetch GitHub IP ranges"
+  exit 1
 }
 echo "$gh_ranges" | jq -e '.web and .api and .git' >/dev/null ||
-	{
-		echo "ERROR: GitHub API response missing required fields"
-		exit 1
-	}
+  {
+    echo "ERROR: GitHub API response missing required fields"
+    exit 1
+  }
 
 while read -r cidr; do
-	[[ "$cidr" =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/[0-9]{1,2}$ ]] ||
-		{
-			echo "ERROR: Invalid CIDR: $cidr"
-			exit 1
-		}
-	echo "Adding GitHub range $cidr"
-	ipset add allowed-domains "$cidr" -exist
+  [[ "$cidr" =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/[0-9]{1,2}$ ]] ||
+    {
+      echo "ERROR: Invalid CIDR: $cidr"
+      exit 1
+    }
+  echo "Adding GitHub range $cidr"
+  ipset add allowed-domains "$cidr" -exist
 done < <(echo "$gh_ranges" | jq -r '(.web + .api + .git)[]' | grep -v ':' | aggregate -q)
 
 # Extract Docker's actual DNS port so dnsmasq can connect to it directly.
@@ -217,8 +217,8 @@ done < <(echo "$gh_ranges" | jq -r '(.web + .api + .git)[]' | grep -v ':' | aggr
 # uid-owner tricks needed) and don't require the DOCKER_OUTPUT NAT chain.
 DOCKER_DNS_PORT=$(echo "$DOCKER_DNS_RULES" | sed -n 's/.*udp.*--to-destination 127\.0\.0\.11:\([0-9]*\).*/\1/p' | head -1)
 [ -z "$DOCKER_DNS_PORT" ] && {
-	echo "ERROR: Failed to extract Docker DNS port"
-	exit 1
+  echo "ERROR: Failed to extract Docker DNS port"
+  exit 1
 }
 echo "Docker DNS port: $DOCKER_DNS_PORT"
 
@@ -254,8 +254,8 @@ iptables -t nat -I OUTPUT -p udp --dport 53 -j DNAT --to-destination 127.0.0.2:5
 # Allow traffic to/from the host gateway IP
 HOST_IP=$(ip route | grep default | cut -d" " -f3)
 [ -z "$HOST_IP" ] && {
-	echo "ERROR: Failed to detect host IP"
-	exit 1
+  echo "ERROR: Failed to detect host IP"
+  exit 1
 }
 echo "Host gateway IP: $HOST_IP"
 iptables -A INPUT -s "$HOST_IP" -j ACCEPT
@@ -291,17 +291,17 @@ echo "Firewall configuration complete"
 
 # Verify
 if curl --connect-timeout 5 https://example.com >/dev/null 2>&1; then
-	echo "ERROR: Firewall check failed — able to reach example.com"
-	exit 1
+  echo "ERROR: Firewall check failed — able to reach example.com"
+  exit 1
 else
-	echo "OK: example.com is blocked"
+  echo "OK: example.com is blocked"
 fi
 
 if ! curl --connect-timeout 5 https://api.github.com/zen >/dev/null 2>&1; then
-	echo "ERROR: Firewall check failed — unable to reach api.github.com"
-	exit 1
+  echo "ERROR: Firewall check failed — unable to reach api.github.com"
+  exit 1
 else
-	echo "OK: api.github.com is reachable"
+  echo "OK: api.github.com is reachable"
 fi
 ```
 
@@ -311,7 +311,7 @@ Add a `postStartCommand` to `.devcontainer/devcontainer.json`:
 
 ```jsonc
 {
-    "postStartCommand": "sudo .devcontainer/init-firewall.sh"
+  "postStartCommand": "sudo .devcontainer/init-firewall.sh",
 }
 ```
 
@@ -322,8 +322,8 @@ these settings to `customizations.vscode.settings` in `.devcontainer/devcontaine
 
 ```json
 {
-    "claudeCode.allowDangerouslySkipPermissions": true,
-    "claudeCode.initialPermissionMode": "bypassPermissions"
+  "claudeCode.allowDangerouslySkipPermissions": true,
+  "claudeCode.initialPermissionMode": "bypassPermissions"
 }
 ```
 
@@ -333,7 +333,7 @@ Or from the terminal:
 claude --dangerously-skip-permissions
 ```
 
-The default allowlist covers GitHub, Packagist, the npm registry, jsDelivr, and the VS Code
+The default allowlist covers GitHub, Packagist, the npm registry, jsDelivr, and the Visual Studio Code
 marketplace. Add any domain your agent needs (its provider API, a private registry) to the
 `ipset=` line in the script, then rebuild the container:
 
