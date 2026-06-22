@@ -3,9 +3,9 @@
 A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony](https://symfony.com) web framework,
 with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) inside!
 
-Specially tailored for coding agents: ships with a [Dev Container](https://containers.dev/) configuration
-that lets [Claude Code](https://claude.ai/claude-code) (and other AI coding assistants) run in fully autonomous
-mode inside a sandboxed environment.
+Coding-agents ready: ships with a [Dev Container](https://containers.dev/) and a [one-page guide](docs/agents.md)
+to run [OpenCode](https://opencode.ai), [Claude Code](https://claude.ai/claude-code), or any AI coding assistant,
+against a local or a remote model, with an optional network sandbox.
 
 ![CI](https://github.com/dunglas/symfony-docker/workflows/CI/badge.svg)
 
@@ -30,8 +30,8 @@ mode inside a sandboxed environment.
 - [Vulcain](https://vulcain.rocks) support
 - Native [XDebug](docs/xdebug.md) integration
 - [Hot Reloading](https://frankenphp.dev/docs/hot-reload/)
-- [Dev Container](https://containers.dev/) support, optimized for AI coding agents
-- [AI coding agents](docs/agents.md) with sandboxing out of the box
+- [Dev Container](https://containers.dev/) support
+- [AI coding agents](docs/agents.md) with an optional network sandbox
 - Rootless, slim production image
 
 **Enjoy!**
@@ -49,7 +49,7 @@ mode inside a sandboxed environment.
 9. [Using a Makefile](docs/makefile.md)
 10. [Updating the template](docs/updating.md)
 11. [Troubleshooting](docs/troubleshooting.md)
-12. [Using AI Coding Agents](docs/agents.md)
+12. [Using AI coding agents](docs/agents.md)
 
 ## License
 

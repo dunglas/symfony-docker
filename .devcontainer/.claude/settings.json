@@ -1,5 +1,0 @@
-{
-    "enabledPlugins": {
-        "php-lsp@claude-plugins-official": true
-    }
-}
