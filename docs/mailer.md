@@ -4,20 +4,7 @@
 
 When you install [Symfony Mailer](https://symfony.com/doc/current/mailer.html),
 the Symfony Flex recipe automatically registers a [Mailpit](https://mailpit.axllent.org/)
-service in `compose.override.yaml`:
-
-```yaml
-###> symfony/mailer ###
-mailer:
-  image: axllent/mailpit
-  ports:
-    - "1025"
-    - "8025"
-  environment:
-    MP_SMTP_AUTH_ACCEPT_ANY: 1
-    MP_SMTP_AUTH_ALLOW_INSECURE: 1
-###< symfony/mailer ###
-```
+service in `compose.override.yaml`.
 
 Mailpit acts as a fake SMTP server: it catches every email sent by your
 application and displays it in a web UI, so no real email is ever delivered
@@ -25,7 +12,8 @@ during development.
 
 ### Configuring the DSN
 
-In `.env` (or `.env.local`), point the Mailer to the `mailer` service:
+The recipe leaves `MAILER_DSN=null://null` (emails are discarded), so point the
+Mailer to the `mailer` service in `.env` (or `.env.local`):
 
 ```dotenv
 MAILER_DSN=smtp://mailer:1025
