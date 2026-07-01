@@ -15,7 +15,7 @@ To switch to Alpine-based images, apply the following changes to the `Dockerfile
 +FROM dunglas/frankenphp:1-php8.5-alpine AS frankenphp_upstream
 
 -SHELL ["/bin/bash", "-euxo", "pipefail", "-c"]
-+SHELL ["/bin/ash", "-euxo", "-c"]
++SHELL ["/bin/ash", "-eux", "-o", "pipefail", "-c"]
 
 -# hadolint ignore=DL3008
 -RUN <<-EOF
@@ -52,7 +52,7 @@ To switch to Alpine-based images, apply the following changes to the `Dockerfile
 +FROM alpine:3 AS frankenphp_prod
 
 -SHELL ["/bin/bash", "-euxo", "pipefail", "-c"]
-+SHELL ["/bin/ash", "-euxo", "-c"]
++SHELL ["/bin/ash", "-eux", "-o", "pipefail", "-c"]
 
 -COPY --from=frankenphp_prod_builder /usr/lib/file/magic.mgc /usr/lib/file/magic.mgc
 +COPY --from=frankenphp_prod_builder /usr/share/misc/magic.mgc /usr/share/misc/magic.mgc

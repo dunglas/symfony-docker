@@ -1,11 +1,7 @@
 ---
-# Dev Container-specific overrides
-# Adds capabilities required by the firewall script (init-firewall.sh)
-# that restricts Claude Code's outbound network access.
+# Dev Container-specific overrides: enable XDebug
 services:
   php:
-    cap_add:
-      - NET_ADMIN
     environment:
       XDEBUG_MODE: "${XDEBUG_MODE:-develop,debug}"
       XDEBUG_CONFIG: "client_host=127.0.0.1 start_with_request=yes"
