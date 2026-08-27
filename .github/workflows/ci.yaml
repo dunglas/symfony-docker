@@ -78,6 +78,9 @@ jobs:
         env:
           GITHUB_ACTIONS_CONFIG_FILE: actionlint.yaml
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LOG_LEVEL: NOTICE
+          SUPPRESS_OUTPUT_ON_SUCCESS: true
+          SUPPRESS_POSSUM: true
           VALIDATE_CHECKOV: false
           VALIDATE_TRIVY: false
           VALIDATE_BIOME_FORMAT: false
