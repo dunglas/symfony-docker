@@ -82,4 +82,3 @@ jobs:
           VALIDATE_BIOME_FORMAT: false
           VALIDATE_BIOME_LINT: false
           VALIDATE_PYTHON_BLACK: false
-          VALIDATE_PYTHON_RUFF_FORMAT: false
