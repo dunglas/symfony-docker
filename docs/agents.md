@@ -24,8 +24,8 @@ There is no official Dev Container feature for OpenCode yet, so install the CLI 
 
 ```jsonc
 {
-  // Install the CLI on container creation (alongside the existing intelephense install)
-  "postCreateCommand": "npm install -g intelephense && curl -fsSL https://opencode.ai/install | bash",
+  // Install the CLI on container creation
+  "postCreateCommand": "curl -fsSL https://opencode.ai/install | bash",
   "customizations": {
     "vscode": {
       "extensions": [
