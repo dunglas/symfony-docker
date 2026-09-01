@@ -51,6 +51,9 @@ CMD [ "frankenphp", "run", "--config", "/etc/frankenphp/Caddyfile" ]
 # Dev FrankenPHP image
 FROM frankenphp_base AS frankenphp_dev
 
+# Repeated because hadolint doesn't inherit the SHELL of the parent stage
+SHELL ["/bin/bash", "-euxo", "pipefail", "-c"]
+
 ENV APP_ENV=dev
 ENV XDEBUG_MODE=off
 ENV FRANKENPHP_WORKER_CONFIG=watch
@@ -85,6 +88,9 @@ CMD [ "frankenphp", "run", "--config", "/etc/frankenphp/Caddyfile", "--watch" ]
 # Builder for the prod FrankenPHP image
 FROM frankenphp_base AS frankenphp_prod_builder
 
+# Repeated because hadolint doesn't inherit the SHELL of the parent stage
+SHELL ["/bin/bash", "-euxo", "pipefail", "-c"]
+
 ENV APP_ENV=prod
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
@@ -112,7 +118,7 @@ RUN <<-EOF
 EOF
 
 # Collect shared libraries needed by FrankenPHP and PHP extensions
-# hadolint ignore=DL3008,SC3054,DL4006
+# hadolint ignore=DL3008,SC3054
 RUN <<-'EOF'
 	apt-get update
 	apt-get install -y --no-install-recommends libtree
