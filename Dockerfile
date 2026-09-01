@@ -63,6 +63,21 @@ RUN <<-EOF
 	git config --system --add safe.directory /app
 EOF
 
+# Symfony Language Server, for editors and AI agents that don't bundle it themselves
+# https://github.com/symfony/language-tools
+ARG TARGETARCH
+RUN <<-EOF
+	case "$TARGETARCH" in
+		amd64) lsp_arch=x64 ;;
+		arm64) lsp_arch=arm64 ;;
+		*) echo "unsupported architecture: $TARGETARCH"; exit 1 ;;
+	esac
+	# The release URL redirects to the latest tag, no API token nor rate limit involved
+	lsp_version=$(basename "$(curl -fsSLI -o /dev/null -w '%{url_effective}' https://github.com/symfony/language-tools/releases/latest)")
+	curl -fsSL "https://github.com/symfony/language-tools/releases/download/$lsp_version/symfony-lsp-$lsp_version-linux-$lsp_arch.tar.gz" \
+		| tar -xz -C /usr/local/bin --strip-components=1 --wildcards '*/symfony-lsp'
+EOF
+
 COPY --link frankenphp/conf.d/20-app.dev.ini $PHP_INI_DIR/app.conf.d/
 
 CMD [ "frankenphp", "run", "--config", "/etc/frankenphp/Caddyfile", "--watch" ]
