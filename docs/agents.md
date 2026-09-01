@@ -24,12 +24,13 @@ There is no official Dev Container feature for OpenCode yet, so install the CLI 
 
 ```jsonc
 {
-  // Install the CLI on container creation (alongside the existing intelephense install)
-  "postCreateCommand": "npm install -g intelephense && curl -fsSL https://opencode.ai/install | bash",
+  // Install the CLI on container creation
+  "postCreateCommand": "curl -fsSL https://opencode.ai/install | bash",
   "customizations": {
     "vscode": {
       "extensions": [
         "sst-dev.opencode",
+        "symfony.language-tools",
         "bmewburn.vscode-intelephense-client",
         "xdebug.php-debug",
       ],
@@ -78,6 +79,7 @@ Visual Studio Code extension. Edit `.devcontainer/devcontainer.json`:
     "vscode": {
       "extensions": [
         "anthropic.claude-code",
+        "symfony.language-tools",
         "bmewburn.vscode-intelephense-client",
         "xdebug.php-debug",
       ],
@@ -91,6 +93,46 @@ Rebuild the container, then run `claude` in the integrated terminal or open the 
 Without the firewall, this is all you need. To let Claude Code run autonomously, enable the
 [network sandbox](#optional-network-sandbox) first and add `anthropic.com`, `sentry.io`, and
 `statsig.com` to the allowlist.
+
+## Symfony Language Server
+
+The dev image ships the [Symfony Language Server](https://github.com/symfony/language-tools) as
+`/usr/local/bin/symfony-lsp`. It knows about routes, services, Twig, translations, environment
+variables, Messenger, Security, forms, Doctrine and the rest of the framework, so an agent gets
+real definitions and diagnostics instead of guesses. It complements a general PHP language server
+such as Intelephense, it does not replace it.
+
+The `symfony.language-tools` Visual Studio Code extension bundles its own copy of the server, so
+there is nothing to configure there. The binary in the image is for agents and editors that expect
+to launch a server themselves.
+
+### With OpenCode
+
+Declare the server in `opencode.json` at the root of the project:
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "lsp": {
+    "symfony": {
+      "command": ["symfony-lsp"],
+      "extensions": [".php", ".twig", ".yaml", ".yml", ".xml"]
+    }
+  }
+}
+```
+
+### From the command line
+
+`symfony-lsp check` reports the same diagnostics without an editor, which is useful to let an agent
+verify its own changes:
+
+```console
+symfony-lsp check --format=json src/ templates/
+```
+
+`--format=github` is also available for CI annotations. The check runs the application to index the
+container, so pass `--source-only` when the code cannot be trusted.
 
 ## Optional: network sandbox
 

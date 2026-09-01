@@ -7,14 +7,11 @@
     ],
     "service": "php",
     "workspaceFolder": "/app",
-    "features": {
-        "ghcr.io/devcontainers/features/node:1": {}
-    },
     "remoteUser": "nonroot",
-    "postCreateCommand": "npm install -g intelephense",
     "customizations": {
         "vscode": {
             "extensions": [
+                "symfony.language-tools",
                 "bmewburn.vscode-intelephense-client",
                 "xdebug.php-debug"
             ],
