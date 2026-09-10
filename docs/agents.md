@@ -132,7 +132,9 @@ symfony-lsp check --format=json src/ templates/
 ```
 
 `--format=github` is also available for CI annotations. The check runs the application to index the
-container, so pass `--source-only` when the code cannot be trusted.
+container, so pass `--source-only` when the code cannot be trusted. See
+[Introducing symfony-lsp check](https://symfony.com/blog/introducing-symfony-lsp-check-symfony-aware-diagnostics-in-your-ci)
+for the full picture.
 
 ## Optional: network sandbox
 
