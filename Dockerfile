@@ -27,7 +27,8 @@ RUN <<-EOF
 		apcu \
 		intl \
 		opcache \
-		zip
+		zip \
+		symfony/php-ext-deepclone@bbaa98792a2218d355d57d51cbdbb63155ad74e4
 	rm -rf /var/lib/apt/lists/*
 EOF
 
