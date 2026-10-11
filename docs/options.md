@@ -128,7 +128,7 @@ to inject options block, directive or configuration.
 | `MERCURE_PUBLISHER_JWT_ALG`     | the JWT algorithm to use for publishers                                                                                                                                                 | `HS256`             |
 | `MERCURE_SUBSCRIBER_JWT_KEY`    | the JWT key to use for subscribers                                                                                                                                                      |                     |
 | `MERCURE_SUBSCRIBER_JWT_ALG`    | the JWT algorithm to use for subscribers                                                                                                                                                | `HS256`             |
-| `MERCURE_TRUSTED_ISSUERS`       | the trusted [issuers](https://mercure.rocks/docs/hub/config) of the JWTs, separated by commas or whitespace                                                                             | `https://localhost` |
+| `MERCURE_TRUSTED_ISSUERS`       | the trusted [issuer](https://mercure.rocks/docs/hub/config) of the JWTs (their `iss` claim)                                                                                             | `https://localhost` |
 | `MERCURE_PUBLIC_URL`            | the public URL of the hub, also used as the audience (`aud` claim) of the JWTs                                                                                                          |                     |
 | `MERCURE_EXTRA_DIRECTIVES`      | a list of extra [Mercure directives](https://mercure.rocks/docs/hub/config), one per line                                                                                               |                     |
 
