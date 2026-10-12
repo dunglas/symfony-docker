@@ -25,10 +25,24 @@
 	encode zstd br gzip
 
 	mercure {
-		# Publisher JWT key
-		publisher_jwt {env.MERCURE_PUBLISHER_JWT_KEY} {env.MERCURE_PUBLISHER_JWT_ALG}
-		# Subscriber JWT key
-		subscriber_jwt {env.MERCURE_SUBSCRIBER_JWT_KEY} {env.MERCURE_SUBSCRIBER_JWT_ALG}
+		# Share the hub between the addresses listed in SERVER_NAME (e.g. "localhost, php:80")
+		name default
+		# Trusted issuer: binds the iss claim access tokens must carry to its keys.
+		# In production, set MERCURE_TRUSTED_ISSUERS to the stable identifier of your token issuer
+		# (your app's URL for self-issued tokens).
+		issuer {$MERCURE_TRUSTED_ISSUERS:https://localhost} {
+			# Publisher JWT key
+			publisher {
+				jwt {env.MERCURE_PUBLISHER_JWT_KEY} {env.MERCURE_PUBLISHER_JWT_ALG}
+			}
+			# Subscriber JWT key
+			subscriber {
+				jwt {env.MERCURE_SUBSCRIBER_JWT_KEY} {env.MERCURE_SUBSCRIBER_JWT_ALG}
+			}
+		}
+		# Pin the audience (aud claim) access tokens must carry to the public URL,
+		# so tokens stay valid when the app publishes through an internal address (e.g. http://php)
+		resource_identifier {$MERCURE_PUBLIC_URL}
 		# Allow anonymous subscribers (double-check that it's what you want)
 		anonymous
 		# Enable the subscription API (double-check that it's what you want)
