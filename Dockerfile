@@ -51,7 +51,7 @@ CMD [ "frankenphp", "run", "--config", "/etc/frankenphp/Caddyfile" ]
 # Dev FrankenPHP image
 FROM frankenphp_base AS frankenphp_dev
 
-# Repeated because hadolint doesn't inherit the SHELL of the parent stage
+# Repeated until hadolint inherits the parent stage SHELL: https://github.com/hadolint/hadolint/pull/1258
 SHELL ["/bin/bash", "-euxo", "pipefail", "-c"]
 
 ENV APP_ENV=dev
@@ -88,7 +88,7 @@ CMD [ "frankenphp", "run", "--config", "/etc/frankenphp/Caddyfile", "--watch" ]
 # Builder for the prod FrankenPHP image
 FROM frankenphp_base AS frankenphp_prod_builder
 
-# Repeated because hadolint doesn't inherit the SHELL of the parent stage
+# Repeated until hadolint inherits the parent stage SHELL: https://github.com/hadolint/hadolint/pull/1258
 SHELL ["/bin/bash", "-euxo", "pipefail", "-c"]
 
 ENV APP_ENV=prod
