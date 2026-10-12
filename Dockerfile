@@ -1,7 +1,7 @@
 #syntax=docker/dockerfile:1
 
 # Versions
-FROM dunglas/frankenphp:1-php8.5 AS frankenphp_upstream
+FROM dunglas/frankenphp:1-php8.5@sha256:a3b718823fa7d12a7a2933cb729a70bd642c31c890d9c66702c1a9e49b44f5f6 AS frankenphp_upstream
 
 # The different stages of this Dockerfile are meant to be built into separate images
 # https://docs.docker.com/build/building/multi-stage/#stop-at-a-specific-build-stage
@@ -134,7 +134,7 @@ RUN <<-'EOF'
 EOF
 
 # Prod FrankenPHP image
-FROM debian:13-slim AS frankenphp_prod
+FROM debian:13-slim@sha256:62bd423aeee912639ca8ee681c2b762cb3e25137e0a92b20be455898a9f034ad AS frankenphp_prod
 
 SHELL ["/bin/bash", "-euxo", "pipefail", "-c"]
 
