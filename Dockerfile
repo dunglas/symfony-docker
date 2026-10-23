@@ -1,7 +1,8 @@
 #syntax=docker/dockerfile:1
 
 # Versions
-FROM dunglas/frankenphp:1-php8.5 AS frankenphp_upstream
+FROM dunglas/frankenphp:1-php8.5@sha256:a3b718823fa7d12a7a2933cb729a70bd642c31c890d9c66702c1a9e49b44f5f6 AS frankenphp_upstream
+FROM composer/composer:2-bin@sha256:016c41066558559142758092f7ef286d66ae113df23d49e086fdda0166dd5f01 AS composer_upstream
 
 # The different stages of this Dockerfile are meant to be built into separate images
 # https://docs.docker.com/build/building/multi-stage/#stop-at-a-specific-build-stage
@@ -23,13 +24,14 @@ RUN <<-EOF
 		file \
 		git
 	install-php-extensions \
-		@composer \
 		apcu \
 		intl \
 		opcache \
 		zip
 	rm -rf /var/lib/apt/lists/*
 EOF
+
+COPY --link --from=composer_upstream /composer /usr/local/bin/composer
 
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER=1
@@ -134,7 +136,7 @@ RUN <<-'EOF'
 EOF
 
 # Prod FrankenPHP image
-FROM debian:13-slim AS frankenphp_prod
+FROM debian:13-slim@sha256:62bd423aeee912639ca8ee681c2b762cb3e25137e0a92b20be455898a9f034ad AS frankenphp_prod
 
 SHELL ["/bin/bash", "-euxo", "pipefail", "-c"]
 
