@@ -94,7 +94,8 @@ variables and starting the project with this command:
 
 ```console
 SERVER_NAME=http://localhost \
-MERCURE_PUBLIC_URL=http://localhost/.well-known/mercure \
+DEFAULT_URI=http://localhost \
+CADDY_MERCURE_PUBLIC_URL=http://localhost/.well-known/mercure \
 docker compose up --wait
 ```
 
