@@ -40,9 +40,6 @@
 				jwt {env.MERCURE_SUBSCRIBER_JWT_KEY} {env.MERCURE_SUBSCRIBER_JWT_ALG}
 			}
 		}
-		# Pin the audience (aud claim) access tokens must carry to the public URL,
-		# so tokens stay valid when the app publishes through an internal address (e.g. http://php)
-		resource_identifier {$MERCURE_PUBLIC_URL}
 		# Allow anonymous subscribers (double-check that it's what you want)
 		anonymous
 		# Enable the subscription API (double-check that it's what you want)
