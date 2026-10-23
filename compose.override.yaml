@@ -26,5 +26,6 @@ services:
       # Ensure that host.docker.internal is correctly defined on Linux
       - host.docker.internal:host-gateway
     tty: true
+# Empty Flex mark, see compose.yaml
 ###> symfony/mercure-bundle ###
 ###< symfony/mercure-bundle ###
