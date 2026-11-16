@@ -50,6 +50,7 @@ against a local or a remote model, with an optional network sandbox.
 10. [Updating the template](docs/updating.md)
 11. [Troubleshooting](docs/troubleshooting.md)
 12. [Using AI coding agents](docs/agents.md)
+13. [Monitoring with Ember](docs/ember.md)
 
 ## License
 
