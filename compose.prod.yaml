@@ -2,6 +2,7 @@
 # Production environment override
 services:
   php:
+    # Set IMAGES_PREFIX per project or to your registry namespace, see docs/options.md
     image: ${IMAGES_PREFIX:-}app-php-prod
     build:
       context: .

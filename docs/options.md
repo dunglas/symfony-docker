@@ -103,6 +103,24 @@ to access your application on [https://localhost:4443](https://localhost:4443).
 > Creating a Let's Encrypt certificate for another port will not work,
 > you have to use the standard ports or to configure Caddy to use another provider.
 
+## Prefixing Image Names
+
+The images are named `app-php-dev` and `app-php-prod`.
+Every project created from this template uses these names.
+When two projects run on the same machine, the last one built overwrites the image of the other,
+and `docker compose up` without `--build` starts the other project's image.
+
+Use the `IMAGES_PREFIX` environment variable to give each project its own image names,
+or to push the images to your registry.
+Set it in the `.env` file at the root of the project,
+which `docker compose` and `docker buildx bake` both read:
+
+```dotenv
+IMAGES_PREFIX=my-project-
+```
+
+The images are then named `my-project-app-php-dev` and `my-project-app-php-prod`.
+
 ## `Caddyfile` Options
 
 You can also customize the `Caddyfile` by using the following environment variables
