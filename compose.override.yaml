@@ -2,6 +2,7 @@
 # Development environment override
 services:
   php:
+    # Set IMAGES_PREFIX per project to avoid image name clashes, see docs/options.md
     image: ${IMAGES_PREFIX:-}app-php-dev
     build:
       context: .
